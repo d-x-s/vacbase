@@ -88,7 +88,7 @@ public class LoginPage {
         }));
     }
 
-    public Scene getLoginIn() {
+    public Scene getLogin() {
         return login;
     }
 

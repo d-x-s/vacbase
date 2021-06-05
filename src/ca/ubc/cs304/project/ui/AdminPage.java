@@ -6,73 +6,73 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-
 import static ca.ubc.cs304.project.ui.HelpfulFunctions.*;
 
-public class PatientPage {
-    Scene page;
-    Button viewRecord;
-    Button viewChildrenRecord;
-    Button viewConditions;
-    Button vacLocations;
 
-    public PatientPage(String name) {
+public class AdminPage {
+    Scene page;
+    Button vaccineButton;
+    Button distributorButton;
+    Button patientButton;
+    Button facilitiesButton;
+
+    public AdminPage() {
         VBox pane = new VBox(30);
         pane.setAlignment(Pos.CENTER);
         VBox menuButtons = new VBox(10);
         menuButtons.setAlignment(Pos.CENTER);
 
-        Label fullName = new Label(name);
-        fullName.setFont(new Font("Montserrat", 64));
+        Label text = new Label("What would you like to look at?");
+        text.setFont(new Font("Montserrat", 30));
 
-        viewRecord = makeButton(new Button("View Vaccine Record"));
-        setButtonSpecs(viewRecord);
+        vaccineButton = makeButton(new Button("Vaccine"));
+        setButtonSpecs(vaccineButton);
 
-        viewChildrenRecord = makeButton(new Button("View Minor's Record"));
-        setButtonSpecs(viewChildrenRecord);
+        distributorButton = makeButton(new Button("Distributor"));
+        setButtonSpecs(distributorButton);
 
-        viewConditions = makeButton(new Button("View Preexisting Conditions"));
-        setButtonSpecs(viewConditions);
+        patientButton = makeButton(new Button("Patient"));
+        setButtonSpecs(patientButton);
 
-        vacLocations = makeButton(new Button("Where can I get vaccinated"));
-        setButtonSpecs(vacLocations);
+        facilitiesButton = makeButton(new Button("Facilities"));
+        setButtonSpecs(facilitiesButton);
 
-        menuButtons.getChildren().addAll(viewRecord, viewChildrenRecord, viewConditions, vacLocations);
+        menuButtons.getChildren().addAll(vaccineButton, distributorButton, patientButton, facilitiesButton);
 
-        pane.getChildren().addAll(fullName, menuButtons);
+        pane.getChildren().addAll(text, menuButtons);
         setBackgroundColor(pane);
         addButtonFunctionality();
+
         page = new Scene(pane, pageWidth, pageHeight);
 
     }
 
     private void addButtonFunctionality() {
-        viewRecord.setOnAction((event -> {
+        vaccineButton.setOnAction((event -> {
             // Todo: Add functionality
             System.out.println("View Vaccine Record");
         }));
-        viewChildrenRecord.setOnAction((event -> {
+        distributorButton.setOnAction((event -> {
             // Todo: Add functionality
             System.out.println("View Minor's Record");
         }));
-        viewConditions.setOnAction((event -> {
+        patientButton.setOnAction((event -> {
             // Todo: Add functionality
             System.out.println("View Preexisting Conditions");
         }));
-        vacLocations.setOnAction((event -> {
+        facilitiesButton.setOnAction((event -> {
             // Todo: Add functionality
             System.out.println("Where can I get vaccinated?");
         }));
     }
 
     private void setButtonSpecs(Button button) {
-        button.setFont(new Font("Montserrat", 24));
-        button.setMinSize(420, 56);
-        button.setMaxSize(420, 56);
+        button.setFont(new Font("Montserrat", 36));
+        button.setMinSize(250, 63);
+        button.setMaxSize(250, 63);
     }
 
     public Scene getPage() {
         return page;
     }
-
 }

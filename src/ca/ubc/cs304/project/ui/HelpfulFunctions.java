@@ -44,7 +44,7 @@ public class HelpfulFunctions {
      */
     public static Button makeButton(Button button) {
         //TODO: Find better color or something idk, parameterize with color to make it easier
-        button.setStyle("-fx-background-color: #20B2AA; -fx-background-radius: 15px; -fx-text-fill: #ffffff");
+        button.setStyle("-fx-background-color: #20B2AA; -fx-background-radius: 100px; -fx-text-fill: #ffffff");
         return button;
     }
 

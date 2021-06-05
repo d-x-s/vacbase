@@ -10,21 +10,25 @@ import oracle.jdbc.logging.annotations.Log;
 public class Main extends Application {
 
     Stage window;
-    Scene loginScene;
+    Scene scene;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         window = primaryStage;
 
         // Testing PatientPage
-        PatientPage patientPage = new PatientPage("Jon Yu");
-        loginScene = patientPage.getPage();
+        //PatientPage patientPage = new PatientPage("Jon Yu");
+        //scene = patientPage.getPage();
+
+        // Testing AdminPage
+        AdminPage adminPage = new AdminPage();
+        scene = adminPage.getPage();
 
         // Testing loginPage
 //        LoginPage loginPage = new LoginPage();
-//        loginScene = loginPage.getLoginIn();
+//        scene = loginPage.getLogin();
 
-        window.setScene(loginScene);
+        window.setScene(scene);
         window.setTitle("Title");
         window.show();
     }
