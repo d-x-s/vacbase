@@ -21,12 +21,12 @@ public class Main extends Application {
         //scene = patientPage.getPage();
 
         // Testing AdminPage
-        AdminPage adminPage = new AdminPage();
-        scene = adminPage.getPage();
+//        AdminPage adminPage = new AdminPage();
+//        scene = adminPage.getPage();
 
         // Testing loginPage
-//        LoginPage loginPage = new LoginPage();
-//        scene = loginPage.getLogin();
+        LoginPage loginPage = new LoginPage();
+        scene = loginPage.getLogin();
 
         window.setScene(scene);
         window.setTitle("Title");

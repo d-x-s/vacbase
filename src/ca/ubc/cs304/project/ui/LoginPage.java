@@ -1,17 +1,9 @@
 package ca.ubc.cs304.project.ui;
 
-import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 import static ca.ubc.cs304.project.ui.HelpfulFunctions.*;
@@ -24,6 +16,7 @@ public class LoginPage {
     private String password;
     private Button loginAdmin;
     private Button loginPatient;
+    private Hyperlink createAccount;
 
     public LoginPage() {
         Pane root = new Pane();
@@ -54,9 +47,13 @@ public class LoginPage {
 
         addButtonFunctionality();
 
+        createAccount = new Hyperlink("Create Account");
+        createAccount.setFont(new Font("Montserrat", 15));
+        createAccount.setOpacity(0.5);
+        setLayout(createAccount, 28, pageHeight - 35);
 
 
-        root.getChildren().addAll(vacBase, usernameField, passwordField, shotImage, loginAdmin, loginPatient);
+        root.getChildren().addAll(vacBase, usernameField, passwordField, shotImage, loginAdmin, loginPatient, createAccount);
 
         // Sets background color
         login = new Scene(root, pageWidth, pageHeight);
@@ -86,6 +83,11 @@ public class LoginPage {
             password = passwordField.getText();
             System.out.println(password);
         }));
+
+        createAccount.setOnAction((event -> {
+            // TODO: Bring up a popup
+        }));
+
     }
 
     public Scene getLogin() {
