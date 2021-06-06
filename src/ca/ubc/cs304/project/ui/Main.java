@@ -25,8 +25,12 @@ public class Main extends Application {
 //        scene = adminPage.getPage();
 
         // Testing loginPage
-        LoginPage loginPage = new LoginPage();
-        scene = loginPage.getLogin();
+//        LoginPage loginPage = new LoginPage();
+//        scene = loginPage.getLogin();
+
+        // Testing CreateAccountPage
+        CreateAccountPage createPage = new CreateAccountPage();
+        scene = createPage.getPage();
 
         window.setScene(scene);
         window.setTitle("Title");
