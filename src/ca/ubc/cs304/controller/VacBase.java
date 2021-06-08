@@ -105,6 +105,10 @@ public class VacBase implements LoginWindowDelegate, TerminalTransactionsDelegat
 //    		System.out.println();
 //    	}
     }
+
+    public void showPatientAccount() {
+
+	}
 	
     /**
 	 * TerminalTransactionsDelegate Implementation

@@ -22,6 +22,17 @@ DROP TABLE AdministeredVaccineGivenToPatient;
 DROP TABLE PatientAccount;
 DROP TABLE Nurse;
 
+CREATE TABLE Branch (
+                        branch_id integer not null PRIMARY KEY,
+                        branch_name varchar2(20) not null,
+                        branch_addr varchar2(50),
+                        branch_city varchar2(20) not null,
+                        branch_phone integer
+
+);
+
+
+
 CREATE TABLE PatientAccount (
                                 CareCardNumber INTEGER PRIMARY KEY,
                                 FullName CHAR(20),
@@ -222,3 +233,22 @@ CREATE TABLE HappensIn (
                            FOREIGN KEY (FacilityName) REFERENCES Facility (FacilityName)
                                ON DELETE CASCADE
 );
+
+
+
+
+INSERT ALL
+    INTO PatientAccount VALUES (1000000000, 'John Smith', date '1978-09-23', 'GenericName')
+    INTO PatientAccount VALUES (1000000001, 'Karen Kao', date '1940-10-20', 'Manager123')
+    INTO PatientAccount VALUES (1000000002, 'Peter Parker', date '2001-04-06', 'Spiderman')
+    INTO PatientAccount VALUES (1000000003, 'Dan Ham', date '2000-12-25', 'Breakfast')
+    INTO PatientAccount VALUES (1000000004, 'Sam Wilson', date '1978-09-23', 'Falcon')
+    INTO PatientAccount VALUES (1000000005, 'Steve Rogers', date '1918-07-04', 'CaptAmerica')
+    INTO PatientAccount VALUES (1000000006, 'Tony Stark', date '1970-05-29', 'IronMan')
+    INTO PatientAccount VALUES (2000000000, 'Child 1', date '2010-01-01', 'Child1')
+    INTO PatientAccount VALUES (2000000001, 'Child 2', date '2010-01-01', 'Child2')
+    INTO PatientAccount VALUES (2000000002, 'Child 3', date '2010-01-01', 'Child3')
+    INTO PatientAccount VALUES (2000000003, 'Child 4', date '2010-01-01', 'Child4')
+    INTO PatientAccount VALUES (2000000004, 'Child 5', date '2010-01-01', 'Child5')
+SELECT 1 FROM DUAL;
+
