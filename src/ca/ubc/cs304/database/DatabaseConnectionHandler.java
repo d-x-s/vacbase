@@ -75,9 +75,10 @@ public class DatabaseConnectionHandler {
 		try {
 			// resources/sql/databaseSetup.sql
 			// resources/sql/create_db.sql
+			dropBranchTableIfExists();
 			SQLUtil.executeFile(connection, new File("resources/sql/databaseSetup.sql"));
 			//createTriggers(connection);
-		} catch (IOException | SQLException e) {
+		} catch (SQLException | IOException e) {
 			e.printStackTrace();
 			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
 		}
