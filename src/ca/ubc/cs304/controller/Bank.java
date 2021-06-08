@@ -106,6 +106,10 @@ public class Bank implements LoginWindowDelegate, TerminalTransactionsDelegate {
     		System.out.println();
     	}
     }
+
+    public void showPatientAccount() {
+
+	}
 	
     /**
 	 * TerminalTransactionsDelegate Implementation

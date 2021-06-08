@@ -46,6 +46,66 @@ public class DatabaseConnectionHandler {
 		}
 	}
 
+	public boolean login(String username, String password) {
+		try {
+			if (connection != null) {
+				connection.close();
+			}
+
+			connection = DriverManager.getConnection(ORACLE_URL, username, password);
+			connection.setAutoCommit(false);
+
+			System.out.println("\nConnected to Oracle!");
+			return true;
+		} catch (SQLException e) {
+			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+			return false;
+		}
+	}
+
+	private void rollbackConnection() {
+		try  {
+			connection.rollback();
+		} catch (SQLException e) {
+			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+		}
+	}
+
+	public void databaseSetup() {
+		try {
+			// resources/sql/databaseSetup.sql
+			// resources/sql/create_db.sql
+			SQLUtil.executeFile(connection, new File("resources/sql/databaseSetup.sql"));
+			//createTriggers(connection);
+		} catch (IOException | SQLException e) {
+			e.printStackTrace();
+			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+		}
+	}
+
+	private void dropBranchTableIfExists() {
+		try {
+			Statement stmt = connection.createStatement();
+			ResultSet rs = stmt.executeQuery("select table_name from user_tables");
+
+			while(rs.next()) {
+				if(rs.getString(1).toLowerCase().equals("branch")) {
+					stmt.execute("DROP TABLE branch");
+					break;
+				}
+			}
+
+			rs.close();
+			stmt.close();
+		} catch (SQLException e) {
+			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+		}
+	}
+
+	// END OF DATABASE HANDLERS ////////////////////////////////////////////////////////////////////////////////////////
+
+	// BRANCH //////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 	public void deleteBranch(int branchId) {
 		try {
 			PreparedStatement ps = connection.prepareStatement("DELETE FROM branch WHERE branch_id = ?");
@@ -143,81 +203,24 @@ public class DatabaseConnectionHandler {
 			rollbackConnection();
 		}	
 	}
-	
-	public boolean login(String username, String password) {
-		try {
-			if (connection != null) {
-				connection.close();
-			}
-	
-			connection = DriverManager.getConnection(ORACLE_URL, username, password);
-			connection.setAutoCommit(false);
-	
-			System.out.println("\nConnected to Oracle!");
-			return true;
-		} catch (SQLException e) {
-			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
-			return false;
-		}
-	}
 
-	private void rollbackConnection() {
-		try  {
-			connection.rollback();	
-		} catch (SQLException e) {
-			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
-		}
-	}
-	
-	public void databaseSetup() {
-		dropBranchTableIfExists();
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		try {
-			// resources/sql/databaseSetup.sql
-			// resources/sql/create_db.sql
-			SQLUtil.executeFile(connection, new File("resources/sql/databaseSetup.sql"));
-			//createTriggers(connection);
-		} catch (IOException | SQLException e) {
-			e.printStackTrace();
-			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
-		}
+	// PATIENTACCOUNT /////////////////////////////////////////////////////////////////////////////////////////////////
 
-		///
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-//		try {
-//			Statement stmt = connection.createStatement();
-//			stmt.executeUpdate("CREATE TABLE branch (branch_id integer PRIMARY KEY, branch_name varchar2(20) not null, branch_addr varchar2(50), branch_city varchar2(20) not null, branch_phone integer)");
-//			stmt.close();
-//		} catch (SQLException e) {
-//			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
-//		}
-
-		///
-
-//		BranchModel branch1 = new BranchModel("123 Charming Ave", "Vancouver", 1, "First Branch", 1234567);
-//		insertBranch(branch1);
-//
-//		BranchModel branch2 = new BranchModel("123 Coco Ave", "Vancouver", 2, "Second Branch", 1234568);
-//		insertBranch(branch2);
-	}
-	
-	private void dropBranchTableIfExists() {
-		try {
-			Statement stmt = connection.createStatement();
-			ResultSet rs = stmt.executeQuery("select table_name from user_tables");
-			
-			while(rs.next()) {
-				if(rs.getString(1).toLowerCase().equals("branch")) {
-					stmt.execute("DROP TABLE branch");
-					break;
-				}
-			}
-			
-			rs.close();
-			stmt.close();
-		} catch (SQLException e) {
-			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
-		}
-	}
 }
