@@ -32,12 +32,22 @@ public class HelpfulFunctions {
     }
 
     /*
-        Sets the background color of a pane
+        Sets the background color of a pane to green
     */
     public static void setBackgroundColor(Pane root) {
         root.setBackground(new Background(new BackgroundFill(Color.rgb(196, 227, 199),
                 CornerRadii.EMPTY, Insets.EMPTY)));
     }
+
+    /*
+        Sets the background color of a pane to green
+    */
+    public static void setWhiteBackgroundColor(Pane root) {
+        root.setBackground(new Background(new BackgroundFill(Color.rgb(253, 255, 242),
+                CornerRadii.EMPTY, Insets.EMPTY)));
+    }
+
+
 
     /*
         Creates a rounded button as seen on Figma
