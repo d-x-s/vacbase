@@ -3,18 +3,18 @@ package ca.ubc.cs304.controller;
 import ca.ubc.cs304.database.DatabaseConnectionHandler;
 import ca.ubc.cs304.delegates.LoginWindowDelegate;
 import ca.ubc.cs304.delegates.TerminalTransactionsDelegate;
-import ca.ubc.cs304.model.BranchModel;
+import ca.ubc.cs304.model.vaccine.Vaccine;
 import ca.ubc.cs304.ui.LoginWindow;
 import ca.ubc.cs304.ui.TerminalTransactions;
 
 /**
  * This is the main controller class that will orchestrate everything.
  */
-public class Bank implements LoginWindowDelegate, TerminalTransactionsDelegate {
+public class VacBase implements LoginWindowDelegate, TerminalTransactionsDelegate {
 	private DatabaseConnectionHandler dbHandler = null;
 	private LoginWindow loginWindow = null;
 
-	public Bank() {
+	public VacBase() {
 		dbHandler = new DatabaseConnectionHandler();
 	}
 	
@@ -54,18 +54,17 @@ public class Bank implements LoginWindowDelegate, TerminalTransactionsDelegate {
 	 * 
 	 * Insert a branch with the given info
 	 */
-    public void insertBranch(BranchModel model) {
-    	dbHandler.insertBranch(model);
-    }
-
+	public void insertVaccine(Vaccine model) {
+		dbHandler.insertVaccine(model);
+	}
     /**
 	 * TermainalTransactionsDelegate Implementation
 	 * 
 	 * Delete branch with given branch ID.
-	 */ 
-    public void deleteBranch(int branchId) {
-    	dbHandler.deleteBranch(branchId);
-    }
+	 */
+	public void deleteVaccine(String vacName) {
+		dbHandler.deleteVaccine(vacName);
+	}
     
     /**
 	 * TermainalTransactionsDelegate Implementation
@@ -73,38 +72,38 @@ public class Bank implements LoginWindowDelegate, TerminalTransactionsDelegate {
 	 * Update the branch name for a specific ID
 	 */
 
-    public void updateBranch(int branchId, String name) {
-    	dbHandler.updateBranch(branchId, name);
-    }
+	public void updateVaccine(int branchId, String name) {
+		dbHandler.updateVaccine(branchId, name);
+	}
 
     /**
 	 * TermainalTransactionsDelegate Implementation
 	 * 
 	 * Displays information about varies bank branches.
 	 */
-    public void showBranch() {
-    	BranchModel[] models = dbHandler.getBranchInfo();
+    public void showVaccine() {
+		Vaccine[] models = dbHandler.getVaccineInfo();
     	
-    	for (int i = 0; i < models.length; i++) {
-    		BranchModel model = models[i];
-    		
-    		// simplified output formatting; truncation may occur
-    		System.out.printf("%-10.10s", model.getId());
-    		System.out.printf("%-20.20s", model.getName());
-    		if (model.getAddress() == null) {
-    			System.out.printf("%-20.20s", " ");
-    		} else {
-    			System.out.printf("%-20.20s", model.getAddress());
-    		}
-    		System.out.printf("%-15.15s", model.getCity());
-    		if (model.getPhoneNumber() == 0) {
-    			System.out.printf("%-15.15s", " ");
-    		} else {
-    			System.out.printf("%-15.15s", model.getPhoneNumber());
-    		}
-    		
-    		System.out.println();
-    	}
+//    	for (int i = 0; i < models.length; i++) {
+//			VaccineModel model = models[i];
+//
+//    		// simplified output formatting; truncation may occur
+//    		System.out.printf("%-10.10s", model.getId());
+//    		System.out.printf("%-20.20s", model.getName());
+//    		if (model.getAddress() == null) {
+//    			System.out.printf("%-20.20s", " ");
+//    		} else {
+//    			System.out.printf("%-20.20s", model.getAddress());
+//    		}
+//    		System.out.printf("%-15.15s", model.getCity());
+//    		if (model.getPhoneNumber() == 0) {
+//    			System.out.printf("%-15.15s", " ");
+//    		} else {
+//    			System.out.printf("%-15.15s", model.getPhoneNumber());
+//    		}
+//
+//    		System.out.println();
+//    	}
     }
 	
     /**
@@ -135,7 +134,7 @@ public class Bank implements LoginWindowDelegate, TerminalTransactionsDelegate {
 	 * Main method called at launch time
 	 */
 	public static void main(String args[]) {
-		Bank bank = new Bank();
-		bank.start();
+		VacBase vacBase = new VacBase();
+		vacBase.start();
 	}
 }

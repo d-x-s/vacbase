@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import ca.ubc.cs304.model.BranchModel;
+import ca.ubc.cs304.model.vaccine.Vaccine;
 import ca.ubc.cs304.sql.SQLUtil;
 
 /**
@@ -46,37 +46,31 @@ public class DatabaseConnectionHandler {
 		}
 	}
 
-	public void deleteBranch(int branchId) {
+	public void deleteVaccine(String vacName) {
 		try {
 			PreparedStatement ps = connection.prepareStatement("DELETE FROM branch WHERE branch_id = ?");
-			ps.setInt(1, branchId);
-			
+			ps.setString(1, vacName);
+
 			int rowCount = ps.executeUpdate();
 			if (rowCount == 0) {
-				System.out.println(WARNING_TAG + " Branch " + branchId + " does not exist!");
+				System.out.println(WARNING_TAG + " Vaccine " + vacName + " does not exist!");
 			}
-			
+
 			connection.commit();
-	
+
 			ps.close();
 		} catch (SQLException e) {
 			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
 			rollbackConnection();
 		}
 	}
-	
-	public void insertBranch(BranchModel model) {
+
+	public void insertVaccine(Vaccine model) {
 		try {
 			PreparedStatement ps = connection.prepareStatement("INSERT INTO branch VALUES (?,?,?,?,?)");
-			ps.setInt(1, model.getId());
-			ps.setString(2, model.getName());
-			ps.setString(3, model.getAddress());
-			ps.setString(4, model.getCity());
-			if (model.getPhoneNumber() == 0) {
-				ps.setNull(5, java.sql.Types.INTEGER);
-			} else {
-				ps.setInt(5, model.getPhoneNumber());
-			}
+			ps.setString(1, model.getVacName());
+			ps.setString(2, model.getType());
+			ps.setDouble(3, model.getDosage());
 
 			ps.executeUpdate();
 			connection.commit();
@@ -88,12 +82,12 @@ public class DatabaseConnectionHandler {
 		}
 	}
 	
-	public BranchModel[] getBranchInfo() {
-		ArrayList<BranchModel> result = new ArrayList<BranchModel>();
+	public Vaccine[] getVaccineInfo() {
+		ArrayList<Vaccine> result = new ArrayList<Vaccine>();
 		
 		try {
 			Statement stmt = connection.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM branch");
+			ResultSet rs = stmt.executeQuery("SELECT * FROM vaccine");
 		
 //    		// get info on ResultSet
 //    		ResultSetMetaData rsmd = rs.getMetaData();
@@ -107,11 +101,9 @@ public class DatabaseConnectionHandler {
 //    		}
 			
 			while(rs.next()) {
-				BranchModel model = new BranchModel(rs.getString("branch_addr"),
-													rs.getString("branch_city"),
-													rs.getInt("branch_id"),
-													rs.getString("branch_name"),
-													rs.getInt("branch_phone"));
+				Vaccine model = new Vaccine(rs.getString("vaccine_vacname"),
+													  rs.getString("vaccine_type"),
+													  rs.getDouble("vaccine_dosage"));
 				result.add(model);
 			}
 
@@ -121,27 +113,27 @@ public class DatabaseConnectionHandler {
 			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
 		}	
 		
-		return result.toArray(new BranchModel[result.size()]);
+		return result.toArray(new Vaccine[result.size()]);
 	}
-	
-	public void updateBranch(int id, String name) {
+
+	public void updateVaccine(int id, String name) {
 		try {
-		  PreparedStatement ps = connection.prepareStatement("UPDATE branch SET branch_name = ? WHERE branch_id = ?");
-		  ps.setString(1, name);
-		  ps.setInt(2, id);
-		
-		  int rowCount = ps.executeUpdate();
-		  if (rowCount == 0) {
-		      System.out.println(WARNING_TAG + " Branch " + id + " does not exist!");
-		  }
-	
-		  connection.commit();
-		  
-		  ps.close();
+			PreparedStatement ps = connection.prepareStatement("UPDATE branch SET branch_name = ? WHERE branch_id = ?");
+			ps.setString(1, name);
+			ps.setInt(2, id);
+
+			int rowCount = ps.executeUpdate();
+			if (rowCount == 0) {
+				System.out.println(WARNING_TAG + " Branch " + id + " does not exist!");
+			}
+
+			connection.commit();
+
+			ps.close();
 		} catch (SQLException e) {
 			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
 			rollbackConnection();
-		}	
+		}
 	}
 	
 	public boolean login(String username, String password) {

@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import ca.ubc.cs304.delegates.TerminalTransactionsDelegate;
-import ca.ubc.cs304.model.BranchModel;
+import ca.ubc.cs304.model.vaccine.Vaccine;
 
 /**
  * The class is only responsible for handling terminal text inputs. 
@@ -87,7 +87,7 @@ public class TerminalTransactions {
 					handleUpdateOption();
 					break;
 				case 4:  
-					delegate.showBranch(); 
+					delegate.showVaccine();
 					break;
 				case 5:
 					handleQuitOption();
@@ -143,12 +143,10 @@ public class TerminalTransactions {
 			phoneNumber = readInteger(true);
 		}
 		
-		BranchModel model = new BranchModel(address,
-											city,
-											id,
-											name,
-											phoneNumber);
-		delegate.insertBranch(model);
+		Vaccine model = new Vaccine(vacName,
+											type,
+											dosage);
+		delegate.insertVaccine(model);
 	}
 	
 	private void handleQuitOption() {
