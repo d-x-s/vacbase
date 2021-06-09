@@ -2,15 +2,15 @@ package ca.ubc.cs304.controller;
 
 import ca.ubc.cs304.database.DatabaseConnectionHandler;
 import ca.ubc.cs304.delegates.LoginWindowDelegate;
-import ca.ubc.cs304.delegates.TerminalTransactionsDelegate;
+import ca.ubc.cs304.delegates.TabPageDelegate;
 import ca.ubc.cs304.model.vaccine.Vaccine;
+import ca.ubc.cs304.project.ui.TabPage;
 import ca.ubc.cs304.ui.LoginWindow;
-import ca.ubc.cs304.ui.TerminalTransactions;
 
 /**
  * This is the main controller class that will orchestrate everything.
  */
-public class VacBase implements LoginWindowDelegate, TerminalTransactionsDelegate {
+public class VacBase implements LoginWindowDelegate, TabPageDelegate {
 	private DatabaseConnectionHandler dbHandler = null;
 	private LoginWindow loginWindow = null;
 
@@ -35,9 +35,8 @@ public class VacBase implements LoginWindowDelegate, TerminalTransactionsDelegat
 			// Once connected, remove login window and start text transaction flow
 			loginWindow.dispose();
 
-			TerminalTransactions transaction = new TerminalTransactions();
-			transaction.setupDatabase(this);
-			transaction.showMainMenu(this);
+			TabPage vacPage = new TabPage();
+			vacPage.setupDatabase(this);
 		} else {
 			loginWindow.handleLoginFailed();
 
@@ -50,88 +49,72 @@ public class VacBase implements LoginWindowDelegate, TerminalTransactionsDelegat
 	}
 	
 	/**
-	 * TermainalTransactionsDelegate Implementation
+	 * TabPageDelegate Implementation
 	 * 
-	 * Insert a branch with the given info
+	 * Insert a vaccine with the given info
 	 */
 	public void insertVaccine(Vaccine model) {
 		dbHandler.insertVaccine(model);
 	}
     /**
-	 * TermainalTransactionsDelegate Implementation
+	 * TabPageDelegate Implementation
 	 * 
-	 * Delete branch with given branch ID.
+	 * Delete vaccine with given vaccine name.
 	 */
 	public void deleteVaccine(String vacName) {
 		dbHandler.deleteVaccine(vacName);
 	}
     
     /**
-	 * TermainalTransactionsDelegate Implementation
+	 * TabPageDelegate Implementation
 	 * 
-	 * Update the branch name for a specific ID
+	 * Update the vaccine type, dosage for a name
 	 */
 
-	public void updateVaccine(int branchId, String name) {
-		dbHandler.updateVaccine(branchId, name);
+	public void updateVaccine(String vacName, String type, double dosage) {
+		dbHandler.updateVaccine(vacName, type, dosage);
 	}
 
-    /**
-	 * TermainalTransactionsDelegate Implementation
+	/**
+	 * TabPageDelegate Implementation
+	 *
+	 * The TabPage instance tells us that it is done with what it's
+	 * doing so we are cleaning up the connection since it's no longer needed.
+	 */
+	public void tabPageFinished() {
+		this.dbHandler.close();
+		this.dbHandler = null;
+		System.exit(0);
+	}
+
+	/**
+	 * TabPageDelegate Implementation
 	 * 
-	 * Displays information about varies bank branches.
+	 * Displays information about various vaccines.
 	 */
     public void showVaccine() {
 		Vaccine[] models = dbHandler.getVaccineInfo();
     	
-//    	for (int i = 0; i < models.length; i++) {
-//			VaccineModel model = models[i];
-//
-//    		// simplified output formatting; truncation may occur
-//    		System.out.printf("%-10.10s", model.getId());
-//    		System.out.printf("%-20.20s", model.getName());
-//    		if (model.getAddress() == null) {
-//    			System.out.printf("%-20.20s", " ");
-//    		} else {
-//    			System.out.printf("%-20.20s", model.getAddress());
-//    		}
-//    		System.out.printf("%-15.15s", model.getCity());
-//    		if (model.getPhoneNumber() == 0) {
-//    			System.out.printf("%-15.15s", " ");
-//    		} else {
-//    			System.out.printf("%-15.15s", model.getPhoneNumber());
-//    		}
-//
-//    		System.out.println();
-//    	}
-    }
+    	for (int i = 0; i < models.length; i++) {
+			Vaccine model = models[i];
 
-    public void showPatientAccount() {
+    		// simplified output formatting; truncation may occur
+    		System.out.printf("%-10.10s", model.getVacName());
+    		System.out.printf("%-20.20s", model.getType());
+			System.out.printf("%-20.20s", model.getDosage());
 
-	}
-	
-    /**
-	 * TerminalTransactionsDelegate Implementation
-	 * 
-     * The TerminalTransaction instance tells us that it is done with what it's 
-     * doing so we are cleaning up the connection since it's no longer needed.
-     */ 
-    public void terminalTransactionsFinished() {
-    	dbHandler.close();
-    	dbHandler = null;
-    	
-    	System.exit(0);
+    		System.out.println();
+    	}
     }
     
     /**
-	 * TerminalTransactionsDelegate Implementation
+	 * TabPageDelegate Implementation
 	 * 
-     * The TerminalTransaction instance tells us that the user is fine with dropping any existing table
-     * called branch and creating a new one for this project to use
+     * The TabPage instance tells us that the user is fine with dropping any existing table
+     * called vaccine and creating a new one for this project to use
      */ 
 	public void databaseSetup() {
-		dbHandler.databaseSetup();;
-		
+		dbHandler.databaseSetup();
 	}
     
 	/**
