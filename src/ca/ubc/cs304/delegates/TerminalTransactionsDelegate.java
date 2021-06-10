@@ -1,6 +1,7 @@
 package ca.ubc.cs304.delegates;
 
-import ca.ubc.cs304.model.vaccine.Vaccine;
+import ca.ubc.cs304.model.BranchModel;
+import ca.ubc.cs304.model.patient.PatientAccount;
 
 /**
  * This interface uses the delegation design pattern where instead of having
@@ -14,10 +15,15 @@ import ca.ubc.cs304.model.vaccine.Vaccine;
 public interface TerminalTransactionsDelegate {
 	public void databaseSetup();
 	
-	public void deleteVaccine(String vacName);
-	public void insertVaccine(Vaccine model);
-	public void showVaccine();
-	public void updateVaccine(int branchId, String name);
-	
+	public void deleteBranch(int branchId);
+	public void insertBranch(BranchModel model);
+	public void showBranch();
+	public void updateBranch(int branchId, String name);
+
+	public void insertPatientAccount(PatientAccount model);
+	public void deletePatientAccount(int careCardNumber);
+	public void showPatientAccount();
+	public void updatePatientAccount(int CareCardNumber, String newUsername);
+
 	public void terminalTransactionsFinished();
 }

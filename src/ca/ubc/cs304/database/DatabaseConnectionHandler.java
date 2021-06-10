@@ -2,10 +2,16 @@ package ca.ubc.cs304.database;
 
 import java.io.File;
 import java.io.IOException;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
-import ca.ubc.cs304.model.vaccine.Vaccine;
+import ca.ubc.cs304.model.BranchModel;
+import ca.ubc.cs304.model.patient.PatientAccount;
 import ca.ubc.cs304.sql.SQLUtil;
 
 /**
@@ -18,9 +24,9 @@ public class DatabaseConnectionHandler {
 	private static final String ORACLE_URL = "jdbc:oracle:thin:@localhost:1522:stu";
 	private static final String EXCEPTION_TAG = "[EXCEPTION]";
 	private static final String WARNING_TAG = "[WARNING]";
-	
+
 	private Connection connection = null;
-	
+
 	public DatabaseConnectionHandler() {
 		try {
 			// Load the Oracle JDBC driver
@@ -30,7 +36,7 @@ public class DatabaseConnectionHandler {
 			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
 		}
 	}
-	
+
 	public void close() {
 		try {
 			if (connection != null) {
@@ -38,6 +44,202 @@ public class DatabaseConnectionHandler {
 			}
 		} catch (SQLException e) {
 			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+		}
+	}
+
+	public void deleteBranch(int branchId) {
+		try {
+			PreparedStatement ps = connection.prepareStatement("DELETE FROM branch WHERE branch_id = ?");
+			ps.setInt(1, branchId);
+
+			int rowCount = ps.executeUpdate();
+			if (rowCount == 0) {
+				System.out.println(WARNING_TAG + " Branch " + branchId + " does not exist!");
+			}
+
+			connection.commit();
+
+			ps.close();
+		} catch (SQLException e) {
+			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+			rollbackConnection();
+		}
+	}
+
+	public void deletePatientAccount(int careCardNumber) {
+		try {
+			PreparedStatement ps = connection.prepareStatement("DELETE FROM PatientAccount WHERE CareCardNumber = ?");
+			ps.setInt(1, careCardNumber);
+
+			int rowCount = ps.executeUpdate();
+			if (rowCount == 0) {
+				System.out.println(WARNING_TAG + " Account " + careCardNumber + " does not exist!");
+			}
+
+			connection.commit();
+
+			ps.close();
+		} catch (SQLException e) {
+			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+			rollbackConnection();
+		}
+	}
+
+	public void insertBranch(BranchModel model) {
+		try {
+			PreparedStatement ps = connection.prepareStatement("INSERT INTO branch VALUES (?,?,?,?,?)");
+			ps.setInt(1, model.getId());
+			ps.setString(2, model.getName());
+			ps.setString(3, model.getAddress());
+			ps.setString(4, model.getCity());
+			if (model.getPhoneNumber() == 0) {
+				ps.setNull(5, java.sql.Types.INTEGER);
+			} else {
+				ps.setInt(5, model.getPhoneNumber());
+			}
+
+			ps.executeUpdate();
+			connection.commit();
+
+			ps.close();
+		} catch (SQLException e) {
+			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+			rollbackConnection();
+		}
+	}
+
+	public void insertPatientAccount(PatientAccount model) {
+		try {
+			PreparedStatement ps = connection.prepareStatement("INSERT INTO PatientAccount VALUES (?,?,?,?)");
+			ps.setInt(1, model.getCareCardNumber());
+			ps.setString(2, model.getFullName());
+			ps.setDate(3, model.getDate());
+			ps.setString(4, model.getUsername());
+//			if (model.getPhoneNumber() == 0) {
+//				ps.setNull(5, java.sql.Types.INTEGER);
+//			} else {
+//				ps.setInt(5, model.getPhoneNumber());
+//			}
+
+			ps.executeUpdate();
+			connection.commit();
+
+			ps.close();
+		} catch (SQLException e) {
+			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+			rollbackConnection();
+		}
+	}
+
+	public BranchModel[] getBranchInfo() {
+		ArrayList<BranchModel> result = new ArrayList<BranchModel>();
+
+		try {
+			Statement stmt = connection.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM branch");
+
+//    		// get info on ResultSet
+//    		ResultSetMetaData rsmd = rs.getMetaData();
+//
+//    		System.out.println(" ");
+//
+//    		// display column names;
+//    		for (int i = 0; i < rsmd.getColumnCount(); i++) {
+//    			// get column name and print it
+//    			System.out.printf("%-15s", rsmd.getColumnName(i + 1));
+//    		}
+
+			while(rs.next()) {
+				BranchModel model = new BranchModel(rs.getString("branch_addr"),
+						rs.getString("branch_city"),
+						rs.getInt("branch_id"),
+						rs.getString("branch_name"),
+						rs.getInt("branch_phone"));
+				result.add(model);
+			}
+
+			rs.close();
+			stmt.close();
+		} catch (SQLException e) {
+			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+		}
+
+		return result.toArray(new BranchModel[result.size()]);
+	}
+
+	public PatientAccount[] getPatientAccountInfo() {
+		ArrayList<PatientAccount> result = new ArrayList<PatientAccount>();
+
+		try {
+			Statement stmt = connection.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM PatientAccount");
+
+//    		// get info on ResultSet
+//    		ResultSetMetaData rsmd = rs.getMetaData();
+//
+//    		System.out.println(" ");
+//
+//    		// display column names;
+//    		for (int i = 0; i < rsmd.getColumnCount(); i++) {
+//    			// get column name and print it
+//    			System.out.printf("%-15s", rsmd.getColumnName(i + 1));
+//    		}
+
+			while(rs.next()) {
+				PatientAccount model = new PatientAccount(
+						rs.getInt("CareCardNumber"),
+						rs.getString("FullName"),
+						rs.getDate("DOB"),
+						rs.getString("Username"));
+				result.add(model);
+			}
+
+			rs.close();
+			stmt.close();
+		} catch (SQLException e) {
+			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+		}
+
+		return result.toArray(new PatientAccount[result.size()]);
+	}
+
+	public void updateBranch(int id, String name) {
+		try {
+			PreparedStatement ps = connection.prepareStatement("UPDATE branch SET branch_name = ? WHERE branch_id = ?");
+			ps.setString(1, name);
+			ps.setInt(2, id);
+
+			int rowCount = ps.executeUpdate();
+			if (rowCount == 0) {
+				System.out.println(WARNING_TAG + " Branch " + id + " does not exist!");
+			}
+
+			connection.commit();
+
+			ps.close();
+		} catch (SQLException e) {
+			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+			rollbackConnection();
+		}
+	}
+
+	public void updatePatientAccount(int CareCardNumber, String newUserName) {
+		try {
+			PreparedStatement ps = connection.prepareStatement("UPDATE PatientAccount SET Username = ? WHERE CareCardNumber = ?");
+			ps.setString(1, newUserName);
+			ps.setInt(2, CareCardNumber);
+
+			int rowCount = ps.executeUpdate();
+			if (rowCount == 0) {
+				System.out.println(WARNING_TAG + " PatientAccount with CareCardNumber" + CareCardNumber + " does not exist!");
+			}
+
+			connection.commit();
+
+			ps.close();
+		} catch (SQLException e) {
+			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+			rollbackConnection();
 		}
 	}
 
@@ -66,12 +268,41 @@ public class DatabaseConnectionHandler {
 		}
 	}
 
+//	public void databaseSetup() {
+//		dropBranchTableIfExists();
+//
+//		try {
+//			Statement stmt = connection.createStatement();
+//			stmt.executeUpdate("CREATE TABLE branch (branch_id integer PRIMARY KEY, branch_name varchar2(20) not null, branch_addr varchar2(50), branch_city varchar2(20) not null, branch_phone integer)");
+//			stmt.close();
+//		} catch (SQLException e) {
+//			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+//		}
+//
+//		BranchModel branch1 = new BranchModel("123 Charming Ave", "Vancouver", 1, "First Branch", 1234567);
+//		insertBranch(branch1);
+//
+//		BranchModel branch2 = new BranchModel("123 Coco Ave", "Vancouver", 2, "Second Branch", 1234568);
+//		insertBranch(branch2);
+//	}
+
 	public void databaseSetup() {
 		try {
 			// resources/sql/databaseSetup.sql
 			// resources/sql/create_db.sql
 			dropBranchTableIfExists();
+
+			// add tables
 			SQLUtil.executeFile(connection, new File("resources/sql/databaseSetup.sql"));
+
+			// drop tables
+			// SQLUtil.executeFile(connection, new File("resources/sql/databaseDrop.sql"));
+
+			// clear tables
+			// SQLUtil.executeFile(connection, new File("resources/sql/databaseClear.sql"));
+
+			// delete tables
+
 			//createTriggers(connection);
 		} catch (SQLException | IOException e) {
 			e.printStackTrace();
@@ -97,119 +328,4 @@ public class DatabaseConnectionHandler {
 			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
 		}
 	}
-
-	// END OF DATABASE HANDLERS ////////////////////////////////////////////////////////////////////////////////////////
-
-	// BRANCH //////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	public void deleteVaccine(String vacName) {
-		try {
-			PreparedStatement ps = connection.prepareStatement("DELETE FROM Vaccine WHERE vacname = ?");
-			ps.setString(1, vacName);
-
-			int rowCount = ps.executeUpdate();
-			if (rowCount == 0) {
-				System.out.println(WARNING_TAG + " Vaccine " + vacName + " does not exist!");
-			}
-
-			connection.commit();
-
-			ps.close();
-		} catch (SQLException e) {
-			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
-			rollbackConnection();
-		}
-	}
-
-	public void insertVaccine(Vaccine model) {
-		try {
-			PreparedStatement ps = connection.prepareStatement("INSERT INTO Vaccine VALUES (?,?,?)");
-			ps.setString(1, model.getVacName());
-			ps.setString(2, model.getType());
-			ps.setDouble(3, model.getDosage());
-
-			ps.executeUpdate();
-			connection.commit();
-
-			ps.close();
-		} catch (SQLException e) {
-			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
-			rollbackConnection();
-		}
-	}
-	
-	public Vaccine[] getVaccineInfo() {
-		ArrayList<Vaccine> result = new ArrayList<Vaccine>();
-		
-		try {
-			Statement stmt = connection.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM vaccine");
-		
-    		// get info on ResultSet
-    		ResultSetMetaData rsmd = rs.getMetaData();
-
-    		System.out.println(" ");
-
-    		// display column names;
-    		for (int i = 0; i < rsmd.getColumnCount(); i++) {
-    			// get column name and print it
-    			System.out.printf("%-15s", rsmd.getColumnName(i + 1));
-    		}
-			
-			while(rs.next()) {
-				Vaccine model = new Vaccine(rs.getString("vaccine_vacname"),
-											rs.getString("vaccine_type"),
-											rs.getDouble("vaccine_dosage"));
-				result.add(model);
-			}
-
-			rs.close();
-			stmt.close();
-		} catch (SQLException e) {
-			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
-		}	
-		
-		return result.toArray(new Vaccine[result.size()]);
-	}
-
-	public void updateVaccine(String vacName, String type, double dosage) {
-		try {
-			PreparedStatement ps = connection.prepareStatement("UPDATE Vaccine SET type = ?, dosage = ? WHERE vacname = ?");
-			ps.setString(1, type);
-			ps.setDouble(2, dosage);
-			ps.setString(3, vacName);
-
-			int rowCount = ps.executeUpdate();
-			if (rowCount == 0) {
-				System.out.println(WARNING_TAG + " Vaccine " + vacName + " does not exist!");
-			}
-
-			connection.commit();
-
-			ps.close();
-		} catch (SQLException e) {
-			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
-			rollbackConnection();
-		}
-	}
-
-	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	// PATIENTACCOUNT /////////////////////////////////////////////////////////////////////////////////////////////////
-
-	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
 }

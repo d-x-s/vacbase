@@ -2,9 +2,6 @@ package ca.ubc.cs304.model.patient;
 
 import java.sql.Date;
 
-/**
- * The intent for this class is to update/store information about a single patient account
- */
 public class PatientAccount {
     private final int careCardNumber;
     private String fullName;
