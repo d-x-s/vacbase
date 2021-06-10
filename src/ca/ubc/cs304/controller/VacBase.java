@@ -54,6 +54,8 @@ public class VacBase implements LoginWindowDelegate, TerminalTransactionsDelegat
 		}
 	}
 
+
+	// BRANCH //////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/**
 	 * TermainalTransactionsDelegate Implementation
 	 *
@@ -62,8 +64,6 @@ public class VacBase implements LoginWindowDelegate, TerminalTransactionsDelegat
 	public void insertBranch(BranchModel model) {
 		dbHandler.insertBranch(model);
 	}
-
-	public void insertPatientAccount(PatientAccount model) { dbHandler.insertPatientAccount(model); }
 
 	/**
 	 * TermainalTransactionsDelegate Implementation
@@ -74,9 +74,6 @@ public class VacBase implements LoginWindowDelegate, TerminalTransactionsDelegat
 		dbHandler.deleteBranch(branchId);
 	}
 
-	public void deletePatientAccount(int careCardNumber) { dbHandler.deletePatientAccount(careCardNumber); }
-
-
 	/**
 	 * TermainalTransactionsDelegate Implementation
 	 *
@@ -86,8 +83,6 @@ public class VacBase implements LoginWindowDelegate, TerminalTransactionsDelegat
 	public void updateBranch(int branchId, String name) {
 		dbHandler.updateBranch(branchId, name);
 	}
-
-	public void updatePatientAccount(int CareCardNumber, String newUserName)  {dbHandler.updatePatientAccount(CareCardNumber, newUserName); }
 
 	/**
 	 * TermainalTransactionsDelegate Implementation
@@ -118,7 +113,17 @@ public class VacBase implements LoginWindowDelegate, TerminalTransactionsDelegat
 			System.out.println();
 		}
 	}
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+
+
+
+	// PATIENTACCOUNT //////////////////////////////////////////////////////////////////////////////////////////////////
+
+	public void insertPatientAccount(PatientAccount model) { dbHandler.insertPatientAccount(model); }
+	public void deletePatientAccount(int careCardNumber) { dbHandler.deletePatientAccount(careCardNumber); }
+	public void updatePatientAccount(int CareCardNumber, String newUserName)  {dbHandler.updatePatientAccount(CareCardNumber, newUserName); }
 	public void showPatientAccount() {
 		PatientAccount[] models = dbHandler.getPatientAccountInfo();
 
@@ -144,6 +149,28 @@ public class VacBase implements LoginWindowDelegate, TerminalTransactionsDelegat
 			System.out.println();
 		}
 	}
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+	// VACCINE /////////////////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+	// FACILITY ////////////////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+	// CONDITION ///////////////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	/**
 	 * TerminalTransactionsDelegate Implementation

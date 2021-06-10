@@ -2,12 +2,7 @@ package ca.ubc.cs304.database;
 
 import java.io.File;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
 import ca.ubc.cs304.model.BranchModel;
@@ -16,6 +11,9 @@ import ca.ubc.cs304.sql.SQLUtil;
 
 /**
  * This class handles all database related transactions
+ *
+ * !!! NOTE !!!
+ * SCROLL DOWN FOR THE IMPLEMENTATION OF PATIENTACCOUNT, VACCINE, CONDITION, AND FACILITY
  */
 public class DatabaseConnectionHandler {
 	// Use this version of the ORACLE_URL if you are running the code off of the server
@@ -27,6 +25,7 @@ public class DatabaseConnectionHandler {
 
 	private Connection connection = null;
 
+	// CONNECTION OPERATIONS ///////////////////////////////////////////////////////////////////////////////////////////
 	public DatabaseConnectionHandler() {
 		try {
 			// Load the Oracle JDBC driver
@@ -47,6 +46,99 @@ public class DatabaseConnectionHandler {
 		}
 	}
 
+	public boolean login(String username, String password) {
+		try {
+			if (connection != null) {
+				connection.close();
+			}
+
+			connection = DriverManager.getConnection(ORACLE_URL, username, password);
+			connection.setAutoCommit(false);
+
+			System.out.println("\nConnected to Oracle!");
+			return true;
+		} catch (SQLException e) {
+			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+			return false;
+		}
+	}
+
+	private void rollbackConnection() {
+		try  {
+			connection.rollback();
+		} catch (SQLException e) {
+			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+		}
+	}
+
+	// NOTE: This is an old copy of databaseSetup that hardcoded branch creation
+//	public void databaseSetup() {
+//		dropBranchTableIfExists();
+//
+//		try {
+//			Statement stmt = connection.createStatement();
+//			stmt.executeUpdate("CREATE TABLE branch (branch_id integer PRIMARY KEY, branch_name varchar2(20) not null, branch_addr varchar2(50), branch_city varchar2(20) not null, branch_phone integer)");
+//			stmt.close();
+//		} catch (SQLException e) {
+//			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+//		}
+//
+//		BranchModel branch1 = new BranchModel("123 Charming Ave", "Vancouver", 1, "First Branch", 1234567);
+//		insertBranch(branch1);
+//
+//		BranchModel branch2 = new BranchModel("123 Coco Ave", "Vancouver", 2, "Second Branch", 1234568);
+//		insertBranch(branch2);
+//	}
+
+	// NOTE: This database setup runs a SQL script to create the tables
+	public void databaseSetup() {
+		try {
+			// resources/sql/databaseSetup.sql
+			// resources/sql/create_db.sql
+			dropBranchTableIfExists();
+
+			// add tables
+			SQLUtil.executeFile(connection, new File("resources/sql/databaseSetup.sql"));
+
+			// drop tables
+			// SQLUtil.executeFile(connection, new File("resources/sql/databaseDrop.sql"));
+
+			// clear tables
+			// SQLUtil.executeFile(connection, new File("resources/sql/databaseClear.sql"));
+
+			//createTriggers(connection);
+		} catch (SQLException | IOException e) {
+			e.printStackTrace();
+			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+		}
+	}
+
+	private void dropBranchTableIfExists() {
+		try {
+			Statement stmt = connection.createStatement();
+			ResultSet rs = stmt.executeQuery("select table_name from user_tables");
+
+			while(rs.next()) {
+				if(rs.getString(1).toLowerCase().equals("branch")) {
+					stmt.execute("DROP TABLE branch");
+					break;
+				}
+			}
+
+			rs.close();
+			stmt.close();
+		} catch (SQLException e) {
+			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+		}
+	}
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+	// BRANCH //////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public void deleteBranch(int branchId) {
 		try {
 			PreparedStatement ps = connection.prepareStatement("DELETE FROM branch WHERE branch_id = ?");
@@ -55,25 +147,6 @@ public class DatabaseConnectionHandler {
 			int rowCount = ps.executeUpdate();
 			if (rowCount == 0) {
 				System.out.println(WARNING_TAG + " Branch " + branchId + " does not exist!");
-			}
-
-			connection.commit();
-
-			ps.close();
-		} catch (SQLException e) {
-			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
-			rollbackConnection();
-		}
-	}
-
-	public void deletePatientAccount(int careCardNumber) {
-		try {
-			PreparedStatement ps = connection.prepareStatement("DELETE FROM PatientAccount WHERE CareCardNumber = ?");
-			ps.setInt(1, careCardNumber);
-
-			int rowCount = ps.executeUpdate();
-			if (rowCount == 0) {
-				System.out.println(WARNING_TAG + " Account " + careCardNumber + " does not exist!");
 			}
 
 			connection.commit();
@@ -108,6 +181,88 @@ public class DatabaseConnectionHandler {
 		}
 	}
 
+	public BranchModel[] getBranchInfo() {
+		ArrayList<BranchModel> result = new ArrayList<BranchModel>();
+
+		try {
+			Statement stmt = connection.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM branch");
+
+    		// get info on ResultSet
+    		ResultSetMetaData rsmd = rs.getMetaData();
+
+    		System.out.println(" ");
+
+    		// display column names;
+    		for (int i = 0; i < rsmd.getColumnCount(); i++) {
+    			// get column name and print it
+    			System.out.printf("%-15s", rsmd.getColumnName(i + 1));
+    		}
+
+			while(rs.next()) {
+				BranchModel model = new BranchModel(rs.getString("branch_addr"),
+						rs.getString("branch_city"),
+						rs.getInt("branch_id"),
+						rs.getString("branch_name"),
+						rs.getInt("branch_phone"));
+				result.add(model);
+			}
+
+			rs.close();
+			stmt.close();
+		} catch (SQLException e) {
+			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+		}
+
+		return result.toArray(new BranchModel[result.size()]);
+	}
+
+	public void updateBranch(int id, String name) {
+		try {
+			PreparedStatement ps = connection.prepareStatement("UPDATE branch SET branch_name = ? WHERE branch_id = ?");
+			ps.setString(1, name);
+			ps.setInt(2, id);
+
+			int rowCount = ps.executeUpdate();
+			if (rowCount == 0) {
+				System.out.println(WARNING_TAG + " Branch " + id + " does not exist!");
+			}
+
+			connection.commit();
+
+			ps.close();
+		} catch (SQLException e) {
+			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+			rollbackConnection();
+		}
+	}
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+	// PATIENTACCOUNT //////////////////////////////////////////////////////////////////////////////////////////////////
+	public void deletePatientAccount(int careCardNumber) {
+		try {
+			PreparedStatement ps = connection.prepareStatement("DELETE FROM PatientAccount WHERE CareCardNumber = ?");
+			ps.setInt(1, careCardNumber);
+
+			int rowCount = ps.executeUpdate();
+			if (rowCount == 0) {
+				System.out.println(WARNING_TAG + " Account " + careCardNumber + " does not exist!");
+			}
+
+			connection.commit();
+
+			ps.close();
+		} catch (SQLException e) {
+			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+			rollbackConnection();
+		}
+	}
+
 	public void insertPatientAccount(PatientAccount model) {
 		try {
 			PreparedStatement ps = connection.prepareStatement("INSERT INTO PatientAccount VALUES (?,?,?,?)");
@@ -131,41 +286,7 @@ public class DatabaseConnectionHandler {
 		}
 	}
 
-	public BranchModel[] getBranchInfo() {
-		ArrayList<BranchModel> result = new ArrayList<BranchModel>();
 
-		try {
-			Statement stmt = connection.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM branch");
-
-//    		// get info on ResultSet
-//    		ResultSetMetaData rsmd = rs.getMetaData();
-//
-//    		System.out.println(" ");
-//
-//    		// display column names;
-//    		for (int i = 0; i < rsmd.getColumnCount(); i++) {
-//    			// get column name and print it
-//    			System.out.printf("%-15s", rsmd.getColumnName(i + 1));
-//    		}
-
-			while(rs.next()) {
-				BranchModel model = new BranchModel(rs.getString("branch_addr"),
-						rs.getString("branch_city"),
-						rs.getInt("branch_id"),
-						rs.getString("branch_name"),
-						rs.getInt("branch_phone"));
-				result.add(model);
-			}
-
-			rs.close();
-			stmt.close();
-		} catch (SQLException e) {
-			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
-		}
-
-		return result.toArray(new BranchModel[result.size()]);
-	}
 
 	public PatientAccount[] getPatientAccountInfo() {
 		ArrayList<PatientAccount> result = new ArrayList<PatientAccount>();
@@ -174,16 +295,16 @@ public class DatabaseConnectionHandler {
 			Statement stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM PatientAccount");
 
-//    		// get info on ResultSet
-//    		ResultSetMetaData rsmd = rs.getMetaData();
-//
-//    		System.out.println(" ");
-//
-//    		// display column names;
-//    		for (int i = 0; i < rsmd.getColumnCount(); i++) {
-//    			// get column name and print it
-//    			System.out.printf("%-15s", rsmd.getColumnName(i + 1));
-//    		}
+    		// get info on ResultSet
+    		ResultSetMetaData rsmd = rs.getMetaData();
+
+    		System.out.println(" ");
+
+    		// display column names;
+    		for (int i = 0; i < rsmd.getColumnCount(); i++) {
+    			// get column name and print it
+    			System.out.printf("%-15s", rsmd.getColumnName(i + 1));
+    		}
 
 			while(rs.next()) {
 				PatientAccount model = new PatientAccount(
@@ -201,26 +322,6 @@ public class DatabaseConnectionHandler {
 		}
 
 		return result.toArray(new PatientAccount[result.size()]);
-	}
-
-	public void updateBranch(int id, String name) {
-		try {
-			PreparedStatement ps = connection.prepareStatement("UPDATE branch SET branch_name = ? WHERE branch_id = ?");
-			ps.setString(1, name);
-			ps.setInt(2, id);
-
-			int rowCount = ps.executeUpdate();
-			if (rowCount == 0) {
-				System.out.println(WARNING_TAG + " Branch " + id + " does not exist!");
-			}
-
-			connection.commit();
-
-			ps.close();
-		} catch (SQLException e) {
-			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
-			rollbackConnection();
-		}
 	}
 
 	public void updatePatientAccount(int CareCardNumber, String newUserName) {
@@ -242,90 +343,28 @@ public class DatabaseConnectionHandler {
 			rollbackConnection();
 		}
 	}
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	public boolean login(String username, String password) {
-		try {
-			if (connection != null) {
-				connection.close();
-			}
 
-			connection = DriverManager.getConnection(ORACLE_URL, username, password);
-			connection.setAutoCommit(false);
 
-			System.out.println("\nConnected to Oracle!");
-			return true;
-		} catch (SQLException e) {
-			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
-			return false;
-		}
-	}
 
-	private void rollbackConnection() {
-		try  {
-			connection.rollback();
-		} catch (SQLException e) {
-			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
-		}
-	}
 
-//	public void databaseSetup() {
-//		dropBranchTableIfExists();
-//
-//		try {
-//			Statement stmt = connection.createStatement();
-//			stmt.executeUpdate("CREATE TABLE branch (branch_id integer PRIMARY KEY, branch_name varchar2(20) not null, branch_addr varchar2(50), branch_city varchar2(20) not null, branch_phone integer)");
-//			stmt.close();
-//		} catch (SQLException e) {
-//			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
-//		}
-//
-//		BranchModel branch1 = new BranchModel("123 Charming Ave", "Vancouver", 1, "First Branch", 1234567);
-//		insertBranch(branch1);
-//
-//		BranchModel branch2 = new BranchModel("123 Coco Ave", "Vancouver", 2, "Second Branch", 1234568);
-//		insertBranch(branch2);
-//	}
+	// VACCINE /////////////////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	public void databaseSetup() {
-		try {
-			// resources/sql/databaseSetup.sql
-			// resources/sql/create_db.sql
-			dropBranchTableIfExists();
 
-			// add tables
-			SQLUtil.executeFile(connection, new File("resources/sql/databaseSetup.sql"));
 
-			// drop tables
-			// SQLUtil.executeFile(connection, new File("resources/sql/databaseDrop.sql"));
 
-			// clear tables
-			// SQLUtil.executeFile(connection, new File("resources/sql/databaseClear.sql"));
 
-			// delete tables
+	// FACILITY ////////////////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-			//createTriggers(connection);
-		} catch (SQLException | IOException e) {
-			e.printStackTrace();
-			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
-		}
-	}
 
-	private void dropBranchTableIfExists() {
-		try {
-			Statement stmt = connection.createStatement();
-			ResultSet rs = stmt.executeQuery("select table_name from user_tables");
 
-			while(rs.next()) {
-				if(rs.getString(1).toLowerCase().equals("branch")) {
-					stmt.execute("DROP TABLE branch");
-					break;
-				}
-			}
 
-			rs.close();
-			stmt.close();
-		} catch (SQLException e) {
-			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
-		}
-	}
+
+	// CONDITION ///////////////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 }

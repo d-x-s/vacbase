@@ -1,9 +1,10 @@
 package ca.ubc.cs304.project.ui;
 
 import ca.ubc.cs304.delegates.TabPageDelegate;
-import ca.ubc.cs304.model.distributor.Facility;
+import ca.ubc.cs304.model.PatientAccountModel;
 import ca.ubc.cs304.model.patient.PatientAccount;
 import ca.ubc.cs304.model.patient.PreExistingCondition;
+import ca.ubc.cs304.model.patient.Facility;
 import ca.ubc.cs304.model.vaccine.Vaccine;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
