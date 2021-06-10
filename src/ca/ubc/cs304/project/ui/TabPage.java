@@ -1,8 +1,10 @@
 package ca.ubc.cs304.project.ui;
 
 import ca.ubc.cs304.delegates.TabPageDelegate;
+import ca.ubc.cs304.model.distributor.Facility;
 import ca.ubc.cs304.model.patient.PatientAccount;
 import ca.ubc.cs304.model.vaccine.Vaccine;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -12,12 +14,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
-import javafx.scene.text.TextAlignment;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 
 import static ca.ubc.cs304.project.ui.HelpfulFunctions.*;
 
@@ -41,6 +41,16 @@ public class TabPage {
     Button button60;
     TableView<PatientAccount> filterView;
     ObservableList<PatientAccount> filterList;
+
+    /*
+    Facility Tab
+     */
+    Button insertFacilityButton;
+    Button updateFacilityButton;
+    TextField facilityNameField;
+    TextField addressField;
+    TableView<Facility> facilityView;
+    ObservableList<Facility> facilityList;
 
 
     private TabPageDelegate delegate = null;
@@ -105,6 +115,82 @@ public class TabPage {
     }
 
     private void setUpFacilitiesTab() {
+        VBox mainPane = new VBox(20);
+        setWhiteBackgroundColor(mainPane);
+        facilityView = new TableView<>();
+
+        //region Setting up tableView
+        TableColumn<Facility, String> nameColumn = new TableColumn<>("Facility Name");
+        TableColumn<Facility, String> addressColumn = new TableColumn<>("Address");
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("facilityName"));
+        addressColumn.setCellValueFactory(new PropertyValueFactory<>("address"));
+
+        facilityView.setItems(getFacilities());
+        facilityView.getColumns().addAll(nameColumn, addressColumn);
+
+        //endregion
+
+        //region Setting up Layouts
+        HBox hBox = new HBox();
+        hBox.setPadding(new Insets(5));
+
+        VBox vBox1 = new VBox(5);
+        VBox vBox2 = new VBox(5);
+        hBox.getChildren().addAll(vBox1, vBox2);
+        //endregion
+
+        //region Customizing textfields and buttons
+        makeButtonOnWhite(insertFacilityButton);
+        makeButtonOnWhite(updateFacilityButton);
+        insertFacilityButton.setFont(commonFont(20));
+        updateFacilityButton.setFont(commonFont(20));
+        insertFacilityButton.setMinWidth(100);
+        insertFacilityButton.setMaxWidth(100);
+        updateFacilityButton.setMinWidth(100);
+        updateFacilityButton.setMaxWidth(100);
+        insertFacilityButton.setTranslateX(40);
+        updateFacilityButton.setTranslateX(40);
+        addressField.setPromptText("Input address: ");
+        addressField.setFont(commonFont(20));
+        facilityNameField.setPromptText("Input name: ");
+        facilityNameField.setFont(commonFont(20));
+        facilityNameField.setMinWidth(400);
+        //endregion
+
+        vBox1.getChildren().addAll(facilityNameField, addressField);
+
+        vBox2.getChildren().addAll(insertFacilityButton, updateFacilityButton);
+        mainPane.getChildren().addAll(facilityView, hBox);
+
+        facilities.setContent(mainPane);
+
+        insertFacilityButton.setOnAction(e -> {
+            Facility temp;
+            try {
+                temp = new Facility(facilityNameField.getText(), addressField.getText());
+                facilityList.add(temp);
+                facilityNameField.clear();
+                addressField.clear();
+            } catch (NullPointerException npe) {
+                npe.printStackTrace();
+            }
+        });
+        facilityView.setOnMousePressed(event -> {
+            if (event.isPrimaryButtonDown() && event.getClickCount() == 2) {
+                Facility selectedItem = facilityView.getSelectionModel().getSelectedItem();
+                facilityView.getItems().remove(selectedItem);
+            }
+        });
+
+        updateFacilityButton.setOnAction(event -> {
+            Facility selectedItem = facilityView.getSelectionModel().getSelectedItem();
+            //TODO: Add setters
+//            selectedItem.setAddress(addressField.getText());
+//            selectedItem.setFacilityName(facilityNameField.getText());
+            addressField.clear();
+            facilityNameField.clear();
+        });
+
 
     }
 
@@ -179,10 +265,25 @@ public class TabPage {
         button3044 = new Button("30 - 44");
         button4559 = new Button("45 - 59");
         button60 = new Button("60+");
+        insertFacilityButton = new Button("Insert");
+        updateFacilityButton = new Button("Update");
+        facilityNameField = new TextField();
+        addressField = new TextField();
     }
 
     public Scene getPage() {
         return page;
+    }
+
+    public ObservableList<Facility> getFacilities() {
+        facilityList = FXCollections.observableArrayList();
+        facilityList.add(new Facility("Facility 1", "Address 1"));
+        facilityList.add(new Facility("Facility 2", "Address 2"));
+        facilityList.add(new Facility("Facility 3", "Address 3"));
+        facilityList.add(new Facility("Facility 4", "Address 4"));
+        facilityList.add(new Facility("Facility 5", "Address 5"));
+        facilityList.add(new Facility("Facility 6", "Address 6"));
+        return facilityList;
     }
 
 
@@ -203,7 +304,7 @@ public class TabPage {
             if (choice != INVALID_INT) {
                 switch (choice) {
                     case 1:
-                        // delegate.databaseSetup();
+                        delegate.databaseSetup();
                         break;
                     case 2:
                         handleQuitOption();
