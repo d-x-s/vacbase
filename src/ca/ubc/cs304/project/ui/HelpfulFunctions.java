@@ -10,6 +10,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -58,6 +59,15 @@ public class HelpfulFunctions {
         return button;
     }
 
+    /*
+        Creates a rounded button as seen on Figma
+     */
+    public static Button makeButtonOnWhite(Button button) {
+        //TODO: Find better color or something idk, parameterize with color to make it easier
+        button.setStyle("-fx-background-color: #000000; -fx-background-radius: 100px; -fx-text-fill: #ffffff");
+        return button;
+    }
+
     public static ImageView createImage(String directory) {
         ImageView imageView = new ImageView();
         try {
@@ -68,6 +78,10 @@ public class HelpfulFunctions {
             e.printStackTrace();
         }
         return imageView;
+    }
+
+    public static Font commonFont(int x) {
+        return new Font("Montserrat", x);
     }
 
 

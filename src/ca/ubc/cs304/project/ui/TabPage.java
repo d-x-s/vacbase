@@ -1,17 +1,19 @@
 package ca.ubc.cs304.project.ui;
 
 import ca.ubc.cs304.delegates.TabPageDelegate;
+import ca.ubc.cs304.model.PatientAccountModel;
+import ca.ubc.cs304.model.patient.PatientAccount;
 import ca.ubc.cs304.model.vaccine.Vaccine;
+import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -27,7 +29,20 @@ public class TabPage {
     Tab distributor;
     Tab patient;
     Tab facilities;
+    Tab filter;
     TextField searchBar;
+
+    /*
+    Filter tab
+     */
+    Button button017;
+    Button button1829;
+    Button button3044;
+    Button button4559;
+    Button button60;
+    TableView<PatientAccount> filterView;
+    ObservableList<PatientAccount> filterList;
+
 
     private TabPageDelegate delegate = null;
     private BufferedReader bufferedReader = null;
@@ -38,8 +53,6 @@ public class TabPage {
     private static final int EMPTY_INPUT = 0;
     private static final String INVALID_STRING = "";
 
-    // Example data
-    ArrayList<ArrayList<String>> distributorData;
 
     public TabPage() {
 
@@ -49,12 +62,13 @@ public class TabPage {
         setUpVaccineTab();
         setUpFacilitiesTab();
         setUpPatientTab();
+        setUpFilterTab();
 
         //endregion
         StackPane backgroundPane = new StackPane();
         setBackgroundColor(backgroundPane);
         backgroundPane.getChildren().add(tabs);
-        tabs.getTabs().addAll(vaccine, distributor, patient, facilities);
+        tabs.getTabs().addAll(vaccine, distributor, patient, facilities, filter);
         tabs.setMaxSize(pageWidth - 70, pageHeight - 70);
         tabs.setMinSize(pageWidth - 70, pageHeight - 70);
         page = new Scene(backgroundPane, pageWidth, pageHeight);
@@ -95,18 +109,83 @@ public class TabPage {
 
     }
 
+    private void setUpFilterTab() {
+        HBox hBox = new HBox();
+        setWhiteBackgroundColor(hBox);
+        hBox.setPadding(new Insets(10));
+        filterView = new TableView<>();
+
+        //region Setting up columns
+        TableColumn<PatientAccount, String> usernameColumn = new TableColumn<>("Username");
+        TableColumn<PatientAccount, String> careCardNumber = new TableColumn<>("Care Care Number");
+        usernameColumn.setMinWidth((pageWidth >> 1) * .75);
+        careCardNumber.setMinWidth(pageWidth - (pageWidth >> 1) * .75);
+        usernameColumn.setMaxWidth((pageWidth >> 1) * .75);
+        careCardNumber.setMaxWidth(pageWidth - (pageWidth >> 1) * .75);
+        usernameColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
+        careCardNumber.setCellValueFactory(new PropertyValueFactory<>("careCardNumber"));
+        //endregion
+
+        VBox vBox = new VBox(10);
+        BorderPane hBox1 = new BorderPane();
+        BorderPane hBox2 = new BorderPane();
+        BorderPane hBox3 = new BorderPane();
+        BorderPane hBox4 = new BorderPane();
+
+        //region Customizing Buttons
+        makeButtonOnWhite(button017);
+        makeButtonOnWhite(button1829);
+        makeButtonOnWhite(button3044);
+        makeButtonOnWhite(button4559);
+        makeButtonOnWhite(button60);
+        button017.setFont(commonFont(24));
+        button1829.setFont(commonFont(24));
+        button3044.setFont(commonFont(24));
+        button4559.setFont(commonFont(24));
+        button60.setFont(commonFont(24));
+        //endregion
+
+        vBox.getChildren().addAll(hBox1, hBox2, hBox3, hBox4);
+        Label filterLabel = new Label("Filter by Age Bracket: ");
+        filterLabel.setFont(commonFont(24));
+        //region Adding nodes to rhs
+        hBox1.setCenter(filterLabel);
+        hBox2.setLeft(button017);
+        hBox2.setRight(button1829);
+        hBox3.setLeft(button3044);
+        hBox3.setRight(button4559);
+        hBox4.setCenter(button60);
+        //endregion
+        vBox.setTranslateX(50);
+
+
+
+
+
+
+        hBox.getChildren().addAll(filterView, vBox);
+        filter.setContent(hBox);
+    }
+
     private void initiateFields() {
         searchBar = new TextField();
+        filter = new Tab("Filter");
         tabs = new TabPane();
         vaccine = new Tab("Vaccines");
         distributor = new Tab("Distributors");
         patient = new Tab("Patients");
         facilities = new Tab("Facilities");
+        button017 = new Button("0 - 17");
+        button1829 = new Button("18 - 29");
+        button3044 = new Button("30 - 44");
+        button4559 = new Button("45 - 59");
+        button60 = new Button("60+");
     }
 
     public Scene getPage() {
         return page;
     }
+
 
     /**
      * The following methods handle insertion, deletion, and updates in the DB
@@ -173,7 +252,7 @@ public class TabPage {
         return input;
     }
 
-    private double readDouble (boolean allowEmpty) {
+    private double readDouble(boolean allowEmpty) {
         String line = null;
         double input = INVALID_DOUBLE;
         try {
