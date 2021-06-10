@@ -33,8 +33,11 @@ public class Main extends Application {
 //        scene = createPage.getPage();
 
         // Testing AdminPage
-        TabPage tabPage = new TabPage();
-        scene = tabPage.getPage();
+//        TabPage tabPage = new TabPage();
+//        scene = tabPage.getPage();
+
+        ViewOnlyPage viewOnlyPage = new ViewOnlyPage();
+        scene = viewOnlyPage.getPage();
 
         window.setScene(scene);
         window.setTitle("Title");

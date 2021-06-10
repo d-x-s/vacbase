@@ -72,6 +72,42 @@ public class AdminPage {
         button.setMaxSize(250, 63);
     }
 
+    public void setPage(Scene page) {
+        this.page = page;
+    }
+
+    public Button getVaccineButton() {
+        return vaccineButton;
+    }
+
+    public void setVaccineButton(Button vaccineButton) {
+        this.vaccineButton = vaccineButton;
+    }
+
+    public Button getDistributorButton() {
+        return distributorButton;
+    }
+
+    public void setDistributorButton(Button distributorButton) {
+        this.distributorButton = distributorButton;
+    }
+
+    public Button getPatientButton() {
+        return patientButton;
+    }
+
+    public void setPatientButton(Button patientButton) {
+        this.patientButton = patientButton;
+    }
+
+    public Button getFacilitiesButton() {
+        return facilitiesButton;
+    }
+
+    public void setFacilitiesButton(Button facilitiesButton) {
+        this.facilitiesButton = facilitiesButton;
+    }
+
     public Scene getPage() {
         return page;
     }
