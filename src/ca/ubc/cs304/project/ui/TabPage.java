@@ -1,10 +1,8 @@
 package ca.ubc.cs304.project.ui;
 
 import ca.ubc.cs304.delegates.TabPageDelegate;
-import ca.ubc.cs304.model.PatientAccountModel;
+import ca.ubc.cs304.model.distributor.Facility;
 import ca.ubc.cs304.model.patient.PatientAccount;
-import ca.ubc.cs304.model.patient.PreExistingCondition;
-import ca.ubc.cs304.model.patient.Facility;
 import ca.ubc.cs304.model.vaccine.Vaccine;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,12 +14,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
-import javafx.scene.text.TextAlignment;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 
 import static ca.ubc.cs304.project.ui.HelpfulFunctions.*;
 
