@@ -11,14 +11,13 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
 import static ca.ubc.cs304.project.ui.HelpfulFunctions.*;
 
-public class ViewOnlyPage {
+public class ConditionPage {
     Scene page;
     TableView<PreExistingCondition> viewConditions;
     TextField conditionInput;
@@ -27,7 +26,7 @@ public class ViewOnlyPage {
     long careCardNumber;
     ObservableList<PreExistingCondition> conditions;
 
-    public ViewOnlyPage() {
+    public ConditionPage() {
         VBox pane = new VBox();
 
         //TODO: set the careCardNumber when scene is created
@@ -91,14 +90,14 @@ public class ViewOnlyPage {
     // TODO: zero validation. add some somewhere or something idk
     private void addFunctionality() {
         insertButton.setOnAction(e -> {
-               PreExistingCondition temp;
-               try {
-                   temp = new PreExistingCondition((int)careCardNumber, conditionInput.getText());
-                   conditions.add(temp);
-                   conditionInput.clear();
-               } catch (NullPointerException npe) {
-                   npe.printStackTrace();
-               }
+            PreExistingCondition temp;
+            try {
+                temp = new PreExistingCondition((int)careCardNumber, conditionInput.getText());
+                conditions.add(temp);
+                conditionInput.clear();
+            } catch (NullPointerException npe) {
+                npe.printStackTrace();
+            }
         });
         viewConditions.setOnMousePressed(event -> {
             if (event.isPrimaryButtonDown() && event.getClickCount() == 2) {

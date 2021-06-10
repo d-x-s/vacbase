@@ -3,9 +3,7 @@ package ca.ubc.cs304.project.ui;
 import javafx.application.Application;
 
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import oracle.jdbc.logging.annotations.Log;
 
 public class Main extends Application {
 
@@ -33,16 +31,16 @@ public class Main extends Application {
 //        scene = createPage.getPage();
 
         // Testing AdminPage
-//        TabPage tabPage = new TabPage();
-//        scene = tabPage.getPage();
+        TabPage tabPage = new TabPage();
+        scene = tabPage.getPage();
 
-        ViewOnlyPage viewOnlyPage = new ViewOnlyPage();
-        scene = viewOnlyPage.getPage();
 
         window.setScene(scene);
         window.setTitle("Title");
         window.show();
     }
+
+
 
     public static void main(String[] args) {
         launch(args);

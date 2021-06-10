@@ -42,11 +42,15 @@ public class TabPage {
     ArrayList<ArrayList<String>> distributorData;
 
     public TabPage() {
+
+        //region Setup Tabs
         initiateFields();
         setUpDistributorTab();
         setUpVaccineTab();
         setUpFacilitiesTab();
         setUpPatientTab();
+
+        //endregion
         StackPane backgroundPane = new StackPane();
         setBackgroundColor(backgroundPane);
         backgroundPane.getChildren().add(tabs);
