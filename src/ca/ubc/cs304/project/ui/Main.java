@@ -31,8 +31,12 @@ public class Main extends Application {
 //        scene = createPage.getPage();
 
         // Testing AdminPage
-        TabPage tabPage = new TabPage();
-        scene = tabPage.getPage();
+//        TabPage tabPage = new TabPage();
+//        scene = tabPage.getPage();
+
+        // Testing conditionPage
+        ConditionPage conditionPage = new ConditionPage();
+        scene = conditionPage.getPage();
 
 
         window.setScene(scene);
