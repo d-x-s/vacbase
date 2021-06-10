@@ -1,7 +1,6 @@
 package ca.ubc.cs304.project.ui;
 
 import ca.ubc.cs304.delegates.TabPageDelegate;
-import ca.ubc.cs304.model.PatientAccountModel;
 import ca.ubc.cs304.model.patient.PatientAccount;
 import ca.ubc.cs304.model.vaccine.Vaccine;
 import javafx.collections.ObservableList;
@@ -204,7 +203,7 @@ public class TabPage {
             if (choice != INVALID_INT) {
                 switch (choice) {
                     case 1:
-                        delegate.databaseSetup();
+                        // delegate.databaseSetup();
                         break;
                     case 2:
                         handleQuitOption();

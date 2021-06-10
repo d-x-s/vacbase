@@ -90,7 +90,7 @@ public class DatabaseConnectionHandler {
 //		insertBranch(branch2);
 //	}
 
-	// NOTE: This databse setup runs a SQL script to create the tables
+	// NOTE: This database setup runs a SQL script to create the tables
 	public void databaseSetup() {
 		try {
 			// resources/sql/databaseSetup.sql
@@ -105,8 +105,6 @@ public class DatabaseConnectionHandler {
 
 			// clear tables
 			// SQLUtil.executeFile(connection, new File("resources/sql/databaseClear.sql"));
-
-			// delete tables
 
 			//createTriggers(connection);
 		} catch (SQLException | IOException e) {

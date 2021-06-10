@@ -64,7 +64,7 @@ public class TerminalTransactions {
         bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         int choice = INVALID_INPUT;
 
-        while (choice != 9) {
+        while (choice != 21) {
             System.out.println();
             System.out.println("1. Insert branch");
             System.out.println("2. Delete branch");
@@ -76,9 +76,24 @@ public class TerminalTransactions {
             System.out.println("7. Show Patient Accounts");
             System.out.println("8. Update the username of a Patient Account");
 
+            System.out.println("9. TODO: Insert Vaccine");
+            System.out.println("10. TODO: Delete Vaccine");
+            System.out.println("11. TODO: Show Vaccines");
+            System.out.println("12. TODO: Update the ________ of a Vaccine");
 
-            System.out.println("9. Quit");
-            System.out.print("Please choose one of the above 9 options: ");
+            System.out.println("13. TODO: Insert a Condition");
+            System.out.println("14. TODO: Delete a Condition");
+            System.out.println("15. TODO: Show Conditions");
+            System.out.println("16. TODO: Update _________ of a Condition");
+
+            System.out.println("17. TODO: Insert a Facility");
+            System.out.println("18. TODO: Delete a Facility");
+            System.out.println("19. TODO: Show Facilities");
+            System.out.println("20. TODO: Update the _________ of a Facility");
+
+
+            System.out.println("21. Quit");
+            System.out.print("Please choose one of the above 21 options: ");
 
             choice = readInteger(false);
 
@@ -114,9 +129,44 @@ public class TerminalTransactions {
                         handlePatientAccountUpdateOption();
                         break;
                     case 9:
+                        System.out.println("Todo!");
+                        break;
+                    case 10:
+                        System.out.println("Todo!");
+                        break;
+                    case 11:
+                        System.out.println("Todo!");
+                        break;
+                    case 12:
+                        System.out.println("Todo!");
+                        break;
+                    case 13:
+                        System.out.println("Todo!");
+                        break;
+                    case 14:
+                        System.out.println("Todo!");
+                        break;
+                    case 15:
+                        System.out.println("Todo!");
+                        break;
+                    case 16:
+                        System.out.println("Todo!");
+                        break;
+                    case 17:
+                        System.out.println("Todo!");
+                        break;
+                    case 18:
+                        System.out.println("Todo!");
+                        break;
+                    case 19:
+                        System.out.println("Todo!");
+                        break;
+                    case 20:
+                        System.out.println("Todo!");
+                        break;
+                    case 21:
                         handleQuitOption();
                         break;
-
                     default:
                         System.out.println(WARNING_TAG + " The number that you entered was not a valid option.");
                         break;
@@ -125,6 +175,8 @@ public class TerminalTransactions {
         }
     }
 
+    // BRANCH //////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     private void handleDeleteOption() {
         int branchId = INVALID_INPUT;
         while (branchId == INVALID_INPUT) {
@@ -132,17 +184,6 @@ public class TerminalTransactions {
             branchId = readInteger(false);
             if (branchId != INVALID_INPUT) {
                 delegate.deleteBranch(branchId);
-            }
-        }
-    }
-
-    private void handlePatientAccountDeleteOption() {
-        int CareCardNumber = INVALID_INPUT;
-        while (CareCardNumber == INVALID_INPUT) {
-            System.out.print("Please enter the CareCardNumber you wish to delete: ");
-            CareCardNumber = readInteger(false);
-            if (CareCardNumber != INVALID_INPUT) {
-                delegate.deletePatientAccount(CareCardNumber);
             }
         }
     }
@@ -187,6 +228,34 @@ public class TerminalTransactions {
         delegate.insertBranch(model);
     }
 
+    private void handleUpdateOption() {
+        int id = INVALID_INPUT;
+        while (id == INVALID_INPUT) {
+            System.out.print("Please enter the branch ID you wish to update: ");
+            id = readInteger(false);
+        }
+
+        String name = null;
+        while (name == null || name.length() <= 0) {
+            System.out.print("Please enter the branch name you wish to update: ");
+            name = readLine().trim();
+        }
+
+        delegate.updateBranch(id, name);
+    }
+
+    // BRANCH //////////////////////////////////////////////////////////////////////////////////////////////////////////
+    private void handlePatientAccountDeleteOption() {
+        int CareCardNumber = INVALID_INPUT;
+        while (CareCardNumber == INVALID_INPUT) {
+            System.out.print("Please enter the CareCardNumber you wish to delete: ");
+            CareCardNumber = readInteger(false);
+            if (CareCardNumber != INVALID_INPUT) {
+                delegate.deletePatientAccount(CareCardNumber);
+            }
+        }
+    }
+
     private void handlePatientAccountInsertOption() {
         int CareCardNumber = INVALID_INPUT;
         while (CareCardNumber == INVALID_INPUT) {
@@ -222,37 +291,13 @@ public class TerminalTransactions {
                 Username);
         delegate.insertPatientAccount(model);
     }
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    private void handleQuitOption() {
-        System.out.println("Good Bye!");
 
-        if (bufferedReader != null) {
-            try {
-                bufferedReader.close();
-            } catch (IOException e) {
-                System.out.println("IOException!");
-            }
-        }
 
-        delegate.terminalTransactionsFinished();
-    }
 
-    private void handleUpdateOption() {
-        int id = INVALID_INPUT;
-        while (id == INVALID_INPUT) {
-            System.out.print("Please enter the branch ID you wish to update: ");
-            id = readInteger(false);
-        }
 
-        String name = null;
-        while (name == null || name.length() <= 0) {
-            System.out.print("Please enter the branch name you wish to update: ");
-            name = readLine().trim();
-        }
-
-        delegate.updateBranch(id, name);
-    }
-
+    // PATIENTACCOUNT //////////////////////////////////////////////////////////////////////////////////////////////////
     private void handlePatientAccountUpdateOption() {
         int CareCardNumber = INVALID_INPUT;
         while (CareCardNumber == INVALID_INPUT) {
@@ -268,6 +313,45 @@ public class TerminalTransactions {
 
         delegate.updatePatientAccount(CareCardNumber, newUserName);
     }
+
+    private void handleQuitOption() {
+        System.out.println("Good Bye!");
+
+        if (bufferedReader != null) {
+            try {
+                bufferedReader.close();
+            } catch (IOException e) {
+                System.out.println("IOException!");
+            }
+        }
+
+        delegate.terminalTransactionsFinished();
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+    // VACCINE /////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+    // FACILITY ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+    // CONDITION ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 
     private int readInteger(boolean allowEmpty) {
         String line = null;
