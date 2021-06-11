@@ -7,8 +7,11 @@ import ca.ubc.cs304.delegates.TerminalTransactionsDelegate;
 
 import ca.ubc.cs304.model.BranchModel;
 
+import ca.ubc.cs304.model.distributor.Facility;
 import ca.ubc.cs304.model.patient.PatientAccount;
 
+import ca.ubc.cs304.model.patient.PreExistingCondition;
+import ca.ubc.cs304.model.vaccine.Vaccine;
 import ca.ubc.cs304.ui.LoginWindow;
 import ca.ubc.cs304.ui.TerminalTransactions;
 
@@ -131,6 +134,7 @@ public class VacBase implements LoginWindowDelegate, TerminalTransactionsDelegat
 	public void insertPatientAccount(PatientAccount model) { dbHandler.insertPatientAccount(model); }
 	public void deletePatientAccount(int careCardNumber) { dbHandler.deletePatientAccount(careCardNumber); }
 	public void updatePatientAccount(int CareCardNumber, String newUserName)  {dbHandler.updatePatientAccount(CareCardNumber, newUserName); }
+
 	public void showPatientAccount() {
 		PatientAccount[] models = dbHandler.getPatientAccountInfo();
 
@@ -165,19 +169,90 @@ public class VacBase implements LoginWindowDelegate, TerminalTransactionsDelegat
 	// VACCINE /////////////////////////////////////////////////////////////////////////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+	public void deleteVaccine(String vacName) {
+		dbHandler.deleteVaccine(vacName);
+	}
 
+	public void insertVaccine(Vaccine model) {
+		dbHandler.insertVaccine(model);
+	}
 
+	public void showVaccine() {
+		Vaccine[] models = dbHandler.getVaccineInfo();
 
+		for (int i = 0; i < models.length; i++) {
+			Vaccine model = models[i];
+
+			// simplified output formatting; truncation may occur
+			System.out.printf("%-10.10s", model.getVacName());
+			System.out.printf("%-20.20s", model.getType());
+			System.out.printf("%-15.15s", model.getDosage());
+
+			System.out.println();
+		}
+	}
+
+	public void updateVaccine(String vacName, double dosage) {
+		dbHandler.updateVaccine(vacName, dosage);
+	}
 
 	// FACILITY ////////////////////////////////////////////////////////////////////////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+	public void deleteFacility(String name) {
+		dbHandler.deleteFacility(name);
+	}
 
+	public void insertFacility(Facility model) {
+		dbHandler.insertFacility(model);
+	}
 
+	public void showFacility() {
+		Facility[] models = dbHandler.getFacilityInfo();
 
+		for (int i = 0; i < models.length; i++) {
+			Facility model = models[i];
+
+			// simplified output formatting; truncation may occur
+			System.out.printf("%-10.10s", model.getFacilityName());
+			System.out.printf("%-20.20s", model.getAddress());
+
+			System.out.println();
+		}
+	}
+
+	public void updateFacility(String name, String address) {
+		dbHandler.updateFacility(name, address);
+	}
 
 	// CONDITION ///////////////////////////////////////////////////////////////////////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	public void insertCondition(PreExistingCondition model) {
+		dbHandler.insertCondition(model);
+	}
+
+	public void deleteCondition(int careCardNumber) {
+		dbHandler.deleteCondition(careCardNumber);
+	}
+
+	public void showCondition() {
+		PreExistingCondition[] models = dbHandler.getConditionInfo();
+
+		for (int i = 0; i < models.length; i++) {
+			PreExistingCondition model = models[i];
+
+			// simplified output formatting; truncation may occur
+			System.out.printf("%-10.10s", model.getCareCardNumber());
+			System.out.printf("%-20.20s", model.getCondition());
+
+			System.out.println();
+		}
+	}
+
+	public void updateCondition(int careCardNumber, String condition) {
+		dbHandler.updateCondition(careCardNumber, condition);
+	}
 
 	/**
 	 * TerminalTransactionsDelegate Implementation

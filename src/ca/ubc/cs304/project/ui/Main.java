@@ -21,8 +21,6 @@ public class Main extends Application {
     TabPage tabPage;
     ConditionPage conditionPage;
 
-    PatientAccount currentUser;
-
     @Override
     public void start(Stage primaryStage) throws Exception {
         window = primaryStage;
@@ -188,6 +186,7 @@ public class Main extends Application {
             window.setScene(createPage.getPage());
         });
     }
+
 
     public static void main(String[] args) {
         launch(args);

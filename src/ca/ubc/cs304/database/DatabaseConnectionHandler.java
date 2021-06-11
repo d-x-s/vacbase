@@ -6,7 +6,10 @@ import java.sql.*;
 import java.util.ArrayList;
 
 import ca.ubc.cs304.model.BranchModel;
+import ca.ubc.cs304.model.distributor.Facility;
 import ca.ubc.cs304.model.patient.PatientAccount;
+import ca.ubc.cs304.model.patient.PreExistingCondition;
+import ca.ubc.cs304.model.vaccine.Vaccine;
 import ca.ubc.cs304.sql.SQLUtil;
 
 /**
@@ -104,7 +107,7 @@ public class DatabaseConnectionHandler {
             // SQLUtil.executeFile(connection, new File("resources/sql/databaseDrop.sql"));
 
             // populate tables:
-            // SQLUtil.executeFile(connection, new File("resources/sql/databasePopulate.sql"));
+            //SQLUtil.executeFile(connection, new File("resources/sql/databasePopulate.sql"));
 
             // placeholder: DOES NOTHING
             SQLUtil.executeFile(connection, new File("resources/sql/databaseClear.sql"));
@@ -380,14 +383,276 @@ public class DatabaseConnectionHandler {
 
     // VACCINE /////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public void deleteVaccine(String vacName) {
+        try {
+            PreparedStatement ps = connection.prepareStatement("DELETE FROM Vaccine WHERE VacName = ?");
+            ps.setString(1, vacName);
 
+            int rowCount = ps.executeUpdate();
+            if (rowCount == 0) {
+                System.out.println(WARNING_TAG + " Vaccine " + vacName + " does not exist!");
+            }
+
+            connection.commit();
+
+            ps.close();
+        } catch (SQLException e) {
+            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+            rollbackConnection();
+        }
+    }
+
+    public void insertVaccine(Vaccine model) {
+        try {
+            PreparedStatement ps = connection.prepareStatement("INSERT INTO Vaccine VALUES (?,?,?)");
+            ps.setString(1, model.getVacName());
+            ps.setString(2, model.getType());
+            ps.setDouble(3, model.getDosage());
+
+            ps.executeUpdate();
+            connection.commit();
+
+            ps.close();
+        } catch (SQLException e) {
+            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+            rollbackConnection();
+        }
+    }
+
+    public Vaccine[] getVaccineInfo() {
+        ArrayList<Vaccine> result = new ArrayList<Vaccine>();
+
+        try {
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Vaccine");
+
+            // get info on ResultSet
+            ResultSetMetaData rsmd = rs.getMetaData();
+
+            System.out.println(" ");
+
+            // display column names;
+            for (int i = 0; i < rsmd.getColumnCount(); i++) {
+                // get column name and print it
+                System.out.printf("%-15s", rsmd.getColumnName(i + 1));
+            }
+
+            while (rs.next()) {
+                Vaccine model = new Vaccine(rs.getString("vacName"),
+                                            rs.getString("type"),
+                                            rs.getDouble("dosage"));
+                result.add(model);
+            }
+
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+        }
+
+        return result.toArray(new Vaccine[result.size()]);
+    }
+
+    // Don't think we need, considering that type and dosage are both static but I'll just put it here
+    public void updateVaccine(String vacName, double newDosage) {
+        try {
+            PreparedStatement ps = connection.prepareStatement("UPDATE Vaccine SET dosage = ? WHERE VacName = ?");
+            ps.setDouble(1, newDosage);
+            ps.setString(2, vacName);
+
+            int rowCount = ps.executeUpdate();
+            if (rowCount == 0) {
+                System.out.println(WARNING_TAG + " Vaccine " + vacName + " does not exist!");
+            }
+
+            connection.commit();
+
+            ps.close();
+        } catch (SQLException e) {
+            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+            rollbackConnection();
+        }
+    }
 
     // FACILITY ////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public void deleteFacility(String name) {
+        try {
+            PreparedStatement ps = connection.prepareStatement("DELETE FROM Facility WHERE FacilityName = ?");
+            ps.setString(1, name);
 
+            int rowCount = ps.executeUpdate();
+            if (rowCount == 0) {
+                System.out.println(WARNING_TAG + " Facility " + name + " does not exist!");
+            }
+
+            connection.commit();
+
+            ps.close();
+        } catch (SQLException e) {
+            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+            rollbackConnection();
+        }
+    }
+
+    public void insertFacility(Facility model) {
+        try {
+            PreparedStatement ps = connection.prepareStatement("INSERT INTO Facility VALUES (?,?)");
+            ps.setString(1, model.getFacilityName());
+            ps.setString(2, model.getAddress());
+
+            ps.executeUpdate();
+            connection.commit();
+
+            ps.close();
+        } catch (SQLException e) {
+            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+            rollbackConnection();
+        }
+    }
+
+    public Facility[] getFacilityInfo() {
+        ArrayList<Facility> result = new ArrayList<Facility>();
+
+        try {
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Facility");
+
+            // get info on ResultSet
+            ResultSetMetaData rsmd = rs.getMetaData();
+
+            System.out.println(" ");
+
+            // display column names;
+            for (int i = 0; i < rsmd.getColumnCount(); i++) {
+                // get column name and print it
+                System.out.printf("%-15s", rsmd.getColumnName(i + 1));
+            }
+
+            while (rs.next()) {
+                Facility model = new Facility(rs.getString("FacilityName"),
+                        rs.getString("Address"));
+                result.add(model);
+            }
+
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+        }
+
+        return result.toArray(new Facility[result.size()]);
+    }
+
+    // Don't think we need, considering that type and dosage are both not null but I'll just put it here
+    public void updateFacility(String name, String newAddress) {
+        try {
+            PreparedStatement ps = connection.prepareStatement("UPDATE Facility SET address = ? WHERE facilityName = ?");
+            ps.setString(1, newAddress);
+            ps.setString(2, name);
+
+            int rowCount = ps.executeUpdate();
+            if (rowCount == 0) {
+                System.out.println(WARNING_TAG + " Facility " + name + " does not exist!");
+            }
+
+            connection.commit();
+
+            ps.close();
+        } catch (SQLException e) {
+            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+            rollbackConnection();
+        }
+    }
 
     // CONDITION ///////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    public void deleteCondition(int careCardNum) {
+        try {
+            PreparedStatement ps = connection.prepareStatement("DELETE FROM PreExistingCondition WHERE CareCardNumber = ?");
+            ps.setInt(1, careCardNum);
 
+            int rowCount = ps.executeUpdate();
+            if (rowCount == 0) {
+                System.out.println(WARNING_TAG + " Patient with care card number " + careCardNum + " does not exist!");
+            }
+
+            connection.commit();
+
+            ps.close();
+        } catch (SQLException e) {
+            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+            rollbackConnection();
+        }
+    }
+
+    public void insertCondition(PreExistingCondition model) {
+        try {
+            PreparedStatement ps = connection.prepareStatement("INSERT INTO PreExistingCondition VALUES (?,?)");
+            ps.setInt(1, model.getCareCardNumber());
+            ps.setString(2, model.getCondition());
+
+            ps.executeUpdate();
+            connection.commit();
+
+            ps.close();
+        } catch (SQLException e) {
+            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+            rollbackConnection();
+        }
+    }
+
+    public PreExistingCondition[] getConditionInfo() {
+        ArrayList<PreExistingCondition> result = new ArrayList<PreExistingCondition>();
+
+        try {
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM PreExistingCondition");
+
+            // get info on ResultSet
+            ResultSetMetaData rsmd = rs.getMetaData();
+
+            System.out.println(" ");
+
+            // display column names;
+            for (int i = 0; i < rsmd.getColumnCount(); i++) {
+                // get column name and print it
+                System.out.printf("%-15s", rsmd.getColumnName(i + 1));
+            }
+
+            while (rs.next()) {
+                PreExistingCondition model = new PreExistingCondition(rs.getInt("CareCardNumber"),
+                        rs.getString("condition"));
+                result.add(model);
+            }
+
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+        }
+
+        return result.toArray(new PreExistingCondition[result.size()]);
+    }
+
+    public void updateCondition(int careCardNum, String newCond) {
+        try {
+            PreparedStatement ps = connection.prepareStatement("UPDATE PreExistingCondition SET condition = ? WHERE careCardNumber = ?");
+            ps.setString(1, newCond);
+            ps.setInt(2, careCardNum);
+
+            int rowCount = ps.executeUpdate();
+            if (rowCount == 0) {
+                System.out.println(WARNING_TAG + " Patient with care card number " + careCardNum + " does not exist!");
+            }
+
+            connection.commit();
+
+            ps.close();
+        } catch (SQLException e) {
+            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+            rollbackConnection();
+        }
+    }
 }
