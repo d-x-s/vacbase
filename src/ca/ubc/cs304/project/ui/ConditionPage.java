@@ -87,6 +87,50 @@ public class ConditionPage {
         this.page = page;
     }
 
+    public TableView<PreExistingCondition> getViewConditions() {
+        return viewConditions;
+    }
+
+    public void setViewConditions(TableView<PreExistingCondition> viewConditions) {
+        this.viewConditions = viewConditions;
+    }
+
+    public TextField getConditionInput() {
+        return conditionInput;
+    }
+
+    public void setConditionInput(TextField conditionInput) {
+        this.conditionInput = conditionInput;
+    }
+
+    public Button getBackButton() {
+        return backButton;
+    }
+
+    public void setBackButton(Button backButton) {
+        this.backButton = backButton;
+    }
+
+    public Button getInsertButton() {
+        return insertButton;
+    }
+
+    public void setInsertButton(Button insertButton) {
+        this.insertButton = insertButton;
+    }
+
+    public long getCareCardNumber() {
+        return careCardNumber;
+    }
+
+    public void setCareCardNumber(long careCardNumber) {
+        this.careCardNumber = careCardNumber;
+    }
+
+    public void setConditions(ObservableList<PreExistingCondition> conditions) {
+        this.conditions = conditions;
+    }
+
     // TODO: zero validation. add some somewhere or something idk
     private void addFunctionality() {
         insertButton.setOnAction(e -> {

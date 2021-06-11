@@ -27,6 +27,7 @@ public class TabPage {
     Tab vaccine;
     Tab distributor;
     Tab patient;
+
     Tab facilities;
     Tab filter;
     TextField searchBar;
@@ -164,34 +165,32 @@ public class TabPage {
 
         facilities.setContent(mainPane);
 
-        insertFacilityButton.setOnAction(e -> {
-            Facility temp;
-            try {
-                temp = new Facility(facilityNameField.getText(), addressField.getText());
-                facilityList.add(temp);
-                facilityNameField.clear();
-                addressField.clear();
-            } catch (NullPointerException npe) {
-                npe.printStackTrace();
-            }
-        });
-        facilityView.setOnMousePressed(event -> {
-            if (event.isPrimaryButtonDown() && event.getClickCount() == 2) {
-                Facility selectedItem = facilityView.getSelectionModel().getSelectedItem();
-                facilityView.getItems().remove(selectedItem);
-            }
-        });
-
-        updateFacilityButton.setOnAction(event -> {
-            Facility selectedItem = facilityView.getSelectionModel().getSelectedItem();
-            //TODO: Add setters
-//            selectedItem.setAddress(addressField.getText());
-//            selectedItem.setFacilityName(facilityNameField.getText());
-            addressField.clear();
-            facilityNameField.clear();
-        });
-
-
+//        insertFacilityButton.setOnAction(e -> {
+//            Facility temp;
+//            try {
+//                temp = new Facility(facilityNameField.getText(), addressField.getText());
+//                facilityList.add(temp);
+//                facilityNameField.clear();
+//                addressField.clear();
+//            } catch (NullPointerException npe) {
+//                npe.printStackTrace();
+//            }
+//        });
+//        facilityView.setOnMousePressed(event -> {
+//            if (event.isPrimaryButtonDown() && event.getClickCount() == 2) {
+//                Facility selectedItem = facilityView.getSelectionModel().getSelectedItem();
+//                facilityView.getItems().remove(selectedItem);
+//            }
+//        });
+//
+//        updateFacilityButton.setOnAction(event -> {
+//            Facility selectedItem = facilityView.getSelectionModel().getSelectedItem();
+//            //TODO: Add setters
+////            selectedItem.setAddress(addressField.getText());
+////            selectedItem.setFacilityName(facilityNameField.getText());
+//            addressField.clear();
+//            facilityNameField.clear();
+//        });
     }
 
     private void setUpFilterTab() {
@@ -448,6 +447,166 @@ public class TabPage {
         }
 
         delegate.updateVaccine(vacName, type, dosage);
+    }
+
+    public void setPage(Scene page) {
+        this.page = page;
+    }
+
+    public TabPane getTabs() {
+        return tabs;
+    }
+
+    public void setTabs(TabPane tabs) {
+        this.tabs = tabs;
+    }
+
+    public Tab getVaccine() {
+        return vaccine;
+    }
+
+    public void setVaccine(Tab vaccine) {
+        this.vaccine = vaccine;
+    }
+
+    public Tab getDistributor() {
+        return distributor;
+    }
+
+    public void setDistributor(Tab distributor) {
+        this.distributor = distributor;
+    }
+
+    public Tab getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Tab patient) {
+        this.patient = patient;
+    }
+
+    public void setFacilities(Tab facilities) {
+        this.facilities = facilities;
+    }
+
+    public Tab getFilter() {
+        return filter;
+    }
+
+    public void setFilter(Tab filter) {
+        this.filter = filter;
+    }
+
+    public TextField getSearchBar() {
+        return searchBar;
+    }
+
+    public void setSearchBar(TextField searchBar) {
+        this.searchBar = searchBar;
+    }
+
+    public Button getButton017() {
+        return button017;
+    }
+
+    public void setButton017(Button button017) {
+        this.button017 = button017;
+    }
+
+    public Button getButton1829() {
+        return button1829;
+    }
+
+    public void setButton1829(Button button1829) {
+        this.button1829 = button1829;
+    }
+
+    public Button getButton3044() {
+        return button3044;
+    }
+
+    public void setButton3044(Button button3044) {
+        this.button3044 = button3044;
+    }
+
+    public Button getButton4559() {
+        return button4559;
+    }
+
+    public void setButton4559(Button button4559) {
+        this.button4559 = button4559;
+    }
+
+    public Button getButton60() {
+        return button60;
+    }
+
+    public void setButton60(Button button60) {
+        this.button60 = button60;
+    }
+
+    public TableView<PatientAccount> getFilterView() {
+        return filterView;
+    }
+
+    public void setFilterView(TableView<PatientAccount> filterView) {
+        this.filterView = filterView;
+    }
+
+    public ObservableList<PatientAccount> getFilterList() {
+        return filterList;
+    }
+
+    public void setFilterList(ObservableList<PatientAccount> filterList) {
+        this.filterList = filterList;
+    }
+
+    public Button getInsertFacilityButton() {
+        return insertFacilityButton;
+    }
+
+    public void setInsertFacilityButton(Button insertFacilityButton) {
+        this.insertFacilityButton = insertFacilityButton;
+    }
+
+    public Button getUpdateFacilityButton() {
+        return updateFacilityButton;
+    }
+
+    public void setUpdateFacilityButton(Button updateFacilityButton) {
+        this.updateFacilityButton = updateFacilityButton;
+    }
+
+    public TextField getFacilityNameField() {
+        return facilityNameField;
+    }
+
+    public void setFacilityNameField(TextField facilityNameField) {
+        this.facilityNameField = facilityNameField;
+    }
+
+    public TextField getAddressField() {
+        return addressField;
+    }
+
+    public void setAddressField(TextField addressField) {
+        this.addressField = addressField;
+    }
+
+    public TableView<Facility> getFacilityView() {
+        return facilityView;
+    }
+
+    public void setFacilityView(TableView<Facility> facilityView) {
+        this.facilityView = facilityView;
+    }
+
+    public ObservableList<Facility> getFacilityList() {
+        return facilityList;
+    }
+
+    public void setFacilityList(ObservableList<Facility> facilityList) {
+        this.facilityList = facilityList;
     }
 
 

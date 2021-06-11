@@ -3,6 +3,7 @@ package ca.ubc.cs304.project.ui;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
@@ -46,6 +47,10 @@ public class HelpfulFunctions {
     public static void setWhiteBackgroundColor(Pane root) {
         root.setBackground(new Background(new BackgroundFill(Color.rgb(253, 255, 242),
                 CornerRadii.EMPTY, Insets.EMPTY)));
+    }
+
+    private static void highlightField(TextField field) {
+        field.setStyle("-fx-border-color: red ; -fx-border-width: 2px ;");
     }
 
 

@@ -41,28 +41,44 @@ public class PatientPage {
 
         pane.getChildren().addAll(fullName, menuButtons);
         setBackgroundColor(pane);
-        addButtonFunctionality();
         page = new Scene(pane, pageWidth, pageHeight);
 
     }
 
-    private void addButtonFunctionality() {
-        viewRecord.setOnAction((event -> {
-            // Todo: Add functionality
-            System.out.println("View Vaccine Record");
-        }));
-        viewChildrenRecord.setOnAction((event -> {
-            // Todo: Add functionality
-            System.out.println("View Minor's Record");
-        }));
-        viewConditions.setOnAction((event -> {
-            // Todo: Add functionality
-            System.out.println("View Preexisting Conditions");
-        }));
-        vacLocations.setOnAction((event -> {
-            // Todo: Add functionality
-            System.out.println("Where can I get vaccinated?");
-        }));
+    public void setPage(Scene page) {
+        this.page = page;
+    }
+
+    public Button getViewRecord() {
+        return viewRecord;
+    }
+
+    public void setViewRecord(Button viewRecord) {
+        this.viewRecord = viewRecord;
+    }
+
+    public Button getViewChildrenRecord() {
+        return viewChildrenRecord;
+    }
+
+    public void setViewChildrenRecord(Button viewChildrenRecord) {
+        this.viewChildrenRecord = viewChildrenRecord;
+    }
+
+    public Button getViewConditions() {
+        return viewConditions;
+    }
+
+    public void setViewConditions(Button viewConditions) {
+        this.viewConditions = viewConditions;
+    }
+
+    public Button getVacLocations() {
+        return vacLocations;
+    }
+
+    public void setVacLocations(Button vacLocations) {
+        this.vacLocations = vacLocations;
     }
 
     private void setButtonSpecs(Button button) {

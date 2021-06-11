@@ -8,7 +8,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -19,7 +18,7 @@ public class CreateAccountPage {
     Scene page;
     private TextField usernameField;
     private PasswordField passwordField;
-    private PasswordField confirmPasswordField;
+    private TextField fullNameField;
     private TextField careCardNumberField;
     private Button confirmButton;
     private Button backButton;
@@ -41,7 +40,7 @@ public class CreateAccountPage {
         fieldPane.setAlignment(Pos.TOP_CENTER);
         fieldPane.setTranslateY(50);
 
-        fieldPane.getChildren().addAll(usernameField,careCardNumberField, passwordField, confirmPasswordField);
+        fieldPane.getChildren().addAll(usernameField,careCardNumberField, passwordField, fullNameField);
         pane.getChildren().addAll(fieldPane, confirmButton, backButton);
         pane.setAlignment(Pos.CENTER);
 
@@ -61,20 +60,6 @@ public class CreateAccountPage {
         return page;
     }
 
-
-//    private void checkValidity() {
-//        try {
-//
-//        } catch (NumberFormatException num) {
-//            // TODO: Highlight the careCareNumber textfield red -> have the write a new one
-//        } catch (InvalidCareCardNumber iCCN) {
-//            // TODO: Highlight the careCardNumber textField red -> have them write a new one
-//        } catch (AlreadyAUsername aAU) {
-//
-//        } catch (PasswordsDontMatch pDM) {
-//            // TODO: Highlight the second password field -> have them rewrite.
-//        }
-//    }
 
     public void setPage(Scene page) {
         this.page = page;
@@ -96,12 +81,12 @@ public class CreateAccountPage {
         this.passwordField = passwordField;
     }
 
-    public PasswordField getConfirmPasswordField() {
-        return confirmPasswordField;
+    public TextField getFullNameField() {
+        return fullNameField;
     }
 
-    public void setConfirmPasswordField(PasswordField confirmPasswordField) {
-        this.confirmPasswordField = confirmPasswordField;
+    public void setFullNameField(TextField fullNameField) {
+        this.fullNameField = fullNameField;
     }
 
     public TextField getCareCardNumberField() {
@@ -134,7 +119,7 @@ public class CreateAccountPage {
     }
 
     private void checkPassword() throws PasswordsDontMatch {
-        if (!passwordField.getText().equals(confirmPasswordField.getText())) {
+        if (!passwordField.getText().equals(fullNameField.getText())) {
             throw new PasswordsDontMatch();
         }
     }
@@ -144,15 +129,11 @@ public class CreateAccountPage {
         Long.parseLong(careCardNumberField.getText());
     }
 
-    private void highlightField(TextField field) {
-        field.setStyle("-fx-border-color: red ; -fx-border-width: 2px ;");
-    }
-
     private void instantiateFields() {
         usernameField = new TextField();
         careCardNumberField = new TextField();
         passwordField = new PasswordField();
-        confirmPasswordField = new PasswordField();
+        fullNameField = new TextField();
         confirmButton = makeButton(new Button("Confirm"));
         backButton = makeButton(new Button("Back"));
     }
@@ -166,7 +147,7 @@ public class CreateAccountPage {
         usernameField.setFont(fieldFont);
         careCardNumberField.setFont(fieldFont);
         passwordField.setFont(fieldFont);
-        confirmPasswordField.setFont(fieldFont);
+        fullNameField.setFont(fieldFont);
     }
 
     /*
@@ -176,7 +157,7 @@ public class CreateAccountPage {
         usernameField.setPromptText("Enter a Username");
         careCardNumberField.setPromptText("Enter 10 digit BC Care Card Number");
         passwordField.setPromptText("Enter Password");
-        confirmPasswordField.setPromptText("Reenter Password");
+        fullNameField.setPromptText("Enter Full Name");
     }
 
     /*
@@ -186,11 +167,11 @@ public class CreateAccountPage {
         usernameField.setMaxSize(400, 66);
         careCardNumberField.setMaxSize(400, 66);
         passwordField.setMaxSize(400, 66);
-        confirmPasswordField.setMaxSize(400, 66);
+        fullNameField.setMaxSize(400, 66);
         usernameField.setMinSize(400, 66);
         careCardNumberField.setMinSize(400, 66);
         passwordField.setMinSize(400, 66);
-        confirmPasswordField.setMinSize(400, 66);
+        fullNameField.setMinSize(400, 66);
     }
 
 }

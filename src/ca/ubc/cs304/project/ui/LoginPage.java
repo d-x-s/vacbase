@@ -9,7 +9,7 @@ import javafx.scene.text.Font;
 import static ca.ubc.cs304.project.ui.HelpfulFunctions.*;
 
 public class LoginPage {
-    private Scene login;
+    private Scene page;
     private TextField usernameField;
     private PasswordField passwordField;
     private String username;
@@ -45,7 +45,6 @@ public class LoginPage {
         loginPatient.setFont(new Font("Montserrat", 30));
         setLayout(loginPatient, 40, pageHeight - 350);
 
-        addButtonFunctionality();
 
         createAccount = new Hyperlink("Create Account");
         createAccount.setFont(new Font("Montserrat", 15));
@@ -56,7 +55,7 @@ public class LoginPage {
         root.getChildren().addAll(vacBase, usernameField, passwordField, shotImage, loginAdmin, loginPatient, createAccount);
 
         // Sets background color
-        login = new Scene(root, pageWidth, pageHeight);
+        page = new Scene(root, pageWidth, pageHeight);
         setBackgroundColor(root);
     }
 
@@ -67,6 +66,66 @@ public class LoginPage {
         node.setMaxSize(538, 66);
         node.setMinSize(538, 66);
         node.setFont(new Font("Montserrat", 35));
+    }
+
+    public void setPage(Scene page) {
+        this.page = page;
+    }
+
+    public TextField getUsernameField() {
+        return usernameField;
+    }
+
+    public void setUsernameField(TextField usernameField) {
+        this.usernameField = usernameField;
+    }
+
+    public PasswordField getPasswordField() {
+        return passwordField;
+    }
+
+    public void setPasswordField(PasswordField passwordField) {
+        this.passwordField = passwordField;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Button getLoginAdmin() {
+        return loginAdmin;
+    }
+
+    public void setLoginAdmin(Button loginAdmin) {
+        this.loginAdmin = loginAdmin;
+    }
+
+    public Button getLoginPatient() {
+        return loginPatient;
+    }
+
+    public void setLoginPatient(Button loginPatient) {
+        this.loginPatient = loginPatient;
+    }
+
+    public Hyperlink getCreateAccount() {
+        return createAccount;
+    }
+
+    public void setCreateAccount(Hyperlink createAccount) {
+        this.createAccount = createAccount;
     }
 
     private void addButtonFunctionality() {
@@ -90,8 +149,8 @@ public class LoginPage {
 
     }
 
-    public Scene getLogin() {
-        return login;
+    public Scene getPage() {
+        return page;
     }
 
 }
