@@ -76,6 +76,58 @@ public class CreateAccountPage {
 //        }
 //    }
 
+    public void setPage(Scene page) {
+        this.page = page;
+    }
+
+    public TextField getUsernameField() {
+        return usernameField;
+    }
+
+    public void setUsernameField(TextField usernameField) {
+        this.usernameField = usernameField;
+    }
+
+    public PasswordField getPasswordField() {
+        return passwordField;
+    }
+
+    public void setPasswordField(PasswordField passwordField) {
+        this.passwordField = passwordField;
+    }
+
+    public PasswordField getConfirmPasswordField() {
+        return confirmPasswordField;
+    }
+
+    public void setConfirmPasswordField(PasswordField confirmPasswordField) {
+        this.confirmPasswordField = confirmPasswordField;
+    }
+
+    public TextField getCareCardNumberField() {
+        return careCardNumberField;
+    }
+
+    public void setCareCardNumberField(TextField careCardNumberField) {
+        this.careCardNumberField = careCardNumberField;
+    }
+
+    public Button getConfirmButton() {
+        return confirmButton;
+    }
+
+    public void setConfirmButton(Button confirmButton) {
+        this.confirmButton = confirmButton;
+    }
+
+    public Button getBackButton() {
+        return backButton;
+    }
+
+    public void setBackButton(Button backButton) {
+        this.backButton = backButton;
+    }
+
     private void checkUsername() throws AlreadyAUsername{
         // TODO: Check DB
 
