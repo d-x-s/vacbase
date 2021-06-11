@@ -97,14 +97,17 @@ public class DatabaseConnectionHandler {
 			// resources/sql/create_db.sql
 			dropBranchTableIfExists();
 
-			// add tables
-			SQLUtil.executeFile(connection, new File("resources/sql/databaseSetup.sql"));
+			// add tables: YOU WILL GET AN ERROR IF THE TABLES ALREADY EXIST!
+			// SQLUtil.executeFile(connection, new File("resources/sql/databaseSetup.sql"));
 
-			// drop tables
+			// drop tables: YOU WILL GET AN ERROR IF THE TABLES DO NOT EXIST!
 			// SQLUtil.executeFile(connection, new File("resources/sql/databaseDrop.sql"));
 
-			// clear tables
-			// SQLUtil.executeFile(connection, new File("resources/sql/databaseClear.sql"));
+			// populate tables:
+			// SQLUtil.executeFile(connection, new File("resources/sql/databasePopulate.sql"));
+
+			// placeholder: DOES NOTHING
+			SQLUtil.executeFile(connection, new File("resources/sql/databaseClear.sql"));
 
 			//createTriggers(connection);
 		} catch (SQLException | IOException e) {
