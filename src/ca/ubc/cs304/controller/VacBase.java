@@ -210,4 +210,5 @@ public class VacBase implements LoginWindowDelegate, TerminalTransactionsDelegat
 		VacBase vacBase = new VacBase();
 		vacBase.start();
 	}
+
 }

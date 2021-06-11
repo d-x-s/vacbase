@@ -390,4 +390,35 @@ public class DatabaseConnectionHandler {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
+
+    // JONATHAN's STUFF IDK TESTING ////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public PatientAccount loginToAccount(String username, String password) {
+        // Need to execute this statement
+        // Select p.careCardNumber, p.fullName, p.DOB, p.Username from PatientAccount p, LoginInfo l Where l.username = p.username and l.username = 'Spiderman' and l.userpassword = 'Password123'
+        String sql = String.format("Select p.careCardNumber, p.fullName, p.DOB, p.Username from PatientAccount p, LoginInfo l Where l.username = p.username and l.username = \'%s\' and l.userpassword = \'%s\'", username, password);
+        System.out.println(sql);
+        PatientAccount model = null;
+        try {
+            System.out.println(connection);
+            Statement stmt = connection.createStatement();
+            System.out.println("Statement is created");
+            ResultSet rs = stmt.executeQuery(sql);
+            System.out.println("Gets here");
+            while (rs.next()) {
+                System.out.println("Iterates");
+                model = new PatientAccount(rs.getInt("careCardNumber"),
+                        rs.getString("fullName"),
+                        rs.getDate("DOB"),
+                        rs.getString("username"));
+            }
+            System.out.println("Executes query");
+            return model;
+        } catch (SQLException e) {
+            System.out.println("Failed");
+            //System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+        }
+        System.out.println("Returns null");
+        return null;
+    }
 }

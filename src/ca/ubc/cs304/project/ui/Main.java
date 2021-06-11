@@ -1,5 +1,6 @@
 package ca.ubc.cs304.project.ui;
 
+import ca.ubc.cs304.database.DatabaseConnectionHandler;
 import ca.ubc.cs304.model.distributor.Facility;
 import ca.ubc.cs304.model.patient.PatientAccount;
 import javafx.application.Application;
@@ -22,10 +23,22 @@ public class Main extends Application {
     ConditionPage conditionPage;
 
     PatientAccount currentUser;
+    DatabaseConnectionHandler dbh;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         window = primaryStage;
+
+        dbh = new DatabaseConnectionHandler();
+        boolean isConnected = false;
+
+        while (!isConnected) {
+            isConnected = dbh.login("ora_jyu19", "a67758979");
+            //isConnected = dbh.login("ora_dsong04", "a29241874");
+            System.out.println("Failed to login");
+        }
+        System.out.println("Successfully Logged in");
+
 
         patientPage = new PatientPage();
         adminPage = new AdminPage();
@@ -169,7 +182,12 @@ public class Main extends Application {
                 - .clear()              (Clears textField)
              */
             // This should go to whatever patientAccount they logged in as
-            patientPage = new PatientPage(new PatientAccount(1, "Jon U", Date.valueOf("2001-04-06"), "Jonomuffin"));
+
+            //patientPage = new PatientPage(new PatientAccount(1, "Jon U", Date.valueOf("2001-04-06"), "Jonomuffin"));
+            patientPage = new PatientPage(dbh.loginToAccount(loginPage.getUsernameField().getText(), loginPage.getPasswordField().getText()));
+            System.out.println("Gets here");
+            loginPage.getUsernameField().clear();
+            loginPage.getPasswordField().clear();
             window.setScene(patientPage.getPage());
         });
         loginPage.getLoginAdmin().setOnAction(event -> {
