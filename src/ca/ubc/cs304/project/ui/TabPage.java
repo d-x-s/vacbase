@@ -52,6 +52,13 @@ public class TabPage {
     TableView<Facility> facilityView;
     ObservableList<Facility> facilityList;
 
+    /*
+    Vaccine tab
+     */
+    Button availabilityButton;
+    TableView<Vaccine> vaccineListView;
+
+
     public TabPage() {
 
         //region Setup Tabs

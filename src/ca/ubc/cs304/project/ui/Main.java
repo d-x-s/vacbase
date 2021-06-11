@@ -24,6 +24,7 @@ public class Main extends Application {
     CreateAccountPage createPage;
     TabPage tabPage;
     ConditionPage conditionPage;
+    PatientVaccineCarePage vaccineCarePage;
 
     PatientAccount currentUser;
     DatabaseConnectionHandler dbh;
@@ -35,12 +36,12 @@ public class Main extends Application {
         dbh = new DatabaseConnectionHandler();
         boolean isConnected = false;
 
-        while (!isConnected) {
-            //isConnected = dbh.login("ora_jyu19", "a67758979");
-            isConnected = dbh.login("ora_dsong04", "a29241874");
-            System.out.println("Failed to login");
-        }
-        System.out.println("Successfully Logged in");
+//        while (!isConnected) {
+//            //isConnected = dbh.login("ora_jyu19", "a67758979");
+//            isConnected = dbh.login("ora_dsong04", "a29241874");
+//            System.out.println("Failed to login");
+//        }
+//        System.out.println("Successfully Logged in");
 
 
         patientPage = new PatientPage();
@@ -49,9 +50,10 @@ public class Main extends Application {
         createPage = new CreateAccountPage();
         tabPage = new TabPage();
         conditionPage = new ConditionPage();
+        vaccineCarePage = new PatientVaccineCarePage();
         addFunctionality();
 
-        scene = loginPage.getPage();
+        scene = vaccineCarePage.getPage();
 
         window.setScene(scene);
         window.setTitle("VacBase");
