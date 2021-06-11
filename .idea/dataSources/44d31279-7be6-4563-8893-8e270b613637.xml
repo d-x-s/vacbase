@@ -540,8 +540,10 @@
     </schema>
     <schema id="180" parent="1" name="ORA_DSONG04">
       <ObjectId>1060</ObjectId>
+      <CreatedTimestamp>2021-06-10.09:50:28</CreatedTimestamp>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
       <IntrospectionVersion>200820</IntrospectionVersion>
-      <IntrospectionTimestamp>2021-06-10.09:29:07</IntrospectionTimestamp>
+      <IntrospectionTimestamp>2021-06-10.09:53:24</IntrospectionTimestamp>
       <Current>1</Current>
     </schema>
     <schema id="181" parent="1" name="ORA_DSPIRITO">
@@ -4425,5 +4427,1050 @@
     <user id="1472" parent="1" name="XS$NULL">
       <ObjectId>2147483638</ObjectId>
     </user>
+    <table id="1473" parent="180" name="ADMINISTEREDVACCINEGIVENTOPATIENT">
+      <ObjectId>364061</ObjectId>
+      <CreatedTimestamp>2021-06-10.09:50:28</CreatedTimestamp>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <TemporaryPreserve>1</TemporaryPreserve>
+    </table>
+    <table id="1474" parent="180" name="AGEBRACKETLOOKUP">
+      <ObjectId>364079</ObjectId>
+      <CreatedTimestamp>2021-06-10.09:50:28</CreatedTimestamp>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <TemporaryPreserve>1</TemporaryPreserve>
+    </table>
+    <table id="1475" parent="180" name="CHICKENPOX">
+      <ObjectId>364075</ObjectId>
+      <CreatedTimestamp>2021-06-10.09:50:28</CreatedTimestamp>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <TemporaryPreserve>1</TemporaryPreserve>
+    </table>
+    <table id="1476" parent="180" name="COURIERS">
+      <ObjectId>364092</ObjectId>
+      <CreatedTimestamp>2021-06-10.09:50:28</CreatedTimestamp>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <TemporaryPreserve>1</TemporaryPreserve>
+    </table>
+    <table id="1477" parent="180" name="COVID19">
+      <ObjectId>364071</ObjectId>
+      <CreatedTimestamp>2021-06-10.09:50:28</CreatedTimestamp>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <TemporaryPreserve>1</TemporaryPreserve>
+    </table>
+    <table id="1478" parent="180" name="DELIVERS">
+      <ObjectId>364094</ObjectId>
+      <CreatedTimestamp>2021-06-10.09:50:28</CreatedTimestamp>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <TemporaryPreserve>1</TemporaryPreserve>
+    </table>
+    <table id="1479" parent="180" name="DISTRIBUTOR">
+      <ObjectId>364090</ObjectId>
+      <CreatedTimestamp>2021-06-10.09:50:28</CreatedTimestamp>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <TemporaryPreserve>1</TemporaryPreserve>
+    </table>
+    <table id="1480" parent="180" name="FACILITY">
+      <ObjectId>364087</ObjectId>
+      <CreatedTimestamp>2021-06-10.09:50:28</CreatedTimestamp>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <TemporaryPreserve>1</TemporaryPreserve>
+    </table>
+    <table id="1481" parent="180" name="FLU">
+      <ObjectId>364073</ObjectId>
+      <CreatedTimestamp>2021-06-10.09:50:28</CreatedTimestamp>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <TemporaryPreserve>1</TemporaryPreserve>
+    </table>
+    <table id="1482" parent="180" name="HAPPENSIN">
+      <ObjectId>364096</ObjectId>
+      <CreatedTimestamp>2021-06-10.09:50:28</CreatedTimestamp>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <TemporaryPreserve>1</TemporaryPreserve>
+    </table>
+    <table id="1483" parent="180" name="INCLUDE">
+      <ObjectId>364063</ObjectId>
+      <CreatedTimestamp>2021-06-10.09:50:28</CreatedTimestamp>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <TemporaryPreserve>1</TemporaryPreserve>
+    </table>
+    <table id="1484" parent="180" name="LOGININFO">
+      <ObjectId>364077</ObjectId>
+      <CreatedTimestamp>2021-06-10.09:50:28</CreatedTimestamp>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <TemporaryPreserve>1</TemporaryPreserve>
+    </table>
+    <table id="1485" parent="180" name="MINOR">
+      <ObjectId>364081</ObjectId>
+      <CreatedTimestamp>2021-06-10.09:50:28</CreatedTimestamp>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <TemporaryPreserve>1</TemporaryPreserve>
+    </table>
+    <table id="1486" parent="180" name="NURSE">
+      <ObjectId>364053</ObjectId>
+      <CreatedTimestamp>2021-06-10.09:50:28</CreatedTimestamp>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <TemporaryPreserve>1</TemporaryPreserve>
+    </table>
+    <table id="1487" parent="180" name="PATIENTACCOUNT">
+      <ObjectId>364050</ObjectId>
+      <CreatedTimestamp>2021-06-10.09:50:28</CreatedTimestamp>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <TemporaryPreserve>1</TemporaryPreserve>
+    </table>
+    <table id="1488" parent="180" name="PREEXISTINGCONDITION">
+      <ObjectId>364083</ObjectId>
+      <CreatedTimestamp>2021-06-10.09:50:28</CreatedTimestamp>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <TemporaryPreserve>1</TemporaryPreserve>
+    </table>
+    <table id="1489" parent="180" name="REQUIREDBOOSTER">
+      <ObjectId>364069</ObjectId>
+      <CreatedTimestamp>2021-06-10.09:50:28</CreatedTimestamp>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <TemporaryPreserve>1</TemporaryPreserve>
+    </table>
+    <table id="1490" parent="180" name="SIDEEFFECT">
+      <ObjectId>364065</ObjectId>
+      <CreatedTimestamp>2021-06-10.09:50:28</CreatedTimestamp>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <TemporaryPreserve>1</TemporaryPreserve>
+    </table>
+    <table id="1491" parent="180" name="VACCINE">
+      <ObjectId>364055</ObjectId>
+      <CreatedTimestamp>2021-06-10.09:50:28</CreatedTimestamp>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <TemporaryPreserve>1</TemporaryPreserve>
+    </table>
+    <table id="1492" parent="180" name="VACCINEHASSIDEEFFECT">
+      <ObjectId>364067</ObjectId>
+      <CreatedTimestamp>2021-06-10.09:50:28</CreatedTimestamp>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <TemporaryPreserve>1</TemporaryPreserve>
+    </table>
+    <table id="1493" parent="180" name="VACCINERECORD">
+      <ObjectId>364085</ObjectId>
+      <CreatedTimestamp>2021-06-10.09:50:28</CreatedTimestamp>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <TemporaryPreserve>1</TemporaryPreserve>
+    </table>
+    <table id="1494" parent="180" name="VACDOSAGE">
+      <ObjectId>364059</ObjectId>
+      <CreatedTimestamp>2021-06-10.09:50:28</CreatedTimestamp>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <TemporaryPreserve>1</TemporaryPreserve>
+    </table>
+    <table id="1495" parent="180" name="VACTYPEMOI">
+      <ObjectId>364057</ObjectId>
+      <CreatedTimestamp>2021-06-10.09:50:28</CreatedTimestamp>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <TemporaryPreserve>1</TemporaryPreserve>
+    </table>
+    <column id="1496" parent="1473" name="EVENTID">
+      <Position>1</Position>
+      <DataType>CHAR(20 byte)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="1497" parent="1473" name="NURSEID">
+      <Position>2</Position>
+      <DataType>CHAR(20 byte)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="1498" parent="1473" name="CARECARDNUMBER">
+      <Position>3</Position>
+      <DataType>NUMBER(*)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="1499" parent="1473" name="VACDATE">
+      <Position>4</Position>
+      <DataType>DATE|0s</DataType>
+    </column>
+    <index id="1500" parent="1473" name="SYS_C00363071">
+      <ObjectId>364062</ObjectId>
+      <NameSurrogate>1</NameSurrogate>
+      <CreatedTimestamp>2021-06-10.09:50:28</CreatedTimestamp>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <TablespaceName>USERS</TablespaceName>
+      <ColNames>EVENTID
+CARECARDNUMBER</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="1501" parent="1473" name="SYS_C00363071">
+      <NameSurrogate>1</NameSurrogate>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <ColNames>EVENTID
+CARECARDNUMBER</ColNames>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <UnderlyingIndexName>SYS_C00363071</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="1502" parent="1473" name="SYS_C00363072">
+      <NameSurrogate>1</NameSurrogate>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <ColNames>NURSEID</ColNames>
+      <RefSchemaName>ORA_DSONG04</RefSchemaName>
+      <RefTableName>NURSE</RefTableName>
+      <RefKeyName>SYS_C00363061</RefKeyName>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <foreign-key id="1503" parent="1473" name="SYS_C00363073">
+      <NameSurrogate>1</NameSurrogate>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <ColNames>CARECARDNUMBER</ColNames>
+      <RefSchemaName>ORA_DSONG04</RefSchemaName>
+      <RefTableName>PATIENTACCOUNT</RefTableName>
+      <RefKeyName>SYS_C00363058</RefKeyName>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <column id="1504" parent="1474" name="DOB">
+      <Position>1</Position>
+      <DataType>DATE|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="1505" parent="1474" name="AGEBRACKET">
+      <Position>2</Position>
+      <DataType>CHAR(20 byte)|0s</DataType>
+    </column>
+    <index id="1506" parent="1474" name="SYS_C00363094">
+      <ObjectId>364080</ObjectId>
+      <NameSurrogate>1</NameSurrogate>
+      <CreatedTimestamp>2021-06-10.09:50:28</CreatedTimestamp>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <TablespaceName>USERS</TablespaceName>
+      <ColNames>DOB</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="1507" parent="1474" name="SYS_C00363094">
+      <NameSurrogate>1</NameSurrogate>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <ColNames>DOB</ColNames>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <UnderlyingIndexName>SYS_C00363094</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="1508" parent="1475" name="VACNAME">
+      <Position>1</Position>
+      <DataType>CHAR(50 byte)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="1509" parent="1475" name="PREVIOUSSHINGLESVACREQUIRED">
+      <Position>2</Position>
+      <DataType>CHAR(1 byte)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="1510" parent="1475" name="SYS_C00363090">
+      <ObjectId>364076</ObjectId>
+      <NameSurrogate>1</NameSurrogate>
+      <CreatedTimestamp>2021-06-10.09:50:28</CreatedTimestamp>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <TablespaceName>USERS</TablespaceName>
+      <ColNames>VACNAME</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="1511" parent="1475" name="SYS_C00363090">
+      <NameSurrogate>1</NameSurrogate>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <ColNames>VACNAME</ColNames>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <UnderlyingIndexName>SYS_C00363090</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="1512" parent="1475" name="SYS_C00363091">
+      <NameSurrogate>1</NameSurrogate>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <ColNames>VACNAME</ColNames>
+      <RefSchemaName>ORA_DSONG04</RefSchemaName>
+      <RefTableName>VACCINE</RefTableName>
+      <RefKeyName>SYS_C00363064</RefKeyName>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <column id="1513" parent="1476" name="COURIER">
+      <Position>1</Position>
+      <DataType>CHAR(50 byte)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="1514" parent="1476" name="DISTRIBUTORNAME">
+      <Position>2</Position>
+      <DataType>CHAR(50 byte)|0s</DataType>
+    </column>
+    <index id="1515" parent="1476" name="SYS_C00363104">
+      <ObjectId>364093</ObjectId>
+      <NameSurrogate>1</NameSurrogate>
+      <CreatedTimestamp>2021-06-10.09:50:28</CreatedTimestamp>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <TablespaceName>USERS</TablespaceName>
+      <ColNames>COURIER</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="1516" parent="1476" name="SYS_C00363104">
+      <NameSurrogate>1</NameSurrogate>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <ColNames>COURIER</ColNames>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <UnderlyingIndexName>SYS_C00363104</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="1517" parent="1476" name="SYS_C00363105">
+      <NameSurrogate>1</NameSurrogate>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <ColNames>DISTRIBUTORNAME</ColNames>
+      <RefSchemaName>ORA_DSONG04</RefSchemaName>
+      <RefTableName>DISTRIBUTOR</RefTableName>
+      <RefKeyName>SYS_C00363103</RefKeyName>
+      <OnDelete>set-null</OnDelete>
+    </foreign-key>
+    <column id="1518" parent="1477" name="VACNAME">
+      <Position>1</Position>
+      <DataType>CHAR(50 byte)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="1519" parent="1477" name="WAITTIMEUNTILBOOSTER">
+      <Position>2</Position>
+      <DataType>NUMBER(*)|0s</DataType>
+    </column>
+    <index id="1520" parent="1477" name="SYS_C00363085">
+      <ObjectId>364072</ObjectId>
+      <NameSurrogate>1</NameSurrogate>
+      <CreatedTimestamp>2021-06-10.09:50:28</CreatedTimestamp>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <TablespaceName>USERS</TablespaceName>
+      <ColNames>VACNAME</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="1521" parent="1477" name="SYS_C00363085">
+      <NameSurrogate>1</NameSurrogate>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <ColNames>VACNAME</ColNames>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <UnderlyingIndexName>SYS_C00363085</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="1522" parent="1477" name="SYS_C00363086">
+      <NameSurrogate>1</NameSurrogate>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <ColNames>VACNAME</ColNames>
+      <RefSchemaName>ORA_DSONG04</RefSchemaName>
+      <RefTableName>VACCINE</RefTableName>
+      <RefKeyName>SYS_C00363064</RefKeyName>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <column id="1523" parent="1478" name="DISTRIBUTORNAME">
+      <Position>1</Position>
+      <DataType>CHAR(50 byte)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="1524" parent="1478" name="FACILITYNAME">
+      <Position>2</Position>
+      <DataType>CHAR(200 byte)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="1525" parent="1478" name="ORDERID">
+      <Position>3</Position>
+      <DataType>NUMBER(*)|0s</DataType>
+    </column>
+    <column id="1526" parent="1478" name="QUANTITY">
+      <Position>4</Position>
+      <DataType>NUMBER(*)|0s</DataType>
+    </column>
+    <column id="1527" parent="1478" name="TIMEOFDELIVERY">
+      <Position>5</Position>
+      <DataType>DATE|0s</DataType>
+    </column>
+    <index id="1528" parent="1478" name="SYS_C00363106">
+      <ObjectId>364095</ObjectId>
+      <NameSurrogate>1</NameSurrogate>
+      <CreatedTimestamp>2021-06-10.09:50:28</CreatedTimestamp>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <TablespaceName>USERS</TablespaceName>
+      <ColNames>DISTRIBUTORNAME
+FACILITYNAME</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="1529" parent="1478" name="SYS_C00363106">
+      <NameSurrogate>1</NameSurrogate>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <ColNames>DISTRIBUTORNAME
+FACILITYNAME</ColNames>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <UnderlyingIndexName>SYS_C00363106</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="1530" parent="1478" name="SYS_C00363107">
+      <NameSurrogate>1</NameSurrogate>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <ColNames>DISTRIBUTORNAME</ColNames>
+      <RefSchemaName>ORA_DSONG04</RefSchemaName>
+      <RefTableName>DISTRIBUTOR</RefTableName>
+      <RefKeyName>SYS_C00363103</RefKeyName>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <foreign-key id="1531" parent="1478" name="SYS_C00363108">
+      <NameSurrogate>1</NameSurrogate>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <ColNames>FACILITYNAME</ColNames>
+      <RefSchemaName>ORA_DSONG04</RefSchemaName>
+      <RefTableName>FACILITY</RefTableName>
+      <RefKeyName>SYS_C00363101</RefKeyName>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <column id="1532" parent="1479" name="DISTRIBUTORNAME">
+      <Position>1</Position>
+      <DataType>CHAR(50 byte)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="1533" parent="1479" name="DISTRIBUTORPHONENUMBER">
+      <Position>2</Position>
+      <DataType>CHAR(50 byte)|0s</DataType>
+    </column>
+    <column id="1534" parent="1479" name="DISTRIBUTOREMAIL">
+      <Position>3</Position>
+      <DataType>CHAR(50 byte)|0s</DataType>
+    </column>
+    <index id="1535" parent="1479" name="SYS_C00363103">
+      <ObjectId>364091</ObjectId>
+      <NameSurrogate>1</NameSurrogate>
+      <CreatedTimestamp>2021-06-10.09:50:28</CreatedTimestamp>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <TablespaceName>USERS</TablespaceName>
+      <ColNames>DISTRIBUTORNAME</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="1536" parent="1479" name="SYS_C00363103">
+      <NameSurrogate>1</NameSurrogate>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <ColNames>DISTRIBUTORNAME</ColNames>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <UnderlyingIndexName>SYS_C00363103</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="1537" parent="1480" name="FACILITYNAME">
+      <Position>1</Position>
+      <DataType>CHAR(200 byte)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="1538" parent="1480" name="ADDRESS">
+      <Position>2</Position>
+      <DataType>CHAR(100 byte)|0s</DataType>
+    </column>
+    <index id="1539" parent="1480" name="SYS_C00363101">
+      <ObjectId>364088</ObjectId>
+      <NameSurrogate>1</NameSurrogate>
+      <CreatedTimestamp>2021-06-10.09:50:28</CreatedTimestamp>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <TablespaceName>USERS</TablespaceName>
+      <ColNames>FACILITYNAME</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="1540" parent="1480" name="SYS_C00363102">
+      <ObjectId>364089</ObjectId>
+      <NameSurrogate>1</NameSurrogate>
+      <CreatedTimestamp>2021-06-10.09:50:28</CreatedTimestamp>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <TablespaceName>USERS</TablespaceName>
+      <ColNames>ADDRESS</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="1541" parent="1480" name="SYS_C00363101">
+      <NameSurrogate>1</NameSurrogate>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <ColNames>FACILITYNAME</ColNames>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <UnderlyingIndexName>SYS_C00363101</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <key id="1542" parent="1480" name="SYS_C00363102">
+      <NameSurrogate>1</NameSurrogate>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <ColNames>ADDRESS</ColNames>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <UnderlyingIndexName>SYS_C00363102</UnderlyingIndexName>
+    </key>
+    <column id="1543" parent="1481" name="VACNAME">
+      <Position>1</Position>
+      <DataType>CHAR(50 byte)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="1544" parent="1481" name="MINAGE">
+      <Position>2</Position>
+      <DataType>NUMBER(*)|0s</DataType>
+    </column>
+    <index id="1545" parent="1481" name="SYS_C00363087">
+      <ObjectId>364074</ObjectId>
+      <NameSurrogate>1</NameSurrogate>
+      <CreatedTimestamp>2021-06-10.09:50:28</CreatedTimestamp>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <TablespaceName>USERS</TablespaceName>
+      <ColNames>VACNAME</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="1546" parent="1481" name="SYS_C00363087">
+      <NameSurrogate>1</NameSurrogate>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <ColNames>VACNAME</ColNames>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <UnderlyingIndexName>SYS_C00363087</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="1547" parent="1481" name="SYS_C00363088">
+      <NameSurrogate>1</NameSurrogate>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <ColNames>VACNAME</ColNames>
+      <RefSchemaName>ORA_DSONG04</RefSchemaName>
+      <RefTableName>VACCINE</RefTableName>
+      <RefKeyName>SYS_C00363064</RefKeyName>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <column id="1548" parent="1482" name="EVENTID">
+      <Position>1</Position>
+      <DataType>CHAR(20 byte)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="1549" parent="1482" name="CARECARDNUMBER">
+      <Position>2</Position>
+      <DataType>NUMBER(*)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="1550" parent="1482" name="FACILITYNAME">
+      <Position>3</Position>
+      <DataType>CHAR(200 byte)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="1551" parent="1482" name="SYS_C00363109">
+      <ObjectId>364097</ObjectId>
+      <NameSurrogate>1</NameSurrogate>
+      <CreatedTimestamp>2021-06-10.09:50:28</CreatedTimestamp>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <TablespaceName>USERS</TablespaceName>
+      <ColNames>EVENTID
+CARECARDNUMBER
+FACILITYNAME</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="1552" parent="1482" name="SYS_C00363109">
+      <NameSurrogate>1</NameSurrogate>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <ColNames>EVENTID
+CARECARDNUMBER
+FACILITYNAME</ColNames>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <UnderlyingIndexName>SYS_C00363109</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="1553" parent="1482" name="SYS_C00363110">
+      <NameSurrogate>1</NameSurrogate>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <ColNames>EVENTID
+CARECARDNUMBER</ColNames>
+      <RefSchemaName>ORA_DSONG04</RefSchemaName>
+      <RefTableName>ADMINISTEREDVACCINEGIVENTOPATIENT</RefTableName>
+      <RefKeyName>SYS_C00363071</RefKeyName>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <foreign-key id="1554" parent="1482" name="SYS_C00363111">
+      <NameSurrogate>1</NameSurrogate>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <ColNames>FACILITYNAME</ColNames>
+      <RefSchemaName>ORA_DSONG04</RefSchemaName>
+      <RefTableName>FACILITY</RefTableName>
+      <RefKeyName>SYS_C00363101</RefKeyName>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <column id="1555" parent="1483" name="EVENTID">
+      <Position>1</Position>
+      <DataType>CHAR(20 byte)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="1556" parent="1483" name="CARECARDNUMBER">
+      <Position>2</Position>
+      <DataType>NUMBER(*)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="1557" parent="1483" name="VACNAME">
+      <Position>3</Position>
+      <DataType>CHAR(50 byte)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="1558" parent="1483" name="SYS_C00363074">
+      <ObjectId>364064</ObjectId>
+      <NameSurrogate>1</NameSurrogate>
+      <CreatedTimestamp>2021-06-10.09:50:28</CreatedTimestamp>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <TablespaceName>USERS</TablespaceName>
+      <ColNames>EVENTID
+CARECARDNUMBER
+VACNAME</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="1559" parent="1483" name="SYS_C00363074">
+      <NameSurrogate>1</NameSurrogate>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <ColNames>EVENTID
+CARECARDNUMBER
+VACNAME</ColNames>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <UnderlyingIndexName>SYS_C00363074</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="1560" parent="1483" name="SYS_C00363075">
+      <NameSurrogate>1</NameSurrogate>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <ColNames>EVENTID
+CARECARDNUMBER</ColNames>
+      <RefSchemaName>ORA_DSONG04</RefSchemaName>
+      <RefTableName>ADMINISTEREDVACCINEGIVENTOPATIENT</RefTableName>
+      <RefKeyName>SYS_C00363071</RefKeyName>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <foreign-key id="1561" parent="1483" name="SYS_C00363076">
+      <NameSurrogate>1</NameSurrogate>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <ColNames>VACNAME</ColNames>
+      <RefSchemaName>ORA_DSONG04</RefSchemaName>
+      <RefTableName>VACCINE</RefTableName>
+      <RefKeyName>SYS_C00363064</RefKeyName>
+      <OnDelete>set-null</OnDelete>
+    </foreign-key>
+    <column id="1562" parent="1484" name="USERNAME">
+      <Position>1</Position>
+      <DataType>CHAR(20 byte)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="1563" parent="1484" name="USERPASSWORD">
+      <Position>2</Position>
+      <DataType>CHAR(60 byte)|0s</DataType>
+    </column>
+    <index id="1564" parent="1484" name="SYS_C00363092">
+      <ObjectId>364078</ObjectId>
+      <NameSurrogate>1</NameSurrogate>
+      <CreatedTimestamp>2021-06-10.09:50:28</CreatedTimestamp>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <TablespaceName>USERS</TablespaceName>
+      <ColNames>USERNAME</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="1565" parent="1484" name="SYS_C00363092">
+      <NameSurrogate>1</NameSurrogate>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <ColNames>USERNAME</ColNames>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <UnderlyingIndexName>SYS_C00363092</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="1566" parent="1484" name="SYS_C00363093">
+      <NameSurrogate>1</NameSurrogate>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <ColNames>USERNAME</ColNames>
+      <RefSchemaName>ORA_DSONG04</RefSchemaName>
+      <RefTableName>PATIENTACCOUNT</RefTableName>
+      <RefKeyName>SYS_C00363059</RefKeyName>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <column id="1567" parent="1485" name="CARECARDNUMBER">
+      <Position>1</Position>
+      <DataType>NUMBER(*)|0s</DataType>
+    </column>
+    <column id="1568" parent="1485" name="MINORCARDNUMBER">
+      <Position>2</Position>
+      <DataType>NUMBER(*)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="1569" parent="1485" name="SYS_C00363095">
+      <ObjectId>364082</ObjectId>
+      <NameSurrogate>1</NameSurrogate>
+      <CreatedTimestamp>2021-06-10.09:50:28</CreatedTimestamp>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <TablespaceName>USERS</TablespaceName>
+      <ColNames>MINORCARDNUMBER</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="1570" parent="1485" name="SYS_C00363095">
+      <NameSurrogate>1</NameSurrogate>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <ColNames>MINORCARDNUMBER</ColNames>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <UnderlyingIndexName>SYS_C00363095</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="1571" parent="1485" name="SYS_C00363096">
+      <NameSurrogate>1</NameSurrogate>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <ColNames>CARECARDNUMBER</ColNames>
+      <RefSchemaName>ORA_DSONG04</RefSchemaName>
+      <RefTableName>PATIENTACCOUNT</RefTableName>
+      <RefKeyName>SYS_C00363058</RefKeyName>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <column id="1572" parent="1486" name="NURSEID">
+      <Position>1</Position>
+      <DataType>CHAR(20 byte)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="1573" parent="1486" name="NURSENAME">
+      <Position>2</Position>
+      <DataType>CHAR(20 byte)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="1574" parent="1486" name="SYS_C00363061">
+      <ObjectId>364054</ObjectId>
+      <NameSurrogate>1</NameSurrogate>
+      <CreatedTimestamp>2021-06-10.09:50:28</CreatedTimestamp>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <TablespaceName>USERS</TablespaceName>
+      <ColNames>NURSEID</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="1575" parent="1486" name="SYS_C00363061">
+      <NameSurrogate>1</NameSurrogate>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <ColNames>NURSEID</ColNames>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <UnderlyingIndexName>SYS_C00363061</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="1576" parent="1487" name="CARECARDNUMBER">
+      <Position>1</Position>
+      <DataType>NUMBER(*)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="1577" parent="1487" name="FULLNAME">
+      <Position>2</Position>
+      <DataType>CHAR(20 byte)|0s</DataType>
+    </column>
+    <column id="1578" parent="1487" name="DOB">
+      <Position>3</Position>
+      <DataType>DATE|0s</DataType>
+    </column>
+    <column id="1579" parent="1487" name="USERNAME">
+      <Position>4</Position>
+      <DataType>CHAR(20 byte)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="1580" parent="1487" name="SYS_C00363058">
+      <ObjectId>364051</ObjectId>
+      <NameSurrogate>1</NameSurrogate>
+      <CreatedTimestamp>2021-06-10.09:50:28</CreatedTimestamp>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <TablespaceName>USERS</TablespaceName>
+      <ColNames>CARECARDNUMBER</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="1581" parent="1487" name="SYS_C00363059">
+      <ObjectId>364052</ObjectId>
+      <NameSurrogate>1</NameSurrogate>
+      <CreatedTimestamp>2021-06-10.09:50:28</CreatedTimestamp>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <TablespaceName>USERS</TablespaceName>
+      <ColNames>USERNAME</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="1582" parent="1487" name="SYS_C00363058">
+      <NameSurrogate>1</NameSurrogate>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <ColNames>CARECARDNUMBER</ColNames>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <UnderlyingIndexName>SYS_C00363058</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <key id="1583" parent="1487" name="SYS_C00363059">
+      <NameSurrogate>1</NameSurrogate>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <ColNames>USERNAME</ColNames>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <UnderlyingIndexName>SYS_C00363059</UnderlyingIndexName>
+    </key>
+    <column id="1584" parent="1488" name="CARECARDNUMBER">
+      <Position>1</Position>
+      <DataType>NUMBER(*)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="1585" parent="1488" name="CONDITION">
+      <Position>2</Position>
+      <DataType>CHAR(60 byte)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="1586" parent="1488" name="SYS_C00363097">
+      <ObjectId>364084</ObjectId>
+      <NameSurrogate>1</NameSurrogate>
+      <CreatedTimestamp>2021-06-10.09:50:28</CreatedTimestamp>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <TablespaceName>USERS</TablespaceName>
+      <ColNames>CARECARDNUMBER
+CONDITION</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="1587" parent="1488" name="SYS_C00363097">
+      <NameSurrogate>1</NameSurrogate>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <ColNames>CARECARDNUMBER
+CONDITION</ColNames>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <UnderlyingIndexName>SYS_C00363097</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="1588" parent="1488" name="SYS_C00363098">
+      <NameSurrogate>1</NameSurrogate>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <ColNames>CARECARDNUMBER</ColNames>
+      <RefSchemaName>ORA_DSONG04</RefSchemaName>
+      <RefTableName>PATIENTACCOUNT</RefTableName>
+      <RefKeyName>SYS_C00363058</RefKeyName>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <column id="1589" parent="1489" name="BOOSTERNAME">
+      <Position>1</Position>
+      <DataType>CHAR(20 byte)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="1590" parent="1489" name="VACNAME">
+      <Position>2</Position>
+      <DataType>CHAR(50 byte)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="1591" parent="1489" name="DOSAGE">
+      <Position>3</Position>
+      <DataType>FLOAT(63 digit)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="1592" parent="1489" name="SYS_C00363083">
+      <ObjectId>364070</ObjectId>
+      <NameSurrogate>1</NameSurrogate>
+      <CreatedTimestamp>2021-06-10.09:50:28</CreatedTimestamp>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <TablespaceName>USERS</TablespaceName>
+      <ColNames>BOOSTERNAME
+VACNAME</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="1593" parent="1489" name="SYS_C00363083">
+      <NameSurrogate>1</NameSurrogate>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <ColNames>BOOSTERNAME
+VACNAME</ColNames>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <UnderlyingIndexName>SYS_C00363083</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="1594" parent="1489" name="SYS_C00363084">
+      <NameSurrogate>1</NameSurrogate>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <ColNames>VACNAME</ColNames>
+      <RefSchemaName>ORA_DSONG04</RefSchemaName>
+      <RefTableName>VACCINE</RefTableName>
+      <RefKeyName>SYS_C00363064</RefKeyName>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <column id="1595" parent="1490" name="SIDEEFFECTNAME">
+      <Position>1</Position>
+      <DataType>CHAR(100 byte)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="1596" parent="1490" name="TREATMENT">
+      <Position>2</Position>
+      <DataType>CHAR(200 byte)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="1597" parent="1490" name="DURATION">
+      <Position>3</Position>
+      <DataType>NUMBER(*)|0s</DataType>
+    </column>
+    <index id="1598" parent="1490" name="SYS_C00363078">
+      <ObjectId>364066</ObjectId>
+      <NameSurrogate>1</NameSurrogate>
+      <CreatedTimestamp>2021-06-10.09:50:28</CreatedTimestamp>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <TablespaceName>USERS</TablespaceName>
+      <ColNames>SIDEEFFECTNAME</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="1599" parent="1490" name="SYS_C00363078">
+      <NameSurrogate>1</NameSurrogate>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <ColNames>SIDEEFFECTNAME</ColNames>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <UnderlyingIndexName>SYS_C00363078</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="1600" parent="1491" name="VACNAME">
+      <Position>1</Position>
+      <DataType>CHAR(50 byte)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="1601" parent="1491" name="TYPE">
+      <Position>2</Position>
+      <DataType>CHAR(50 byte)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="1602" parent="1491" name="DOSAGE">
+      <Position>3</Position>
+      <DataType>FLOAT(63 digit)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="1603" parent="1491" name="SYS_C00363064">
+      <ObjectId>364056</ObjectId>
+      <NameSurrogate>1</NameSurrogate>
+      <CreatedTimestamp>2021-06-10.09:50:28</CreatedTimestamp>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <TablespaceName>USERS</TablespaceName>
+      <ColNames>VACNAME</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="1604" parent="1491" name="SYS_C00363064">
+      <NameSurrogate>1</NameSurrogate>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <ColNames>VACNAME</ColNames>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <UnderlyingIndexName>SYS_C00363064</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="1605" parent="1492" name="SIDEEFFECTNAME">
+      <Position>1</Position>
+      <DataType>CHAR(100 byte)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="1606" parent="1492" name="VACNAME">
+      <Position>2</Position>
+      <DataType>CHAR(50 byte)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="1607" parent="1492" name="SYS_C00363079">
+      <ObjectId>364068</ObjectId>
+      <NameSurrogate>1</NameSurrogate>
+      <CreatedTimestamp>2021-06-10.09:50:28</CreatedTimestamp>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <TablespaceName>USERS</TablespaceName>
+      <ColNames>SIDEEFFECTNAME
+VACNAME</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="1608" parent="1492" name="SYS_C00363079">
+      <NameSurrogate>1</NameSurrogate>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <ColNames>SIDEEFFECTNAME
+VACNAME</ColNames>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <UnderlyingIndexName>SYS_C00363079</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="1609" parent="1492" name="SYS_C00363080">
+      <NameSurrogate>1</NameSurrogate>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <ColNames>SIDEEFFECTNAME</ColNames>
+      <RefSchemaName>ORA_DSONG04</RefSchemaName>
+      <RefTableName>SIDEEFFECT</RefTableName>
+      <RefKeyName>SYS_C00363078</RefKeyName>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <foreign-key id="1610" parent="1492" name="SYS_C00363081">
+      <NameSurrogate>1</NameSurrogate>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <ColNames>VACNAME</ColNames>
+      <RefSchemaName>ORA_DSONG04</RefSchemaName>
+      <RefTableName>VACCINE</RefTableName>
+      <RefKeyName>SYS_C00363064</RefKeyName>
+      <OnDelete>set-null</OnDelete>
+    </foreign-key>
+    <column id="1611" parent="1493" name="CARECARDNUMBER">
+      <Position>1</Position>
+      <DataType>NUMBER(*)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="1612" parent="1493" name="ID">
+      <Position>2</Position>
+      <DataType>NUMBER(*)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="1613" parent="1493" name="EVENTID">
+      <Position>3</Position>
+      <DataType>CHAR(20 byte)|0s</DataType>
+    </column>
+    <index id="1614" parent="1493" name="SYS_C00363099">
+      <ObjectId>364086</ObjectId>
+      <NameSurrogate>1</NameSurrogate>
+      <CreatedTimestamp>2021-06-10.09:50:28</CreatedTimestamp>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <TablespaceName>USERS</TablespaceName>
+      <ColNames>CARECARDNUMBER
+ID</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="1615" parent="1493" name="SYS_C00363099">
+      <NameSurrogate>1</NameSurrogate>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <ColNames>CARECARDNUMBER
+ID</ColNames>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <UnderlyingIndexName>SYS_C00363099</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="1616" parent="1493" name="SYS_C00363100">
+      <NameSurrogate>1</NameSurrogate>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <ColNames>EVENTID
+CARECARDNUMBER</ColNames>
+      <RefSchemaName>ORA_DSONG04</RefSchemaName>
+      <RefTableName>ADMINISTEREDVACCINEGIVENTOPATIENT</RefTableName>
+      <RefKeyName>SYS_C00363071</RefKeyName>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <column id="1617" parent="1494" name="DOSAGE">
+      <Position>1</Position>
+      <DataType>FLOAT(63 digit)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="1618" parent="1494" name="TYPE">
+      <Position>2</Position>
+      <DataType>CHAR(50 byte)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="1619" parent="1494" name="AVAILABILITY">
+      <Position>3</Position>
+      <DataType>CHAR(1 byte)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="1620" parent="1494" name="SYS_C00363068">
+      <ObjectId>364060</ObjectId>
+      <NameSurrogate>1</NameSurrogate>
+      <CreatedTimestamp>2021-06-10.09:50:28</CreatedTimestamp>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <TablespaceName>USERS</TablespaceName>
+      <ColNames>DOSAGE
+TYPE</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="1621" parent="1494" name="SYS_C00363068">
+      <NameSurrogate>1</NameSurrogate>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <ColNames>DOSAGE
+TYPE</ColNames>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <UnderlyingIndexName>SYS_C00363068</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="1622" parent="1495" name="TYPE">
+      <Position>1</Position>
+      <DataType>CHAR(50 byte)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="1623" parent="1495" name="METHODOFINJECTION">
+      <Position>2</Position>
+      <DataType>CHAR(50 byte)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="1624" parent="1495" name="SYS_C00363066">
+      <ObjectId>364058</ObjectId>
+      <NameSurrogate>1</NameSurrogate>
+      <CreatedTimestamp>2021-06-10.09:50:28</CreatedTimestamp>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <TablespaceName>USERS</TablespaceName>
+      <ColNames>TYPE</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="1625" parent="1495" name="SYS_C00363066">
+      <NameSurrogate>1</NameSurrogate>
+      <ModifiedTimestamp>2021-06-10.09:50:28</ModifiedTimestamp>
+      <ColNames>TYPE</ColNames>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <UnderlyingIndexName>SYS_C00363066</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
   </database-model>
 </dataSource>
