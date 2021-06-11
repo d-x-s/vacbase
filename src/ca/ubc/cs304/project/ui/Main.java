@@ -1,10 +1,13 @@
 package ca.ubc.cs304.project.ui;
 
 import ca.ubc.cs304.model.distributor.Facility;
+import ca.ubc.cs304.model.patient.PatientAccount;
 import javafx.application.Application;
 
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+
+import java.sql.Date;
 
 public class Main extends Application {
 
@@ -18,31 +21,21 @@ public class Main extends Application {
     TabPage tabPage;
     ConditionPage conditionPage;
 
+    PatientAccount currentUser;
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         window = primaryStage;
 
-        patientPage = new PatientPage("Jon Yu");
+        patientPage = new PatientPage();
         adminPage = new AdminPage();
-        loginPage = new LoginPage(); /* Some Problem */
+        loginPage = new LoginPage();
         createPage = new CreateAccountPage();
         tabPage = new TabPage();
         conditionPage = new ConditionPage();
         addFunctionality();
 
-        //scene = patientPage.getPage();
-
-        // scene = adminPage.getPage(); /* Depreciated */
-
         scene = loginPage.getPage();
-
-        //scene = createPage.getPage();
-
-        // scene = tabPage.getPage();
-
-        // Testing conditionPage
-//        scene = conditionPage.getPage();
-
 
         window.setScene(scene);
         window.setTitle("VacBase");
@@ -175,6 +168,8 @@ public class Main extends Application {
                 - .getText()            (returns string)
                 - .clear()              (Clears textField)
              */
+            // This should go to whatever patientAccount they logged in as
+            patientPage = new PatientPage(new PatientAccount(1, "Jon U", Date.valueOf("2001-04-06"), "Jonomuffin"));
             window.setScene(patientPage.getPage());
         });
         loginPage.getLoginAdmin().setOnAction(event -> {

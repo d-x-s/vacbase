@@ -1,5 +1,6 @@
 package ca.ubc.cs304.project.ui;
 
+import ca.ubc.cs304.model.patient.PatientAccount;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -15,14 +16,16 @@ public class PatientPage {
     Button viewChildrenRecord;
     Button viewConditions;
     Button vacLocations;
+    PatientAccount patientAccount;
 
-    public PatientPage(String name) {
+    public PatientPage(PatientAccount patientAccount) {
         VBox pane = new VBox(30);
         pane.setAlignment(Pos.CENTER);
         VBox menuButtons = new VBox(10);
         menuButtons.setAlignment(Pos.CENTER);
+        this.patientAccount = patientAccount;
 
-        Label fullName = new Label(name);
+        Label fullName = new Label(patientAccount.getFullName());
         fullName.setFont(new Font("Montserrat", 64));
 
         viewRecord = makeButton(new Button("View Vaccine Record"));
@@ -43,6 +46,14 @@ public class PatientPage {
         setBackgroundColor(pane);
         page = new Scene(pane, pageWidth, pageHeight);
 
+    }
+
+    public PatientPage() {
+        viewRecord = new Button();
+        viewChildrenRecord = new Button();
+        viewConditions = new Button();
+        vacLocations = new Button();
+        page = new Scene(viewRecord, pageWidth, pageHeight);
     }
 
     public void setPage(Scene page) {
