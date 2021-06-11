@@ -6,6 +6,7 @@ import ca.ubc.cs304.exceptions.PasswordsDontMatch;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
@@ -20,6 +21,8 @@ public class CreateAccountPage {
     private PasswordField passwordField;
     private TextField fullNameField;
     private TextField careCardNumberField;
+
+    private DatePicker dobField;
     private Button confirmButton;
     private Button backButton;
 
@@ -40,16 +43,16 @@ public class CreateAccountPage {
         fieldPane.setAlignment(Pos.TOP_CENTER);
         fieldPane.setTranslateY(50);
 
-        fieldPane.getChildren().addAll(usernameField,careCardNumberField, passwordField, fullNameField);
+        fieldPane.getChildren().addAll(usernameField,careCardNumberField, passwordField, fullNameField, dobField);
         pane.getChildren().addAll(fieldPane, confirmButton, backButton);
         pane.setAlignment(Pos.CENTER);
 
         StackPane.setAlignment(backButton, Pos.BOTTOM_LEFT);
         backButton.setTranslateY(-20);
-        backButton.setTranslateX(150);
+        backButton.setTranslateX(90);
         StackPane.setAlignment(confirmButton, Pos.BOTTOM_RIGHT);
         confirmButton.setTranslateY(-20);
-        confirmButton.setTranslateX(-150);
+        confirmButton.setTranslateX(-90);
 
         //highlightField(usernameField);
 
@@ -113,20 +116,12 @@ public class CreateAccountPage {
         this.backButton = backButton;
     }
 
-    private void checkUsername() throws AlreadyAUsername{
-        // TODO: Check DB
-
+    public DatePicker getDobField() {
+        return dobField;
     }
 
-    private void checkPassword() throws PasswordsDontMatch {
-        if (!passwordField.getText().equals(fullNameField.getText())) {
-            throw new PasswordsDontMatch();
-        }
-    }
-
-    private void checkCareCardNumber() throws InvalidCareCardNumber, NumberFormatException {
-        if (careCardNumberField.getText().length() != 10) throw new InvalidCareCardNumber();
-        Long.parseLong(careCardNumberField.getText());
+    public void setDobField(DatePicker dobField) {
+        this.dobField = dobField;
     }
 
     private void instantiateFields() {
@@ -136,6 +131,7 @@ public class CreateAccountPage {
         fullNameField = new TextField();
         confirmButton = makeButton(new Button("Confirm"));
         backButton = makeButton(new Button("Back"));
+        dobField = new DatePicker();
     }
 
     /*

@@ -2,6 +2,8 @@ package ca.ubc.cs304.project.ui;
 
 import ca.ubc.cs304.database.DatabaseConnectionHandler;
 import ca.ubc.cs304.model.distributor.Facility;
+import ca.ubc.cs304.model.patient.AgeBracketLookup;
+import ca.ubc.cs304.model.patient.LoginInfo;
 import ca.ubc.cs304.model.patient.PatientAccount;
 import javafx.application.Application;
 
@@ -9,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.sql.Date;
+import java.util.concurrent.TimeUnit;
 
 public class Main extends Application {
 
@@ -171,6 +174,18 @@ public class Main extends Application {
               There's a function called highlightField(TextField field) in helpful functions that turns a textfield red
               might be useful for indicating errors
              */
+            String name = createPage.getFullNameField().getText();
+            int ccn = Integer.parseInt(createPage.getCareCardNumberField().getText());
+            Date dob = Date.valueOf(createPage.getDobField().getValue());
+            String password = createPage.getPasswordField().getText();
+            String username = createPage.getUsernameField().getText();
+
+            PatientAccount newUser = new PatientAccount(ccn, name, dob, username);
+            LoginInfo newUserLogin = new LoginInfo(username, password);
+            AgeBracketLookup newUserAgeBracket = new AgeBracketLookup(dob, getAgeBracket(dob));
+            dbh.insertPatientAccount(newUser);
+            dbh.insertLoginInfo(newUserLogin);
+            dbh.insertAgeBracket(newUserAgeBracket);
         });
     }
 
@@ -205,6 +220,21 @@ public class Main extends Application {
              */
             window.setScene(createPage.getPage());
         });
+    }
+
+    public String getAgeBracket(Date date) {
+        long diff = TimeUnit.DAYS.convert(Date.valueOf(java.time.LocalDate.now()).getTime() - date.getTime(), TimeUnit.MILLISECONDS);
+        if (diff > 21900) {
+            return "60+";
+        } else if (diff > 16425) {
+            return "45-59";
+        } else if (diff > 10950) {
+            return "30-44";
+        } else if (diff > 6570) {
+            return "18-29";
+        } else {
+            return "18-";
+        }
     }
 
 

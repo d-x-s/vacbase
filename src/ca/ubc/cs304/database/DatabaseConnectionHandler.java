@@ -7,6 +7,8 @@ import java.util.ArrayList;
 
 import ca.ubc.cs304.model.BranchModel;
 import ca.ubc.cs304.model.distributor.Facility;
+import ca.ubc.cs304.model.patient.AgeBracketLookup;
+import ca.ubc.cs304.model.patient.LoginInfo;
 import ca.ubc.cs304.model.patient.PatientAccount;
 import ca.ubc.cs304.model.patient.PreExistingCondition;
 import ca.ubc.cs304.model.vaccine.Vaccine;
@@ -685,5 +687,47 @@ public class DatabaseConnectionHandler {
         }
         System.out.println("Returns null");
         return null;
+    }
+
+    public void insertLoginInfo(LoginInfo model) {
+        try {
+            PreparedStatement ps = connection.prepareStatement("INSERT INTO LoginInfo VALUES (?,?)");
+            ps.setString(1, model.getUsername());
+            ps.setString(2, model.getUserPassword());
+//			if (model.getPhoneNumber() == 0) {
+//				ps.setNull(5, java.sql.Types.INTEGER);
+//			} else {
+//				ps.setInt(5, model.getPhoneNumber());
+//			}
+
+            ps.executeUpdate();
+            connection.commit();
+
+            ps.close();
+        } catch (SQLException e) {
+            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+            rollbackConnection();
+        }
+    }
+
+    public void insertAgeBracket(AgeBracketLookup model) {
+        try {
+            PreparedStatement ps = connection.prepareStatement("INSERT INTO AgeBracketLookup VALUES (?,?)");
+            ps.setDate(1, model.getDOB());
+            ps.setString(2, model.getAgeBracket());
+//			if (model.getPhoneNumber() == 0) {
+//				ps.setNull(5, java.sql.Types.INTEGER);
+//			} else {
+//				ps.setInt(5, model.getPhoneNumber());
+//			}
+
+            ps.executeUpdate();
+            connection.commit();
+
+            ps.close();
+        } catch (SQLException e) {
+            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+            rollbackConnection();
+        }
     }
 }
