@@ -60,6 +60,8 @@ public interface TerminalTransactionsDelegate {
 	 * - Division
 	 */
 
+	public void selectionQuery();
+
 
 	public void terminalTransactionsFinished();
 }
