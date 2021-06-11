@@ -397,7 +397,7 @@ public class TerminalTransactions {
             System.out.print("Please enter the facility name you wish to delete: ");
             fName = readString(false);
             if (fName != INVALID_STRING) {
-                delegate.deleteVaccine(fName);
+                delegate.deleteFacility(fName);
             }
         }
     }
