@@ -64,7 +64,7 @@ public class TerminalTransactions {
         bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         int choice = INVALID_INPUT;
 
-        while (choice != 21) {
+        while (choice != 22) {
             System.out.println();
             System.out.println("1. Insert branch");
             System.out.println("2. Delete branch");
@@ -91,8 +91,9 @@ public class TerminalTransactions {
             System.out.println("19. TODO: Show Facilities");
             System.out.println("20. TODO: Update the _________ of a Facility");
 
+            System.out.println("21. Selection Query");
 
-            System.out.println("21. Quit");
+            System.out.println("22. Quit");
             System.out.print("Please choose one of the above 21 options: ");
 
             choice = readInteger(false);
@@ -165,6 +166,9 @@ public class TerminalTransactions {
                         System.out.println("Todo!");
                         break;
                     case 21:
+                        handleSelectionQuery();
+                        break;
+                    case 22:
                         handleQuitOption();
                         break;
                     default:
@@ -174,6 +178,13 @@ public class TerminalTransactions {
             }
         }
     }
+
+    // QUERIES /////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    private void handleSelectionQuery() {
+        delegate.selectionQuery();
+    }
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     // BRANCH //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
