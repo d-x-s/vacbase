@@ -40,7 +40,6 @@ public class Main extends Application {
 
         while (!isConnected) {
             isConnected = dbh.login("ora_jyu19", "a67758979");
-            //isConnected = dbh.login("ora_dsong04", "a29241874");
             System.out.println("Failed to login");
         }
         System.out.println("Successfully Logged in");
@@ -152,29 +151,22 @@ public class Main extends Application {
     //endregion
 
     private void addFunctionalityPatientPage() {
-        System.out.println("Added functionality");
         patientPage.getViewRecord().setOnAction(event -> {
             // TODO: View record
-            System.out.println("Deleted");
         });
         patientPage.getDeleteAccount().setOnAction(event -> {
-            System.out.println("Deleted");
             window.setScene(loginPage.getPage());
             if (currentUser == null) {
-                System.out.println("Current user is null");
                 exit();
             }
             int careCardNumber = currentUser.getCareCardNumber();
-            System.out.println("After careCardNumber");
+            currentUser = null;
             dbh.deletePatientAccount(careCardNumber);
-            System.out.println("After deletePatientAccount");
         });
         patientPage.getViewConditions().setOnAction(event -> {
-
         });
         patientPage.getVacLocations().setOnAction(event -> {
             // TODO: view locations
-
         });
     }
 
