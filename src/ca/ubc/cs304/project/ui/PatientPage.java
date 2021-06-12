@@ -13,26 +13,28 @@ import static ca.ubc.cs304.project.ui.HelpfulFunctions.*;
 public class PatientPage {
     Scene page;
     Button viewRecord;
-    Button viewChildrenRecord;
+    Button deleteAccount;
     Button viewConditions;
     Button vacLocations;
     PatientAccount patientAccount;
+    Label fullName;
 
-    public PatientPage(PatientAccount patientAccount) {
+    public PatientPage() {
         VBox pane = new VBox(30);
         pane.setAlignment(Pos.CENTER);
         VBox menuButtons = new VBox(10);
         menuButtons.setAlignment(Pos.CENTER);
-        this.patientAccount = patientAccount;
+        this.patientAccount = null;
 
-        Label fullName = new Label(patientAccount.getFullName());
+        fullName = new Label("d");
+
         fullName.setFont(new Font("Montserrat", 64));
 
         viewRecord = makeButton(new Button("View Vaccine Record"));
         setButtonSpecs(viewRecord);
 
-        viewChildrenRecord = makeButton(new Button("View Minor's Record"));
-        setButtonSpecs(viewChildrenRecord);
+        deleteAccount = makeButton(new Button("Delete Account"));
+        setButtonSpecs(deleteAccount);
 
         viewConditions = makeButton(new Button("View Preexisting Conditions"));
         setButtonSpecs(viewConditions);
@@ -40,20 +42,11 @@ public class PatientPage {
         vacLocations = makeButton(new Button("Where can I get vaccinated"));
         setButtonSpecs(vacLocations);
 
-        menuButtons.getChildren().addAll(viewRecord, viewChildrenRecord, viewConditions, vacLocations);
+        menuButtons.getChildren().addAll(viewRecord, deleteAccount, viewConditions, vacLocations);
 
         pane.getChildren().addAll(fullName, menuButtons);
         setBackgroundColor(pane);
         page = new Scene(pane, pageWidth, pageHeight);
-
-    }
-
-    public PatientPage() {
-        viewRecord = new Button();
-        viewChildrenRecord = new Button();
-        viewConditions = new Button();
-        vacLocations = new Button();
-        page = new Scene(viewRecord, pageWidth, pageHeight);
     }
 
     public void setPage(Scene page) {
@@ -68,12 +61,12 @@ public class PatientPage {
         this.viewRecord = viewRecord;
     }
 
-    public Button getViewChildrenRecord() {
-        return viewChildrenRecord;
+    public Button getDeleteAccount() {
+        return deleteAccount;
     }
 
-    public void setViewChildrenRecord(Button viewChildrenRecord) {
-        this.viewChildrenRecord = viewChildrenRecord;
+    public void setDeleteAccount(Button deleteAccount) {
+        this.deleteAccount = deleteAccount;
     }
 
     public Button getViewConditions() {
@@ -100,6 +93,15 @@ public class PatientPage {
 
     public Scene getPage() {
         return page;
+    }
+
+    public void setPatientAccount(PatientAccount patientAccount) {
+        this.patientAccount = patientAccount;
+        setFullName(patientAccount.getFullName());
+    }
+
+    public void setFullName(String name) {
+        fullName.setText(name);
     }
 
 }

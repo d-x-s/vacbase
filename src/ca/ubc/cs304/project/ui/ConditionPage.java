@@ -29,9 +29,6 @@ public class ConditionPage {
     public ConditionPage() {
         VBox pane = new VBox();
 
-        //TODO: set the careCardNumber when scene is created
-        careCardNumber = 1;
-
         //Name column
         TableColumn<PreExistingCondition, String> nameColumn = new TableColumn<>("Condition");
         nameColumn.setMinWidth(pageWidth);
@@ -66,7 +63,6 @@ public class ConditionPage {
         pane.getChildren().addAll(viewConditions, hBox);
         page = new Scene(pane, pageWidth, pageHeight);
         setBackgroundColor(pane);
-        addFunctionality();
 
     }
 
@@ -131,23 +127,5 @@ public class ConditionPage {
         this.conditions = conditions;
     }
 
-    // TODO: zero validation. add some somewhere or something idk
-    private void addFunctionality() {
-        insertButton.setOnAction(e -> {
-            PreExistingCondition temp;
-            try {
-                temp = new PreExistingCondition((int)careCardNumber, conditionInput.getText());
-                conditions.add(temp);
-                conditionInput.clear();
-            } catch (NullPointerException npe) {
-                npe.printStackTrace();
-            }
-        });
-        viewConditions.setOnMousePressed(event -> {
-            if (event.isPrimaryButtonDown() && event.getClickCount() == 2) {
-                PreExistingCondition selectedItem = viewConditions.getSelectionModel().getSelectedItem();
-                viewConditions.getItems().remove(selectedItem);
-            }
-        });
-    }
+
 }

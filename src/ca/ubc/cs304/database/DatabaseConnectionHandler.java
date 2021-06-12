@@ -296,6 +296,7 @@ public class DatabaseConnectionHandler {
 
             ps.close();
         } catch (SQLException e) {
+            System.out.println("Problem here");
             System.out.println(EXCEPTION_TAG + " " + e.getMessage());
             rollbackConnection();
         }
@@ -664,28 +665,22 @@ public class DatabaseConnectionHandler {
         // Need to execute this statement
         // Select p.careCardNumber, p.fullName, p.DOB, p.Username from PatientAccount p, LoginInfo l Where l.username = p.username and l.username = 'Spiderman' and l.userpassword = 'Password123'
         String sql = String.format("Select p.careCardNumber, p.fullName, p.DOB, p.Username from PatientAccount p, LoginInfo l Where l.username = p.username and l.username = \'%s\' and l.userpassword = \'%s\'", username, password);
-        System.out.println(sql);
+        //System.out.println(sql);
         PatientAccount model = null;
         try {
             System.out.println(connection);
             Statement stmt = connection.createStatement();
-            System.out.println("Statement is created");
             ResultSet rs = stmt.executeQuery(sql);
-            System.out.println("Gets here");
             while (rs.next()) {
-                System.out.println("Iterates");
                 model = new PatientAccount(rs.getInt("careCardNumber"),
                         rs.getString("fullName"),
                         rs.getDate("DOB"),
                         rs.getString("username"));
             }
-            System.out.println("Executes query");
             return model;
         } catch (SQLException e) {
-            System.out.println("Failed");
-            //System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
         }
-        System.out.println("Returns null");
         return null;
     }
 
@@ -694,11 +689,6 @@ public class DatabaseConnectionHandler {
             PreparedStatement ps = connection.prepareStatement("INSERT INTO LoginInfo VALUES (?,?)");
             ps.setString(1, model.getUsername());
             ps.setString(2, model.getUserPassword());
-//			if (model.getPhoneNumber() == 0) {
-//				ps.setNull(5, java.sql.Types.INTEGER);
-//			} else {
-//				ps.setInt(5, model.getPhoneNumber());
-//			}
 
             ps.executeUpdate();
             connection.commit();
@@ -715,11 +705,7 @@ public class DatabaseConnectionHandler {
             PreparedStatement ps = connection.prepareStatement("INSERT INTO AgeBracketLookup VALUES (?,?)");
             ps.setDate(1, model.getDOB());
             ps.setString(2, model.getAgeBracket());
-//			if (model.getPhoneNumber() == 0) {
-//				ps.setNull(5, java.sql.Types.INTEGER);
-//			} else {
-//				ps.setInt(5, model.getPhoneNumber());
-//			}
+
 
             ps.executeUpdate();
             connection.commit();

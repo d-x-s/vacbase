@@ -13,6 +13,8 @@ import javafx.stage.Stage;
 import java.sql.Date;
 import java.util.concurrent.TimeUnit;
 
+import static javafx.application.Platform.exit;
+
 public class Main extends Application {
 
     Stage window;
@@ -36,12 +38,12 @@ public class Main extends Application {
         dbh = new DatabaseConnectionHandler();
         boolean isConnected = false;
 
-//        while (!isConnected) {
-//            //isConnected = dbh.login("ora_jyu19", "a67758979");
-//            isConnected = dbh.login("ora_dsong04", "a29241874");
-//            System.out.println("Failed to login");
-//        }
-//        System.out.println("Successfully Logged in");
+        while (!isConnected) {
+            isConnected = dbh.login("ora_jyu19", "a67758979");
+            //isConnected = dbh.login("ora_dsong04", "a29241874");
+            System.out.println("Failed to login");
+        }
+        System.out.println("Successfully Logged in");
 
 
         patientPage = new PatientPage();
@@ -53,7 +55,7 @@ public class Main extends Application {
         vaccineCarePage = new PatientVaccineCarePage();
         addFunctionality();
 
-        scene = vaccineCarePage.getPage();
+        scene = loginPage.getPage();
 
         window.setScene(scene);
         window.setTitle("VacBase");
@@ -148,17 +150,29 @@ public class Main extends Application {
     //endregion
 
     private void addFunctionalityPatientPage() {
+        System.out.println("Added functionality");
         patientPage.getViewRecord().setOnAction(event -> {
             // TODO: View record
+            System.out.println("Deleted");
         });
-        patientPage.getViewChildrenRecord().setOnAction(event -> {
-            // TODO: Possibly remove
+        patientPage.getDeleteAccount().setOnAction(event -> {
+            System.out.println("Deleted");
+            window.setScene(loginPage.getPage());
+            if (currentUser == null) {
+                System.out.println("Current user is null");
+                exit();
+            }
+            int careCardNumber = currentUser.getCareCardNumber();
+            System.out.println("After careCardNumber");
+            dbh.deletePatientAccount(careCardNumber);
+            System.out.println("After deletePatientAccount");
         });
         patientPage.getViewConditions().setOnAction(event -> {
-            // TODO: view preexisting
+
         });
         patientPage.getVacLocations().setOnAction(event -> {
             // TODO: view locations
+
         });
     }
 
@@ -188,6 +202,7 @@ public class Main extends Application {
             dbh.insertPatientAccount(newUser);
             dbh.insertLoginInfo(newUserLogin);
             dbh.insertAgeBracket(newUserAgeBracket);
+            window.setScene(loginPage.getPage());
         });
     }
 
@@ -200,8 +215,8 @@ public class Main extends Application {
              */
             // This should go to whatever patientAccount they logged in as
 
-            //patientPage = new PatientPage(new PatientAccount(1, "Jon U", Date.valueOf("2001-04-06"), "Jonomuffin"));
-            patientPage = new PatientPage(dbh.loginToAccount(loginPage.getUsernameField().getText(), loginPage.getPasswordField().getText()));
+            currentUser = dbh.loginToAccount(loginPage.getUsernameField().getText(), loginPage.getPasswordField().getText());
+            patientPage.setPatientAccount(currentUser);
             System.out.println("Gets here");
             loginPage.getUsernameField().clear();
             loginPage.getPasswordField().clear();
@@ -217,10 +232,13 @@ public class Main extends Application {
         });
 
         loginPage.getCreateAccount().setOnAction(event -> {
-            /* TODO: Log into createAccountPage
-
-             */
             window.setScene(createPage.getPage());
+        });
+    }
+
+    private void addFunctionalityPatientVaccineCarePage() {
+        vaccineCarePage.getBackButton().setOnAction(event -> {
+            window.setScene(patientPage.getPage());
         });
     }
 
