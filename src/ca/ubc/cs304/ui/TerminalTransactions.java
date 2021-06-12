@@ -339,17 +339,23 @@ public class TerminalTransactions {
      */
 
     private void handleVaccineDeleteOption() {
-        String vacName = INVALID_STRING;
-        while (vacName == INVALID_STRING) {
-            System.out.print("Please enter the vaccine name you wish to delete: ");
-            vacName = readString(false);
-            if (vacName != INVALID_STRING) {
-                delegate.deleteVaccine(vacName);
+        int vacID = INVALID_INT;
+        while (vacID == INVALID_INT) {
+            System.out.print("Please enter the vaccine ID you wish to delete: ");
+            vacID = readInteger(false);
+            if (vacID != INVALID_INT) {
+                delegate.deleteVaccine(vacID);
             }
         }
     }
 
     private void handleVaccineInsertOption() {
+        int vacID = INVALID_INT;
+        while (vacID == INVALID_INT) {
+            System.out.print("Please enter the vaccine ID you wish to insert: ");
+            vacID = readInteger(false);
+        }
+
         String vacName = INVALID_STRING;
         while (vacName == INVALID_STRING) {
             System.out.print("Please enter the vaccine name you wish to insert: ");
@@ -368,15 +374,15 @@ public class TerminalTransactions {
             dosage = readDouble(false);
         }
 
-        Vaccine model = new Vaccine(vacName, type, dosage);
+        Vaccine model = new Vaccine(vacID, vacName, type, dosage);
         delegate.insertVaccine(model);
     }
 
     private void handleVaccineUpdateOption() {
-        String vacName = INVALID_STRING;
-        while (vacName == INVALID_STRING) {
-            System.out.print("Please enter the vaccine name you wish to update: ");
-            vacName = readString(false);
+        int vacID = INVALID_INT;
+        while (vacID == INVALID_INT) {
+            System.out.print("Please enter the vaccine ID you wish to update: ");
+            vacID = readInteger(false);
         }
 
         double dosage = 0.0;
@@ -385,24 +391,30 @@ public class TerminalTransactions {
             dosage = readDouble(false);
         }
 
-        delegate.updateVaccine(vacName, dosage);
+        delegate.updateVaccine(vacID, dosage);
     }
 
     // FACILITY ////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private void handleFacilityDeleteOption() {
-        String fName = INVALID_STRING;
-        while (fName == INVALID_STRING) {
-            System.out.print("Please enter the facility name you wish to delete: ");
-            fName = readString(false);
-            if (fName != INVALID_STRING) {
-                delegate.deleteFacility(fName);
+        int FID = INVALID_INT;
+        while (FID == INVALID_INT) {
+            System.out.print("Please enter the facility ID you wish to delete: ");
+            FID = readInteger(false);
+            if (FID != INVALID_INT) {
+                delegate.deleteFacility(FID);
             }
         }
     }
 
     private void handleFacilityInsertOption() {
+        int FID = INVALID_INT;
+        while (FID == INVALID_INT) {
+            System.out.print("Please enter the facility ID you wish to insert: ");
+            FID = readInteger(false);
+        }
+
         String fName = INVALID_STRING;
         while (fName == INVALID_STRING) {
             System.out.print("Please enter the facility name you wish to insert: ");
@@ -415,15 +427,15 @@ public class TerminalTransactions {
             address = readLine().trim();
         }
 
-        Facility model = new Facility(fName, address);
+        Facility model = new Facility(FID, fName, address);
         delegate.insertFacility(model);
     }
 
     private void handleFacilityUpdateOption() {
-        String fName = INVALID_STRING;
-        while (fName == INVALID_STRING) {
-            System.out.print("Please enter the facility name you wish to update: ");
-            fName = readString(false);
+        int FID = INVALID_INT;
+        while (FID == INVALID_INT) {
+            System.out.print("Please enter the facility ID you wish to update: ");
+            FID = readInteger(false);
         }
 
         String address = INVALID_STRING;
@@ -432,7 +444,7 @@ public class TerminalTransactions {
             address = readString(false);
         }
 
-        delegate.updateFacility(fName, address);
+        delegate.updateFacility(FID, address);
     }
     // CONDITION ///////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

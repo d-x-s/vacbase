@@ -36,10 +36,10 @@ public interface TerminalTransactionsDelegate {
 	public void showPatientAccount();
 	public void updatePatientAccount(int CareCardNumber, String newUsername);
 
-	public void deleteVaccine(String vacName);
+	public void deleteVaccine(int vacID);
 	public void insertVaccine(Vaccine model);
 	public void showVaccine();
-	public void updateVaccine(String vacName, double dosage);
+	public void updateVaccine(int vacID, double dosage);
 
 	public void insertCondition(PreExistingCondition model);
 	public void deleteCondition(int careCardNumber);
@@ -47,9 +47,9 @@ public interface TerminalTransactionsDelegate {
 	public void updateCondition(int careCardNumber, String condition);
 
 	public void insertFacility(Facility model);
-	public void deleteFacility(String name);
+	public void deleteFacility(int FID);
 	public void showFacility();
-	public void updateFacility(String name, String newAddress);
+	public void updateFacility(int FID, String newAddress);
 
 	// TODO: QUERY METHODS:
 	/**

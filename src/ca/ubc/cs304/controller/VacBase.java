@@ -169,8 +169,8 @@ public class VacBase implements LoginWindowDelegate, TerminalTransactionsDelegat
 	// VACCINE /////////////////////////////////////////////////////////////////////////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	public void deleteVaccine(String vacName) {
-		dbHandler.deleteVaccine(vacName);
+	public void deleteVaccine(int vacID) {
+		dbHandler.deleteVaccine(vacID);
 	}
 
 	public void insertVaccine(Vaccine model) {
@@ -184,6 +184,7 @@ public class VacBase implements LoginWindowDelegate, TerminalTransactionsDelegat
 			Vaccine model = models[i];
 
 			// simplified output formatting; truncation may occur
+			System.out.printf("%-10.10s", model.getVacID());
 			System.out.printf("%-10.10s", model.getVacName());
 			System.out.printf("%-20.20s", model.getType());
 			System.out.printf("%-15.15s", model.getDosage());
@@ -192,15 +193,15 @@ public class VacBase implements LoginWindowDelegate, TerminalTransactionsDelegat
 		}
 	}
 
-	public void updateVaccine(String vacName, double dosage) {
-		dbHandler.updateVaccine(vacName, dosage);
+	public void updateVaccine(int vacID, double dosage) {
+		dbHandler.updateVaccine(vacID, dosage);
 	}
 
 	// FACILITY ////////////////////////////////////////////////////////////////////////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	public void deleteFacility(String name) {
-		dbHandler.deleteFacility(name);
+	public void deleteFacility(int FID) {
+		dbHandler.deleteFacility(FID);
 	}
 
 	public void insertFacility(Facility model) {
@@ -214,6 +215,7 @@ public class VacBase implements LoginWindowDelegate, TerminalTransactionsDelegat
 			Facility model = models[i];
 
 			// simplified output formatting; truncation may occur
+			System.out.printf("%-10.10s", model.getFacilityID());
 			System.out.printf("%-10.10s", model.getFacilityName());
 			System.out.printf("%-20.20s", model.getAddress());
 
@@ -221,8 +223,8 @@ public class VacBase implements LoginWindowDelegate, TerminalTransactionsDelegat
 		}
 	}
 
-	public void updateFacility(String name, String address) {
-		dbHandler.updateFacility(name, address);
+	public void updateFacility(int FID, String address) {
+		dbHandler.updateFacility(FID, address);
 	}
 
 	// CONDITION ///////////////////////////////////////////////////////////////////////////////////////////////////////

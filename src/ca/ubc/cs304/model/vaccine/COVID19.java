@@ -6,8 +6,8 @@ package ca.ubc.cs304.model.vaccine;
 public class COVID19 extends Vaccine{
     private int waitTimeUntilBooster;
 
-    public COVID19(String vacName, String type, double dosage, int waitTimeUntilBooster) {
-        super(vacName, type, dosage);
+    public COVID19(int vacID, String vacName, String type, double dosage, int waitTimeUntilBooster) {
+        super(vacID, vacName, type, dosage);
         this.waitTimeUntilBooster = waitTimeUntilBooster;
     }
 

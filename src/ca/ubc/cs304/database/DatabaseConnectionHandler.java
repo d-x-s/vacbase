@@ -103,7 +103,7 @@ public class DatabaseConnectionHandler {
             dropBranchTableIfExists();
 
             // add tables: YOU WILL GET AN ERROR IF THE TABLES ALREADY EXIST!
-            // SQLUtil.executeFile(connection, new File("resources/sql/databaseSetup.sql"));
+            //SQLUtil.executeFile(connection, new File("resources/sql/databaseSetup.sql"));
 
             // drop tables: YOU WILL GET AN ERROR IF THE TABLES DO NOT EXIST!
             // SQLUtil.executeFile(connection, new File("resources/sql/databaseDrop.sql"));
@@ -386,14 +386,14 @@ public class DatabaseConnectionHandler {
 
     // VACCINE /////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public void deleteVaccine(String vacName) {
+    public void deleteVaccine(int ID) {
         try {
-            PreparedStatement ps = connection.prepareStatement("DELETE FROM Vaccine WHERE VacName = ?");
-            ps.setString(1, vacName);
+            PreparedStatement ps = connection.prepareStatement("DELETE FROM Vaccine WHERE VacID = ?");
+            ps.setInt(1, ID);
 
             int rowCount = ps.executeUpdate();
             if (rowCount == 0) {
-                System.out.println(WARNING_TAG + " Vaccine " + vacName + " does not exist!");
+                System.out.println(WARNING_TAG + " Vaccine " + ID + " does not exist!");
             }
 
             connection.commit();
@@ -407,10 +407,11 @@ public class DatabaseConnectionHandler {
 
     public void insertVaccine(Vaccine model) {
         try {
-            PreparedStatement ps = connection.prepareStatement("INSERT INTO Vaccine VALUES (?,?,?)");
-            ps.setString(1, model.getVacName());
-            ps.setString(2, model.getType());
-            ps.setDouble(3, model.getDosage());
+            PreparedStatement ps = connection.prepareStatement("INSERT INTO Vaccine VALUES (?,?,?,?)");
+            ps.setInt(1, model.getVacID());
+            ps.setString(2, model.getVacName());
+            ps.setString(3, model.getType());
+            ps.setDouble(4, model.getDosage());
 
             ps.executeUpdate();
             connection.commit();
@@ -441,7 +442,8 @@ public class DatabaseConnectionHandler {
             }
 
             while (rs.next()) {
-                Vaccine model = new Vaccine(rs.getString("vacName"),
+                Vaccine model = new Vaccine(rs.getInt("vacID"),
+                                            rs.getString("vacName"),
                                             rs.getString("type"),
                                             rs.getDouble("dosage"));
                 result.add(model);
@@ -457,15 +459,15 @@ public class DatabaseConnectionHandler {
     }
 
     // Don't think we need, considering that type and dosage are both static but I'll just put it here
-    public void updateVaccine(String vacName, double newDosage) {
+    public void updateVaccine(int vacID, double newDosage) {
         try {
-            PreparedStatement ps = connection.prepareStatement("UPDATE Vaccine SET dosage = ? WHERE VacName = ?");
+            PreparedStatement ps = connection.prepareStatement("UPDATE Vaccine SET dosage = ? WHERE vacID = ?");
             ps.setDouble(1, newDosage);
-            ps.setString(2, vacName);
+            ps.setInt(2, vacID);
 
             int rowCount = ps.executeUpdate();
             if (rowCount == 0) {
-                System.out.println(WARNING_TAG + " Vaccine " + vacName + " does not exist!");
+                System.out.println(WARNING_TAG + " Vaccine with ID " + vacID + " does not exist!");
             }
 
             connection.commit();
@@ -479,14 +481,14 @@ public class DatabaseConnectionHandler {
 
     // FACILITY ////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public void deleteFacility(String name) {
+    public void deleteFacility(int FID) {
         try {
-            PreparedStatement ps = connection.prepareStatement("DELETE FROM Facility WHERE FacilityName = ?");
-            ps.setString(1, name);
+            PreparedStatement ps = connection.prepareStatement("DELETE FROM Facility WHERE FacilityID = ?");
+            ps.setInt(1, FID);
 
             int rowCount = ps.executeUpdate();
             if (rowCount == 0) {
-                System.out.println(WARNING_TAG + " Facility " + name + " does not exist!");
+                System.out.println(WARNING_TAG + " Facility with ID " + FID + " does not exist!");
             }
 
             connection.commit();
@@ -500,9 +502,10 @@ public class DatabaseConnectionHandler {
 
     public void insertFacility(Facility model) {
         try {
-            PreparedStatement ps = connection.prepareStatement("INSERT INTO Facility VALUES (?,?)");
-            ps.setString(1, model.getFacilityName());
-            ps.setString(2, model.getAddress());
+            PreparedStatement ps = connection.prepareStatement("INSERT INTO Facility VALUES (?,?,?)");
+            ps.setInt(1, model.getFacilityID());
+            ps.setString(2, model.getFacilityName());
+            ps.setString(3, model.getAddress());
 
             ps.executeUpdate();
             connection.commit();
@@ -533,7 +536,8 @@ public class DatabaseConnectionHandler {
             }
 
             while (rs.next()) {
-                Facility model = new Facility(rs.getString("FacilityName"),
+                Facility model = new Facility(rs.getInt("FacilityID"),
+                        rs.getString("FacilityName"),
                         rs.getString("Address"));
                 result.add(model);
             }
@@ -547,16 +551,15 @@ public class DatabaseConnectionHandler {
         return result.toArray(new Facility[result.size()]);
     }
 
-    // Don't think we need, considering that type and dosage are both not null but I'll just put it here
-    public void updateFacility(String name, String newAddress) {
+    public void updateFacility(int FID, String newAddress) {
         try {
-            PreparedStatement ps = connection.prepareStatement("UPDATE Facility SET address = ? WHERE facilityName = ?");
+            PreparedStatement ps = connection.prepareStatement("UPDATE Facility SET address = ? WHERE FacilityID = ?");
             ps.setString(1, newAddress);
-            ps.setString(2, name);
+            ps.setInt(2, FID);
 
             int rowCount = ps.executeUpdate();
             if (rowCount == 0) {
-                System.out.println(WARNING_TAG + " Facility " + name + " does not exist!");
+                System.out.println(WARNING_TAG + " Facility with ID " + FID + " does not exist!");
             }
 
             connection.commit();

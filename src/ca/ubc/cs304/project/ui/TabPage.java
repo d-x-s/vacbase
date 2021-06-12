@@ -47,6 +47,7 @@ public class TabPage {
      */
     Button insertFacilityButton;
     Button updateFacilityButton;
+    TextField facilityIDField;
     TextField facilityNameField;
     TextField addressField;
     TableView<Facility> facilityView;
@@ -271,12 +272,12 @@ public class TabPage {
 
     public ObservableList<Facility> getFacilities() {
         facilityList = FXCollections.observableArrayList();
-        facilityList.add(new Facility("Facility 1", "Address 1"));
-        facilityList.add(new Facility("Facility 2", "Address 2"));
-        facilityList.add(new Facility("Facility 3", "Address 3"));
-        facilityList.add(new Facility("Facility 4", "Address 4"));
-        facilityList.add(new Facility("Facility 5", "Address 5"));
-        facilityList.add(new Facility("Facility 6", "Address 6"));
+        facilityList.add(new Facility(101, "FacilityA", "Address 1"));
+        facilityList.add(new Facility(105, "FacilityB", "Address 2"));
+        facilityList.add(new Facility(300, "FacilityC", "Address 3"));
+        facilityList.add(new Facility(480, "FacilityD", "Address 4"));
+        facilityList.add(new Facility(744, "FacilityE", "Address 5"));
+        facilityList.add(new Facility(500, "FacilityF", "Address 6"));
         return facilityList;
     }
 
@@ -406,6 +407,10 @@ public class TabPage {
 
     public void setUpdateFacilityButton(Button updateFacilityButton) {
         this.updateFacilityButton = updateFacilityButton;
+    }
+
+    public TextField getFacilityIDField() {
+        return facilityIDField;
     }
 
     public TextField getFacilityNameField() {
