@@ -6,8 +6,8 @@ package ca.ubc.cs304.model.vaccine;
 public class Flu extends Vaccine {
     private int minAge;
 
-    public Flu(String vacName, String type, double dosage, int minAge) {
-        super(vacName, type, dosage);
+    public Flu(int vacID, String vacName, String type, double dosage, int minAge) {
+        super(vacID, vacName, type, dosage);
         this.minAge = minAge;
     }
 

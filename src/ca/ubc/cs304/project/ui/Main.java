@@ -85,7 +85,9 @@ public class Main extends Application {
         tabPage.getInsertFacilityButton().setOnAction(e -> {
             Facility temp;
             try {
-                temp = new Facility(tabPage.getFacilityNameField().getText(), tabPage.getAddressField().getText());
+                temp = new Facility(Integer.parseInt(tabPage.getFacilityIDField().getText()),
+                        tabPage.getFacilityNameField().getText(),
+                        tabPage.getAddressField().getText());
                 tabPage.getFacilityList().add(temp);
                 tabPage.getFacilityNameField().clear();
                 tabPage.getAddressField().clear();

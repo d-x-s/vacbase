@@ -24,7 +24,8 @@ CREATE TABLE Nurse
 
 CREATE TABLE Vaccine
 (
-    VacName CHAR(50) PRIMARY KEY,
+    VacID   INTEGER PRIMARY KEY,
+    VacName CHAR(50) UNIQUE NOT NULL,
     Type    CHAR(50) NOT NULL,
     Dosage  REAL     NOT NULL
 );
@@ -65,12 +66,12 @@ CREATE TABLE Include
 (
     EventID        CHAR(20),
     CareCardNumber INTEGER,
-    VacName        CHAR(50),
-    PRIMARY KEY (EventID, CareCardNumber, VacName),
+    VacID        INTEGER,
+    PRIMARY KEY (EventID, CareCardNumber, VacID),
     FOREIGN KEY (EventID, CareCardNumber) REFERENCES AdministeredVaccineGivenToPatient (EventID, CareCardNumber)
         ON DELETE CASCADE,
-    FOREIGN KEY (VacName) REFERENCES Vaccine (VacName)
-        ON DELETE SET NULL
+    FOREIGN KEY (VacID) REFERENCES Vaccine (VacID)
+        ON DELETE CASCADE
 );
 
 
@@ -86,11 +87,11 @@ CREATE TABLE SideEffect
 CREATE TABLE VaccineHasSideEffect
 (
     SideEffectName CHAR(100),
-    VacName        CHAR(50),
-    PRIMARY KEY (SideEffectName, VacName),
+    VacID        INTEGER,
+    PRIMARY KEY (SideEffectName, VacID),
     FOREIGN KEY (SideEffectName) REFERENCES SideEffect (SideEffectName)
         ON DELETE CASCADE,
-    FOREIGN KEY (VacName) REFERENCES Vaccine (VacName)
+    FOREIGN KEY (VacID) REFERENCES Vaccine (VacID)
         ON DELETE SET NULL
 );
 
@@ -98,37 +99,37 @@ CREATE TABLE VaccineHasSideEffect
 CREATE TABLE RequiredBooster
 (
     BoosterName CHAR(20),
-    VacName     CHAR(50),
+    VacID     INTEGER,
     Dosage      REAL NOT NULL,
-    PRIMARY KEY (BoosterName, VacName),
-    FOREIGN KEY (VacName) REFERENCES Vaccine (VacName)
+    PRIMARY KEY (BoosterName, VacID),
+    FOREIGN KEY (VacID) REFERENCES Vaccine (VacID)
         ON DELETE CASCADE
 );
 
 
 CREATE TABLE Covid19
 (
-    VacName              CHAR(50) PRIMARY KEY,
+    VacID              INTEGER PRIMARY KEY,
     WaitTimeUntilBooster INTEGER,
-    FOREIGN KEY (VacName) REFERENCES Vaccine (VacName)
+    FOREIGN KEY (VacID) REFERENCES Vaccine (VacID)
         ON DELETE CASCADE
 );
 
 
 CREATE TABLE Flu
 (
-    VacName CHAR(50) PRIMARY KEY,
+    VacID INTEGER PRIMARY KEY,
     MinAge  INTEGER,
-    FOREIGN KEY (VacName) REFERENCES Vaccine (VacName)
+    FOREIGN KEY (VacID) REFERENCES Vaccine (VacID)
         ON DELETE CASCADE
 );
 
 
 CREATE TABLE ChickenPox
 (
-    VacName                     CHAR(50) PRIMARY KEY,
+    VacID                     INTEGER PRIMARY KEY,
     PreviousShinglesVacRequired CHAR(1) NOT NULL,
-    FOREIGN KEY (VacName) REFERENCES Vaccine (VacName)
+    FOREIGN KEY (VacID) REFERENCES Vaccine (VacID)
         ON DELETE CASCADE
 );
 
@@ -182,7 +183,8 @@ CREATE TABLE VaccineRecord
 
 CREATE TABLE Facility
 (
-    FacilityName CHAR(200) PRIMARY KEY,
+    FacilityID   INTEGER PRIMARY KEY,
+    FacilityName CHAR(200),
     Address      CHAR(100) UNIQUE
 );
 
@@ -205,14 +207,14 @@ CREATE TABLE Couriers
 CREATE TABLE Delivers
 (
     DistributorName CHAR(50),
-    FacilityName    CHAR(200),
+    FacilityID    INTEGER,
     OrderID         INTEGER,
     Quantity        INTEGER,
     TimeOfDelivery  DATE,
-    PRIMARY KEY (DistributorName, FacilityName),
+    PRIMARY KEY (DistributorName, FacilityID),
     FOREIGN KEY (DistributorName) REFERENCES Distributor (DistributorName)
         ON DELETE CASCADE,
-    FOREIGN KEY (FacilityName) REFERENCES Facility (FacilityName)
+    FOREIGN KEY (FacilityID) REFERENCES Facility (FacilityID)
         ON DELETE CASCADE
 );
 
@@ -222,11 +224,11 @@ CREATE TABLE HappensIn
 (
     EventID        CHAR(20),
     CareCardNumber INTEGER,
-    FacilityName   CHAR(200),
-    PRIMARY KEY (EventID, CareCardNumber, FacilityName),
+    FacilityID   INTEGER,
+    PRIMARY KEY (EventID, CareCardNumber, FacilityID),
     FOREIGN KEY (EventID, CareCardNumber) REFERENCES AdministeredVaccineGivenToPatient (EventID, CareCardNumber)
         ON DELETE CASCADE,
-    FOREIGN KEY (FacilityName) REFERENCES Facility (FacilityName)
+    FOREIGN KEY (FacilityID) REFERENCES Facility (FacilityID)
         ON DELETE CASCADE
 );
 

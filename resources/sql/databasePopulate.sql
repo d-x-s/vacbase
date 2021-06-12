@@ -22,23 +22,23 @@ INTO SideEffect (SideEffectName, Treatment, Duration) VALUES ('Muscle ache', 'Li
 SELECT 1 FROM DUAL;
 
 INSERT ALL
-    INTO Vaccine (VacName, Type, Dosage) VALUES ('Pfizer', 'mRNA', 0.3)
-    INTO Vaccine (VacName, Type, Dosage) VALUES ('AstraZeneca', 'mRNA', 0.4)
-    INTO Vaccine (VacName, Type, Dosage) VALUES ('Moderna', 'mRNA', 0.5)
-    INTO Vaccine (VacName, Type, Dosage) VALUES ('Janssen', 'Viral Vector', 0.5)
-    INTO Vaccine (VacName, Type, Dosage) VALUES ('AntiCovid', 'mRNA', 0.5)
-    INTO Vaccine (VacName, Type, Dosage) VALUES ('Flulaval', 'Quadrivalent', 0.5)
-    INTO Vaccine (VacName, Type, Dosage) VALUES ('FLUAD', 'Quadrivalent', 0.5)
-    INTO Vaccine (VacName, Type, Dosage) VALUES ('Afluria', 'Viral Vector', 0.7)
-    INTO Vaccine (VacName, Type, Dosage) VALUES ('Flucelvax', 'mRNA', 0.7)
-    INTO Vaccine (VacName, Type, Dosage) VALUES ('Flublok', 'Quadrivalent', 0.2)
-    INTO Vaccine (VacName, Type, Dosage) VALUES ('FluMist', 'Quadrivalent', 0.3)
-    INTO Vaccine (VacName, Type, Dosage) VALUES ('VariVax', 'mRNA', 0.3)
-    INTO Vaccine (VacName, Type, Dosage) VALUES ('ProQuad', 'mRNA', 0.3)
-    INTO Vaccine (VacName, Type, Dosage) VALUES ('Zostavax', 'Viral Vector', 0.3)
-    INTO Vaccine (VacName, Type, Dosage) VALUES ('Shingrix', 'Quadrivalent', 0.3)
-    INTO Vaccine (VacName, Type, Dosage) VALUES ('NoChickenPox', 'Attenuated', 0.3)
-    INTO Vaccine (VacName, Type, Dosage) VALUES ('Varicella', 'Attenuated', 0.7)
+    INTO Vaccine (VacID, VacName, Type, Dosage) VALUES (1001, 'Pfizer', 'mRNA', 0.3)
+    INTO Vaccine (VacID, VacName, Type, Dosage) VALUES (1002, 'AstraZeneca', 'mRNA', 0.4)
+    INTO Vaccine (VacID, VacName, Type, Dosage) VALUES (1003, 'Moderna', 'mRNA', 0.5)
+    INTO Vaccine (VacID, VacName, Type, Dosage) VALUES (1004, 'Janssen', 'Viral Vector', 0.5)
+    INTO Vaccine (VacID, VacName, Type, Dosage) VALUES (1005, 'AntiCovid', 'mRNA', 0.5)
+    INTO Vaccine (VacID, VacName, Type, Dosage) VALUES (2000, 'Flulaval', 'Quadrivalent', 0.5)
+    INTO Vaccine (VacID, VacName, Type, Dosage) VALUES (2002, 'FLUAD', 'Quadrivalent', 0.5)
+    INTO Vaccine (VacID, VacName, Type, Dosage) VALUES (2004, 'Afluria', 'Viral Vector', 0.7)
+    INTO Vaccine (VacID, VacName, Type, Dosage) VALUES (2006, 'Flucelvax', 'mRNA', 0.7)
+    INTO Vaccine (VacID, VacName, Type, Dosage) VALUES (2008, 'Flublok', 'Quadrivalent', 0.2)
+    INTO Vaccine (VacID, VacName, Type, Dosage) VALUES (2010, 'FluMist', 'Quadrivalent', 0.3)
+    INTO Vaccine (VacID, VacName, Type, Dosage) VALUES (3000, 'VariVax', 'mRNA', 0.3)
+    INTO Vaccine (VacID, VacName, Type, Dosage) VALUES (3005, 'ProQuad', 'mRNA', 0.3)
+    INTO Vaccine (VacID, VacName, Type, Dosage) VALUES (3010, 'Zostavax', 'Viral Vector', 0.3)
+    INTO Vaccine (VacID, VacName, Type, Dosage) VALUES (3015, 'Shingrix', 'Quadrivalent', 0.3)
+    INTO Vaccine (VacID, VacName, Type, Dosage) VALUES (3020, 'NoChickenPox', 'Attenuated', 0.3)
+    INTO Vaccine (VacID, VacName, Type, Dosage) VALUES (3025, 'Varicella', 'Attenuated', 0.7)
 SELECT 1 FROM DUAL;
 
 INSERT ALL
@@ -66,11 +66,11 @@ INSERT ALL
 SELECT 1 FROM DUAL;
 
 INSERT ALL
-    INTO Facility(FacilityName, Address) VALUES ('FacilityA','2405 Wesbrook Mall, Vancouver, BC V6T 1Z3')
-    INTO Facility(FacilityName, Address) VALUES ('FacilityB','6308 Thunderbird Blvd, Vancouver, BC V6T 1Z4')
-    INTO Facility(FacilityName, Address) VALUES ('FacilityC','1055 Canada Pl, Vancouver, BC V6C 0C3')
-    INTO Facility(FacilityName, Address) VALUES ('FacilityD','1127 Sumas way Abbotsford, Vancouver BC')
-    INTO Facility(FacilityName, Address) VALUES ('FacilityE','Dentistry Bldg, 5940 University Blvd, Vancouver, BC V6T 1Z3')
+    INTO Facility(FacilityID, FacilityName, Address) VALUES (101, 'FacilityA','2405 Wesbrook Mall, Vancouver, BC V6T 1Z3')
+    INTO Facility(FacilityID, FacilityName, Address) VALUES (105, 'FacilityB','6308 Thunderbird Blvd, Vancouver, BC V6T 1Z4')
+    INTO Facility(FacilityID, FacilityName, Address) VALUES (300, 'FacilityC','1055 Canada Pl, Vancouver, BC V6C 0C3')
+    INTO Facility(FacilityID, FacilityName, Address) VALUES (480, 'FacilityD','1127 Sumas way Abbotsford, Vancouver BC')
+    INTO Facility(FacilityID, FacilityName, Address) VALUES (744, 'FacilityE','Dentistry Bldg, 5940 University Blvd, Vancouver, BC V6T 1Z3')
 SELECT 1 FROM DUAL;
 
 INSERT ALL
@@ -141,68 +141,68 @@ INSERT ALL
 SELECT 1 FROM DUAL;
 
 INSERT ALL
-    INTO HappensIn (EventID, CareCardNumber, FacilityName) VALUES (123456, 1000000000, 'FacilityA')
-    INTO HappensIn (EventID, CareCardNumber, FacilityName) VALUES (858541, 1000000000, 'FacilityB')
-    INTO HappensIn (EventID, CareCardNumber, FacilityName) VALUES (711128, 1000000004, 'FacilityC')
-    INTO HappensIn (EventID, CareCardNumber, FacilityName) VALUES (468997, 2000000002, 'FacilityD')
-    INTO HappensIn (EventID, CareCardNumber, FacilityName) VALUES (010228, 2000000002, 'FacilityE')
+    INTO HappensIn (EventID, CareCardNumber, FacilityID) VALUES (123456, 1000000000, 101)
+    INTO HappensIn (EventID, CareCardNumber, FacilityID) VALUES (858541, 1000000000, 105)
+    INTO HappensIn (EventID, CareCardNumber, FacilityID) VALUES (711128, 1000000004, 300)
+    INTO HappensIn (EventID, CareCardNumber, FacilityID) VALUES (468997, 2000000002, 480)
+    INTO HappensIn (EventID, CareCardNumber, FacilityID) VALUES (010228, 2000000002, 744)
 SELECT 1 FROM DUAL;
 
 INSERT ALL
-    INTO Delivers(DistributorName, FacilityName, OrderID, Quantity, TimeOfDelivery) VALUES ('A','FacilityA', 100, 1000, date '2021-05-31')
-INTO Delivers(DistributorName, FacilityName, OrderID, Quantity, TimeOfDelivery) VALUES ('B','FacilityB', 300, 1000, date '2021-04-23')
-INTO Delivers(DistributorName, FacilityName, OrderID, Quantity, TimeOfDelivery) VALUES ('C','FacilityC', 300, 1000, date '2021-03-08')
-INTO Delivers(DistributorName, FacilityName, OrderID, Quantity, TimeOfDelivery) VALUES ('D','FacilityD',400, 1000, date '2021-05-31')
-INTO Delivers(DistributorName, FacilityName, OrderID, Quantity, TimeOfDelivery) VALUES ('E','FacilityE', 500,1000, date '2021-05-30')
+    INTO Delivers(DistributorName, FacilityID, OrderID, Quantity, TimeOfDelivery) VALUES ('A',101, 100, 1000, date '2021-05-31')
+INTO Delivers(DistributorName, FacilityID, OrderID, Quantity, TimeOfDelivery) VALUES ('B',105, 300, 1000, date '2021-04-23')
+INTO Delivers(DistributorName, FacilityID, OrderID, Quantity, TimeOfDelivery) VALUES ('C',300, 300, 1000, date '2021-03-08')
+INTO Delivers(DistributorName, FacilityID, OrderID, Quantity, TimeOfDelivery) VALUES ('D',480,400, 1000, date '2021-05-31')
+INTO Delivers(DistributorName, FacilityID, OrderID, Quantity, TimeOfDelivery) VALUES ('E',744, 500,1000, date '2021-05-30')
 SELECT 1 FROM DUAL;
 
 INSERT ALL
-    INTO Include (EventID, CareCardNumber, VacName) VALUES (123456, 1000000000, 'Pfizer')
-INTO Include (EventID, CareCardNumber, VacName) VALUES (858541, 1000000000, 'Moderna')
-INTO Include (EventID, CareCardNumber, VacName) VALUES (711128, 1000000004, 'Janssen')
-INTO Include (EventID, CareCardNumber, VacName) VALUES (468997, 2000000002, 'Flulaval')
-INTO Include (EventID, CareCardNumber, VacName) VALUES (010228, 2000000002, 'Varicella')
+    INTO Include (EventID, CareCardNumber, VacID) VALUES (123456, 1000000000, 1001)
+INTO Include (EventID, CareCardNumber, VacID) VALUES (858541, 1000000000, 1002)
+INTO Include (EventID, CareCardNumber, VacID) VALUES (711128, 1000000004, 1003)
+INTO Include (EventID, CareCardNumber, VacID) VALUES (468997, 2000000002, 1004)
+INTO Include (EventID, CareCardNumber, VacID) VALUES (010228, 2000000002, 3025)
 SELECT 1 FROM DUAL;
 
 INSERT ALL
-    INTO RequiredBooster (BoosterName, VacName, Dosage) VALUES ('Pfizer', 'Pfizer', 0.3)
-    INTO RequiredBooster (BoosterName, VacName, Dosage) VALUES ('AstraZeneca', 'AstraZeneca', 0.5)
-    INTO RequiredBooster (BoosterName, VacName, Dosage) VALUES ('Moderna', 'Moderna', 0.5)
-    INTO RequiredBooster (BoosterName, VacName, Dosage) VALUES ('Varicella', 'Varicella', 0.7)
-    INTO RequiredBooster (BoosterName, VacName, Dosage) VALUES ('Flulaval', 'Flulaval', 0.3)
+    INTO RequiredBooster (BoosterName, VacID, Dosage) VALUES ('Pfizer', 1001, 0.3)
+    INTO RequiredBooster (BoosterName, VacID, Dosage) VALUES ('AstraZenca', 1002, 0.5)
+    INTO RequiredBooster (BoosterName, VacID, Dosage) VALUES ('Moderna', 1003, 0.5)
+    INTO RequiredBooster (BoosterName, VacID, Dosage) VALUES ('Varicella', 3025, 0.7)
+    INTO RequiredBooster (BoosterName, VacID, Dosage) VALUES ('Flulaval', 2000, 0.3)
 SELECT 1 FROM DUAL;
 
 
 
 INSERT ALL
-    INTO VaccineHasSideEffect (SideEffectName, VacName) VALUES ('Swelling at injection site', 'Pfizer')
-    INTO VaccineHasSideEffect (SideEffectName, VacName) VALUES ('Fever', 'Moderna')
-    INTO VaccineHasSideEffect (SideEffectName, VacName) VALUES ('Fatigue', 'Flulaval')
-    INTO VaccineHasSideEffect (SideEffectName, VacName) VALUES ('Blood clots', 'AstraZeneca')
-    INTO VaccineHasSideEffect (SideEffectName, VacName) VALUES ('Muscle ache', 'Varicella')
+    INTO VaccineHasSideEffect (SideEffectName, VacID) VALUES ('Swelling at injection site', 1001)
+    INTO VaccineHasSideEffect (SideEffectName, VacID) VALUES ('Fever', 1003)
+    INTO VaccineHasSideEffect (SideEffectName, VacID) VALUES ('Fatigue', 2000)
+    INTO VaccineHasSideEffect (SideEffectName, VacID) VALUES ('Blood clots', 1002)
+    INTO VaccineHasSideEffect (SideEffectName, VacID) VALUES ('Muscle ache', 3025)
 SELECT 1 FROM DUAL;
 
 INSERT ALL
-    INTO ChickenPox (PreviousShinglesVacRequired, VacName) VALUES ('Y', 'VariVax')
-INTO ChickenPox (PreviousShinglesVacRequired, VacName) VALUES ('Y', 'ProQuad')
-INTO ChickenPox (PreviousShinglesVacRequired, VacName) VALUES ('N', 'Zostavax')
-INTO ChickenPox (PreviousShinglesVacRequired, VacName) VALUES ('N', 'Shingrix')
-INTO ChickenPox (PreviousShinglesVacRequired, VacName) VALUES ('Y', 'NoChickenPox')
+    INTO ChickenPox (PreviousShinglesVacRequired, VacID) VALUES ('Y', 3000)
+INTO ChickenPox (PreviousShinglesVacRequired, VacID) VALUES ('Y', 3005)
+INTO ChickenPox (PreviousShinglesVacRequired, VacID) VALUES ('N', 3010)
+INTO ChickenPox (PreviousShinglesVacRequired, VacID) VALUES ('N', 3015)
+INTO ChickenPox (PreviousShinglesVacRequired, VacID) VALUES ('Y', 3020)
 SELECT 1 FROM DUAL;
 
 
 INSERT ALL
-    INTO Flu (MinAge, VacName) VALUES (65, 'FLUAD')
-INTO Flu (MinAge, VacName) VALUES (18, 'Afluria')
-INTO Flu (MinAge, VacName) VALUES (4, 'Flucelvax')
-INTO Flu (MinAge, VacName) VALUES (18, 'Flublok')
-INTO Flu (MinAge, VacName) VALUES (2, 'FluMist')
+    INTO Flu (MinAge, VacID) VALUES (65, 2002)
+INTO Flu (MinAge, VacID) VALUES (18, 2004)
+INTO Flu (MinAge, VacID) VALUES (4, 2006)
+INTO Flu (MinAge, VacID) VALUES (18, 2008)
+INTO Flu (MinAge, VacID) VALUES (2, 2010)
 SELECT 1 FROM DUAL;
 
 INSERT ALL
-    INTO Covid19 (WaitTimeUntilBooster, VacName) VALUES (10, 'AstraZeneca')
-INTO Covid19 (WaitTimeUntilBooster, VacName) VALUES (NULL,'Janssen')
-INTO Covid19 (WaitTimeUntilBooster, VacName) VALUES (4,'Moderna')
-INTO Covid19 (WaitTimeUntilBooster, VacName) VALUES (3, 'Pfizer')
-INTO Covid19 (WaitTimeUntilBooster, VacName) VALUES (5, 'AntiCovid')
+    INTO Covid19 (WaitTimeUntilBooster, VacID) VALUES (10, 1002)
+INTO Covid19 (WaitTimeUntilBooster, VacID) VALUES (NULL, 1004)
+INTO Covid19 (WaitTimeUntilBooster, VacID) VALUES (4, 1003)
+INTO Covid19 (WaitTimeUntilBooster, VacID) VALUES (3, 1001)
+INTO Covid19 (WaitTimeUntilBooster, VacID) VALUES (5, 1005)
 SELECT 1 FROM DUAL;
