@@ -153,14 +153,17 @@ public class TabPage {
         updateFacilityButton.setMaxWidth(100);
         insertFacilityButton.setTranslateX(40);
         updateFacilityButton.setTranslateX(40);
-        addressField.setPromptText("Input address: ");
-        addressField.setFont(commonFont(20));
+
+        facilityIDField.setPromptText("Input ID: ");
+        facilityIDField.setFont(commonFont(20));
         facilityNameField.setPromptText("Input name: ");
         facilityNameField.setFont(commonFont(20));
         facilityNameField.setMinWidth(400);
+        addressField.setPromptText("Input address: ");
+        addressField.setFont(commonFont(20));
         //endregion
 
-        vBox1.getChildren().addAll(facilityNameField, addressField);
+        vBox1.getChildren().addAll(facilityIDField, facilityNameField, addressField);
 
         vBox2.getChildren().addAll(insertFacilityButton, updateFacilityButton);
         mainPane.getChildren().addAll(facilityView, hBox);
@@ -244,11 +247,6 @@ public class TabPage {
         //endregion
         vBox.setTranslateX(50);
 
-
-
-
-
-
         hBox.getChildren().addAll(filterView, vBox);
         filter.setContent(hBox);
     }
@@ -268,6 +266,7 @@ public class TabPage {
         button60 = new Button("60+");
         insertFacilityButton = new Button("Insert");
         updateFacilityButton = new Button("Update");
+        facilityIDField = new TextField();
         facilityNameField = new TextField();
         addressField = new TextField();
     }
@@ -278,7 +277,7 @@ public class TabPage {
 
     public ObservableList<Facility> getFacilities() {
         Facility[] models = dbh.getFacilityInfo();
-        ObservableList<Facility> facilityList = FXCollections.observableArrayList();
+        facilityList = FXCollections.observableArrayList();
         facilityList.addAll(Arrays.asList(models));
         return facilityList;
     }
