@@ -106,16 +106,16 @@ public class DatabaseConnectionHandler {
             dropBranchTableIfExists();
 
             // add tables: YOU WILL GET AN ERROR IF THE TABLES ALREADY EXIST!
-            //SQLUtil.executeFile(connection, new File("resources/sql/databaseSetup.sql"));
+            SQLUtil.executeFile(connection, new File("resources/sql/databaseSetup.sql"));
 
             // drop tables: YOU WILL GET AN ERROR IF THE TABLES DO NOT EXIST!
             // SQLUtil.executeFile(connection, new File("resources/sql/databaseDrop.sql"));
 
             // populate tables:
-            // SQLUtil.executeFile(connection, new File("resources/sql/databasePopulate.sql"));
+            SQLUtil.executeFile(connection, new File("resources/sql/databasePopulate.sql"));
 
             // placeholder: DOES NOTHING
-            SQLUtil.executeFile(connection, new File("resources/sql/databaseClear.sql"));
+//            SQLUtil.executeFile(connection, new File("resources/sql/databaseClear.sql"));
 
             //createTriggers(connection);
         } catch (SQLException | IOException e) {
@@ -174,6 +174,35 @@ public class DatabaseConnectionHandler {
                 String AgeBracket = rs.getString("AgeBracket");
                 System.out.println(CareCardNumber + ", " + FullName + ", " + DOB +
                         ", " + Username + ", " + AgeBracket);
+            }
+        } catch (SQLException e) {
+            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+        }
+    }
+
+    public void projectionQuery() {
+        // String query = "SELECT * FROM PatientAccount, AgeBracketLookup WHERE PatientAccount.DOB = ageBracketLookup.DOB";
+        String query = "SELECT DISTINCT vacName FROM Vaccine, VacDosage WHERE Availability = 'Y'";
+
+        try (Statement stmt = connection.createStatement()) {
+            ResultSet rs = stmt.executeQuery(query);
+
+            // get info on ResultSet
+            ResultSetMetaData rsmd = rs.getMetaData();
+
+            System.out.println(" ");
+
+            // display column names;
+            for (int i = 0; i < rsmd.getColumnCount(); i++) {
+                // get column name and print it
+                System.out.printf("%-15s", rsmd.getColumnName(i + 1));
+            }
+
+            System.out.println(" ");
+
+            while (rs.next()) {
+                String vacName = rs.getString("vacName");
+                System.out.println(vacName);
             }
         } catch (SQLException e) {
             System.out.println(EXCEPTION_TAG + " " + e.getMessage());

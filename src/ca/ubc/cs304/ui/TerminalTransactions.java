@@ -97,9 +97,10 @@ public class TerminalTransactions {
             System.out.println("20. Update the address of a Facility");
 
             System.out.println("21. Selection Query");
+            System.out.println("22. Selection Query");
 
-            System.out.println("22. Quit");
-            System.out.print("Please choose one of the above 21 options: ");
+            System.out.println("23. Quit");
+            System.out.print("Please choose one of the above 23 options: ");
 
             choice = readInteger(false);
 
@@ -177,10 +178,15 @@ public class TerminalTransactions {
                         handleFacilityUpdateOption();
                         break;
 
+                    // Query
                     case 21:
                         handleSelectionQuery();
                         break;
                     case 22:
+                        handleProjectionQuery();
+
+                    // Quit
+                    case 23:
                         handleQuitOption();
                         break;
                     default:
@@ -195,6 +201,10 @@ public class TerminalTransactions {
 
     private void handleSelectionQuery() {
         delegate.selectionQuery();
+    }
+
+    private void handleProjectionQuery() {
+        delegate.projectionQuery();
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

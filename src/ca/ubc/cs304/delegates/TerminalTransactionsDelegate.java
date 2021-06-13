@@ -62,7 +62,17 @@ public interface TerminalTransactionsDelegate {
 	 * - Division
 	 */
 
-	public void selectionQuery();
+	public void selectionQuery(); // ! fulfilled by PatientAccount search
+
+	public void projectionQuery(); // gets the names of available vaccines
+//
+//	public void joinQuery(); // !
+//
+//	public void aggregationQuery(); // the total number of vaccinations administered
+//
+//	public void nestedAggregationQuery();
+//
+//	public void divisionQuery();
 
 
 	public void terminalTransactionsFinished();

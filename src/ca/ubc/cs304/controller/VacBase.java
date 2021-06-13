@@ -62,6 +62,8 @@ public class VacBase implements LoginWindowDelegate, TerminalTransactionsDelegat
 		dbHandler.selectionQuery();
 	}
 
+	public void projectionQuery() { dbHandler.projectionQuery(); }
+
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
