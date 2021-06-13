@@ -50,7 +50,7 @@ public class Main extends Application {
         loginPage = new LoginPage();
         createPage = new CreateAccountPage();
         tabPage = new TabPage(dbh);
-        conditionPage = new ConditionPage();
+        conditionPage = new ConditionPage(dbh);
         vaccineCarePage = new PatientVaccineCarePage();
         addFunctionality();
 

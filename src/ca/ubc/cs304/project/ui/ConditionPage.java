@@ -1,5 +1,7 @@
 package ca.ubc.cs304.project.ui;
 
+import ca.ubc.cs304.database.DatabaseConnectionHandler;
+import ca.ubc.cs304.model.distributor.Facility;
 import ca.ubc.cs304.model.patient.PreExistingCondition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,6 +17,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
+import java.util.Arrays;
+
 import static ca.ubc.cs304.project.ui.HelpfulFunctions.*;
 
 public class ConditionPage {
@@ -25,9 +29,11 @@ public class ConditionPage {
     Button insertButton;
     long careCardNumber;
     ObservableList<PreExistingCondition> conditions;
+    DatabaseConnectionHandler dbh;
 
-    public ConditionPage() {
+    public ConditionPage(DatabaseConnectionHandler databaseConnectionHandler) {
         VBox pane = new VBox();
+        dbh = databaseConnectionHandler;
 
         //Name column
         TableColumn<PreExistingCondition, String> nameColumn = new TableColumn<>("Condition");
@@ -67,12 +73,10 @@ public class ConditionPage {
     }
 
     public ObservableList<PreExistingCondition> getConditions() {
-        conditions = FXCollections.observableArrayList();
-        conditions.add(new PreExistingCondition(1, "Condition 1"));
-        conditions.add(new PreExistingCondition(1, "Condition 2"));
-        conditions.add(new PreExistingCondition(1, "Condition 3"));
-        conditions.add(new PreExistingCondition(1, "Condition 4"));
-        return conditions;
+        PreExistingCondition[] models = dbh.getConditionInfo();
+        ObservableList<PreExistingCondition> conditionsList = FXCollections.observableArrayList();
+        conditionsList.addAll(Arrays.asList(models));
+        return conditionsList;
     }
 
     public Scene getPage() {
