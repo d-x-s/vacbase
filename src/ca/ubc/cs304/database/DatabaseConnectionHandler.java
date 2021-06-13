@@ -13,6 +13,9 @@ import ca.ubc.cs304.model.patient.PatientAccount;
 import ca.ubc.cs304.model.patient.PreExistingCondition;
 import ca.ubc.cs304.model.vaccine.Vaccine;
 import ca.ubc.cs304.sql.SQLUtil;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.ComboBox;
 
 /**
  * This class handles all database related transactions
@@ -550,6 +553,11 @@ public class DatabaseConnectionHandler {
 
         return result.toArray(new Facility[result.size()]);
     }
+
+//    public ComboBox<Facility> makeFacilitiesObservable(Facility[] arr) {
+//        ComboBox<Facility> facilities = new ComboBox<Facility>(FXCollections.observableArrayList(arr));
+//        return facilities;
+//    }
 
     public void updateFacility(int FID, String newAddress) {
         try {

@@ -1,9 +1,12 @@
 package ca.ubc.cs304.project.ui;
 
+import ca.ubc.cs304.database.DatabaseConnectionHandler;
 import ca.ubc.cs304.model.distributor.Facility;
 import ca.ubc.cs304.model.patient.PatientAccount;
 import ca.ubc.cs304.model.vaccine.Vaccine;
+import javafx.beans.InvalidationListener;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -17,6 +20,7 @@ import javafx.scene.text.Font;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.*;
 
 import static ca.ubc.cs304.project.ui.HelpfulFunctions.*;
 
@@ -30,6 +34,7 @@ public class TabPage {
     Tab facilities;
     Tab filter;
     TextField searchBar;
+    DatabaseConnectionHandler dbh;
 
     /*
     Filter tab
@@ -60,9 +65,10 @@ public class TabPage {
     TableView<Vaccine> vaccineListView;
 
 
-    public TabPage() {
+    public TabPage(DatabaseConnectionHandler databaseConnectionHandler) {
 
         //region Setup Tabs
+        dbh = databaseConnectionHandler;
         initiateFields();
         setUpDistributorTab();
         setUpVaccineTab();
@@ -78,8 +84,6 @@ public class TabPage {
         tabs.setMaxSize(pageWidth - 70, pageHeight - 70);
         tabs.setMinSize(pageWidth - 70, pageHeight - 70);
         page = new Scene(backgroundPane, pageWidth, pageHeight);
-
-
     }
 
     private void setUpVaccineTab() {
@@ -117,13 +121,15 @@ public class TabPage {
         facilityView = new TableView<>();
 
         //region Setting up tableView
+        TableColumn<Facility, String> IDColumn = new TableColumn<>("Facility ID");
         TableColumn<Facility, String> nameColumn = new TableColumn<>("Facility Name");
         TableColumn<Facility, String> addressColumn = new TableColumn<>("Address");
+        IDColumn.setCellValueFactory(new PropertyValueFactory<>("facilityID"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("facilityName"));
         addressColumn.setCellValueFactory(new PropertyValueFactory<>("address"));
 
         facilityView.setItems(getFacilities());
-        facilityView.getColumns().addAll(nameColumn, addressColumn);
+        facilityView.getColumns().addAll(IDColumn, nameColumn, addressColumn);
 
         //endregion
 
@@ -271,13 +277,9 @@ public class TabPage {
     }
 
     public ObservableList<Facility> getFacilities() {
-        facilityList = FXCollections.observableArrayList();
-        facilityList.add(new Facility(101, "FacilityA", "Address 1"));
-        facilityList.add(new Facility(105, "FacilityB", "Address 2"));
-        facilityList.add(new Facility(300, "FacilityC", "Address 3"));
-        facilityList.add(new Facility(480, "FacilityD", "Address 4"));
-        facilityList.add(new Facility(744, "FacilityE", "Address 5"));
-        facilityList.add(new Facility(500, "FacilityF", "Address 6"));
+        Facility[] models = dbh.getFacilityInfo();
+        ObservableList<Facility> facilityList = FXCollections.observableArrayList();
+        facilityList.addAll(Arrays.asList(models));
         return facilityList;
     }
 

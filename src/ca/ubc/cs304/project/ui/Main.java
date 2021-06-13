@@ -39,7 +39,7 @@ public class Main extends Application {
         boolean isConnected = false;
 
         while (!isConnected) {
-            isConnected = dbh.login("ora_jyu19", "a67758979");
+            isConnected = dbh.login("ora_akang28", "a74159187");
             System.out.println("Failed to login");
         }
         System.out.println("Successfully Logged in");
@@ -49,12 +49,12 @@ public class Main extends Application {
         adminPage = new AdminPage();
         loginPage = new LoginPage();
         createPage = new CreateAccountPage();
-        tabPage = new TabPage();
+        tabPage = new TabPage(dbh);
         conditionPage = new ConditionPage();
         vaccineCarePage = new PatientVaccineCarePage();
         addFunctionality();
 
-        scene = loginPage.getPage();
+        scene = conditionPage.getPage();
 
         window.setScene(scene);
         window.setTitle("VacBase");
