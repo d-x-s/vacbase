@@ -106,16 +106,16 @@ public class DatabaseConnectionHandler {
             dropBranchTableIfExists();
 
             // add tables: YOU WILL GET AN ERROR IF THE TABLES ALREADY EXIST!
-            SQLUtil.executeFile(connection, new File("resources/sql/databaseSetup.sql"));
+            //SQLUtil.executeFile(connection, new File("resources/sql/databaseSetup.sql"));
 
             // drop tables: YOU WILL GET AN ERROR IF THE TABLES DO NOT EXIST!
             // SQLUtil.executeFile(connection, new File("resources/sql/databaseDrop.sql"));
 
             // populate tables:
-            SQLUtil.executeFile(connection, new File("resources/sql/databasePopulate.sql"));
+            //SQLUtil.executeFile(connection, new File("resources/sql/databasePopulate.sql"));
 
             // placeholder: DOES NOTHING
-//            SQLUtil.executeFile(connection, new File("resources/sql/databaseClear.sql"));
+            SQLUtil.executeFile(connection, new File("resources/sql/databaseClear.sql"));
 
             //createTriggers(connection);
         } catch (SQLException | IOException e) {
@@ -180,8 +180,49 @@ public class DatabaseConnectionHandler {
         }
     }
 
+    public void searchForPatientAccountQuery(int SearchForThisCareCardNumber) {
+        try {
+            //            PreparedStatement ps = connection.prepareStatement("DELETE FROM branch WHERE branch_id = ?");
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM PatientAccount WHERE CareCardNumber = ?");
+            ps.setInt(1, SearchForThisCareCardNumber);
+
+            ResultSet rs = ps.executeQuery();
+
+            // get info on ResultSet
+            ResultSetMetaData rsmd = rs.getMetaData();
+
+            System.out.println(" ");
+
+            // display column names;
+            for (int i = 0; i < rsmd.getColumnCount(); i++) {
+                // get column name and print it
+                System.out.printf("%-15s", rsmd.getColumnName(i + 1));
+            }
+
+            System.out.println(" ");
+
+            while (rs.next()) {
+                int CareCardNumber = rs.getInt("CareCardNumber");
+                String FullName = rs.getString("FullName");
+                Date DOB = rs.getDate("DOB");
+                String Username = rs.getString("Username");
+                System.out.println(CareCardNumber + ", " + FullName + ", " + DOB +
+                        ", " + Username);
+            }
+
+            connection.commit();
+            ps.close();
+
+        } catch (SQLException e) {
+            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+            // System.out.println(WARNING_TAG + " Patient Account: " + SearchForThisCareCardNumber + " does not exist!");
+            rollbackConnection();
+        }
+
+
+    }
+
     public void projectionQuery() {
-        // String query = "SELECT * FROM PatientAccount, AgeBracketLookup WHERE PatientAccount.DOB = ageBracketLookup.DOB";
         String query = "SELECT DISTINCT vacName FROM Vaccine, VacDosage WHERE Availability = 'Y'";
 
         try (Statement stmt = connection.createStatement()) {

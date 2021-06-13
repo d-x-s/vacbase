@@ -97,10 +97,12 @@ public class TerminalTransactions {
             System.out.println("20. Update the address of a Facility");
 
             System.out.println("21. Selection Query");
-            System.out.println("22. Selection Query");
+            System.out.println("22. Projection Query");
+            System.out.println("23. Search for Patient Account Query");
 
-            System.out.println("23. Quit");
-            System.out.print("Please choose one of the above 23 options: ");
+
+            System.out.println("24. Quit");
+            System.out.print("Please choose one of the above 24 options: ");
 
             choice = readInteger(false);
 
@@ -184,9 +186,13 @@ public class TerminalTransactions {
                         break;
                     case 22:
                         handleProjectionQuery();
+                        break;
+                    case 23:
+                        handleSearchForPatientAccountQuery();
+                        break;
 
                     // Quit
-                    case 23:
+                    case 24:
                         handleQuitOption();
                         break;
                     default:
@@ -201,6 +207,18 @@ public class TerminalTransactions {
 
     private void handleSelectionQuery() {
         delegate.selectionQuery();
+    }
+
+    private void handleSearchForPatientAccountQuery() {
+        int CareCardNumber = INVALID_INT;
+        while (CareCardNumber == INVALID_INT) {
+            System.out.print("Please enter the CareCardNumber of the Patient Account you wish to find: ");
+            CareCardNumber = readInteger(false);
+            if (CareCardNumber != INVALID_INT) {
+                delegate.searchForPatientAccountQuery(CareCardNumber);
+            }
+        }
+
     }
 
     private void handleProjectionQuery() {
