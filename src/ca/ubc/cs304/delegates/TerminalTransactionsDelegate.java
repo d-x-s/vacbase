@@ -62,7 +62,9 @@ public interface TerminalTransactionsDelegate {
 	 * - Division
 	 */
 
-	public void selectionQuery(); // ! fulfilled by PatientAccount search
+	public void selectionQuery(); // ! fulfilled by PatientAccount search; can discard this later
+
+	public void searchForPatientAccountQuery(int CareCardNumber);
 
 	public void projectionQuery(); // gets the names of available vaccines
 //
@@ -73,7 +75,6 @@ public interface TerminalTransactionsDelegate {
 //	public void nestedAggregationQuery();
 //
 //	public void divisionQuery();
-
 
 	public void terminalTransactionsFinished();
 }
