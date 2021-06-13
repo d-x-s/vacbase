@@ -54,7 +54,7 @@ public class Main extends Application {
         vaccineCarePage = new PatientVaccineCarePage();
         addFunctionality();
 
-        scene = conditionPage.getPage();
+        scene = tabPage.getPage();
 
         window.setScene(scene);
         window.setTitle("VacBase");
@@ -83,6 +83,7 @@ public class Main extends Application {
     }
 
     private void addFunctionalityFacilityTab() {
+        // insertion
         tabPage.getInsertFacilityButton().setOnAction(e -> {
             Facility temp;
             try {
@@ -90,24 +91,36 @@ public class Main extends Application {
                         tabPage.getFacilityNameField().getText(),
                         tabPage.getAddressField().getText());
                 tabPage.getFacilityList().add(temp);
+                dbh.insertFacility(temp);
+                tabPage.getFacilityIDField().clear();
                 tabPage.getFacilityNameField().clear();
                 tabPage.getAddressField().clear();
             } catch (NullPointerException npe) {
                 npe.printStackTrace();
             }
         });
+
+        // deletion
         tabPage.getFacilityView().setOnMousePressed(event -> {
             if (event.isPrimaryButtonDown() && event.getClickCount() == 2) {
                 Facility selectedItem = tabPage.getFacilityView().getSelectionModel().getSelectedItem();
-                tabPage.getFacilityView().getItems().remove(selectedItem);
+                tabPage.getFacilityList().remove(selectedItem);
+                dbh.deleteFacility(selectedItem.getFacilityID());
             }
         });
 
+        // update
         tabPage.getUpdateFacilityButton().setOnAction(event -> {
-            Facility selectedItem = tabPage.getFacilityView().getSelectionModel().getSelectedItem();
             //TODO: Add setters
-//            selectedItem.setAddress(addressField.getText());
-//            selectedItem.setFacilityName(facilityNameField.getText());
+            int selectedIndex = tabPage.getFacilityView().getSelectionModel().getSelectedIndex();
+            int IDToUpdate = Integer.parseInt(tabPage.getFacilityIDField().getText());
+            String name = tabPage.getFacilityNameField().getText();
+            String addressToUpdate = tabPage.getAddressField().getText();
+            Facility updated = new Facility(IDToUpdate, name, addressToUpdate);
+            dbh.updateFacility(IDToUpdate, addressToUpdate);
+
+            tabPage.getFacilityList().set(selectedIndex, updated);
+            tabPage.getFacilityIDField().clear();
             tabPage.getAddressField().clear();
             tabPage.getFacilityNameField().clear();
         });
