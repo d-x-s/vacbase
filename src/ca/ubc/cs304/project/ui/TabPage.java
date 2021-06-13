@@ -169,33 +169,6 @@ public class TabPage {
         mainPane.getChildren().addAll(facilityView, hBox);
 
         facilities.setContent(mainPane);
-
-//        insertFacilityButton.setOnAction(e -> {
-//            Facility temp;
-//            try {
-//                temp = new Facility(facilityNameField.getText(), addressField.getText());
-//                facilityList.add(temp);
-//                facilityNameField.clear();
-//                addressField.clear();
-//            } catch (NullPointerException npe) {
-//                npe.printStackTrace();
-//            }
-//        });
-//        facilityView.setOnMousePressed(event -> {
-//            if (event.isPrimaryButtonDown() && event.getClickCount() == 2) {
-//                Facility selectedItem = facilityView.getSelectionModel().getSelectedItem();
-//                facilityView.getItems().remove(selectedItem);
-//            }
-//        });
-//
-//        updateFacilityButton.setOnAction(event -> {
-//            Facility selectedItem = facilityView.getSelectionModel().getSelectedItem();
-//            //TODO: Add setters
-////            selectedItem.setAddress(addressField.getText());
-////            selectedItem.setFacilityName(facilityNameField.getText());
-//            addressField.clear();
-//            facilityNameField.clear();
-//        });
     }
 
     private void setUpFilterTab() {

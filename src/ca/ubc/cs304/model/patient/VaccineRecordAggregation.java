@@ -29,12 +29,14 @@ public class VaccineRecordAggregation {
     private int id;
     private int eventId;
     private int nurseID;
+    private int vacID;
+    private int facilityID;
     private Date vacDate;
     private String vacName;
     private String facilityName;
     private String nurseName;
 
-    public VaccineRecordAggregation(int careCardNumber, int id, int eventId, int nurseID,
+    public VaccineRecordAggregation(int careCardNumber, int id, int eventId, int nurseID, int vacID, int facilityID,
                                     Date vacDate, String vacName, String facilityName, String nurseName) {
         this.careCardNumber = careCardNumber;
         this.id = id;
@@ -44,6 +46,9 @@ public class VaccineRecordAggregation {
         this.vacName = vacName;
         this.facilityName = facilityName;
         this.nurseName = nurseName;
+        this.vacID = vacID;
+        this.facilityID = facilityID;
+
     }
 
     public VaccineRecordAggregation() {
@@ -55,6 +60,8 @@ public class VaccineRecordAggregation {
         this.vacName = "";
         this.facilityName  = "";
         this.nurseName = "";
+        this.vacID = 0;
+        this.facilityID = 0;
     }
 
     public AdministeredVaccGivenToPatient makeAdministeredVaccGivenToPatient() {
