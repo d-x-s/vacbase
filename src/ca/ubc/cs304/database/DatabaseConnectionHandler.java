@@ -7,10 +7,11 @@ import java.util.ArrayList;
 
 import ca.ubc.cs304.model.BranchModel;
 import ca.ubc.cs304.model.distributor.Facility;
-import ca.ubc.cs304.model.patient.AgeBracketLookup;
-import ca.ubc.cs304.model.patient.LoginInfo;
-import ca.ubc.cs304.model.patient.PatientAccount;
-import ca.ubc.cs304.model.patient.PreExistingCondition;
+import ca.ubc.cs304.model.distributor.HappensIn;
+import ca.ubc.cs304.model.patient.*;
+import ca.ubc.cs304.model.vaccine.AdministeredVaccGivenToPatient;
+import ca.ubc.cs304.model.vaccine.Include;
+import ca.ubc.cs304.model.vaccine.Nurse;
 import ca.ubc.cs304.model.vaccine.Vaccine;
 import ca.ubc.cs304.sql.SQLUtil;
 import javafx.collections.FXCollections;
@@ -516,9 +517,9 @@ public class DatabaseConnectionHandler {
 
             while (rs.next()) {
                 Vaccine model = new Vaccine(rs.getInt("vacID"),
-                                            rs.getString("vacName"),
-                                            rs.getString("type"),
-                                            rs.getDouble("dosage"));
+                        rs.getString("vacName"),
+                        rs.getString("type"),
+                        rs.getDouble("dosage"));
                 result.add(model);
             }
 
@@ -529,6 +530,34 @@ public class DatabaseConnectionHandler {
         }
 
         return result.toArray(new Vaccine[result.size()]);
+    }
+
+    public Vaccine getSpecificVaccine(int vaccineID) {
+        int vacID = vaccineID;
+        String vacName = "";
+        String type = "";
+        double dosage = 0.0;
+        try {
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM Vaccine WHERE vacID = ?");
+            ps.setInt(1, vaccineID);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                vacID = rs.getInt("vacID");
+                vacName = rs.getString("vacName");
+                type = rs.getString("type");
+                dosage = rs.getDouble("dosage");
+            }
+
+            connection.commit();
+            ps.close();
+
+        } catch (SQLException e) {
+            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+            rollbackConnection();
+        }
+        return new Vaccine(vacID, vacName, type, dosage);
     }
 
     // Don't think we need, considering that type and dosage are both static but I'll just put it here
@@ -622,6 +651,30 @@ public class DatabaseConnectionHandler {
         }
 
         return result.toArray(new Facility[result.size()]);
+    }
+
+    public Facility getSpecificFacility(int facilityID) {
+        String facilityName = "";
+        String address = "";
+        try {
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM Facility WHERE facilityID = ?");
+            ps.setInt(1, facilityID);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                facilityName = rs.getString("facilityName");
+                address  = rs.getString("address");
+            }
+
+            connection.commit();
+            ps.close();
+
+        } catch (SQLException e) {
+            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+            rollbackConnection();
+        }
+        return new Facility(facilityID, facilityName, address);
     }
 
 //    public ComboBox<Facility> makeFacilitiesObservable(Facility[] arr) {
@@ -797,4 +850,121 @@ public class DatabaseConnectionHandler {
             rollbackConnection();
         }
     }
+
+    // VaccineCareCard /////////////////////////////////////////////////////////////////////////////////////////////////////
+    public int getMaxEventID() {
+        int maxID = 0;
+        String query = "SELECT MAX(EventID) AS 'MAX' FROM AdministeredVaccineGivenToPatient";
+        try (Statement stmt = connection.createStatement()) {
+            ResultSet rs = stmt.executeQuery(query);
+            maxID = rs.getInt("MAX");
+        } catch (SQLException e) {
+            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+        }
+        return maxID;
+    }
+
+    public int getMaxVaccineCareCardID() {
+        int maxID = 0;
+        String query = "SELECT MAX(ID) AS 'MAX' FROM VaccineRecord";
+        try (Statement stmt = connection.createStatement()) {
+            ResultSet rs = stmt.executeQuery(query);
+            maxID = rs.getInt("MAX");
+        } catch (SQLException e) {
+            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+        }
+        return maxID;
+    }
+
+    public Nurse getSpecificNurse(int nurseID) {
+        String nurseName = "";
+        try {
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM Nurse WHERE nurseID = ?");
+            ps.setInt(1, nurseID);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                nurseName = rs.getString("NurseName");
+            }
+
+            connection.commit();
+            ps.close();
+
+        } catch (SQLException e) {
+            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+            rollbackConnection();
+        }
+        return new Nurse(nurseID, nurseName);
+    }
+
+    public void insertHappensIn(HappensIn happens) {
+        try {
+            PreparedStatement ps = connection.prepareStatement("INSERT INTO HappensIn VALUES (?,?)");
+            ps.setInt(1, happens.getEventID());
+            ps.setString(2, happens.getFacilityName());
+
+            ps.executeUpdate();
+            connection.commit();
+
+            ps.close();
+        } catch (SQLException e) {
+            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+            rollbackConnection();
+        }
+    }
+
+    public void insertInclude(Include include) {
+        try {
+            PreparedStatement ps = connection.prepareStatement("INSERT INTO include VALUES (?,?,?)");
+            ps.setInt(1, include.getEventID());
+            ps.setInt(2, include.getCareCardNumber());
+            ps.setInt(3, include.getVacID());
+
+            ps.executeUpdate();
+            connection.commit();
+
+            ps.close();
+        } catch (SQLException e) {
+            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+            rollbackConnection();
+        }
+    }
+
+    public void insertVaccineRecord(VaccineRecord record) {
+        try {
+            PreparedStatement ps = connection.prepareStatement("INSERT INTO VaccineRecord VALUES (?,?,?)");
+            ps.setInt(1, record.getCareCardNumber());
+            ps.setInt(2, record.getRecordID());
+            ps.setInt(3, record.getEventID());
+
+            ps.executeUpdate();
+            connection.commit();
+
+            ps.close();
+        } catch (SQLException e) {
+            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+            rollbackConnection();
+        }
+    }
+
+    public void insertAdministeredVaccGivenToPatient(AdministeredVaccGivenToPatient avg) {
+        try {
+            PreparedStatement ps = connection.prepareStatement("INSERT INTO AdministeredVaccineGivenToPatient VALUES (?,?,?,?)");
+            ps.setInt(1, avg.getEventID());
+            ps.setInt(2, avg.getNurseID());
+            ps.setInt(3, avg.getCareCardNumber());
+            ps.setDate(4, avg.getDate());
+
+            ps.executeUpdate();
+            connection.commit();
+
+            ps.close();
+        } catch (SQLException e) {
+            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+            rollbackConnection();
+        }
+    }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }
+

@@ -6,13 +6,13 @@ package ca.ubc.cs304.model.vaccine;
 public class Include {
     private final int eventID;
     private final int careCardNumber;
-    private final String vacName;
+    private final int vaccineId;
 
 
-    public Include(int eventID, int careCardNumber, String vacName) {
+    public Include(int eventID, int careCardNumber, int vaccineId) {
         this.eventID = eventID;
         this.careCardNumber = careCardNumber;
-        this.vacName = vacName;
+        this.vaccineId = vaccineId;
     }
 
     public int getEventID() {
@@ -23,7 +23,7 @@ public class Include {
         return careCardNumber;
     }
 
-    public String getVacName() {
-        return vacName;
+    public int getVacID() {
+        return vaccineId;
     }
 }

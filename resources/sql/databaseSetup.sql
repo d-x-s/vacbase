@@ -17,7 +17,7 @@ CREATE TABLE PatientAccount
 
 CREATE TABLE Nurse
 (
-    NurseID   CHAR(20) PRIMARY KEY,
+    NurseID   INTEGER PRIMARY KEY,
     NurseName CHAR(20) NOT NULL
 );
 
@@ -49,8 +49,8 @@ CREATE TABLE VacDosage
 
 CREATE TABLE AdministeredVaccineGivenToPatient
 (
-    EventID        CHAR(20) NOT NULL,
-    NurseID        CHAR(20) NOT NULL,
+    EventID        INTEGER NOT NULL,
+    NurseID        INTEGER NOT NULL,
     CareCardNumber INTEGER,
     VacDate        DATE,
     PRIMARY KEY (EventID, CareCardNumber),
@@ -64,7 +64,7 @@ CREATE TABLE AdministeredVaccineGivenToPatient
 
 CREATE TABLE Include
 (
-    EventID        CHAR(20),
+    EventID        INTEGER,
     CareCardNumber INTEGER,
     VacID        INTEGER,
     PRIMARY KEY (EventID, CareCardNumber, VacID),
@@ -174,7 +174,7 @@ CREATE TABLE VaccineRecord
 (
     CareCardNumber INTEGER,
     ID             INTEGER,
-    EventID        CHAR(20),
+    EventID        INTEGER,
     PRIMARY KEY (CareCardNumber, ID),
     FOREIGN KEY (CareCardNumber, EventID) REFERENCES AdministeredVaccineGivenToPatient (CareCardNumber, EventID)
         ON DELETE CASCADE
@@ -222,7 +222,7 @@ CREATE TABLE Delivers
 
 CREATE TABLE HappensIn
 (
-    EventID        CHAR(20),
+    EventID        INTEGER,
     CareCardNumber INTEGER,
     FacilityID   INTEGER,
     PRIMARY KEY (EventID, CareCardNumber, FacilityID),

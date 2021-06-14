@@ -86,7 +86,7 @@ public class PatientVaccineCarePage {
     }
 
 
-    private ObservableList<VaccineRecordAggregation> getVaccineRecordList() {
+    public ObservableList<VaccineRecordAggregation> getVaccineRecordList() {
         vaccineRecordList = FXCollections.observableArrayList();
         //vaccineRecordList.add(new VaccineRecordAggregation(1,1,1,1, new java.sql.Date(System.currentTimeMillis()), "Chicken", "Fa", "Jon"));
         //vaccineRecordList.add(new VaccineRecordAggregation(1,1,1,1, new java.sql.Date(System.currentTimeMillis()), "fsdf", "B", "Jon"));

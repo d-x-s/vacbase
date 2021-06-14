@@ -48,7 +48,6 @@ public class VaccineRecordAggregation {
         this.nurseName = nurseName;
         this.vacID = vacID;
         this.facilityID = facilityID;
-
     }
 
     public VaccineRecordAggregation() {
@@ -69,7 +68,7 @@ public class VaccineRecordAggregation {
     }
 
     public Include makeInclude() {
-        return new Include(eventId, careCardNumber, vacName);
+        return new Include(eventId, careCardNumber, vacID);
     }
 
     public VaccineRecord makeVaccineRecord() {

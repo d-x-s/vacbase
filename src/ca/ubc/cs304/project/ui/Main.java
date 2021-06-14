@@ -5,6 +5,9 @@ import ca.ubc.cs304.model.distributor.Facility;
 import ca.ubc.cs304.model.patient.AgeBracketLookup;
 import ca.ubc.cs304.model.patient.LoginInfo;
 import ca.ubc.cs304.model.patient.PatientAccount;
+import ca.ubc.cs304.model.patient.VaccineRecordAggregation;
+import ca.ubc.cs304.model.vaccine.Nurse;
+import ca.ubc.cs304.model.vaccine.Vaccine;
 import javafx.application.Application;
 
 import javafx.scene.Scene;
@@ -34,16 +37,18 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         window = primaryStage;
+        window.setOnCloseRequest(e -> dbh.close());
 
         dbh = new DatabaseConnectionHandler();
         boolean isConnected = false;
 
-//        while (!isConnected) {
-//            //isConnected = dbh.login("ora_akang28", "a74159187");
-//            isConnected = dbh.login("ora_jyu19", "a67758979");
-//            System.out.println("Failed to login");
-//        }
-//        System.out.println("Successfully Logged in");
+        while (!isConnected) {
+            //isConnected = dbh.login("ora_akang28", "a74159187");
+            isConnected = dbh.login("ora_jyu19", "a67758979");
+            //isConnected = dbh.login("ora_dsong04", "a29241874");
+            System.out.println("Failed to login");
+        }
+        System.out.println("Successfully Logged in");
 
 
 
@@ -168,7 +173,7 @@ public class Main extends Application {
 
     private void addFunctionalityPatientPage() {
         patientPage.getViewRecord().setOnAction(event -> {
-            // TODO: View record
+            window.setScene(vaccineCarePage.getPage());
         });
         patientPage.getDeleteAccount().setOnAction(event -> {
             window.setScene(loginPage.getPage());
@@ -227,6 +232,7 @@ public class Main extends Application {
 
             currentUser = dbh.loginToAccount(loginPage.getUsernameField().getText(), loginPage.getPasswordField().getText());
             patientPage.setPatientAccount(currentUser);
+
             System.out.println("Gets here");
             loginPage.getUsernameField().clear();
             loginPage.getPasswordField().clear();
@@ -249,6 +255,26 @@ public class Main extends Application {
     private void addFunctionalityPatientVaccineCarePage() {
         vaccineCarePage.getBackButton().setOnAction(event -> {
             window.setScene(patientPage.getPage());
+        });
+        vaccineCarePage.getInsertButton().setOnAction(event -> {
+            Nurse nurse = dbh.getSpecificNurse(Integer.parseInt(vaccineCarePage.getNurseIDField().getText()));
+            Vaccine vaccine = dbh.getSpecificVaccine(Integer.parseInt(vaccineCarePage.getVacIDField().getText()));
+            Facility facility = dbh.getSpecificFacility(Integer.parseInt(vaccineCarePage.getFacilityIDField().getText()));
+            int newID = dbh.getMaxVaccineCareCardID() + 1;
+            int newEventID = dbh.getMaxEventID() + 1;
+            Date currentDate = new java.sql.Date(System.currentTimeMillis());
+
+            VaccineRecordAggregation newRecord = new VaccineRecordAggregation(currentUser.getCareCardNumber(), newID, newEventID, nurse.getNurseID(),
+                    vaccine.getVacID(),facility.getFacilityID(), currentDate, vaccine.getVacName(), facility.getFacilityName(), nurse.getNurseName());
+            dbh.insertAdministeredVaccGivenToPatient(newRecord.makeAdministeredVaccGivenToPatient());
+            dbh.insertInclude(newRecord.makeInclude());
+            dbh.insertHappensIn(newRecord.makeHappensIn());
+            dbh.insertVaccineRecord(newRecord.makeVaccineRecord());
+            vaccineCarePage.getVaccineRecordList().add(newRecord);
+
+            vaccineCarePage.getFacilityIDField().clear();
+            vaccineCarePage.getNurseIDField().clear();
+            vaccineCarePage.getVacIDField().clear();
         });
     }
 
