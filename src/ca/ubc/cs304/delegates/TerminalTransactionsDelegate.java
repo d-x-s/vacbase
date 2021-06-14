@@ -74,10 +74,10 @@ public interface TerminalTransactionsDelegate {
 	public void joinAggregateWithVaccineRecordQuery(); // joins VaccineRecord with the big aggregation in our ER/D diagram
 
 	public void aggregationQueryTotalVaccines(); // the total number of vaccinations administered
-//
+
 //	public void nestedAggregationQuery();
-//
-//	public void divisionQuery();
+
+	public void divisionQuery(); // searches for people who have had all vaccines
 
 	public void terminalTransactionsFinished();
 }

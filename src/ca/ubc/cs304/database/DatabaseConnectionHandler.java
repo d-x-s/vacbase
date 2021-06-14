@@ -337,6 +337,24 @@ public class DatabaseConnectionHandler {
         }
     }
 
+    public void divisionQuery() {
+        String query = "SELECT p.FullName, p.CareCardNumber FROM PatientAccount p " +
+                "WHERE NOT EXISTS (SELECT * from Vaccine v " +
+                "WHERE NOT EXISTS (SELECT i.VacID FROM Include i " +
+                "WHERE p.CareCardNumber=i.CareCardNumber AND v.VacID=i.VacID))";
+
+        try (Statement stmt = connection.createStatement()) {
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                String FullName = rs.getString("FullName");
+                int CareCardNumber = rs.getInt("CareCardNumber");
+                System.out.println(FullName + " with CareCardNumber " + CareCardNumber + " has received all vaccinations." );
+            }
+        } catch (SQLException e) {
+            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+        }
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
