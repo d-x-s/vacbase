@@ -33,7 +33,7 @@ WHERE PatientAccount.DOB = ageBracketLookup.DOB
 
 Projection:
 ``` sql
-"SELECT DISTINCT ? FROM Vaccine, VacDosage WHERE Availability = 'Y'"
+SELECT DISTINCT ? FROM Vaccine, VacDosage WHERE Availability = 'Y'
 The user can choose which attribute they wish to display. 
 ```
 
@@ -73,21 +73,19 @@ Aggregation:
 
 Nested Aggregation with Group-By:
 ``` sql
-"SELECT AV.CareCardNumber AS CCN, COUNT(*) AS COUNT 
+ SELECT AV.CareCardNumber AS CCN, COUNT(*) AS COUNT 
  FROM AdministeredVaccineGivenToPatient AV 
  GROUP BY AV.CareCardNumber HAVING COUNT(*) > 
  (SELECT AVG(COUNT(CareCardNumber)) 
-  FROM VaccineRecord GROUP BY CareCardNumber)";
-
+  FROM VaccineRecord GROUP BY CareCardNumber);
 ```
 
 Division:
 ``` sql
-"SELECT p.FullName, p.CareCardNumber FROM PatientAccount p 
+ SELECT p.FullName, p.CareCardNumber FROM PatientAccount p 
  WHERE NOT EXISTS (SELECT * from Vaccine v 
  WHERE NOT EXISTS (SELECT i.VacID FROM Include i 
- WHERE p.CareCardNumber=i.CareCardNumber AND v.VacID=i.VacID))";
-
+ WHERE p.CareCardNumber=i.CareCardNumber AND v.VacID=i.VacID));
 ```
 
 # ER/D Modelling
