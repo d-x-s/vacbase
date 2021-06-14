@@ -11,7 +11,8 @@ INSERT ALL
     INTO PatientAccount VALUES (2000000002, 'Child 3', date '2010-01-01', 'Child3')
     INTO PatientAccount VALUES (2000000003, 'Child 4', date '2010-01-01', 'Child4')
     INTO PatientAccount VALUES (2000000004, 'Child 5', date '2010-01-01', 'Child5')
-    INTO PatientAccount VALUES (0000000001, 'Test Subject', date '2021-06-13', 'TestSubject')
+    INTO PatientAccount VALUES (0000000001, 'Test Subject 01', date '2021-06-13', 'Test Subject 01')
+    INTO PatientAccount VALUES (0000000002, 'Test Subject 02', date '2021-06-14', 'Test Subject 02')
 SELECT 1 FROM DUAL;
 
 INSERT ALL
@@ -105,6 +106,12 @@ INSERT ALL
     INTO AdministeredVaccineGivenToPatient (EventID, NurseID, CareCardNumber, VacDate) VALUES (500015, 12345, 0000000001, date '2021-06-13')
     INTO AdministeredVaccineGivenToPatient (EventID, NurseID, CareCardNumber, VacDate) VALUES (500016, 12345, 0000000001, date '2021-06-13')
     INTO AdministeredVaccineGivenToPatient (EventID, NurseID, CareCardNumber, VacDate) VALUES (500017, 12345, 0000000001, date '2021-06-13')
+    INTO AdministeredVaccineGivenToPatient (EventID, NurseID, CareCardNumber, VacDate) VALUES (500018, 24682, 0000000002, date '2021-06-14')
+    INTO AdministeredVaccineGivenToPatient (EventID, NurseID, CareCardNumber, VacDate) VALUES (500019, 24682, 0000000002, date '2021-06-14')
+    INTO AdministeredVaccineGivenToPatient (EventID, NurseID, CareCardNumber, VacDate) VALUES (500020, 24682, 0000000002, date '2021-06-14')
+    INTO AdministeredVaccineGivenToPatient (EventID, NurseID, CareCardNumber, VacDate) VALUES (500021, 24682, 0000000002, date '2021-06-14')
+    INTO AdministeredVaccineGivenToPatient (EventID, NurseID, CareCardNumber, VacDate) VALUES (500022, 24682, 0000000002, date '2021-06-14')
+    INTO AdministeredVaccineGivenToPatient (EventID, NurseID, CareCardNumber, VacDate) VALUES (500023, 24682, 0000000002, date '2021-06-14')
 
 
 
@@ -133,6 +140,12 @@ INSERT ALL
     INTO VaccineRecord (CareCardNumber, ID, EventID) VALUES (0000000001, 20, 500015)
     INTO VaccineRecord (CareCardNumber, ID, EventID) VALUES (0000000001, 21, 500016)
     INTO VaccineRecord (CareCardNumber, ID, EventID) VALUES (0000000001, 22, 500017)
+    INTO VaccineRecord (CareCardNumber, ID, EventID) VALUES (0000000002, 23, 500018)
+    INTO VaccineRecord (CareCardNumber, ID, EventID) VALUES (0000000002, 24, 500019)
+    INTO VaccineRecord (CareCardNumber, ID, EventID) VALUES (0000000002, 25, 500020)
+    INTO VaccineRecord (CareCardNumber, ID, EventID) VALUES (0000000002, 26, 500021)
+    INTO VaccineRecord (CareCardNumber, ID, EventID) VALUES (0000000002, 27, 500022)
+    INTO VaccineRecord (CareCardNumber, ID, EventID) VALUES (0000000002, 28, 500023)
 
 SELECT 1 FROM DUAL;
 
@@ -202,6 +215,12 @@ INSERT ALL
     INTO HappensIn (EventID, CareCardNumber, FacilityID) VALUES (500015, 0000000001, 101)
     INTO HappensIn (EventID, CareCardNumber, FacilityID) VALUES (500016, 0000000001, 101)
     INTO HappensIn (EventID, CareCardNumber, FacilityID) VALUES (500017, 0000000001, 101)
+    INTO HappensIn (EventID, CareCardNumber, FacilityID) VALUES (500018, 0000000002, 101)
+    INTO HappensIn (EventID, CareCardNumber, FacilityID) VALUES (500019, 0000000002, 101)
+    INTO HappensIn (EventID, CareCardNumber, FacilityID) VALUES (500020, 0000000002, 101)
+    INTO HappensIn (EventID, CareCardNumber, FacilityID) VALUES (500021, 0000000002, 101)
+    INTO HappensIn (EventID, CareCardNumber, FacilityID) VALUES (500022, 0000000002, 101)
+    INTO HappensIn (EventID, CareCardNumber, FacilityID) VALUES (500023, 0000000002, 101)
 SELECT 1 FROM DUAL;
 
 INSERT ALL
@@ -235,6 +254,12 @@ INSERT ALL
     INTO Include (EventID, CareCardNumber, VacID) VALUES (500015, 0000000001, 3015)
     INTO Include (EventID, CareCardNumber, VacID) VALUES (500016, 0000000001, 3020)
     INTO Include (EventID, CareCardNumber, VacID) VALUES (500017, 0000000001, 3025)
+    INTO Include (EventID, CareCardNumber, VacID) VALUES (500018, 0000000002, 3000)
+    INTO Include (EventID, CareCardNumber, VacID) VALUES (500019, 0000000002, 3005)
+    INTO Include (EventID, CareCardNumber, VacID) VALUES (500020, 0000000002, 3010)
+    INTO Include (EventID, CareCardNumber, VacID) VALUES (500021, 0000000002, 3015)
+    INTO Include (EventID, CareCardNumber, VacID) VALUES (500022, 0000000002, 3020)
+    INTO Include (EventID, CareCardNumber, VacID) VALUES (500023, 0000000002, 3025)
 SELECT 1 FROM DUAL;
 
 INSERT ALL

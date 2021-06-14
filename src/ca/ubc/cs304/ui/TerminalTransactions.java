@@ -102,9 +102,11 @@ public class TerminalTransactions {
             System.out.println("24. Join VaccineRecord with the ER/D Aggregate, output Vaccine | Date | Location | Nurse");
             System.out.println("25. Aggregation Query: Show the total number of Vaccines administered so far");
             System.out.println("26. Division query: All patients who have gotten all vaccines");
+            System.out.println("27. Nested Aggregation Query: Patients who have been vaccinated more times than the average number of vaccinations for a patient");
 
-            System.out.println("27. Quit");
-            System.out.print("Please choose one of the above 27 options: ");
+
+            System.out.println("28. Quit");
+            System.out.print("Please choose one of the above 28 options: ");
 
             choice = readInteger(false);
 
@@ -201,9 +203,11 @@ public class TerminalTransactions {
                     case 26:
                         delegate.divisionQuery();
                         break;
+                    case 27:
+                        delegate.nestedAggregationQuery();
 
                     // Quit
-                    case 27:
+                    case 28:
                         handleQuitOption();
                         break;
                     default:

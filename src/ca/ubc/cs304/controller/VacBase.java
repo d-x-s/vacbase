@@ -72,6 +72,8 @@ public class VacBase implements LoginWindowDelegate, TerminalTransactionsDelegat
 
 	public void divisionQuery() { dbHandler.divisionQuery(); }
 
+	public void nestedAggregationQuery() { dbHandler.nestedAggregationQuery(); }
+
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
