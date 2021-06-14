@@ -375,7 +375,7 @@ public class DatabaseConnectionHandler {
             while (rs.next()) {
                 int CCN = rs.getInt("CCN");
                 int Count = rs.getInt(("COUNT"));
-                System.out.println("Patient with CareCardNumber: " + CCN + " and a total of " + Count + " vaccines received, have received more vaccines than the average patient in VacBase.");
+                System.out.println("Patient with CareCardNumber: " + CCN + " and a total of " + Count + " vaccines received, has received more vaccines than the average patient in VacBase.");
             }
         } catch (SQLException e) {
             System.out.println(EXCEPTION_TAG + " " + e.getMessage());
