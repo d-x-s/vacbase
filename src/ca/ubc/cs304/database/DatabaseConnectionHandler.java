@@ -233,20 +233,21 @@ public class DatabaseConnectionHandler {
                 String vacName = rs.getString("vacName");
                 int vacID = rs.getInt("VacID");
                 String type = "";
-                int dosage = 0;
-                if (columns.length() == 3) {
+                double dosage = 0;
+                if (columns.equals(" * ")) {
                     type = rs.getString("Type");
-                    dosage = rs.getInt("Dosage");
+                    dosage = rs.getDouble("Dosage");
                 }
-                if (columns.length() == 22) {
+                if (columns.equals(" vacId, vacName, Type ")) {
                     type = rs.getString("Type");
                     dosage = 0;
                 }
-                if (columns.length() == 24) {
+                if (columns.equals(" vacId, vacName, Dosage ")) {
                     type = "";
-                    dosage = rs.getInt("Dosage");
+                    dosage = rs.getDouble("Dosage");
                 }
                 list.add(new Vaccine(vacID, vacName, type, dosage));
+                System.out.println(new Vaccine(vacID, vacName, type, dosage));
             }
         } catch (SQLException e) {
             System.out.println(EXCEPTION_TAG + " " + e.getMessage());

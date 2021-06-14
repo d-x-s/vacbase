@@ -98,20 +98,23 @@ public class TabPage {
         setWhiteBackgroundColor(hBox);
         hBox.setPadding(new Insets(10));
         VBox vBox = new VBox(10);
-        vBox.setTranslateX(40);
+        vBox.setTranslateX(30);
         vBox.setTranslateY(50);
-        typeBox.setFont(commonFont(24));
-        dosageBox.setFont(commonFont(24));
+        typeBox.setFont(commonFont(20));
+        dosageBox.setFont(commonFont(20));
         makeButtonOnWhite(viewButton);
-        viewButton.setFont(commonFont(30));
+        viewButton.setFont(commonFont(20));
         hBox.getChildren().addAll(vaccineListView, vBox);
         vBox.getChildren().addAll(typeBox, dosageBox, viewButton);
 
+
         vacIDColumn = new TableColumn<>();
         vacNameColumn = new TableColumn<>();
-        vacIDColumn.setCellValueFactory(new PropertyValueFactory<>("vacId"));
+        vacIDColumn.setCellValueFactory(new PropertyValueFactory<>("vacID"));
         vacNameColumn.setCellValueFactory(new PropertyValueFactory<>("vacName"));
         vaccineListView.setItems(vaccineList);
+        vaccineListView.setMinWidth(pageWidth >> 1);
+        vaccineListView.setMaxWidth(pageWidth >> 1);
 
         vaccine.setContent(hBox);
     }
@@ -490,7 +493,7 @@ public class TabPage {
         dosageColumn.setCellValueFactory(new PropertyValueFactory<>("dosage"));
         switch(vaccineSelection()) {
             case 0:
-                return "";
+                return " vacId, vacName ";
             case 1:
                 vaccineListView.getColumns().add(typeColumn);
                 return " vacId, vacName, Type ";
@@ -499,7 +502,7 @@ public class TabPage {
                 return " vacId, vacName, Dosage ";
             case 3:
                 vaccineListView.getColumns().addAll(typeColumn, dosageColumn);
-                return " *";
+                return " * ";
             default:
                 throw new IllegalStateException("Unexpected value: " + vaccineSelection());
         }
