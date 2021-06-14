@@ -1,5 +1,5 @@
 # VacBase: An Oracle Database for Vaccine Tracking
-![Logo for VacBase on a Banner.](data/Logo.png?raw=true "VacBase Banner")
+![Logo for VacBase on a Banner.](data/Logo2.png?raw=true "VacBase Banner")
 
 - Note 1
 - Note 2
