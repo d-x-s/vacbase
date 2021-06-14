@@ -106,11 +106,11 @@ public class DatabaseConnectionHandler {
             // resources/sql/create_db.sql
             dropBranchTableIfExists();
 
+            // drop tables: YOU WILL GET AN ERROR IF THE TABLES DO NOT EXIST!
+            //SQLUtil.executeFile(connection, new File("resources/sql/databaseDrop.sql"));
+
             // add tables: YOU WILL GET AN ERROR IF THE TABLES ALREADY EXIST!
             //SQLUtil.executeFile(connection, new File("resources/sql/databaseSetup.sql"));
-
-            // drop tables: YOU WILL GET AN ERROR IF THE TABLES DO NOT EXIST!
-            // SQLUtil.executeFile(connection, new File("resources/sql/databaseDrop.sql"));
 
             // populate tables:
             //SQLUtil.executeFile(connection, new File("resources/sql/databasePopulate.sql"));
@@ -250,6 +250,90 @@ public class DatabaseConnectionHandler {
             System.out.println(EXCEPTION_TAG + " " + e.getMessage());
         }
     }
+
+    public void joinAggregateWithVaccineRecordQuery() {
+        String query =
+                "SELECT " +
+                    "VaccineRecord.CareCardNumber, " +
+                    "VaccineRecord.ID, " +
+                    "VaccineRecord.EventID, " +
+                    "AdministeredVaccineGivenToPatient.NurseID, " +
+                    "AdministeredVaccineGivenToPatient.VacDate, " +
+                    "Include.VacID, " +
+                    "Vaccine.VacName, " +
+                    "HappensIn.FacilityID, " +
+                    "Facility.FacilityName, " +
+                    "Nurse.NurseName FROM VaccineRecord " +
+                "INNER JOIN AdministeredVaccineGivenToPatient " +
+                     "ON VaccineRecord.EventID = AdministeredVaccineGivenToPatient.EventID " +
+                     "and VaccineRecord.CareCardNumber = AdministeredVaccineGivenToPatient.CareCardNumber " +
+                "INNER JOIN Include " +
+                     "ON AdministeredVaccineGivenToPatient.EventID = Include.EventID " +
+                "INNER JOIN HappensIn " +
+                     "ON AdministeredVaccineGivenToPatient.EventID = HappensIn.EventID " +
+                "INNER JOIN NURSE " +
+                     "ON AdministeredVaccineGivenToPatient.NurseID = Nurse.NurseID " +
+                "INNER JOIN FACILITY " +
+                     "ON HappensIn.FacilityID = Facility.FacilityID " +
+                "INNER JOIN VACCINE " +
+                     "ON Include.VacID = Vaccine.VacID";
+
+        try (Statement stmt = connection.createStatement()) {
+            ResultSet rs = stmt.executeQuery(query);
+
+            // get info on ResultSet
+            ResultSetMetaData rsmd = rs.getMetaData();
+
+            System.out.println(" ");
+
+            // display column names;
+            for (int i = 0; i < rsmd.getColumnCount(); i++) {
+                // get column name and print it
+                System.out.printf("%-15s", rsmd.getColumnName(i + 1));
+            }
+
+            System.out.println(" ");
+
+            while (rs.next()) {
+
+                // TODO: only need to output certain variables, need a way to save other data for later?
+                int CareCardNumber = rs.getInt("CareCardNumber");
+                int ID = rs.getInt("ID");
+                int EventID = rs.getInt("EventID");
+
+                int NurseID = rs.getInt("NurseID");
+                String NurseName = rs.getString("NurseName");
+
+                Date VacDate = rs.getDate("VacDate");
+                int VacID = rs.getInt("VacID");
+                String VacName = rs.getString("VacName");
+
+                int FacilityID = rs.getInt("NurseID");
+                String FacilityName = rs.getString("FacilityName");
+
+                System.out.println(CareCardNumber + ", " + ID + ", " + EventID +
+                        ", " + NurseID +  ", " + VacDate + ", " + VacID + ", " + VacName +
+                        ", " + FacilityID + ", " + FacilityName + ", " + NurseName);
+            }
+        } catch (SQLException e) {
+            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+        }
+    }
+
+    public void aggregationQueryTotalVaccines() {
+        String query = "SELECT COUNT(*) FROM VaccineRecord";
+
+        try (Statement stmt = connection.createStatement()) {
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                String count = rs.getString("COUNT(*)");
+                System.out.println("The total number of vaccines administered so far is: " + count);
+            }
+        } catch (SQLException e) {
+            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+        }
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 

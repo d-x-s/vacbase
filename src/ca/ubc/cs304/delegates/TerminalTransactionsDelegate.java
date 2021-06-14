@@ -64,13 +64,16 @@ public interface TerminalTransactionsDelegate {
 
 	public void selectionQuery(); // ! fulfilled by PatientAccount search; can discard this later
 
-	public void searchForPatientAccountQuery(int CareCardNumber);
+	public void searchForPatientAccountQuery(int CareCardNumber); // search for a unique PatientAccount
 
 	public void projectionQuery(); // gets the names of available vaccines
-//
-//	public void joinQuery(); // !
-//
-//	public void aggregationQuery(); // the total number of vaccinations administered
+	                               // TODO: the user should be able to choose which column to display
+	                               //       need to add option for user: display all VacNames or all VacIDs?
+	                               //       otherwise, this query is considered to be hardcoded
+
+	public void joinAggregateWithVaccineRecordQuery(); // joins VaccineRecord with the big aggregation in our ER/D diagram
+
+	public void aggregationQueryTotalVaccines(); // the total number of vaccinations administered
 //
 //	public void nestedAggregationQuery();
 //
