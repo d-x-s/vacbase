@@ -96,12 +96,12 @@ public class TerminalTransactions {
             System.out.println("19. Show Facilities");
             System.out.println("20. Update the address of a Facility");
 
-            System.out.println("21. Selection Query");
-            System.out.println("22. Projection Query");
+            System.out.println("21. Selection Query: To discard (?)");
+            System.out.println("22. Projection Query: Display available Vaccines");
             System.out.println("23. Search for Patient Account Query");
+            System.out.println("24. Join VaccineRecord with the ER/D Aggregate, output Vaccine | Date | Location | Nurse");
 
-
-            System.out.println("24. Quit");
+            System.out.println("25. Quit");
             System.out.print("Please choose one of the above 24 options: ");
 
             choice = readInteger(false);
@@ -190,9 +190,12 @@ public class TerminalTransactions {
                     case 23:
                         handleSearchForPatientAccountQuery();
                         break;
+                    case 24:
+                        delegate.joinAggregateWithVaccineRecordQuery();
+                        break;
 
                     // Quit
-                    case 24:
+                    case 25:
                         handleQuitOption();
                         break;
                     default:

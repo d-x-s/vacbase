@@ -184,7 +184,7 @@ CREATE TABLE VaccineRecord
 CREATE TABLE Facility
 (
     FacilityID   INTEGER PRIMARY KEY,
-    FacilityName CHAR(200),
+    FacilityName CHAR(50),
     Address      CHAR(100) UNIQUE
 );
 
