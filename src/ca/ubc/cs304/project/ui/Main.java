@@ -46,6 +46,7 @@ public class Main extends Application {
 
         dbh = new DatabaseConnectionHandler();
         boolean isConnected = false;
+        int count = 0;
 
         while (!isConnected) {
             if (count == 0) {

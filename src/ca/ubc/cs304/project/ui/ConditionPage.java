@@ -126,11 +126,11 @@ public class ConditionPage {
         this.insertButton = insertButton;
     }
 
-    public long getCareCardNumber() {
+    public int getCareCardNumber() {
         return careCardNumber;
     }
 
-    public void setCareCardNumber(long careCardNumber) {
+    public void setCareCardNumber(int careCardNumber) {
         this.careCardNumber = careCardNumber;
     }
 
