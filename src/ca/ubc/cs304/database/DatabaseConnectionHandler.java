@@ -541,6 +541,33 @@ public class DatabaseConnectionHandler {
             rollbackConnection();
         }
     }
+
+    public PatientAccount getSpecificPatientAccount(int careCardNum) {
+        String fullName = "";
+        Date DOB = new Date(0);
+        String userName = "";
+
+        try {
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM PatientAccount WHERE CareCardNumber = ?");
+            ps.setInt(1, careCardNum);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                fullName = rs.getString("FullName");
+                DOB = rs.getDate("DOB");
+                userName  = rs.getString("Username");
+            }
+
+            connection.commit();
+            ps.close();
+
+        } catch (SQLException e) {
+            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+            rollbackConnection();
+        }
+        return new PatientAccount(careCardNum, fullName, DOB, userName);
+    }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 

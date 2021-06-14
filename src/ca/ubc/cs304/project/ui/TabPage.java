@@ -106,13 +106,6 @@ public class TabPage {
         vBox.setAlignment(Pos.CENTER);
         vBox.getChildren().addAll(message, searchBar);
         patient.setContent(vBox);
-
-        searchBar.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.ENTER) {
-                System.out.println("Testing to see if it works.");
-            }
-        });
-
     }
 
     private void setUpFacilitiesTab() {
