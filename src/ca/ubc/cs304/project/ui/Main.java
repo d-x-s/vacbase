@@ -15,7 +15,9 @@ import ca.ubc.cs304.model.patient.PreExistingCondition;
 import javafx.application.Application;
 
 import javafx.scene.Scene;
+import javafx.scene.control.MenuBar;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.sql.Date;
@@ -28,6 +30,7 @@ public class Main extends Application {
 
     Stage window;
     Scene scene;
+    MenuBar menuBar = new MenuBar();
 
     PatientPage patientPage;
     AdminPage adminPage;
@@ -48,21 +51,20 @@ public class Main extends Application {
         dbh = new DatabaseConnectionHandler();
         boolean isConnected = false;
         int count = 0;
-        isConnected = dbh.login("ora_jyu19", "a67758979");
         while (!isConnected) {
             if (count == 0) {
                 isConnected = dbh.login("ora_akang28", "a74159187");
+                System.out.println("Successfully Logged in as Alice");
             } else if (count == 1) {
                 isConnected = dbh.login("ora_dsong04", "a29241874");
+                System.out.println("Successfully Logged in as Davis");
             } else if (count == 2){
                 isConnected = dbh.login("ora_jyu19", "a67758979");
+                System.out.println("Successfully Logged in as Jonathan");
             } else {
                 count = 0; /* loop*/
             }
-
-            System.out.println("Failed to login");
         }
-        System.out.println("Successfully Logged in");
 
 
         patientPage = new PatientPage();
@@ -73,8 +75,8 @@ public class Main extends Application {
         conditionPage = new ConditionPage(dbh);
         vaccineCarePage = new PatientVaccineCarePage();
         addFunctionality();
-
-        scene = tabPage.getPage();
+        VBox vBox = new VBox();
+        scene = loginPage.getPage();
 
         window.setScene(scene);
         window.setTitle("VacBase");
@@ -105,6 +107,7 @@ public class Main extends Application {
             if (event.getCode() == KeyCode.ENTER) {
                 int careCardNum = Integer.parseInt(tabPage.getSearchBar().getText());
                 PatientAccount user = dbh.getSpecificPatientAccount(careCardNum);
+                currentUser = user;
                 patientPage.setCurrentUser(user);
                 conditionPage.setCareCardNumber(careCardNum);
                 window.setScene(patientPage.getPage());
