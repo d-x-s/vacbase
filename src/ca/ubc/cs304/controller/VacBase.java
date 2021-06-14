@@ -70,6 +70,10 @@ public class VacBase implements LoginWindowDelegate, TerminalTransactionsDelegat
 
 	public void aggregationQueryTotalVaccines() { dbHandler.aggregationQueryTotalVaccines(); }
 
+	public void divisionQuery() { dbHandler.divisionQuery(); }
+
+	public void nestedAggregationQuery() { dbHandler.nestedAggregationQuery(); }
+
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
