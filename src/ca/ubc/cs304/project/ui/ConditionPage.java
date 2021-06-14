@@ -1,11 +1,9 @@
 package ca.ubc.cs304.project.ui;
 
 import ca.ubc.cs304.database.DatabaseConnectionHandler;
-import ca.ubc.cs304.model.distributor.Facility;
 import ca.ubc.cs304.model.patient.PreExistingCondition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -27,7 +25,7 @@ public class ConditionPage {
     TextField conditionInput;
     Button backButton;
     Button insertButton;
-    long careCardNumber;
+    int careCardNumber;
     ObservableList<PreExistingCondition> conditions;
     DatabaseConnectionHandler dbh;
 
@@ -42,7 +40,6 @@ public class ConditionPage {
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("condition")); /* Needs to be exact name as class property*/
 
         viewConditions = new TableView<>();
-        viewConditions.setItems(getConditions());
         viewConditions.getColumns().add(nameColumn);
         viewConditions.setMinWidth(pageWidth);
         viewConditions.setMaxWidth(pageWidth);
@@ -60,8 +57,6 @@ public class ConditionPage {
         insertButton.setFont(new Font("Montserrat", 24));
         insertButton.setTranslateX(135);
 
-
-
         HBox hBox = new HBox(10);
         hBox.setPadding(new Insets(10,10,10,10));
         hBox.getChildren().addAll(backButton, conditionInput, insertButton);
@@ -72,11 +67,15 @@ public class ConditionPage {
 
     }
 
-    public ObservableList<PreExistingCondition> getConditions() {
-        PreExistingCondition[] models = dbh.getConditionInfo();
-        ObservableList<PreExistingCondition> conditionsList = FXCollections.observableArrayList();
-        conditionsList.addAll(Arrays.asList(models));
-        return conditionsList;
+    public void setUpTable() {
+        viewConditions.setItems(loadConditionsToTable());
+    }
+
+    public ObservableList<PreExistingCondition> loadConditionsToTable() {
+        PreExistingCondition[] models = dbh.getConditionInfo(careCardNumber);
+        conditions = FXCollections.observableArrayList();
+        conditions.addAll(Arrays.asList(models));
+        return conditions;
     }
 
     public Scene getPage() {
@@ -89,6 +88,10 @@ public class ConditionPage {
 
     public TableView<PreExistingCondition> getViewConditions() {
         return viewConditions;
+    }
+
+    public ObservableList<PreExistingCondition> getConditions() {
+        return conditions;
     }
 
     public void setViewConditions(TableView<PreExistingCondition> viewConditions) {
@@ -119,11 +122,11 @@ public class ConditionPage {
         this.insertButton = insertButton;
     }
 
-    public long getCareCardNumber() {
+    public int getCareCardNumber() {
         return careCardNumber;
     }
 
-    public void setCareCardNumber(long careCardNumber) {
+    public void setCareCardNumber(int careCardNumber) {
         this.careCardNumber = careCardNumber;
     }
 

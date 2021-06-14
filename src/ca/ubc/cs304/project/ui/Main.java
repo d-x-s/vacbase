@@ -5,9 +5,13 @@ import ca.ubc.cs304.model.distributor.Facility;
 import ca.ubc.cs304.model.patient.AgeBracketLookup;
 import ca.ubc.cs304.model.patient.LoginInfo;
 import ca.ubc.cs304.model.patient.PatientAccount;
+
 import ca.ubc.cs304.model.patient.VaccineRecordAggregation;
 import ca.ubc.cs304.model.vaccine.Nurse;
 import ca.ubc.cs304.model.vaccine.Vaccine;
+
+import ca.ubc.cs304.model.patient.PreExistingCondition;
+
 import javafx.application.Application;
 
 import javafx.scene.Scene;
@@ -43,14 +47,12 @@ public class Main extends Application {
         boolean isConnected = false;
 
         while (!isConnected) {
-            //isConnected = dbh.login("ora_akang28", "a74159187");
-            isConnected = dbh.login("ora_jyu19", "a67758979");
+            isConnected = dbh.login("ora_akang28", "a74159187");
+            //isConnected = dbh.login("ora_jyu19", "a67758979");
             //isConnected = dbh.login("ora_dsong04", "a29241874");
             System.out.println("Failed to login");
         }
         System.out.println("Successfully Logged in");
-
-
 
 
         patientPage = new PatientPage();
@@ -73,6 +75,7 @@ public class Main extends Application {
     private void addFunctionality() {
         addFunctionalityTabPage();
         addFunctionalityPatientPage();
+        addFunctionalityConditionPage();
         addFunctionalityCreatePage();
         addFunctionalityLoginPage();
     }
@@ -185,9 +188,38 @@ public class Main extends Application {
             dbh.deletePatientAccount(careCardNumber);
         });
         patientPage.getViewConditions().setOnAction(event -> {
+            window.setScene(conditionPage.getPage());
+            conditionPage.setUpTable();
         });
         patientPage.getVacLocations().setOnAction(event -> {
             // TODO: view locations
+        });
+    }
+
+    private void addFunctionalityConditionPage() {
+        conditionPage.getBackButton().setOnAction( event -> {
+            window.setScene(patientPage.getPage());
+        });
+
+        conditionPage.getInsertButton().setOnAction( event -> {
+            PreExistingCondition temp;
+            try {
+                temp = new PreExistingCondition(conditionPage.getCareCardNumber(),
+                                                conditionPage.getConditionInput().getText());
+                conditionPage.getConditions().add(temp);
+                dbh.insertCondition(temp);
+                conditionPage.getConditionInput().clear();
+            } catch (NullPointerException npe) {
+                npe.printStackTrace();
+            }
+        });
+
+        conditionPage.getViewConditions().setOnMousePressed(event -> {
+            if (event.isPrimaryButtonDown() && event.getClickCount() == 2) {
+                PreExistingCondition selected = conditionPage.getViewConditions().getSelectionModel().getSelectedItem();
+                conditionPage.getConditions().remove(selected);
+                dbh.deleteCondition(conditionPage.getCareCardNumber(), selected.getCondition().trim());
+            }
         });
     }
 
@@ -231,7 +263,8 @@ public class Main extends Application {
             // This should go to whatever patientAccount they logged in as
 
             currentUser = dbh.loginToAccount(loginPage.getUsernameField().getText(), loginPage.getPasswordField().getText());
-            patientPage.setPatientAccount(currentUser);
+            patientPage.setCurrentUser(currentUser);
+            conditionPage.setCareCardNumber(currentUser.getCareCardNumber());
 
             System.out.println("Gets here");
             loginPage.getUsernameField().clear();

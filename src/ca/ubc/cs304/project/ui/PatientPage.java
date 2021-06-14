@@ -16,7 +16,7 @@ public class PatientPage {
     Button deleteAccount;
     Button viewConditions;
     Button vacLocations;
-    PatientAccount patientAccount;
+    PatientAccount currentUser;
     Label fullName;
 
     public PatientPage() {
@@ -24,7 +24,7 @@ public class PatientPage {
         pane.setAlignment(Pos.CENTER);
         VBox menuButtons = new VBox(10);
         menuButtons.setAlignment(Pos.CENTER);
-        this.patientAccount = null;
+        this.currentUser = null;
 
         fullName = new Label("d");
 
@@ -95,9 +95,9 @@ public class PatientPage {
         return page;
     }
 
-    public void setPatientAccount(PatientAccount patientAccount) {
-        this.patientAccount = patientAccount;
-        setFullName(patientAccount.getFullName());
+    public void setCurrentUser(PatientAccount currentUser) {
+        this.currentUser = currentUser;
+        setFullName(currentUser.getFullName());
     }
 
     public void setFullName(String name) {
