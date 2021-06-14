@@ -763,11 +763,6 @@ public class DatabaseConnectionHandler {
         return new Facility(facilityID, facilityName, address);
     }
 
-//    public ComboBox<Facility> makeFacilitiesObservable(Facility[] arr) {
-//        ComboBox<Facility> facilities = new ComboBox<Facility>(FXCollections.observableArrayList(arr));
-//        return facilities;
-//    }
-
     public void updateFacility(int FID, String newAddress) {
         try {
             PreparedStatement ps = connection.prepareStatement("UPDATE Facility SET address = ? WHERE FacilityID = ?");
@@ -791,14 +786,16 @@ public class DatabaseConnectionHandler {
     // CONDITION ///////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void deleteCondition(int careCardNum) {
+    public void deleteCondition(int careCardNum, String description) {
         try {
-            PreparedStatement ps = connection.prepareStatement("DELETE FROM PreExistingCondition WHERE CareCardNumber = ?");
+            PreparedStatement ps = connection.prepareStatement("DELETE FROM PreExistingCondition WHERE CareCardNumber = ? AND CONDITION = cast(? as CHAR(60))");
             ps.setInt(1, careCardNum);
+            ps.setString(2, description);
 
             int rowCount = ps.executeUpdate();
             if (rowCount == 0) {
-                System.out.println(WARNING_TAG + " Patient with care card number " + careCardNum + " does not exist!");
+                System.out.println(WARNING_TAG + " Patient with care card number " + careCardNum +
+                        " and condition " + description + " does not exist!");
             }
 
             connection.commit();
@@ -826,12 +823,13 @@ public class DatabaseConnectionHandler {
         }
     }
 
-    public PreExistingCondition[] getConditionInfo() {
+    public PreExistingCondition[] getConditionInfo(int careCardNum) {
         ArrayList<PreExistingCondition> result = new ArrayList<PreExistingCondition>();
 
         try {
-            Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM PreExistingCondition");
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM PreExistingCondition WHERE CareCardNumber = ?");
+            ps.setInt(1, careCardNum);
+            ResultSet rs = ps.executeQuery();
 
             // get info on ResultSet
             ResultSetMetaData rsmd = rs.getMetaData();
@@ -851,7 +849,7 @@ public class DatabaseConnectionHandler {
             }
 
             rs.close();
-            stmt.close();
+            ps.close();
         } catch (SQLException e) {
             System.out.println(EXCEPTION_TAG + " " + e.getMessage());
         }

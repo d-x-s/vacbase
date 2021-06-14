@@ -5,9 +5,13 @@ import ca.ubc.cs304.model.distributor.Facility;
 import ca.ubc.cs304.model.patient.AgeBracketLookup;
 import ca.ubc.cs304.model.patient.LoginInfo;
 import ca.ubc.cs304.model.patient.PatientAccount;
+
 import ca.ubc.cs304.model.patient.VaccineRecordAggregation;
 import ca.ubc.cs304.model.vaccine.Nurse;
 import ca.ubc.cs304.model.vaccine.Vaccine;
+
+import ca.ubc.cs304.model.patient.PreExistingCondition;
+
 import javafx.application.Application;
 
 import javafx.scene.Scene;
@@ -42,7 +46,6 @@ public class Main extends Application {
 
         dbh = new DatabaseConnectionHandler();
         boolean isConnected = false;
-        int count = 0;
 
         while (!isConnected) {
             if (count == 0) {
@@ -80,6 +83,7 @@ public class Main extends Application {
     private void addFunctionality() {
         addFunctionalityTabPage();
         addFunctionalityPatientPage();
+        addFunctionalityConditionPage();
         addFunctionalityCreatePage();
         addFunctionalityLoginPage();
     }
@@ -194,9 +198,37 @@ public class Main extends Application {
         });
         patientPage.getViewConditions().setOnAction(event -> {
             window.setScene(conditionPage.getPage());
+            conditionPage.setUpTable();
         });
         patientPage.getVacLocations().setOnAction(event -> {
             // TODO: view locations
+        });
+    }
+
+    private void addFunctionalityConditionPage() {
+        conditionPage.getBackButton().setOnAction( event -> {
+            window.setScene(patientPage.getPage());
+        });
+
+        conditionPage.getInsertButton().setOnAction( event -> {
+            PreExistingCondition temp;
+            try {
+                temp = new PreExistingCondition(conditionPage.getCareCardNumber(),
+                                                conditionPage.getConditionInput().getText());
+                conditionPage.getConditions().add(temp);
+                dbh.insertCondition(temp);
+                conditionPage.getConditionInput().clear();
+            } catch (NullPointerException npe) {
+                npe.printStackTrace();
+            }
+        });
+
+        conditionPage.getViewConditions().setOnMousePressed(event -> {
+            if (event.isPrimaryButtonDown() && event.getClickCount() == 2) {
+                PreExistingCondition selected = conditionPage.getViewConditions().getSelectionModel().getSelectedItem();
+                conditionPage.getConditions().remove(selected);
+                dbh.deleteCondition(conditionPage.getCareCardNumber(), selected.getCondition().trim());
+            }
         });
     }
 
@@ -240,7 +272,8 @@ public class Main extends Application {
             // This should go to whatever patientAccount they logged in as
 
             currentUser = dbh.loginToAccount(loginPage.getUsernameField().getText(), loginPage.getPasswordField().getText());
-            patientPage.setPatientAccount(currentUser);
+            patientPage.setCurrentUser(currentUser);
+            conditionPage.setCareCardNumber(currentUser.getCareCardNumber());
 
             System.out.println("Gets here");
             ArrayList<VaccineRecordAggregation> list = dbh.joinAggregateWithVaccineRecordQuery();
@@ -267,7 +300,6 @@ public class Main extends Application {
 
     private void addFunctionalityPatientVaccineCarePage() {
         vaccineCarePage.getBackButton().setOnAction(event -> {
-            System.out.println("Should go back");
             window.setScene(patientPage.getPage());
         });
         vaccineCarePage.getInsertButton().setOnAction(event -> {
@@ -279,7 +311,7 @@ public class Main extends Application {
             Date currentDate = new java.sql.Date(System.currentTimeMillis());
 
             VaccineRecordAggregation newRecord = new VaccineRecordAggregation(currentUser.getCareCardNumber(), newID, newEventID, nurse.getNurseID(),
-                    vaccine.getVacID(), facility.getFacilityID(), currentDate, vaccine.getVacName(), facility.getFacilityName(), nurse.getNurseName());
+                    vaccine.getVacID(),facility.getFacilityID(), currentDate, vaccine.getVacName(), facility.getFacilityName(), nurse.getNurseName());
             dbh.insertAdministeredVaccGivenToPatient(newRecord.makeAdministeredVaccGivenToPatient());
             dbh.insertInclude(newRecord.makeInclude());
             dbh.insertHappensIn(newRecord.makeHappensIn());

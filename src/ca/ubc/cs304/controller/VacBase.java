@@ -243,11 +243,11 @@ public class VacBase implements LoginWindowDelegate, TerminalTransactionsDelegat
 	}
 
 	public void deleteCondition(int careCardNumber) {
-		dbHandler.deleteCondition(careCardNumber);
+		dbHandler.deleteCondition(careCardNumber, "Headache");
 	}
 
 	public void showCondition() {
-		PreExistingCondition[] models = dbHandler.getConditionInfo();
+		PreExistingCondition[] models = dbHandler.getConditionInfo(1000000001);
 
 		for (int i = 0; i < models.length; i++) {
 			PreExistingCondition model = models[i];

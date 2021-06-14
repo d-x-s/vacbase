@@ -27,7 +27,7 @@ public class ConditionPage {
     TextField conditionInput;
     Button backButton;
     Button insertButton;
-    long careCardNumber;
+    int careCardNumber;
     ObservableList<PreExistingCondition> conditions;
     DatabaseConnectionHandler dbh;
 
@@ -46,8 +46,6 @@ public class ConditionPage {
         viewConditions.getColumns().add(nameColumn);
         viewConditions.setMinWidth(pageWidth);
         viewConditions.setMaxWidth(pageWidth);
-
-
 
         conditionInput = new TextField();
         conditionInput.setPromptText("Write Notes: ");
@@ -73,11 +71,15 @@ public class ConditionPage {
 
     }
 
-    public ObservableList<PreExistingCondition> getConditions() {
-        PreExistingCondition[] models = dbh.getConditionInfo();
-        ObservableList<PreExistingCondition> conditionsList = FXCollections.observableArrayList();
-        conditionsList.addAll(Arrays.asList(models));
-        return conditionsList;
+    public void setUpTable() {
+        viewConditions.setItems(loadConditionsToTable());
+    }
+
+    public ObservableList<PreExistingCondition> loadConditionsToTable() {
+        PreExistingCondition[] models = dbh.getConditionInfo(careCardNumber);
+        conditions = FXCollections.observableArrayList();
+        conditions.addAll(Arrays.asList(models));
+        return conditions;
     }
 
     public Scene getPage() {
@@ -90,6 +92,10 @@ public class ConditionPage {
 
     public TableView<PreExistingCondition> getViewConditions() {
         return viewConditions;
+    }
+
+    public ObservableList<PreExistingCondition> getConditions() {
+        return conditions;
     }
 
     public void setViewConditions(TableView<PreExistingCondition> viewConditions) {
