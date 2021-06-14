@@ -317,6 +317,21 @@ public class DatabaseConnectionHandler {
             System.out.println(EXCEPTION_TAG + " " + e.getMessage());
         }
     }
+
+    public void aggregationQueryTotalVaccines() {
+        String query = "SELECT COUNT(*) FROM VaccineRecord";
+
+        try (Statement stmt = connection.createStatement()) {
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                String count = rs.getString("COUNT(*)");
+                System.out.println("The total number of vaccines administered so far is: " + count);
+            }
+        } catch (SQLException e) {
+            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+        }
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 

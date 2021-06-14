@@ -69,7 +69,7 @@ public class TerminalTransactions {
         bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         int choice = INVALID_INT;
 
-        while (choice != 22) {
+        while (choice != 27) {
             System.out.println();
             System.out.println("1. Insert branch");
             System.out.println("2. Delete branch");
@@ -100,9 +100,10 @@ public class TerminalTransactions {
             System.out.println("22. Projection Query: Display available Vaccines");
             System.out.println("23. Search for Patient Account Query");
             System.out.println("24. Join VaccineRecord with the ER/D Aggregate, output Vaccine | Date | Location | Nurse");
+            System.out.println("25. Aggregation Query: Show the total number of Vaccines administered so far");
 
-            System.out.println("25. Quit");
-            System.out.print("Please choose one of the above 24 options: ");
+            System.out.println("26. Quit");
+            System.out.print("Please choose one of the above 26 options: ");
 
             choice = readInteger(false);
 
@@ -193,9 +194,12 @@ public class TerminalTransactions {
                     case 24:
                         delegate.joinAggregateWithVaccineRecordQuery();
                         break;
+                    case 25:
+                        delegate.aggregationQueryTotalVaccines();
+                        break;
 
                     // Quit
-                    case 25:
+                    case 26:
                         handleQuitOption();
                         break;
                     default:
