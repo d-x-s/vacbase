@@ -356,8 +356,9 @@ public class DatabaseConnectionHandler {
     }
 
     public void nestedAggregationQuery() {
-        String query_1 = "(select AVG(COUNT(CareCardNumber)) AS AverageVaccines from VaccineRecord GROUP BY CareCardNumber)";
 
+        // This is the subquery, it simply displays the average vaccines dispensed, for context
+        String query_1 = "(select AVG(COUNT(CareCardNumber)) AS AverageVaccines from VaccineRecord GROUP BY CareCardNumber)";
         try (Statement stmt = connection.createStatement()) {
             ResultSet rs = stmt.executeQuery(query_1);
             while (rs.next()) {
@@ -368,8 +369,8 @@ public class DatabaseConnectionHandler {
             System.out.println(EXCEPTION_TAG + " " + e.getMessage());
         }
 
+        // This is the actual nested aggregation query
         String query_2 = "SELECT AV.CareCardNumber AS CCN, COUNT(*) AS COUNT FROM AdministeredVaccineGivenToPatient AV GROUP BY AV.CareCardNumber HAVING COUNT(*) > (select AVG(COUNT(CareCardNumber)) from VaccineRecord GROUP BY CareCardNumber)";
-
         try (Statement stmt = connection.createStatement()) {
             ResultSet rs = stmt.executeQuery(query_2);
             while (rs.next()) {
