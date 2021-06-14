@@ -362,7 +362,7 @@ public class DatabaseConnectionHandler {
             ResultSet rs = stmt.executeQuery(query_1);
             while (rs.next()) {
                 int AverageVaccines = rs.getInt("AverageVaccines");
-                System.out.println("The average number of vaccines dispensed so far is: " + AverageVaccines);
+                System.out.println("The average number of vaccines dispensed per person so far is: " + AverageVaccines);
             }
         } catch (SQLException e) {
             System.out.println(EXCEPTION_TAG + " " + e.getMessage());
