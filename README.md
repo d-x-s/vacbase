@@ -1,13 +1,33 @@
 # VacBase: An Oracle Database for Vaccine Tracking
 ![Logo for VacBase on a Banner.](data/Logo2.png?raw=true "VacBase Banner")
 
-- Note 1
-- Note 2
-- Note 3
 
 # Running the Program
+Our database instance is hosted on the UBC servers. If you are a student, you can connect to UBC's Oracle service with:  
+
+- Username: ORA_[*Your CWL*]
+- Password: a[*Your Student Number*]
+
+If you are using this method, you also need to be tunneled into the server via SSH. You can use XShell for this purpose,
+or any other tunneling method.
+You can simply start the program by running the 'Main' class in the project.ui folder. 
 
 # What does VacBase do? 
+VacBase was created as a solution for monitoring the entire Vaccination supply chain. 
+From the distributor who ships the order, to the nurse that administers the Vaccine, 
+VacBase presents a simple way to store data on every aspect of a Vaccine’s life cycle. 
+Backend functionality was accomplished with JDBC and Oracle Database. 
+The frontend was created with the JavaFX GUI toolkit.  
+
+VacBase allows for both admin access and patient access, which is fantastic for streamlining the Vaccination process. 
+An admin (like a nurse) is free to update information about Patients and store data about each Vaccination 
+that takes place. 
+Valuable data like Care Card numbers are hidden away from Patients who access the database, 
+who are only able to view their own accounts and update only their personal information. 
+Furthermore, patients can add details about any pre-existing conditions they may have, 
+which is important for a nurse to know beforehand. 
+VacBase was inspired by the recent COVID-19 crisis and was implemented more as a thought experiment 
+than a serious application for real use.
 
 # Queries
 Insertion:
@@ -92,9 +112,15 @@ Division:
 ![Entity Relationship Diagram](data/ERDiagram.png?raw=true "Entity Relationship Diagram")
 This image is is best viewed in another tab.
 
+# What we could improve or add:
+1) Scalability. Database instances on UBC servers are locked to a maximum of 2 users simultaneously. 
+   If we were to seriously implement this project and use it for a real-world applications, we would need to find
+   a paid database hosting service that allows multiple connections. 
+
 # About us!
 | Team Member   | Github        |
 | ------------- | ------------- |
 | Alice         | [https://github.com/alicekanng](https://github.com/alicekanng "link title")|
 | Jonathan      | [https://github.com/JonAndYu](https://github.com/JonAndYu "link title")    |
 | Davis         | [https://github.com/d-x-s](https://github.com/d-x-s "link title")          |
+
