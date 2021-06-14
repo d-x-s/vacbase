@@ -18,4 +18,12 @@ public class Nurse {
     public String getNurseName() {
         return nurseName;
     }
+
+    @Override
+    public String toString() {
+        return "Nurse{" +
+                "nurseID=" + nurseID +
+                ", nurseName='" + nurseName + '\'' +
+                '}';
+    }
 }

@@ -26,4 +26,13 @@ public class Include {
     public int getVacID() {
         return vaccineId;
     }
+
+    @Override
+    public String toString() {
+        return "Include{" +
+                "eventID=" + eventID +
+                ", careCardNumber=" + careCardNumber +
+                ", vaccineId=" + vaccineId +
+                '}';
+    }
 }

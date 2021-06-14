@@ -31,4 +31,14 @@ public class Vaccine {
 	public double getDosage() {
 		return dosage;
 	}
+
+	@Override
+	public String toString() {
+		return "Vaccine{" +
+				"vacID=" + vacID +
+				", vacName='" + vacName + '\'' +
+				", type='" + type + '\'' +
+				", dosage=" + dosage +
+				'}';
+	}
 }

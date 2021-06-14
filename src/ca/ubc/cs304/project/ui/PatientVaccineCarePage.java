@@ -82,15 +82,12 @@ public class PatientVaccineCarePage {
         hBox.getChildren().addAll(vaccineRecordView, vBox);
         page = new Scene(hBox, pageWidth, pageHeight);
         setBackgroundColor(hBox);
-        setPatientView(true);
+        setPatientView(false);
 
     }
 
 
     public ObservableList<VaccineRecordAggregation> getVaccineRecordList() {
-        //vaccineRecordList.add(new VaccineRecordAggregation(1,1,1,1, new java.sql.Date(System.currentTimeMillis()), "Chicken", "Fa", "Jon"));
-        //vaccineRecordList.add(new VaccineRecordAggregation(1,1,1,1, new java.sql.Date(System.currentTimeMillis()), "fsdf", "B", "Jon"));
-        //vaccineRecordList.add(new VaccineRecordAggregation(1,1,1,1, new java.sql.Date(System.currentTimeMillis()), "Ch", "V", "Jon"));
         return vaccineRecordList;
     }
 

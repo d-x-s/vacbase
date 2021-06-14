@@ -6,18 +6,33 @@ package ca.ubc.cs304.model.distributor;
  */
 public class HappensIn {
     private final int eventID;
-    private final String facilityName;
+    private final int careCardNumber;
+    private final int facilityID;
 
-    public HappensIn(int eventID, String facilityName) {
+    public HappensIn(int eventID, int careCardNumber, int facilityID) {
         this.eventID = eventID;
-        this.facilityName = facilityName;
+        this.careCardNumber = careCardNumber;
+        this.facilityID = facilityID;
     }
 
     public int getEventID() {
         return eventID;
     }
 
-    public String getFacilityName() {
-        return facilityName;
+    public int getCareCardNumber() {
+        return careCardNumber;
+    }
+
+    public int getFacilityID() {
+        return facilityID;
+    }
+
+    @Override
+    public String toString() {
+        return "HappensIn{" +
+                "eventID=" + eventID +
+                ", careCardNumber=" + careCardNumber +
+                ", facilityID=" + facilityID +
+                '}';
     }
 }

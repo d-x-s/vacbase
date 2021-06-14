@@ -25,4 +25,13 @@ public class VaccineRecord {
     public int getEventID() {
         return eventID;
     }
+
+    @Override
+    public String toString() {
+        return "VaccineRecord{" +
+                "careCardNumber=" + careCardNumber +
+                ", recordID=" + recordID +
+                ", eventID=" + eventID +
+                '}';
+    }
 }

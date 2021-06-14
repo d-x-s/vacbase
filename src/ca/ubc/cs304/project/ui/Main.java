@@ -47,7 +47,7 @@ public class Main extends Application {
         dbh = new DatabaseConnectionHandler();
         boolean isConnected = false;
         int count = 0;
-
+        isConnected = dbh.login("ora_jyu19", "a67758979");
         while (!isConnected) {
             if (count == 0) {
                 isConnected = dbh.login("ora_akang28", "a74159187");
@@ -186,6 +186,10 @@ public class Main extends Application {
 
     private void addFunctionalityPatientPage() {
         patientPage.getViewRecord().setOnAction(event -> {
+            ArrayList<VaccineRecordAggregation> list = dbh.joinAggregateWithVaccineRecordQuery(currentUser.getCareCardNumber());
+            for (VaccineRecordAggregation v : list) {
+                vaccineCarePage.getVaccineRecordList().add(v);
+            }
             window.setScene(vaccineCarePage.getPage());
         });
         patientPage.getDeleteAccount().setOnAction(event -> {
@@ -276,21 +280,11 @@ public class Main extends Application {
             patientPage.setCurrentUser(currentUser);
             conditionPage.setCareCardNumber(currentUser.getCareCardNumber());
 
-            System.out.println("Gets here");
-            ArrayList<VaccineRecordAggregation> list = dbh.joinAggregateWithVaccineRecordQuery();
-            for (VaccineRecordAggregation v : list) {
-                vaccineCarePage.getVaccineRecordList().add(v);
-            }
             loginPage.getUsernameField().clear();
             loginPage.getPasswordField().clear();
             window.setScene(patientPage.getPage());
         });
         loginPage.getLoginAdmin().setOnAction(event -> {
-            /* TODO: Log into tabPage
-            Utilize loginPage.getPasswordField() and loginPage.getUsernameField();
-                - .getText()            (returns string)
-                - .clear()              (Clears textField)
-             */
             window.setScene(tabPage.getPage());
         });
 
@@ -308,15 +302,22 @@ public class Main extends Application {
             Vaccine vaccine = dbh.getSpecificVaccine(Integer.parseInt(vaccineCarePage.getVacIDField().getText()));
             Facility facility = dbh.getSpecificFacility(Integer.parseInt(vaccineCarePage.getFacilityIDField().getText()));
             int newID = dbh.getMaxVaccineCareCardID() + 1;
+            System.out.println("The next id is: " + newID);
             int newEventID = dbh.getMaxEventID() + 1;
+            System.out.println("The next event id is: " + newEventID);
             Date currentDate = new java.sql.Date(System.currentTimeMillis());
 
             VaccineRecordAggregation newRecord = new VaccineRecordAggregation(currentUser.getCareCardNumber(), newID, newEventID, nurse.getNurseID(),
                     vaccine.getVacID(),facility.getFacilityID(), currentDate, vaccine.getVacName(), facility.getFacilityName(), nurse.getNurseName());
+            System.out.println(newRecord);
             dbh.insertAdministeredVaccGivenToPatient(newRecord.makeAdministeredVaccGivenToPatient());
+            System.out.println(newRecord.makeAdministeredVaccGivenToPatient());
             dbh.insertInclude(newRecord.makeInclude());
+            System.out.println(newRecord.makeInclude());
             dbh.insertHappensIn(newRecord.makeHappensIn());
+            System.out.println(newRecord.makeHappensIn());
             dbh.insertVaccineRecord(newRecord.makeVaccineRecord());
+            System.out.println(newRecord.makeVaccineRecord());
             vaccineCarePage.getVaccineRecordList().add(newRecord);
 
             vaccineCarePage.getFacilityIDField().clear();

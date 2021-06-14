@@ -76,7 +76,7 @@ public class VaccineRecordAggregation {
     }
 
     public HappensIn makeHappensIn() {
-        return new HappensIn(eventId, facilityName);
+        return new HappensIn(eventId, careCardNumber, facilityID);
     }
 
     public int getCareCardNumber() {
@@ -141,5 +141,21 @@ public class VaccineRecordAggregation {
 
     public void setNurseName(String nurseName) {
         this.nurseName = nurseName;
+    }
+
+    @Override
+    public String toString() {
+        return "VaccineRecordAggregation{" +
+                "careCardNumber=" + careCardNumber +
+                ", id=" + id +
+                ", eventId=" + eventId +
+                ", nurseID=" + nurseID +
+                ", vacID=" + vacID +
+                ", facilityID=" + facilityID +
+                ", vacDate=" + vacDate +
+                ", vacName='" + vacName + '\'' +
+                ", facilityName='" + facilityName + '\'' +
+                ", nurseName='" + nurseName + '\'' +
+                '}';
     }
 }

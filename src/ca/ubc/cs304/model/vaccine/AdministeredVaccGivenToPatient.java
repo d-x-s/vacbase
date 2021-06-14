@@ -18,6 +18,16 @@ public class AdministeredVaccGivenToPatient {
         this.date = date;
     }
 
+    @Override
+    public String toString() {
+        return "AdministeredVaccGivenToPatient{" +
+                "eventID=" + eventID +
+                ", nurseID=" + nurseID +
+                ", careCardNumber=" + careCardNumber +
+                ", date=" + date +
+                '}';
+    }
+
     public int getEventID() {
         return eventID;
     }

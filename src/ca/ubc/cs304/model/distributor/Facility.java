@@ -25,4 +25,13 @@ public class Facility {
     public String getAddress() {
         return address;
     }
+
+    @Override
+    public String toString() {
+        return "Facility{" +
+                "facilityID=" + facilityID +
+                ", facilityName='" + facilityName + '\'' +
+                ", address='" + address + '\'' +
+                '}';
+    }
 }

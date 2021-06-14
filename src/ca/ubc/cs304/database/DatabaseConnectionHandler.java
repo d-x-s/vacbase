@@ -250,33 +250,34 @@ public class DatabaseConnectionHandler {
         }
     }
 
-    public ArrayList<VaccineRecordAggregation> joinAggregateWithVaccineRecordQuery() {
+    public ArrayList<VaccineRecordAggregation> joinAggregateWithVaccineRecordQuery(int number) {
         ArrayList<VaccineRecordAggregation> list = new ArrayList<>();
         String query =
                 "SELECT " +
-                    "VaccineRecord.CareCardNumber, " +
-                    "VaccineRecord.ID, " +
-                    "VaccineRecord.EventID, " +
-                    "AdministeredVaccineGivenToPatient.NurseID, " +
-                    "AdministeredVaccineGivenToPatient.VacDate, " +
-                    "Include.VacID, " +
-                    "Vaccine.VacName, " +
-                    "HappensIn.FacilityID, " +
-                    "Facility.FacilityName, " +
-                    "Nurse.NurseName FROM VaccineRecord " +
-                "INNER JOIN AdministeredVaccineGivenToPatient " +
-                     "ON VaccineRecord.EventID = AdministeredVaccineGivenToPatient.EventID " +
-                     "and VaccineRecord.CareCardNumber = AdministeredVaccineGivenToPatient.CareCardNumber " +
-                "INNER JOIN Include " +
-                     "ON AdministeredVaccineGivenToPatient.EventID = Include.EventID " +
-                "INNER JOIN HappensIn " +
-                     "ON AdministeredVaccineGivenToPatient.EventID = HappensIn.EventID " +
-                "INNER JOIN NURSE " +
-                     "ON AdministeredVaccineGivenToPatient.NurseID = Nurse.NurseID " +
-                "INNER JOIN FACILITY " +
-                     "ON HappensIn.FacilityID = Facility.FacilityID " +
-                "INNER JOIN VACCINE " +
-                     "ON Include.VacID = Vaccine.VacID";
+                        "VaccineRecord.CareCardNumber, " +
+                        "VaccineRecord.ID, " +
+                        "VaccineRecord.EventID, " +
+                        "AdministeredVaccineGivenToPatient.NurseID, " +
+                        "AdministeredVaccineGivenToPatient.VacDate, " +
+                        "Include.VacID, " +
+                        "Vaccine.VacName, " +
+                        "HappensIn.FacilityID, " +
+                        "Facility.FacilityName, " +
+                        "Nurse.NurseName FROM VaccineRecord " +
+                        "INNER JOIN AdministeredVaccineGivenToPatient " +
+                        "ON VaccineRecord.EventID = AdministeredVaccineGivenToPatient.EventID " +
+                        "and VaccineRecord.CareCardNumber = AdministeredVaccineGivenToPatient.CareCardNumber " +
+                        "INNER JOIN Include " +
+                        "ON AdministeredVaccineGivenToPatient.EventID = Include.EventID " +
+                        "INNER JOIN HappensIn " +
+                        "ON AdministeredVaccineGivenToPatient.EventID = HappensIn.EventID " +
+                        "INNER JOIN NURSE " +
+                        "ON AdministeredVaccineGivenToPatient.NurseID = Nurse.NurseID " +
+                        "INNER JOIN FACILITY " +
+                        "ON HappensIn.FacilityID = Facility.FacilityID " +
+                        "INNER JOIN VACCINE " +
+                        "ON Include.VacID = Vaccine.VacID " +
+                        " WHERE  VaccineRecord.CareCardNumber = " + "'" + number + "'";
 
         try (Statement stmt = connection.createStatement()) {
             ResultSet rs = stmt.executeQuery(query);
@@ -312,7 +313,7 @@ public class DatabaseConnectionHandler {
                 String FacilityName = rs.getString("FacilityName");
 
                 System.out.println(CareCardNumber + ", " + ID + ", " + EventID +
-                        ", " + NurseID +  ", " + VacDate + ", " + VacID + ", " + VacName +
+                        ", " + NurseID + ", " + VacDate + ", " + VacID + ", " + VacName +
                         ", " + FacilityID + ", " + FacilityName + ", " + NurseName);
                 list.add(new VaccineRecordAggregation(CareCardNumber, ID, EventID, NurseID, VacID, FacilityID, VacDate, VacName, FacilityName, NurseName));
             }
@@ -750,7 +751,7 @@ public class DatabaseConnectionHandler {
 
             while (rs.next()) {
                 facilityName = rs.getString("facilityName");
-                address  = rs.getString("address");
+                address = rs.getString("address");
             }
 
             connection.commit();
@@ -938,10 +939,12 @@ public class DatabaseConnectionHandler {
     // VaccineCareCard /////////////////////////////////////////////////////////////////////////////////////////////////////
     public int getMaxEventID() {
         int maxID = 0;
-        String query = "SELECT MAX(EventID) AS 'MAX' FROM AdministeredVaccineGivenToPatient";
+        String query = "SELECT MAX(EventID) FROM AdministeredVaccineGivenToPatient";
         try (Statement stmt = connection.createStatement()) {
             ResultSet rs = stmt.executeQuery(query);
-            maxID = rs.getInt("MAX");
+            while (rs.next()) {
+                maxID = rs.getInt("MAX(EventID)");
+            }
         } catch (SQLException e) {
             System.out.println(EXCEPTION_TAG + " " + e.getMessage());
         }
@@ -950,10 +953,12 @@ public class DatabaseConnectionHandler {
 
     public int getMaxVaccineCareCardID() {
         int maxID = 0;
-        String query = "SELECT MAX(ID) AS 'MAX' FROM VaccineRecord";
+        String query = "SELECT MAX(ID) FROM VaccineRecord";
         try (Statement stmt = connection.createStatement()) {
             ResultSet rs = stmt.executeQuery(query);
-            maxID = rs.getInt("MAX");
+            while (rs.next()) {
+                maxID = rs.getInt("MAX(ID)");
+            }
         } catch (SQLException e) {
             System.out.println(EXCEPTION_TAG + " " + e.getMessage());
         }
@@ -984,9 +989,10 @@ public class DatabaseConnectionHandler {
 
     public void insertHappensIn(HappensIn happens) {
         try {
-            PreparedStatement ps = connection.prepareStatement("INSERT INTO HappensIn VALUES (?,?)");
+            PreparedStatement ps = connection.prepareStatement("INSERT INTO HappensIn VALUES (?,?,?)");
             ps.setInt(1, happens.getEventID());
-            ps.setString(2, happens.getFacilityName());
+            ps.setInt(2, happens.getCareCardNumber());
+            ps.setInt(3, happens.getFacilityID());
 
             ps.executeUpdate();
             connection.commit();
