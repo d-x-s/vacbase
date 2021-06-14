@@ -7,6 +7,8 @@
 
 # Running the Program
 
+# What does VacBase do? 
+
 # Queries
 Insertion:
 ``` sql
@@ -56,4 +58,9 @@ TODO
 # ER/D Modelling
 ![Entity Relationship Diagram](data/ERDiagram.png?raw=true "Entity Relationship Diagram")
 
-# About us! 
+# About us!
+| Team Member   | Github        |
+| ------------- | ------------- |
+| Alice         | [https://github.com/alicekanng](https://github.com/alicekanng "link title")|
+| Jonathan      | [https://github.com/JonAndYu](https://github.com/JonAndYu "link title")    |
+| Davis         | [https://github.com/d-x-s](https://github.com/d-x-s "link title")          |
