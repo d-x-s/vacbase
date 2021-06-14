@@ -11,14 +11,15 @@ INSERT ALL
     INTO PatientAccount VALUES (2000000002, 'Child 3', date '2010-01-01', 'Child3')
     INTO PatientAccount VALUES (2000000003, 'Child 4', date '2010-01-01', 'Child4')
     INTO PatientAccount VALUES (2000000004, 'Child 5', date '2010-01-01', 'Child5')
+    INTO PatientAccount VALUES (1, 'Secret', date '2021-06-13', 'TestSubject')
 SELECT 1 FROM DUAL;
 
 INSERT ALL
     INTO SideEffect (SideEffectName, Treatment, Duration) VALUES ('Swelling at injection site', 'Apply wet cloth/ice', 2)
-INTO SideEffect (SideEffectName, Treatment, Duration) VALUES ('Fever', 'Drink lots of water', 3)
-INTO SideEffect (SideEffectName, Treatment, Duration) VALUES ('Fatigue', 'Stay at home and rest', 2)
-INTO SideEffect (SideEffectName, Treatment, Duration) VALUES ('Blood clots', 'Visit a doctor', 7)
-INTO SideEffect (SideEffectName, Treatment, Duration) VALUES ('Muscle ache', 'Light exercise', 5)
+    INTO SideEffect (SideEffectName, Treatment, Duration) VALUES ('Fever', 'Drink lots of water', 3)
+    INTO SideEffect (SideEffectName, Treatment, Duration) VALUES ('Fatigue', 'Stay at home and rest', 2)
+    INTO SideEffect (SideEffectName, Treatment, Duration) VALUES ('Blood clots', 'Visit a doctor', 7)
+    INTO SideEffect (SideEffectName, Treatment, Duration) VALUES ('Muscle ache', 'Light exercise', 5)
 SELECT 1 FROM DUAL;
 
 INSERT ALL
@@ -74,11 +75,11 @@ INSERT ALL
 SELECT 1 FROM DUAL;
 
 INSERT ALL
-    INTO Distributor(DistributorName, DistributorPhoneNumber, DistributorEmail) VALUES ('A', '800-822-2463', 'www.sanofipasteur.us/contact')
-    INTO Distributor(DistributorName, DistributorPhoneNumber, DistributorEmail) VALUES ('B','855-358-8966','cs.flu@seqirus.com')
-    INTO Distributor(DistributorName, DistributorPhoneNumber, DistributorEmail) VALUES ('C','404-639-3670','drugservice@cdc.gov')
-    INTO Distributor(DistributorName, DistributorPhoneNumber, DistributorEmail) VALUES ('D','800-637-2590',NULL)
-    INTO Distributor(DistributorName, DistributorPhoneNumber, DistributorEmail) VALUES ('E','877-246-8472','productsafety@ebsi.com')
+    INTO Distributor(DistributorName, DistributorPhoneNumber, DistributorEmail) VALUES ('Alpha', '800-822-2463', 'www.sanofipasteur.us/contact')
+    INTO Distributor(DistributorName, DistributorPhoneNumber, DistributorEmail) VALUES ('Beta','855-358-8966','cs.flu@seqirus.com')
+    INTO Distributor(DistributorName, DistributorPhoneNumber, DistributorEmail) VALUES ('Charlie','404-639-3670','drugservice@cdc.gov')
+    INTO Distributor(DistributorName, DistributorPhoneNumber, DistributorEmail) VALUES ('Delta','800-637-2590',NULL)
+    INTO Distributor(DistributorName, DistributorPhoneNumber, DistributorEmail) VALUES ('Echo','877-246-8472','productsafety@ebsi.com')
 SELECT 1 FROM DUAL;
 
 INSERT ALL
@@ -87,6 +88,26 @@ INSERT ALL
     INTO AdministeredVaccineGivenToPatient (EventID, NurseID, CareCardNumber, VacDate) VALUES (711128, 34567, 1000000004, date '2015-02-28')
     INTO AdministeredVaccineGivenToPatient (EventID, NurseID, CareCardNumber, VacDate) VALUES (468997, 48484, 2000000002, date '2009-05-07')
     INTO AdministeredVaccineGivenToPatient (EventID, NurseID, CareCardNumber, VacDate) VALUES (010228, 51235, 2000000002, date '2021-08-17')
+    INTO AdministeredVaccineGivenToPatient (EventID, NurseID, CareCardNumber, VacDate) VALUES (500001, 12345, 1, date '2021-06-13')
+    INTO AdministeredVaccineGivenToPatient (EventID, NurseID, CareCardNumber, VacDate) VALUES (500002, 12345, 1, date '2021-06-13')
+    INTO AdministeredVaccineGivenToPatient (EventID, NurseID, CareCardNumber, VacDate) VALUES (500003, 12345, 1, date '2021-06-13')
+    INTO AdministeredVaccineGivenToPatient (EventID, NurseID, CareCardNumber, VacDate) VALUES (500004, 12345, 1, date '2021-06-13')
+    INTO AdministeredVaccineGivenToPatient (EventID, NurseID, CareCardNumber, VacDate) VALUES (500005, 12345, 1, date '2021-06-13')
+    INTO AdministeredVaccineGivenToPatient (EventID, NurseID, CareCardNumber, VacDate) VALUES (500006, 12345, 1, date '2021-06-13')
+    INTO AdministeredVaccineGivenToPatient (EventID, NurseID, CareCardNumber, VacDate) VALUES (500007, 12345, 1, date '2021-06-13')
+    INTO AdministeredVaccineGivenToPatient (EventID, NurseID, CareCardNumber, VacDate) VALUES (500008, 12345, 1, date '2021-06-13')
+    INTO AdministeredVaccineGivenToPatient (EventID, NurseID, CareCardNumber, VacDate) VALUES (500009, 12345, 1, date '2021-06-13')
+    INTO AdministeredVaccineGivenToPatient (EventID, NurseID, CareCardNumber, VacDate) VALUES (500010, 12345, 1, date '2021-06-13')
+    INTO AdministeredVaccineGivenToPatient (EventID, NurseID, CareCardNumber, VacDate) VALUES (500011, 12345, 1, date '2021-06-13')
+    INTO AdministeredVaccineGivenToPatient (EventID, NurseID, CareCardNumber, VacDate) VALUES (500012, 12345, 1, date '2021-06-13')
+    INTO AdministeredVaccineGivenToPatient (EventID, NurseID, CareCardNumber, VacDate) VALUES (500013, 12345, 1, date '2021-06-13')
+    INTO AdministeredVaccineGivenToPatient (EventID, NurseID, CareCardNumber, VacDate) VALUES (500014, 12345, 1, date '2021-06-13')
+    INTO AdministeredVaccineGivenToPatient (EventID, NurseID, CareCardNumber, VacDate) VALUES (500015, 12345, 1, date '2021-06-13')
+    INTO AdministeredVaccineGivenToPatient (EventID, NurseID, CareCardNumber, VacDate) VALUES (500016, 12345, 1, date '2021-06-13')
+    INTO AdministeredVaccineGivenToPatient (EventID, NurseID, CareCardNumber, VacDate) VALUES (500017, 12345, 1, date '2021-06-13')
+
+
+
 SELECT 1 FROM DUAL;
 
 INSERT ALL
@@ -95,6 +116,24 @@ INSERT ALL
     INTO VaccineRecord (CareCardNumber, ID, EventID) VALUES (1000000004, 3, 711128)
     INTO VaccineRecord (CareCardNumber, ID, EventID) VALUES (2000000002, 4, 468997)
     INTO VaccineRecord (CareCardNumber, ID, EventID) VALUES (2000000002, 5, 010228)
+    INTO VaccineRecord (CareCardNumber, ID, EventID) VALUES (1, 6, 500001)
+    INTO VaccineRecord (CareCardNumber, ID, EventID) VALUES (1, 7, 500002)
+    INTO VaccineRecord (CareCardNumber, ID, EventID) VALUES (1, 8, 500003)
+    INTO VaccineRecord (CareCardNumber, ID, EventID) VALUES (1, 9, 500004)
+    INTO VaccineRecord (CareCardNumber, ID, EventID) VALUES (1, 10, 500005)
+    INTO VaccineRecord (CareCardNumber, ID, EventID) VALUES (1, 11, 500006)
+    INTO VaccineRecord (CareCardNumber, ID, EventID) VALUES (1, 12, 500007)
+    INTO VaccineRecord (CareCardNumber, ID, EventID) VALUES (1, 13, 500008)
+    INTO VaccineRecord (CareCardNumber, ID, EventID) VALUES (1, 14, 500009)
+    INTO VaccineRecord (CareCardNumber, ID, EventID) VALUES (1, 15, 500010)
+    INTO VaccineRecord (CareCardNumber, ID, EventID) VALUES (1, 16, 500011)
+    INTO VaccineRecord (CareCardNumber, ID, EventID) VALUES (1, 17, 500012)
+    INTO VaccineRecord (CareCardNumber, ID, EventID) VALUES (1, 18, 500013)
+    INTO VaccineRecord (CareCardNumber, ID, EventID) VALUES (1, 19, 500014)
+    INTO VaccineRecord (CareCardNumber, ID, EventID) VALUES (1, 20, 500015)
+    INTO VaccineRecord (CareCardNumber, ID, EventID) VALUES (1, 21, 500016)
+    INTO VaccineRecord (CareCardNumber, ID, EventID) VALUES (1, 22, 500017)
+
 SELECT 1 FROM DUAL;
 
 INSERT ALL
@@ -133,11 +172,11 @@ INSERT ALL
 SELECT 1 FROM DUAL;
 
 INSERT ALL
-    INTO Couriers(Courier, DistributorName) VALUES ('UPS', 'A')
-    INTO Couriers(Courier, DistributorName) VALUES ('Fedex', 'B')
-    INTO Couriers(Courier, DistributorName) VALUES ('Canada Post', 'C')
-    INTO Couriers(Courier, DistributorName) VALUES ('Independent', 'D')
-    INTO Couriers(Courier, DistributorName) VALUES ('Purolator', 'E')
+    INTO Couriers(Courier, DistributorName) VALUES ('UPS', 'Alpha')
+    INTO Couriers(Courier, DistributorName) VALUES ('Fedex', 'Beta')
+    INTO Couriers(Courier, DistributorName) VALUES ('Canada Post', 'Charlie')
+    INTO Couriers(Courier, DistributorName) VALUES ('Independent', 'Delta')
+    INTO Couriers(Courier, DistributorName) VALUES ('Purolator', 'Echo')
 SELECT 1 FROM DUAL;
 
 INSERT ALL
@@ -146,22 +185,56 @@ INSERT ALL
     INTO HappensIn (EventID, CareCardNumber, FacilityID) VALUES (711128, 1000000004, 300)
     INTO HappensIn (EventID, CareCardNumber, FacilityID) VALUES (468997, 2000000002, 480)
     INTO HappensIn (EventID, CareCardNumber, FacilityID) VALUES (010228, 2000000002, 744)
+    INTO HappensIn (EventID, CareCardNumber, FacilityID) VALUES (500001, 1, 101)
+    INTO HappensIn (EventID, CareCardNumber, FacilityID) VALUES (500002, 1, 101)
+    INTO HappensIn (EventID, CareCardNumber, FacilityID) VALUES (500003, 1, 101)
+    INTO HappensIn (EventID, CareCardNumber, FacilityID) VALUES (500004, 1, 101)
+    INTO HappensIn (EventID, CareCardNumber, FacilityID) VALUES (500005, 1, 101)
+    INTO HappensIn (EventID, CareCardNumber, FacilityID) VALUES (500006, 1, 101)
+    INTO HappensIn (EventID, CareCardNumber, FacilityID) VALUES (500007, 1, 101)
+    INTO HappensIn (EventID, CareCardNumber, FacilityID) VALUES (500008, 1, 101)
+    INTO HappensIn (EventID, CareCardNumber, FacilityID) VALUES (500009, 1, 101)
+    INTO HappensIn (EventID, CareCardNumber, FacilityID) VALUES (500010, 1, 101)
+    INTO HappensIn (EventID, CareCardNumber, FacilityID) VALUES (500011, 1, 101)
+    INTO HappensIn (EventID, CareCardNumber, FacilityID) VALUES (500012, 1, 101)
+    INTO HappensIn (EventID, CareCardNumber, FacilityID) VALUES (500013, 1, 101)
+    INTO HappensIn (EventID, CareCardNumber, FacilityID) VALUES (500014, 1, 101)
+    INTO HappensIn (EventID, CareCardNumber, FacilityID) VALUES (500015, 1, 101)
+    INTO HappensIn (EventID, CareCardNumber, FacilityID) VALUES (500016, 1, 101)
+    INTO HappensIn (EventID, CareCardNumber, FacilityID) VALUES (500017, 1, 101)
 SELECT 1 FROM DUAL;
 
 INSERT ALL
-    INTO Delivers(DistributorName, FacilityID, OrderID, Quantity, TimeOfDelivery) VALUES ('A',101, 100, 1000, date '2021-05-31')
-INTO Delivers(DistributorName, FacilityID, OrderID, Quantity, TimeOfDelivery) VALUES ('B',105, 300, 1000, date '2021-04-23')
-INTO Delivers(DistributorName, FacilityID, OrderID, Quantity, TimeOfDelivery) VALUES ('C',300, 300, 1000, date '2021-03-08')
-INTO Delivers(DistributorName, FacilityID, OrderID, Quantity, TimeOfDelivery) VALUES ('D',480,400, 1000, date '2021-05-31')
-INTO Delivers(DistributorName, FacilityID, OrderID, Quantity, TimeOfDelivery) VALUES ('E',744, 500,1000, date '2021-05-30')
+    INTO Delivers(DistributorName, FacilityID, OrderID, Quantity, TimeOfDelivery) VALUES ('Alpha',101, 100, 1000, date '2021-05-31')
+    INTO Delivers(DistributorName, FacilityID, OrderID, Quantity, TimeOfDelivery) VALUES ('Beta',105, 300, 1000, date '2021-04-23')
+    INTO Delivers(DistributorName, FacilityID, OrderID, Quantity, TimeOfDelivery) VALUES ('Charlie',300, 300, 1000, date '2021-03-08')
+    INTO Delivers(DistributorName, FacilityID, OrderID, Quantity, TimeOfDelivery) VALUES ('Delta',480,400, 1000, date '2021-05-31')
+    INTO Delivers(DistributorName, FacilityID, OrderID, Quantity, TimeOfDelivery) VALUES ('Echo',744, 500,1000, date '2021-05-30')
 SELECT 1 FROM DUAL;
 
 INSERT ALL
     INTO Include (EventID, CareCardNumber, VacID) VALUES (123456, 1000000000, 1001)
-INTO Include (EventID, CareCardNumber, VacID) VALUES (858541, 1000000000, 1002)
-INTO Include (EventID, CareCardNumber, VacID) VALUES (711128, 1000000004, 1003)
-INTO Include (EventID, CareCardNumber, VacID) VALUES (468997, 2000000002, 1004)
-INTO Include (EventID, CareCardNumber, VacID) VALUES (010228, 2000000002, 3025)
+    INTO Include (EventID, CareCardNumber, VacID) VALUES (858541, 1000000000, 1002)
+    INTO Include (EventID, CareCardNumber, VacID) VALUES (711128, 1000000004, 1003)
+    INTO Include (EventID, CareCardNumber, VacID) VALUES (468997, 2000000002, 1004)
+    INTO Include (EventID, CareCardNumber, VacID) VALUES (010228, 2000000002, 3025)
+    INTO Include (EventID, CareCardNumber, VacID) VALUES (500001, 1, 1001)
+    INTO Include (EventID, CareCardNumber, VacID) VALUES (500002, 1, 1002)
+    INTO Include (EventID, CareCardNumber, VacID) VALUES (500003, 1, 1003)
+    INTO Include (EventID, CareCardNumber, VacID) VALUES (500004, 1, 1004)
+    INTO Include (EventID, CareCardNumber, VacID) VALUES (500005, 1, 1005)
+    INTO Include (EventID, CareCardNumber, VacID) VALUES (500006, 1, 2000)
+    INTO Include (EventID, CareCardNumber, VacID) VALUES (500007, 1, 2002)
+    INTO Include (EventID, CareCardNumber, VacID) VALUES (500008, 1, 2004)
+    INTO Include (EventID, CareCardNumber, VacID) VALUES (500009, 1, 2006)
+    INTO Include (EventID, CareCardNumber, VacID) VALUES (500010, 1, 2008)
+    INTO Include (EventID, CareCardNumber, VacID) VALUES (500011, 1, 2010)
+    INTO Include (EventID, CareCardNumber, VacID) VALUES (500012, 1, 3000)
+    INTO Include (EventID, CareCardNumber, VacID) VALUES (500013, 1, 3005)
+    INTO Include (EventID, CareCardNumber, VacID) VALUES (500014, 1, 3010)
+    INTO Include (EventID, CareCardNumber, VacID) VALUES (500015, 1, 3015)
+    INTO Include (EventID, CareCardNumber, VacID) VALUES (500016, 1, 3020)
+    INTO Include (EventID, CareCardNumber, VacID) VALUES (500017, 1, 3025)
 SELECT 1 FROM DUAL;
 
 INSERT ALL
@@ -171,8 +244,6 @@ INSERT ALL
     INTO RequiredBooster (BoosterName, VacID, Dosage) VALUES ('Varicella', 3025, 0.7)
     INTO RequiredBooster (BoosterName, VacID, Dosage) VALUES ('Flulaval', 2000, 0.3)
 SELECT 1 FROM DUAL;
-
-
 
 INSERT ALL
     INTO VaccineHasSideEffect (SideEffectName, VacID) VALUES ('Swelling at injection site', 1001)
@@ -184,25 +255,24 @@ SELECT 1 FROM DUAL;
 
 INSERT ALL
     INTO ChickenPox (PreviousShinglesVacRequired, VacID) VALUES ('Y', 3000)
-INTO ChickenPox (PreviousShinglesVacRequired, VacID) VALUES ('Y', 3005)
-INTO ChickenPox (PreviousShinglesVacRequired, VacID) VALUES ('N', 3010)
-INTO ChickenPox (PreviousShinglesVacRequired, VacID) VALUES ('N', 3015)
-INTO ChickenPox (PreviousShinglesVacRequired, VacID) VALUES ('Y', 3020)
+    INTO ChickenPox (PreviousShinglesVacRequired, VacID) VALUES ('Y', 3005)
+    INTO ChickenPox (PreviousShinglesVacRequired, VacID) VALUES ('N', 3010)
+    INTO ChickenPox (PreviousShinglesVacRequired, VacID) VALUES ('N', 3015)
+    INTO ChickenPox (PreviousShinglesVacRequired, VacID) VALUES ('Y', 3020)
 SELECT 1 FROM DUAL;
-
 
 INSERT ALL
     INTO Flu (MinAge, VacID) VALUES (65, 2002)
-INTO Flu (MinAge, VacID) VALUES (18, 2004)
-INTO Flu (MinAge, VacID) VALUES (4, 2006)
-INTO Flu (MinAge, VacID) VALUES (18, 2008)
-INTO Flu (MinAge, VacID) VALUES (2, 2010)
+    INTO Flu (MinAge, VacID) VALUES (18, 2004)
+    INTO Flu (MinAge, VacID) VALUES (4, 2006)
+    INTO Flu (MinAge, VacID) VALUES (18, 2008)
+    INTO Flu (MinAge, VacID) VALUES (2, 2010)
 SELECT 1 FROM DUAL;
 
 INSERT ALL
     INTO Covid19 (WaitTimeUntilBooster, VacID) VALUES (10, 1002)
-INTO Covid19 (WaitTimeUntilBooster, VacID) VALUES (NULL, 1004)
-INTO Covid19 (WaitTimeUntilBooster, VacID) VALUES (4, 1003)
-INTO Covid19 (WaitTimeUntilBooster, VacID) VALUES (3, 1001)
-INTO Covid19 (WaitTimeUntilBooster, VacID) VALUES (5, 1005)
+    INTO Covid19 (WaitTimeUntilBooster, VacID) VALUES (NULL, 1004)
+    INTO Covid19 (WaitTimeUntilBooster, VacID) VALUES (4, 1003)
+    INTO Covid19 (WaitTimeUntilBooster, VacID) VALUES (3, 1001)
+    INTO Covid19 (WaitTimeUntilBooster, VacID) VALUES (5, 1005)
 SELECT 1 FROM DUAL;

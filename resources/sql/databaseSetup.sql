@@ -67,7 +67,7 @@ CREATE TABLE Include
     EventID        INTEGER,
     CareCardNumber INTEGER,
     VacID        INTEGER,
-    PRIMARY KEY (EventID, CareCardNumber, VacID),
+    PRIMARY KEY (EventID, CareCardNumber),
     FOREIGN KEY (EventID, CareCardNumber) REFERENCES AdministeredVaccineGivenToPatient (EventID, CareCardNumber)
         ON DELETE CASCADE,
     FOREIGN KEY (VacID) REFERENCES Vaccine (VacID)
@@ -175,7 +175,7 @@ CREATE TABLE VaccineRecord
     CareCardNumber INTEGER,
     ID             INTEGER,
     EventID        INTEGER,
-    PRIMARY KEY (CareCardNumber, ID),
+    PRIMARY KEY (ID),
     FOREIGN KEY (CareCardNumber, EventID) REFERENCES AdministeredVaccineGivenToPatient (CareCardNumber, EventID)
         ON DELETE CASCADE
 );

@@ -107,13 +107,13 @@ public class DatabaseConnectionHandler {
             dropBranchTableIfExists();
 
             // drop tables: YOU WILL GET AN ERROR IF THE TABLES DO NOT EXIST!
-            //SQLUtil.executeFile(connection, new File("resources/sql/databaseDrop.sql"));
+            SQLUtil.executeFile(connection, new File("resources/sql/databaseDrop.sql"));
 
             // add tables: YOU WILL GET AN ERROR IF THE TABLES ALREADY EXIST!
-            //SQLUtil.executeFile(connection, new File("resources/sql/databaseSetup.sql"));
+            SQLUtil.executeFile(connection, new File("resources/sql/databaseSetup.sql"));
 
             // populate tables:
-            //SQLUtil.executeFile(connection, new File("resources/sql/databasePopulate.sql"));
+            SQLUtil.executeFile(connection, new File("resources/sql/databasePopulate.sql"));
 
             // placeholder: DOES NOTHING
             SQLUtil.executeFile(connection, new File("resources/sql/databaseClear.sql"));
@@ -541,6 +541,33 @@ public class DatabaseConnectionHandler {
             System.out.println(EXCEPTION_TAG + " " + e.getMessage());
             rollbackConnection();
         }
+    }
+
+    public PatientAccount getSpecificPatientAccount(int careCardNum) {
+        String fullName = "";
+        Date DOB = new Date(0);
+        String userName = "";
+
+        try {
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM PatientAccount WHERE CareCardNumber = ?");
+            ps.setInt(1, careCardNum);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                fullName = rs.getString("FullName");
+                DOB = rs.getDate("DOB");
+                userName  = rs.getString("Username");
+            }
+
+            connection.commit();
+            ps.close();
+
+        } catch (SQLException e) {
+            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+            rollbackConnection();
+        }
+        return new PatientAccount(careCardNum, fullName, DOB, userName);
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

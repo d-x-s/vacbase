@@ -15,6 +15,7 @@ import ca.ubc.cs304.model.patient.PreExistingCondition;
 import javafx.application.Application;
 
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 
 import java.sql.Date;
@@ -73,7 +74,7 @@ public class Main extends Application {
         vaccineCarePage = new PatientVaccineCarePage();
         addFunctionality();
 
-        scene = loginPage.getPage();
+        scene = tabPage.getPage();
 
         window.setScene(scene);
         window.setTitle("VacBase");
@@ -100,7 +101,15 @@ public class Main extends Application {
 
     //region tabPage subroutines
     private void addFunctionalityPatientTab() {
-
+        tabPage.getSearchBar().setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                int careCardNum = Integer.parseInt(tabPage.getSearchBar().getText());
+                PatientAccount user = dbh.getSpecificPatientAccount(careCardNum);
+                patientPage.setCurrentUser(user);
+                conditionPage.setCareCardNumber(careCardNum);
+                window.setScene(patientPage.getPage());
+            }
+        });
     }
 
     private void addFunctionalityFacilityTab() {
@@ -132,7 +141,6 @@ public class Main extends Application {
 
         // update
         tabPage.getUpdateFacilityButton().setOnAction(event -> {
-            //TODO: Add setters
             int selectedIndex = tabPage.getFacilityView().getSelectionModel().getSelectedIndex();
             int IDToUpdate = Integer.parseInt(tabPage.getFacilityIDField().getText());
             String name = tabPage.getFacilityNameField().getText();
@@ -239,7 +247,6 @@ public class Main extends Application {
 
     private void addFunctionalityCreatePage() {
         createPage.getBackButton().setOnAction(event -> {
-            // TODO: go back to LoginPage
             window.setScene(loginPage.getPage());
         });
         createPage.getConfirmButton().setOnAction(event -> {
