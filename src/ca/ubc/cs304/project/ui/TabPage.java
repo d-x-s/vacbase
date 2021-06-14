@@ -25,44 +25,50 @@ import java.util.*;
 import static ca.ubc.cs304.project.ui.HelpfulFunctions.*;
 
 public class TabPage {
-    Scene page;
-    TabPane tabs;
-    Tab vaccine;
-    Tab distributor;
-    Tab patient;
+    private Scene page;
+    private TabPane tabs;
+    private Tab vaccine;
+    private Tab distributor;
+    private Tab patient;
 
-    Tab facilities;
-    Tab filter;
-    TextField searchBar;
-    DatabaseConnectionHandler dbh;
+    private Tab facilities;
+    private Tab filter;
+    private TextField searchBar;
+    private DatabaseConnectionHandler dbh;
 
     /*
     Filter tab
      */
-    Button button017;
-    Button button1829;
-    Button button3044;
-    Button button4559;
-    Button button60;
-    TableView<PatientAccount> filterView;
-    ObservableList<PatientAccount> filterList;
+    private Button button017;
+    private Button button1829;
+    private Button button3044;
+    private Button button4559;
+    private Button button60;
+    private TableView<PatientAccount> filterView;
+    private ObservableList<PatientAccount> filterList;
 
     /*
     Facility Tab
      */
-    Button insertFacilityButton;
-    Button updateFacilityButton;
-    TextField facilityIDField;
-    TextField facilityNameField;
-    TextField addressField;
-    TableView<Facility> facilityView;
-    ObservableList<Facility> facilityList;
+    private Button insertFacilityButton;
+    private Button updateFacilityButton;
+    private TextField facilityIDField;
+    private TextField facilityNameField;
+    private TextField addressField;
+    private TableView<Facility> facilityView;
+    private ObservableList<Facility> facilityList;
 
     /*
     Vaccine tab
      */
-    Button availabilityButton;
-    TableView<Vaccine> vaccineListView;
+    private CheckBox typeBox;
+    private CheckBox dosageBox;
+    private Button viewButton;
+    private TableView<Vaccine> vaccineListView;
+    private ObservableList<Vaccine> vaccineList;
+    private TableColumn<Vaccine, String> vacIDColumn;
+    private TableColumn<Vaccine, String> vacNameColumn;
+
 
 
     public TabPage(DatabaseConnectionHandler databaseConnectionHandler) {
@@ -75,6 +81,7 @@ public class TabPage {
         setUpFacilitiesTab();
         setUpPatientTab();
         setUpFilterTab();
+        setUpVaccineTab();
 
         //endregion
         StackPane backgroundPane = new StackPane();
@@ -87,7 +94,26 @@ public class TabPage {
     }
 
     private void setUpVaccineTab() {
+        HBox hBox = new HBox();
+        setWhiteBackgroundColor(hBox);
+        hBox.setPadding(new Insets(10));
+        VBox vBox = new VBox(10);
+        vBox.setTranslateX(40);
+        vBox.setTranslateY(50);
+        typeBox.setFont(commonFont(24));
+        dosageBox.setFont(commonFont(24));
+        makeButtonOnWhite(viewButton);
+        viewButton.setFont(commonFont(30));
+        hBox.getChildren().addAll(vaccineListView, vBox);
+        vBox.getChildren().addAll(typeBox, dosageBox, viewButton);
 
+        vacIDColumn = new TableColumn<>();
+        vacNameColumn = new TableColumn<>();
+        vacIDColumn.setCellValueFactory(new PropertyValueFactory<>("vacId"));
+        vacNameColumn.setCellValueFactory(new PropertyValueFactory<>("vacName"));
+        vaccineListView.setItems(vaccineList);
+
+        vaccine.setContent(hBox);
     }
 
     private void setUpDistributorTab() {
@@ -235,6 +261,11 @@ public class TabPage {
         facilityIDField = new TextField();
         facilityNameField = new TextField();
         addressField = new TextField();
+        typeBox = new CheckBox("Select Type");
+        dosageBox = new CheckBox("Select Dosage");
+        viewButton = new Button ("View Selections");
+        vaccineListView = new TableView<>();
+        vaccineList = FXCollections.observableArrayList();
     }
 
     public Scene getPage() {
@@ -246,6 +277,17 @@ public class TabPage {
         facilityList = FXCollections.observableArrayList();
         facilityList.addAll(Arrays.asList(models));
         return facilityList;
+    }
+
+    // region Getters and setters
+
+
+    public TableColumn<Vaccine, String> getVacIDColumn() {
+        return vacIDColumn;
+    }
+
+    public TableColumn<Vaccine, String> getVacNameColumn() {
+        return vacNameColumn;
     }
 
     public void setPage(Scene page) {
@@ -412,5 +454,54 @@ public class TabPage {
         this.facilityList = facilityList;
     }
 
+    public CheckBox getTypeBox() {
+        return typeBox;
+    }
 
+    public CheckBox getDosageBox() {
+        return dosageBox;
+    }
+
+    public Button getViewButton() {
+        return viewButton;
+    }
+
+    public TableView<Vaccine> getVaccineListView() {
+        return vaccineListView;
+    }
+
+    public ObservableList<Vaccine> getVaccineList() {
+        return vaccineList;
+    }
+
+    //endregion
+
+    public int vaccineSelection() {
+        int count = 0;
+        if (typeBox.isSelected()) count = count + 1;
+        if (dosageBox.isSelected()) count = count + 2;
+        return count;
+    }
+
+    public String generateTableView() {
+        TableColumn<Vaccine, String> typeColumn = new TableColumn<>();
+        TableColumn<Vaccine, String> dosageColumn = new TableColumn<>();
+        typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
+        dosageColumn.setCellValueFactory(new PropertyValueFactory<>("dosage"));
+        switch(vaccineSelection()) {
+            case 0:
+                return "";
+            case 1:
+                vaccineListView.getColumns().add(typeColumn);
+                return " vacId, vacName, Type ";
+            case 2:
+                vaccineListView.getColumns().add(dosageColumn);
+                return " vacId, vacName, Dosage ";
+            case 3:
+                vaccineListView.getColumns().addAll(typeColumn, dosageColumn);
+                return " *";
+            default:
+                throw new IllegalStateException("Unexpected value: " + vaccineSelection());
+        }
+    }
 }

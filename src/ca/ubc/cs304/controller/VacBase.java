@@ -64,7 +64,7 @@ public class VacBase implements LoginWindowDelegate, TerminalTransactionsDelegat
 
 	public void searchForPatientAccountQuery(int CareCardNumber) { dbHandler.searchForPatientAccountQuery(CareCardNumber); }
 
-	public void projectionQuery() { dbHandler.projectionQuery(); }
+	public void projectionQuery() { dbHandler.projectionQuery("test"); }
 
 	public void joinAggregateWithVaccineRecordQuery() { dbHandler.joinAggregateWithVaccineRecordQuery(1000000000); }
 

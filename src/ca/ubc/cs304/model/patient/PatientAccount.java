@@ -30,4 +30,14 @@ public class PatientAccount {
     public String getUsername() {
         return username;
     }
+
+    @Override
+    public String toString() {
+        return "PatientAccount{" +
+                "careCardNumber=" + careCardNumber +
+                ", fullName='" + fullName + '\'' +
+                ", date=" + date +
+                ", username='" + username + '\'' +
+                '}';
+    }
 }

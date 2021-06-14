@@ -16,6 +16,7 @@ import javafx.application.Application;
 
 import javafx.scene.Scene;
 import javafx.scene.control.MenuBar;
+import javafx.scene.control.TableView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -51,6 +52,7 @@ public class Main extends Application {
         dbh = new DatabaseConnectionHandler();
         boolean isConnected = false;
         int count = 0;
+        isConnected = dbh.login("ora_jyu19", "a67758979");
         while (!isConnected) {
             if (count == 0) {
                 isConnected = dbh.login("ora_akang28", "a74159187");
@@ -64,6 +66,7 @@ public class Main extends Application {
             } else {
                 count = 0; /* loop*/
             }
+            count++;
         }
 
 
@@ -191,7 +194,17 @@ public class Main extends Application {
     }
 
     private void addFunctionalityVaccineTab() {
-
+        tabPage.getViewButton().setOnAction(event -> {
+            tabPage.getVaccineList().clear();
+            tabPage.getVaccineListView().getColumns().clear();
+            tabPage.getVaccineListView().getColumns().addAll(tabPage.getVacIDColumn(), tabPage.getVacNameColumn());
+            String sqlColumn = tabPage.generateTableView();
+            ArrayList<Vaccine> projection = dbh.projectionQuery(sqlColumn);
+            for (Vaccine vaccine: projection) {
+                tabPage.getVaccineList().add(vaccine);
+            }
+            tabPage.getVaccineListView().setItems(tabPage.getVaccineList());
+        });
     }
     //endregion
 

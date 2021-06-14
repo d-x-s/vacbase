@@ -222,32 +222,36 @@ public class DatabaseConnectionHandler {
 
     }
 
-    public void projectionQuery() {
-        String query = "SELECT DISTINCT vacName FROM Vaccine, VacDosage WHERE Availability = 'Y'";
+    public ArrayList<Vaccine> projectionQuery(String columns) {
+        ArrayList<Vaccine> list = new ArrayList<>();
+        String query = "SELECT" + columns + "From Vaccine";
 
         try (Statement stmt = connection.createStatement()) {
             ResultSet rs = stmt.executeQuery(query);
 
-            // get info on ResultSet
-            ResultSetMetaData rsmd = rs.getMetaData();
-
-            System.out.println(" ");
-
-            // display column names;
-            for (int i = 0; i < rsmd.getColumnCount(); i++) {
-                // get column name and print it
-                System.out.printf("%-15s", rsmd.getColumnName(i + 1));
-            }
-
-            System.out.println(" ");
-
             while (rs.next()) {
                 String vacName = rs.getString("vacName");
-                System.out.println(vacName);
+                int vacID = rs.getInt("VacID");
+                String type = "";
+                int dosage = 0;
+                if (columns.length() == 3) {
+                    type = rs.getString("Type");
+                    dosage = rs.getInt("Dosage");
+                }
+                if (columns.length() == 22) {
+                    type = rs.getString("Type");
+                    dosage = 0;
+                }
+                if (columns.length() == 24) {
+                    type = "";
+                    dosage = rs.getInt("Dosage");
+                }
+                list.add(new Vaccine(vacID, vacName, type, dosage));
             }
         } catch (SQLException e) {
             System.out.println(EXCEPTION_TAG + " " + e.getMessage());
         }
+        return list;
     }
 
     public ArrayList<VaccineRecordAggregation> joinAggregateWithVaccineRecordQuery(int number) {
@@ -567,6 +571,7 @@ public class DatabaseConnectionHandler {
             System.out.println(EXCEPTION_TAG + " " + e.getMessage());
             rollbackConnection();
         }
+        System.out.println(new PatientAccount(careCardNum, fullName, DOB, userName));
         return new PatientAccount(careCardNum, fullName, DOB, userName);
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
