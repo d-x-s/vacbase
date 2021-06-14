@@ -34,6 +34,7 @@ public class PatientVaccineCarePage {
         HBox hBox = new HBox();
         hBox.setPadding(new Insets(30, 0, 30, 30));
         hBox.setSpacing(30);
+        vaccineRecordList = FXCollections.observableArrayList();
 
         //region Setting up tableview
         vaccineRecordView = new TableView<>();
@@ -87,7 +88,6 @@ public class PatientVaccineCarePage {
 
 
     public ObservableList<VaccineRecordAggregation> getVaccineRecordList() {
-        vaccineRecordList = FXCollections.observableArrayList();
         //vaccineRecordList.add(new VaccineRecordAggregation(1,1,1,1, new java.sql.Date(System.currentTimeMillis()), "Chicken", "Fa", "Jon"));
         //vaccineRecordList.add(new VaccineRecordAggregation(1,1,1,1, new java.sql.Date(System.currentTimeMillis()), "fsdf", "B", "Jon"));
         //vaccineRecordList.add(new VaccineRecordAggregation(1,1,1,1, new java.sql.Date(System.currentTimeMillis()), "Ch", "V", "Jon"));

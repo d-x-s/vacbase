@@ -47,6 +47,8 @@ public class ConditionPage {
         viewConditions.setMinWidth(pageWidth);
         viewConditions.setMaxWidth(pageWidth);
 
+
+
         conditionInput = new TextField();
         conditionInput.setPromptText("Write Notes: ");
         conditionInput.setFont(new Font("Montserrat", 24));
@@ -59,7 +61,6 @@ public class ConditionPage {
         backButton.setFont(new Font("Montserrat", 24));
         insertButton.setFont(new Font("Montserrat", 24));
         insertButton.setTranslateX(135);
-
 
 
         HBox hBox = new HBox(10);

@@ -183,7 +183,6 @@ public class DatabaseConnectionHandler {
 
     public void searchForPatientAccountQuery(int SearchForThisCareCardNumber) {
         try {
-            //            PreparedStatement ps = connection.prepareStatement("DELETE FROM branch WHERE branch_id = ?");
             PreparedStatement ps = connection.prepareStatement("SELECT * FROM PatientAccount WHERE CareCardNumber = ?");
             ps.setInt(1, SearchForThisCareCardNumber);
 
@@ -251,7 +250,8 @@ public class DatabaseConnectionHandler {
         }
     }
 
-    public void joinAggregateWithVaccineRecordQuery() {
+    public ArrayList<VaccineRecordAggregation> joinAggregateWithVaccineRecordQuery() {
+        ArrayList<VaccineRecordAggregation> list = new ArrayList<>();
         String query =
                 "SELECT " +
                     "VaccineRecord.CareCardNumber, " +
@@ -314,10 +314,12 @@ public class DatabaseConnectionHandler {
                 System.out.println(CareCardNumber + ", " + ID + ", " + EventID +
                         ", " + NurseID +  ", " + VacDate + ", " + VacID + ", " + VacName +
                         ", " + FacilityID + ", " + FacilityName + ", " + NurseName);
+                list.add(new VaccineRecordAggregation(CareCardNumber, ID, EventID, NurseID, VacID, FacilityID, VacDate, VacName, FacilityName, NurseName));
             }
         } catch (SQLException e) {
             System.out.println(EXCEPTION_TAG + " " + e.getMessage());
         }
+        return list;
     }
 
     public void aggregationQueryTotalVaccines() {
