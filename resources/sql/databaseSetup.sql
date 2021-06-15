@@ -1,12 +1,3 @@
-CREATE TABLE branch
-(
-    branch_id    integer not null PRIMARY KEY,
-    branch_name  varchar2(20) not null,
-    branch_addr  varchar2(50),
-    branch_city  varchar2(20) not null,
-    branch_phone integer
-);
-
 CREATE TABLE PatientAccount
 (
     CareCardNumber INTEGER PRIMARY KEY,
@@ -30,7 +21,7 @@ CREATE TABLE Vaccine
     Dosage  REAL     NOT NULL
 );
 
-
+/*
 CREATE TABLE VacTypeMOI
 (
     Type              CHAR(50) PRIMARY KEY,
@@ -45,7 +36,7 @@ CREATE TABLE VacDosage
     Availability CHAR(1) NOT NULL,
     PRIMARY KEY (Dosage, Type)
 );
-
+*/
 
 CREATE TABLE AdministeredVaccineGivenToPatient
 (
@@ -60,8 +51,6 @@ CREATE TABLE AdministeredVaccineGivenToPatient
         ON DELETE CASCADE
 );
 
-
-
 CREATE TABLE Include
 (
     EventID        INTEGER,
@@ -74,15 +63,13 @@ CREATE TABLE Include
         ON DELETE CASCADE
 );
 
-
-
+/*
 CREATE TABLE SideEffect
 (
     SideEffectName CHAR(100) PRIMARY KEY,
     Treatment      CHAR(200) NOT NULL,
     Duration       INTEGER
 );
-
 
 CREATE TABLE VaccineHasSideEffect
 (
@@ -95,7 +82,6 @@ CREATE TABLE VaccineHasSideEffect
         ON DELETE SET NULL
 );
 
-
 CREATE TABLE RequiredBooster
 (
     BoosterName CHAR(20),
@@ -106,7 +92,6 @@ CREATE TABLE RequiredBooster
         ON DELETE CASCADE
 );
 
-
 CREATE TABLE Covid19
 (
     VacID              INTEGER PRIMARY KEY,
@@ -114,7 +99,6 @@ CREATE TABLE Covid19
     FOREIGN KEY (VacID) REFERENCES Vaccine (VacID)
         ON DELETE CASCADE
 );
-
 
 CREATE TABLE Flu
 (
@@ -124,7 +108,6 @@ CREATE TABLE Flu
         ON DELETE CASCADE
 );
 
-
 CREATE TABLE ChickenPox
 (
     VacID                     INTEGER PRIMARY KEY,
@@ -132,7 +115,7 @@ CREATE TABLE ChickenPox
     FOREIGN KEY (VacID) REFERENCES Vaccine (VacID)
         ON DELETE CASCADE
 );
-
+*/
 
 CREATE TABLE LoginInfo
 (
@@ -142,13 +125,12 @@ CREATE TABLE LoginInfo
         ON DELETE CASCADE
 );
 
-
+/*
 CREATE TABLE AgeBracketLookup
 (
     DOB        DATE PRIMARY KEY,
     AgeBracket CHAR(20)
 );
-
 
 CREATE TABLE Minor
 (
@@ -157,8 +139,7 @@ CREATE TABLE Minor
     FOREIGN KEY (CareCardNumber) REFERENCES PatientAccount
         ON DELETE CASCADE
 );
-
-
+*/
 
 CREATE TABLE PreExistingCondition
 (
@@ -168,7 +149,6 @@ CREATE TABLE PreExistingCondition
     FOREIGN KEY (CareCardNumber) REFERENCES PatientAccount
         ON DELETE CASCADE
 );
-
 
 CREATE TABLE VaccineRecord
 (
@@ -180,7 +160,6 @@ CREATE TABLE VaccineRecord
         ON DELETE CASCADE
 );
 
-
 CREATE TABLE Facility
 (
     FacilityID   INTEGER PRIMARY KEY,
@@ -188,7 +167,7 @@ CREATE TABLE Facility
     Address      CHAR(100) UNIQUE
 );
 
-
+/*
 CREATE TABLE Distributor
 (
     DistributorName        CHAR(50) PRIMARY KEY,
@@ -217,8 +196,7 @@ CREATE TABLE Delivers
     FOREIGN KEY (FacilityID) REFERENCES Facility (FacilityID)
         ON DELETE CASCADE
 );
-
-
+*/
 
 CREATE TABLE HappensIn
 (
@@ -231,16 +209,3 @@ CREATE TABLE HappensIn
     FOREIGN KEY (FacilityID) REFERENCES Facility (FacilityID)
         ON DELETE CASCADE
 );
-
-
-
-
-
-
-
-
-
-
-
-
-

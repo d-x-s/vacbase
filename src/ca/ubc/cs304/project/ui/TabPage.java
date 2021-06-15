@@ -318,18 +318,6 @@ public class TabPage {
         return vacNameColumn;
     }
 
-    public void setPage(Scene page) {
-        this.page = page;
-    }
-
-    public TabPane getTabs() {
-        return tabs;
-    }
-
-    public void setTabs(TabPane tabs) {
-        this.tabs = tabs;
-    }
-
     public Tab getVaccine() {
         return vaccine;
     }
@@ -346,32 +334,16 @@ public class TabPage {
         this.patient = patient;
     }
 
-    public void setFacilities(Tab facilities) {
-        this.facilities = facilities;
-    }
-
     public TextField getSearchBar() {
         return searchBar;
-    }
-
-    public void setSearchBar(TextField searchBar) {
-        this.searchBar = searchBar;
     }
 
     public Button getInsertFacilityButton() {
         return insertFacilityButton;
     }
 
-    public void setInsertFacilityButton(Button insertFacilityButton) {
-        this.insertFacilityButton = insertFacilityButton;
-    }
-
     public Button getUpdateFacilityButton() {
         return updateFacilityButton;
-    }
-
-    public void setUpdateFacilityButton(Button updateFacilityButton) {
-        this.updateFacilityButton = updateFacilityButton;
     }
 
     public TextField getFacilityIDField() {
@@ -382,40 +354,18 @@ public class TabPage {
         return facilityNameField;
     }
 
-    public void setFacilityNameField(TextField facilityNameField) {
-        this.facilityNameField = facilityNameField;
-    }
 
     public TextField getAddressField() {
         return addressField;
     }
 
-    public void setAddressField(TextField addressField) {
-        this.addressField = addressField;
-    }
 
     public TableView<Facility> getFacilityView() {
         return facilityView;
     }
 
-    public void setFacilityView(TableView<Facility> facilityView) {
-        this.facilityView = facilityView;
-    }
-
     public ObservableList<Facility> getFacilityList() {
         return facilityList;
-    }
-
-    public void setFacilityList(ObservableList<Facility> facilityList) {
-        this.facilityList = facilityList;
-    }
-
-    public CheckBox getTypeBox() {
-        return typeBox;
-    }
-
-    public CheckBox getDosageBox() {
-        return dosageBox;
     }
 
     public Button getViewButton() {
@@ -430,10 +380,6 @@ public class TabPage {
         return vaccineList;
     }
 
-    public void setAggregationLabel(Label aggregationLabel) {
-        this.aggregationLabel = aggregationLabel;
-    }
-
     public Button getDivisionButton() {
         return divisionButton;
     }
@@ -446,16 +392,8 @@ public class TabPage {
         return aggregationButton;
     }
 
-    public TableView<PatientAccount> getDivisionView() {
-        return divisionView;
-    }
-
     public ObservableList<PatientAccount> getDivisionList() {
         return divisionList;
-    }
-
-    public TableView<NestedAggregation> getNestedAggregationView() {
-        return nestedAggregationView;
     }
 
     public ObservableList<NestedAggregation> getNestedAggregationList() {
@@ -465,7 +403,6 @@ public class TabPage {
     public Label getAggregationLabel() {
         return aggregationLabel;
     }
-
     //endregion
 
     public int vaccineSelection() {

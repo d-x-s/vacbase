@@ -63,65 +63,32 @@ public class CreateAccountPage {
         return page;
     }
 
-
-    public void setPage(Scene page) {
-        this.page = page;
-    }
-
     public TextField getUsernameField() {
         return usernameField;
-    }
-
-    public void setUsernameField(TextField usernameField) {
-        this.usernameField = usernameField;
     }
 
     public PasswordField getPasswordField() {
         return passwordField;
     }
 
-    public void setPasswordField(PasswordField passwordField) {
-        this.passwordField = passwordField;
-    }
-
     public TextField getFullNameField() {
         return fullNameField;
-    }
-
-    public void setFullNameField(TextField fullNameField) {
-        this.fullNameField = fullNameField;
     }
 
     public TextField getCareCardNumberField() {
         return careCardNumberField;
     }
 
-    public void setCareCardNumberField(TextField careCardNumberField) {
-        this.careCardNumberField = careCardNumberField;
-    }
-
     public Button getConfirmButton() {
         return confirmButton;
-    }
-
-    public void setConfirmButton(Button confirmButton) {
-        this.confirmButton = confirmButton;
     }
 
     public Button getBackButton() {
         return backButton;
     }
 
-    public void setBackButton(Button backButton) {
-        this.backButton = backButton;
-    }
-
     public DatePicker getDobField() {
         return dobField;
-    }
-
-    public void setDobField(DatePicker dobField) {
-        this.dobField = dobField;
     }
 
     private void instantiateFields() {

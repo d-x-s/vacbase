@@ -22,14 +22,14 @@ import java.util.Arrays;
 import static ca.ubc.cs304.project.ui.HelpfulFunctions.*;
 
 public class ConditionPage {
-    Scene page;
-    TableView<PreExistingCondition> viewConditions;
-    TextField conditionInput;
-    Button backButton;
-    Button insertButton;
-    int careCardNumber;
-    ObservableList<PreExistingCondition> conditions;
-    DatabaseConnectionHandler dbh;
+    private Scene page;
+    private TableView<PreExistingCondition> viewConditions;
+    private TextField conditionInput;
+    private Button backButton;
+    private Button insertButton;
+    private int careCardNumber;
+    private ObservableList<PreExistingCondition> conditions;
+    private DatabaseConnectionHandler dbh;
 
     public ConditionPage(DatabaseConnectionHandler databaseConnectionHandler) {
         VBox pane = new VBox();
@@ -86,10 +86,6 @@ public class ConditionPage {
         return page;
     }
 
-    public void setPage(Scene page) {
-        this.page = page;
-    }
-
     public TableView<PreExistingCondition> getViewConditions() {
         return viewConditions;
     }
@@ -98,32 +94,16 @@ public class ConditionPage {
         return conditions;
     }
 
-    public void setViewConditions(TableView<PreExistingCondition> viewConditions) {
-        this.viewConditions = viewConditions;
-    }
-
     public TextField getConditionInput() {
         return conditionInput;
-    }
-
-    public void setConditionInput(TextField conditionInput) {
-        this.conditionInput = conditionInput;
     }
 
     public Button getBackButton() {
         return backButton;
     }
 
-    public void setBackButton(Button backButton) {
-        this.backButton = backButton;
-    }
-
     public Button getInsertButton() {
         return insertButton;
-    }
-
-    public void setInsertButton(Button insertButton) {
-        this.insertButton = insertButton;
     }
 
     public int getCareCardNumber() {
@@ -133,10 +113,5 @@ public class ConditionPage {
     public void setCareCardNumber(int careCardNumber) {
         this.careCardNumber = careCardNumber;
     }
-
-    public void setConditions(ObservableList<PreExistingCondition> conditions) {
-        this.conditions = conditions;
-    }
-
 
 }

@@ -32,7 +32,6 @@ public class Main extends Application {
     Scene scene;
 
     PatientPage patientPage;
-    AdminPage adminPage;
     LoginPage loginPage;
     CreateAccountPage createPage;
     TabPage tabPage;
@@ -69,7 +68,6 @@ public class Main extends Application {
 
 
         patientPage = new PatientPage();
-        adminPage = new AdminPage();
         loginPage = new LoginPage();
         createPage = new CreateAccountPage();
         tabPage = new TabPage(dbh);
@@ -108,6 +106,7 @@ public class Main extends Application {
                 PatientAccount user = dbh.getSpecificPatientAccount(careCardNum);
                 currentUser = user;
                 patientPage.setCurrentUser(user);
+                vaccineCarePage.setPatientView(false);
                 conditionPage.setCareCardNumber(careCardNum);
                 window.setScene(patientPage.getPage());
             }
@@ -217,6 +216,8 @@ public class Main extends Application {
             window.setScene(loginPage.getPage());
             currentUser = null;
             conditionPage.setCareCardNumber(0);
+            vaccineCarePage.setPatientView(true);
+            vaccineCarePage.getVaccineRecordList().clear();
         });
     }
 
@@ -278,13 +279,6 @@ public class Main extends Application {
 
     private void addFunctionalityLoginPage() {
         loginPage.getLoginPatient().setOnAction(event -> {
-            /* TODO: Log into patientPage
-            Utilize loginPage.getPasswordField() and loginPage.getUsernameField();
-                - .getText()            (returns string)
-                - .clear()              (Clears textField)
-             */
-            // This should go to whatever patientAccount they logged in as
-
             currentUser = dbh.loginToAccount(loginPage.getUsernameField().getText(), loginPage.getPasswordField().getText());
             patientPage.setCurrentUser(currentUser);
             conditionPage.setCareCardNumber(currentUser.getCareCardNumber());

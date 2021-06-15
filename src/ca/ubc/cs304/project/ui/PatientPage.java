@@ -11,13 +11,13 @@ import javafx.scene.text.Font;
 import static ca.ubc.cs304.project.ui.HelpfulFunctions.*;
 
 public class PatientPage {
-    Scene page;
-    Button viewRecord;
-    Button deleteAccount;
-    Button viewConditions;
-    Button logOut;
-    PatientAccount currentUser;
-    Label fullName;
+    private Scene page;
+    private Button viewRecord;
+    private Button deleteAccount;
+    private Button viewConditions;
+    private Button logOut;
+    private PatientAccount currentUser;
+    private Label fullName;
 
     public PatientPage() {
         VBox pane = new VBox(30);
@@ -49,40 +49,20 @@ public class PatientPage {
         page = new Scene(pane, pageWidth, pageHeight);
     }
 
-    public void setPage(Scene page) {
-        this.page = page;
-    }
-
     public Button getViewRecord() {
         return viewRecord;
-    }
-
-    public void setViewRecord(Button viewRecord) {
-        this.viewRecord = viewRecord;
     }
 
     public Button getDeleteAccount() {
         return deleteAccount;
     }
 
-    public void setDeleteAccount(Button deleteAccount) {
-        this.deleteAccount = deleteAccount;
-    }
-
     public Button getViewConditions() {
         return viewConditions;
     }
 
-    public void setViewConditions(Button viewConditions) {
-        this.viewConditions = viewConditions;
-    }
-
     public Button getLogOut() {
         return logOut;
-    }
-
-    public void setLogOut(Button logOut) {
-        this.logOut = logOut;
     }
 
     private void setButtonSpecs(Button button) {

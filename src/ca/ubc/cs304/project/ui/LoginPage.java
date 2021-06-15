@@ -68,24 +68,12 @@ public class LoginPage {
         node.setFont(new Font("Montserrat", 35));
     }
 
-    public void setPage(Scene page) {
-        this.page = page;
-    }
-
     public TextField getUsernameField() {
         return usernameField;
     }
 
-    public void setUsernameField(TextField usernameField) {
-        this.usernameField = usernameField;
-    }
-
     public PasswordField getPasswordField() {
         return passwordField;
-    }
-
-    public void setPasswordField(PasswordField passwordField) {
-        this.passwordField = passwordField;
     }
 
     public String getUsername() {
@@ -96,57 +84,16 @@ public class LoginPage {
         this.username = username;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public Button getLoginAdmin() {
         return loginAdmin;
-    }
-
-    public void setLoginAdmin(Button loginAdmin) {
-        this.loginAdmin = loginAdmin;
     }
 
     public Button getLoginPatient() {
         return loginPatient;
     }
 
-    public void setLoginPatient(Button loginPatient) {
-        this.loginPatient = loginPatient;
-    }
-
     public Hyperlink getCreateAccount() {
         return createAccount;
-    }
-
-    public void setCreateAccount(Hyperlink createAccount) {
-        this.createAccount = createAccount;
-    }
-
-    private void addButtonFunctionality() {
-        loginAdmin.setOnAction((event -> {
-            //TODO: Add functionality
-            System.out.println("Goodbye World");
-            username = usernameField.getText();
-            System.out.println(username);
-        }));
-
-        loginPatient.setOnAction((event -> {
-            //TODO: Add functionality
-            System.out.println("Hello World");
-            password = passwordField.getText();
-            System.out.println(password);
-        }));
-
-        createAccount.setOnAction((event -> {
-            // TODO: Bring up a popup
-        }));
-
     }
 
     public Scene getPage() {

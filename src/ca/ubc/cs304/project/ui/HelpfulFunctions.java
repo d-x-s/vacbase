@@ -24,7 +24,6 @@ public class HelpfulFunctions {
     public static final int pageWidth = 654;
     public static final int pageHeight = 474;
 
-
     /*
         Positions node on the specified (x,y).
     */
@@ -52,8 +51,6 @@ public class HelpfulFunctions {
     private static void highlightField(TextField field) {
         field.setStyle("-fx-border-color: red ; -fx-border-width: 2px ;");
     }
-
-
 
     /*
         Creates a rounded button as seen on Figma

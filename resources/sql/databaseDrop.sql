@@ -1,21 +1,21 @@
-DROP TABLE VaccineHasSideEffect;
-DROP TABLE RequiredBooster;
-DROP TABLE Covid19;
-DROP TABLE Flu;
-DROP TABLE ChickenPox;
+DROP TABLE VaccineHasSideEffect;    /* Commented out */
+DROP TABLE RequiredBooster;         /* Commented out */
+DROP TABLE Covid19;                 /* Commented out */
+DROP TABLE Flu;                     /* Commented out */
+DROP TABLE ChickenPox;              /* Commented out */
 DROP TABLE LoginInfo;
-DROP TABLE Minor;
-DROP TABLE AgeBracketLookup;
+DROP TABLE Minor;                   /* Commented out */
+DROP TABLE AgeBracketLookup;        /* Commented out */
 DROP TABLE PreExistingCondition;
 DROP TABLE VaccineRecord;
-DROP TABLE Couriers;
-DROP TABLE Delivers;
+DROP TABLE Couriers;                /* Commented out */
+DROP TABLE Delivers;                /* Commented out */
 DROP TABLE HappensIn;
-DROP TABLE Distributor;
+DROP TABLE Distributor;             /* Commented out */
 DROP TABLE Facility;
-DROP TABLE VacTypeMOI;
-DROP TABLE VacDosage;
-DROP TABLE SideEffect;
+DROP TABLE VacTypeMOI;              /* Commented out */
+DROP TABLE VacDosage;               /* Commented out */
+DROP TABLE SideEffect;              /* Commented out */
 DROP TABLE Include;
 DROP TABLE Vaccine;
 DROP TABLE AdministeredVaccineGivenToPatient;

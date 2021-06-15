@@ -20,15 +20,15 @@ import javafx.scene.layout.VBox;
 import static ca.ubc.cs304.project.ui.HelpfulFunctions.*;
 
 public class PatientVaccineCarePage {
-    Scene page;
-    TableView<VaccineRecordAggregation> vaccineRecordView;
-    ObservableList<VaccineRecordAggregation> vaccineRecordList;
+    private Scene page;
+    private TableView<VaccineRecordAggregation> vaccineRecordView;
+    private ObservableList<VaccineRecordAggregation> vaccineRecordList;
 
-    Button backButton;
-    Button insertButton;
-    TextField nurseIDField;
-    TextField facilityIDField;
-    TextField vacIDField;
+    private Button backButton;
+    private Button insertButton;
+    private TextField nurseIDField;
+    private TextField facilityIDField;
+    private TextField vacIDField;
 
     public PatientVaccineCarePage() {
         HBox hBox = new HBox();
@@ -82,10 +82,9 @@ public class PatientVaccineCarePage {
         hBox.getChildren().addAll(vaccineRecordView, vBox);
         page = new Scene(hBox, pageWidth, pageHeight);
         setBackgroundColor(hBox);
-        setPatientView(false);
+        setPatientView(true);
 
     }
-
 
     public ObservableList<VaccineRecordAggregation> getVaccineRecordList() {
         return vaccineRecordList;
@@ -95,28 +94,8 @@ public class PatientVaccineCarePage {
         return page;
     }
 
-    public void setPage(Scene page) {
-        this.page = page;
-    }
-
-    public TableView<VaccineRecordAggregation> getVaccineRecordView() {
-        return vaccineRecordView;
-    }
-
-    public void setVaccineRecordView(TableView<VaccineRecordAggregation> vaccineRecordView) {
-        this.vaccineRecordView = vaccineRecordView;
-    }
-
-    public void setVaccineRecordList(ObservableList<VaccineRecordAggregation> vaccineRecordList) {
-        this.vaccineRecordList = vaccineRecordList;
-    }
-
     public Button getBackButton() {
         return backButton;
-    }
-
-    public void setBackButton(Button backButton) {
-        this.backButton = backButton;
     }
 
     public void setPatientView(boolean isPatient) {
@@ -130,31 +109,15 @@ public class PatientVaccineCarePage {
         return insertButton;
     }
 
-    public void setInsertButton(Button insertButton) {
-        this.insertButton = insertButton;
-    }
-
     public TextField getNurseIDField() {
         return nurseIDField;
-    }
-
-    public void setNurseIDField(TextField nurseIDField) {
-        this.nurseIDField = nurseIDField;
     }
 
     public TextField getFacilityIDField() {
         return facilityIDField;
     }
 
-    public void setFacilityIDField(TextField facilityIDField) {
-        this.facilityIDField = facilityIDField;
-    }
-
     public TextField getVacIDField() {
         return vacIDField;
-    }
-
-    public void setVacIDField(TextField vacIDField) {
-        this.vacIDField = vacIDField;
     }
 }
