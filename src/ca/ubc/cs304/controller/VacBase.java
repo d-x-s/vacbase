@@ -5,8 +5,6 @@ import ca.ubc.cs304.delegates.LoginWindowDelegate;
 
 import ca.ubc.cs304.delegates.TerminalTransactionsDelegate;
 
-import ca.ubc.cs304.model.BranchModel;
-
 import ca.ubc.cs304.model.distributor.Facility;
 import ca.ubc.cs304.model.patient.PatientAccount;
 
@@ -73,72 +71,6 @@ public class VacBase implements LoginWindowDelegate, TerminalTransactionsDelegat
 	public void divisionQuery() { dbHandler.divisionQuery(); }
 
 	public void nestedAggregationQuery() { dbHandler.nestedAggregationQuery(); }
-
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-	// BRANCH //////////////////////////////////////////////////////////////////////////////////////////////////////////
-	/**
-	 * TermainalTransactionsDelegate Implementation
-	 *
-	 * Insert a branch with the given info
-	 */
-	public void insertBranch(BranchModel model) {
-		dbHandler.insertBranch(model);
-	}
-
-	/**
-	 * TermainalTransactionsDelegate Implementation
-	 *
-	 * Delete branch with given branch ID.
-	 */
-	public void deleteBranch(int branchId) {
-		dbHandler.deleteBranch(branchId);
-	}
-
-	/**
-	 * TermainalTransactionsDelegate Implementation
-	 *
-	 * Update the branch name for a specific ID
-	 */
-
-	public void updateBranch(int branchId, String name) {
-		dbHandler.updateBranch(branchId, name);
-	}
-
-	/**
-	 * TermainalTransactionsDelegate Implementation
-	 *
-	 * Displays information about varies bank branches.
-	 */
-	public void showBranch() {
-		BranchModel[] models = dbHandler.getBranchInfo();
-
-		for (int i = 0; i < models.length; i++) {
-			BranchModel model = models[i];
-
-			// simplified output formatting; truncation may occur
-			System.out.printf("%-10.10s", model.getId());
-			System.out.printf("%-20.20s", model.getName());
-			if (model.getAddress() == null) {
-				System.out.printf("%-20.20s", " ");
-			} else {
-				System.out.printf("%-20.20s", model.getAddress());
-			}
-			System.out.printf("%-15.15s", model.getCity());
-			if (model.getPhoneNumber() == 0) {
-				System.out.printf("%-15.15s", " ");
-			} else {
-				System.out.printf("%-15.15s", model.getPhoneNumber());
-			}
-
-			System.out.println();
-		}
-	}
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
 
 
 	// PATIENTACCOUNT //////////////////////////////////////////////////////////////////////////////////////////////////

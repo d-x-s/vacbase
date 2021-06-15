@@ -28,9 +28,7 @@ public class SQLUtil {
             while ((line = reader.readLine()) != null) {
                 buf.append(line);
             }
-
             String[] statementStrings = buf.toString().split(";");
-
 
             for (String statementString : statementStrings) {
                 String trimString = statementString.trim();
@@ -47,7 +45,6 @@ public class SQLUtil {
                     failureCount++;
                 }
             }
-
             System.out.printf("%d statements executed, %d exceptions from file %s.\n", statementCount,failureCount, fileName);
         } catch (SQLException e) {
             System.out.printf("%d statements executed from file %s before exception.\n", statementCount, fileName);
@@ -57,9 +54,5 @@ public class SQLUtil {
             failures = "Encountered "+failureCount+" exception(s) during execution. \n"+failures;
             throw new SQLException(failures);
         }
-    }
-
-    public static PreparedStatement getAllFromTableQuery(Connection connection, String tableName, String mainColumn) throws SQLException {
-        return connection.prepareStatement(String.format("SELECT * FROM %s ORDER BY %S", tableName,mainColumn));
     }
 }
