@@ -16,7 +16,7 @@ CREATE TABLE Nurse
 CREATE TABLE Vaccine
 (
     VacID   INTEGER PRIMARY KEY,
-    VacName CHAR(50) UNIQUE NOT NULL,
+    VacName CHAR(30) UNIQUE NOT NULL,
     Type    CHAR(50) NOT NULL,
     Dosage  REAL     NOT NULL
 );
@@ -163,7 +163,7 @@ CREATE TABLE VaccineRecord
 CREATE TABLE Facility
 (
     FacilityID   INTEGER PRIMARY KEY,
-    FacilityName CHAR(200),
+    FacilityName CHAR(50),
     Address      CHAR(100) UNIQUE
 );
 

@@ -72,11 +72,11 @@ INSERT ALL
 SELECT 1 FROM DUAL;
 
 INSERT ALL
-    INTO Facility(FacilityID, FacilityName, Address) VALUES (101, 'FacilityA','2405 Wesbrook Mall, Vancouver, BC V6T 1Z3')
-    INTO Facility(FacilityID, FacilityName, Address) VALUES (105, 'FacilityB','6308 Thunderbird Blvd, Vancouver, BC V6T 1Z4')
-    INTO Facility(FacilityID, FacilityName, Address) VALUES (300, 'FacilityC','1055 Canada Pl, Vancouver, BC V6C 0C3')
-    INTO Facility(FacilityID, FacilityName, Address) VALUES (480, 'FacilityD','1127 Sumas way Abbotsford, Vancouver BC')
-    INTO Facility(FacilityID, FacilityName, Address) VALUES (744, 'FacilityE','Dentistry Bldg, 5940 University Blvd, Vancouver, BC V6T 1Z3')
+    INTO Facility(FacilityID, FacilityName, Address) VALUES (101, 'Old Barn Community Center','2405 Wesbrook Mall, Vancouver, BC V6T 1Z3')
+    INTO Facility(FacilityID, FacilityName, Address) VALUES (105, 'UBC Pharmaceutical Building','6308 Thunderbird Blvd, Vancouver, BC V6T 1Z4')
+    INTO Facility(FacilityID, FacilityName, Address) VALUES (300, 'Shoppers Pharmacy','1055 Canada Pl, Vancouver, BC V6C 0C3')
+    INTO Facility(FacilityID, FacilityName, Address) VALUES (480, 'Careville','1127 Sumas way Abbotsford, Vancouver BC')
+    INTO Facility(FacilityID, FacilityName, Address) VALUES (744, 'UBC Dentistry Building','Dentistry Bldg, 5940 University Blvd, Vancouver, BC V6T 1Z3')
 SELECT 1 FROM DUAL;
 
 
