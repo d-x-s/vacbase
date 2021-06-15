@@ -2,7 +2,6 @@ CREATE TABLE ActivityLog
 (
     Username CHAR(30),
     Activity CHAR(30),
-    EventDate DATE,
     TimeOf TIMESTAMP
 );
 
