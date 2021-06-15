@@ -7,19 +7,15 @@
         <identifier-quote-string>&quot;</identifier-quote-string>
       </database-info>
       <case-sensitivity plain-identifiers="upper" quoted-identifiers="exact" />
-      <secret-storage>master_key</secret-storage>
-      <user-name>ora_akang28</user-name>
+      <user-name>ora_jyu19</user-name>
       <schema-mapping>
         <introspection-scope>
-          <node kind="schema">
-            <name qname="@" />
-            <name qname="PUBLIC" />
-          </node>
+          <node kind="schema" qname="ORA_JYU19" />
         </introspection-scope>
       </schema-mapping>
       <ssh-properties>
         <enabled>true</enabled>
-        <ssh-config-id>60dfa398-db63-4559-9c99-8d3775b294fb</ssh-config-id>
+        <ssh-config-id>ea1628b8-7e17-4c17-b837-9269d090c2a3</ssh-config-id>
       </ssh-properties>
     </data-source>
   </component>
