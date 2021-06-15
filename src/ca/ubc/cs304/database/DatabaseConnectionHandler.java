@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import ca.ubc.cs304.model.distributor.Facility;
 import ca.ubc.cs304.model.distributor.HappensIn;
 import ca.ubc.cs304.model.patient.*;
+import ca.ubc.cs304.model.statistics.NestedAggregation;
 import ca.ubc.cs304.model.vaccine.AdministeredVaccGivenToPatient;
 import ca.ubc.cs304.model.vaccine.Include;
 import ca.ubc.cs304.model.vaccine.Nurse;
@@ -302,25 +303,28 @@ public class DatabaseConnectionHandler {
         return list;
     }
 
-    public void aggregationQueryTotalVaccines() {
+    public String aggregationQueryTotalVaccines() {
         String query = "SELECT COUNT(*) FROM VaccineRecord";
-
+        String count = "Test";
         try (Statement stmt = connection.createStatement()) {
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
-                String count = rs.getString("COUNT(*)");
+                count = rs.getString("COUNT(*)");
                 System.out.println("The total number of vaccines administered so far is: " + count);
             }
         } catch (SQLException e) {
             System.out.println(EXCEPTION_TAG + " " + e.getMessage());
         }
+        return count;
     }
 
-    public void divisionQuery() {
-        String query = "SELECT p.FullName, p.CareCardNumber FROM PatientAccount p " +
+    public ArrayList<PatientAccount> divisionQuery() {
+        String query = "SELECT * FROM PatientAccount p " +
                 "WHERE NOT EXISTS (SELECT * from Vaccine v " +
                 "WHERE NOT EXISTS (SELECT i.VacID FROM Include i " +
                 "WHERE p.CareCardNumber=i.CareCardNumber AND v.VacID=i.VacID))";
+
+        ArrayList<PatientAccount> list = new ArrayList<>();
 
         try (Statement stmt = connection.createStatement()) {
             ResultSet rs = stmt.executeQuery(query);
@@ -328,14 +332,16 @@ public class DatabaseConnectionHandler {
                 String FullName = rs.getString("FullName");
                 int CareCardNumber = rs.getInt("CareCardNumber");
                 System.out.println(FullName + " with CareCardNumber " + CareCardNumber + " has received all vaccinations." );
+                list.add(new PatientAccount(CareCardNumber, FullName, rs.getDate("DOB"), rs.getString("username")));
             }
         } catch (SQLException e) {
             System.out.println(EXCEPTION_TAG + " " + e.getMessage());
         }
+        return list;
     }
 
-    public void nestedAggregationQuery() {
-
+    public ArrayList<NestedAggregation> nestedAggregationQuery() {
+        ArrayList<NestedAggregation> list = new ArrayList<>();
         // This is the subquery, it simply displays the average vaccines dispensed, for context
         String query_1 = "(select AVG(COUNT(CareCardNumber)) AS AverageVaccines from VaccineRecord GROUP BY CareCardNumber)";
         try (Statement stmt = connection.createStatement()) {
@@ -356,10 +362,12 @@ public class DatabaseConnectionHandler {
                 int CCN = rs.getInt("CCN");
                 int Count = rs.getInt(("COUNT"));
                 System.out.println("Patient with CareCardNumber: " + CCN + " and a total of " + Count + " vaccines received, has received more vaccines than the average patient in VacBase.");
+                list.add(new NestedAggregation(CCN, Count));
             }
         } catch (SQLException e) {
             System.out.println(EXCEPTION_TAG + " " + e.getMessage());
         }
+        return list;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

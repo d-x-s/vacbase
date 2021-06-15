@@ -7,6 +7,7 @@ import ca.ubc.cs304.model.patient.LoginInfo;
 import ca.ubc.cs304.model.patient.PatientAccount;
 
 import ca.ubc.cs304.model.patient.VaccineRecordAggregation;
+import ca.ubc.cs304.model.statistics.NestedAggregation;
 import ca.ubc.cs304.model.vaccine.Nurse;
 import ca.ubc.cs304.model.vaccine.Vaccine;
 
@@ -18,6 +19,7 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 
+import java.sql.Array;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
@@ -95,6 +97,7 @@ public class Main extends Application {
         addFunctionalityFacilityTab();
         addFunctionalityVaccineTab();
         addFunctionalityPatientVaccineCarePage();
+        addFunctionalityStatisticsTab();
     }
 
     //region tabPage subroutines
@@ -108,6 +111,25 @@ public class Main extends Application {
                 conditionPage.setCareCardNumber(careCardNum);
                 window.setScene(patientPage.getPage());
             }
+        });
+    }
+
+    private void addFunctionalityStatisticsTab() {
+        tabPage.getDivisionButton().setOnAction(event -> {
+            ArrayList<PatientAccount> list = dbh.divisionQuery();
+            for (PatientAccount account : list) {
+                System.out.println(account);
+                tabPage.getDivisionList().add(account);
+            }
+        });
+        tabPage.getNestedAggregationButton().setOnAction(event -> {
+            ArrayList<NestedAggregation> list = dbh.nestedAggregationQuery();
+            for (NestedAggregation aggregation : list) {
+                tabPage.getNestedAggregationList().add(aggregation);
+            }
+        });
+        tabPage.getAggregationButton().setOnAction(event -> {
+            tabPage.getAggregationLabel().setText(dbh.aggregationQueryTotalVaccines());
         });
     }
 

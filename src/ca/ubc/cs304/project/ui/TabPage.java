@@ -3,6 +3,7 @@ package ca.ubc.cs304.project.ui;
 import ca.ubc.cs304.database.DatabaseConnectionHandler;
 import ca.ubc.cs304.model.distributor.Facility;
 import ca.ubc.cs304.model.patient.PatientAccount;
+import ca.ubc.cs304.model.statistics.NestedAggregation;
 import ca.ubc.cs304.model.vaccine.Vaccine;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,6 +24,7 @@ public class TabPage {
     private TabPane tabs;
     private Tab vaccine;
     private Tab patient;
+    private Tab statistics;
 
     private Tab facilities;
     private TextField searchBar;
@@ -50,6 +52,19 @@ public class TabPage {
     private TableColumn<Vaccine, String> vacIDColumn;
     private TableColumn<Vaccine, String> vacNameColumn;
 
+    /*
+    Statistics tab
+     */
+    private Button divisionButton;
+    private Button nestedAggregationButton;
+    private Button aggregationButton;
+    private TableView<PatientAccount> divisionView;
+    private ObservableList<PatientAccount> divisionList;
+    private TableView<NestedAggregation> nestedAggregationView;
+    private ObservableList<NestedAggregation> nestedAggregationList;
+    private Label aggregationLabel;
+
+
     public TabPage(DatabaseConnectionHandler databaseConnectionHandler) {
 
         //region Setup Tabs
@@ -58,16 +73,104 @@ public class TabPage {
         setUpVaccineTab();
         setUpFacilitiesTab();
         setUpPatientTab();
-        setUpVaccineTab();
+        setUpStatisticsTab();
 
         //endregion
         StackPane backgroundPane = new StackPane();
         setBackgroundColor(backgroundPane);
         backgroundPane.getChildren().add(tabs);
-        tabs.getTabs().addAll(vaccine, patient, facilities);
+        tabs.getTabs().addAll(vaccine, patient, facilities, statistics);
         tabs.setMaxSize(pageWidth - 70, pageHeight - 70);
         tabs.setMinSize(pageWidth - 70, pageHeight - 70);
         page = new Scene(backgroundPane, pageWidth, pageHeight);
+    }
+
+    private void setUpStatisticsTab() {
+        HBox hBox = new HBox(10);
+        setWhiteBackgroundColor(hBox);
+        VBox vBox1 = new VBox(10);
+        VBox vBox2 = new VBox(10);
+        VBox vBox3 = new VBox(10);
+        vBox1.setPadding(new Insets(5));
+        vBox2.setPadding(new Insets(5));
+        vBox3.setPadding(new Insets(5));
+        hBox.getChildren().addAll(vBox1, vBox2, vBox3);
+        vBox1.setMinWidth(194);
+        vBox2.setMinWidth(194);
+        vBox3.setMinWidth(194);
+        vBox1.setMaxWidth(194);
+        vBox2.setMaxWidth(194);
+        vBox3.setMaxWidth(194);
+        makeButtonOnWhite(divisionButton);
+        makeButtonOnWhite(nestedAggregationButton);
+        makeButtonOnWhite(aggregationButton);
+        divisionButton.setFont(commonFont(24));
+        nestedAggregationButton.setFont(commonFont(24));
+        aggregationButton.setFont(commonFont(24));
+        divisionView.setMinHeight(202);
+        divisionView.setMaxHeight(202);
+        nestedAggregationView.setMinHeight(202);
+        nestedAggregationView.setMaxHeight(202);
+        divisionButton.setTranslateY(40);
+        divisionView.setTranslateY(40);
+        nestedAggregationButton.setTranslateY(15);
+        nestedAggregationView.setTranslateY(15);
+        divisionButton.setMinWidth(180);
+        divisionButton.setMaxWidth(180);
+        nestedAggregationButton.setMinWidth(180);
+        nestedAggregationButton.setMaxWidth(180);
+        aggregationButton.setMinWidth(165);
+        aggregationButton.setMaxWidth(165);
+        aggregationButton.setTranslateY(40);
+        aggregationLabel.setTranslateY(100);
+        aggregationLabel.setTranslateX(60);
+        //region label stuff
+        Label divisionLabel1 = new Label("Displays a list of fully ");
+        Label divisionLabel2 = new Label("vaccinated individuals. ");
+        divisionLabel1.setFont(commonFont(16));
+        divisionLabel2.setFont(commonFont(16));
+        VBox divisionBox = new VBox();
+        divisionBox.getChildren().addAll(divisionLabel1, divisionLabel2);
+
+        Label nestedLabel1 = new Label("Displays all patients who");
+        Label nestedLabel2 = new Label("have been vaccinated");
+        Label nestedLabel3 = new Label("more than average.");
+        nestedLabel1.setFont(commonFont(16));
+        nestedLabel2.setFont(commonFont(16));
+        nestedLabel3.setFont(commonFont(16));
+        VBox nestedBox = new VBox();
+        nestedBox.getChildren().addAll(nestedLabel1, nestedLabel2, nestedLabel3);
+
+        Label aggLabel1 = new Label("Displays the number");
+        Label aggLabel2 = new Label("of vaccinations.");
+        aggLabel1.setFont(commonFont(16));
+        aggLabel2.setFont(commonFont(16));
+        VBox aggBox = new VBox();
+        aggBox.getChildren().addAll(aggLabel1, aggLabel2);
+        //endregion
+
+        //region tableViewStuff
+        TableColumn<NestedAggregation, String> careCardColumn = new TableColumn<>("CCN");
+        TableColumn<NestedAggregation, String> countColumn = new TableColumn<>("Count");
+        careCardColumn.setCellValueFactory(new PropertyValueFactory<>("careCardNumber"));
+        countColumn.setCellValueFactory(new PropertyValueFactory<>("count"));
+        nestedAggregationView.getColumns().addAll(careCardColumn, countColumn);
+        nestedAggregationView.setItems(nestedAggregationList);
+
+        TableColumn<PatientAccount, String> nameColumn = new TableColumn<>("Name");
+        TableColumn<PatientAccount, String> careNumber = new TableColumn<>("CCN");
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("fullName"));
+        careNumber.setCellValueFactory(new PropertyValueFactory<>("careCardNumber"));
+        divisionView.setItems(divisionList);
+        divisionView.getColumns().addAll(nameColumn, careNumber);
+
+        //endregion
+
+        aggregationLabel.setFont(commonFont(30));
+        vBox1.getChildren().addAll(divisionBox, divisionButton, divisionView);
+        vBox2.getChildren().addAll(nestedBox, nestedAggregationButton, nestedAggregationView);
+        vBox3.getChildren().addAll(aggBox, aggregationButton, aggregationLabel);
+        statistics.setContent(hBox);
     }
 
     private void setUpVaccineTab() {
@@ -85,8 +188,8 @@ public class TabPage {
         vBox.getChildren().addAll(typeBox, dosageBox, viewButton);
 
 
-        vacIDColumn = new TableColumn<>();
-        vacNameColumn = new TableColumn<>();
+        vacIDColumn = new TableColumn<>("ID");
+        vacNameColumn = new TableColumn<>("Name");
         vacIDColumn.setCellValueFactory(new PropertyValueFactory<>("vacID"));
         vacNameColumn.setCellValueFactory(new PropertyValueFactory<>("vacName"));
         vaccineListView.setItems(vaccineList);
@@ -95,7 +198,6 @@ public class TabPage {
 
         vaccine.setContent(hBox);
     }
-
 
     private void setUpPatientTab() {
         VBox vBox = new VBox(20);
@@ -172,6 +274,7 @@ public class TabPage {
         tabs = new TabPane();
         vaccine = new Tab("Vaccines");
         patient = new Tab("Patients");
+        statistics = new Tab("Statistics");
         facilities = new Tab("Facilities");
         insertFacilityButton = new Button("Insert");
         updateFacilityButton = new Button("Update");
@@ -180,9 +283,17 @@ public class TabPage {
         addressField = new TextField();
         typeBox = new CheckBox("Select Type");
         dosageBox = new CheckBox("Select Dosage");
-        viewButton = new Button ("View Selections");
+        viewButton = new Button("View Selections");
         vaccineListView = new TableView<>();
         vaccineList = FXCollections.observableArrayList();
+        divisionButton = new Button("View");
+        nestedAggregationButton = new Button("View");
+        aggregationButton = new Button("View");
+        divisionView = new TableView<>();
+        divisionList = FXCollections.observableArrayList();
+        nestedAggregationView = new TableView<>();
+        nestedAggregationList = FXCollections.observableArrayList();
+        aggregationLabel = new Label();
     }
 
     public Scene getPage() {
@@ -319,6 +430,42 @@ public class TabPage {
         return vaccineList;
     }
 
+    public void setAggregationLabel(Label aggregationLabel) {
+        this.aggregationLabel = aggregationLabel;
+    }
+
+    public Button getDivisionButton() {
+        return divisionButton;
+    }
+
+    public Button getNestedAggregationButton() {
+        return nestedAggregationButton;
+    }
+
+    public Button getAggregationButton() {
+        return aggregationButton;
+    }
+
+    public TableView<PatientAccount> getDivisionView() {
+        return divisionView;
+    }
+
+    public ObservableList<PatientAccount> getDivisionList() {
+        return divisionList;
+    }
+
+    public TableView<NestedAggregation> getNestedAggregationView() {
+        return nestedAggregationView;
+    }
+
+    public ObservableList<NestedAggregation> getNestedAggregationList() {
+        return nestedAggregationList;
+    }
+
+    public Label getAggregationLabel() {
+        return aggregationLabel;
+    }
+
     //endregion
 
     public int vaccineSelection() {
@@ -329,11 +476,11 @@ public class TabPage {
     }
 
     public String generateTableView() {
-        TableColumn<Vaccine, String> typeColumn = new TableColumn<>();
-        TableColumn<Vaccine, String> dosageColumn = new TableColumn<>();
+        TableColumn<Vaccine, String> typeColumn = new TableColumn<>("Type");
+        TableColumn<Vaccine, String> dosageColumn = new TableColumn<>("Dosage");
         typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
         dosageColumn.setCellValueFactory(new PropertyValueFactory<>("dosage"));
-        switch(vaccineSelection()) {
+        switch (vaccineSelection()) {
             case 0:
                 return " vacId, vacName ";
             case 1:
@@ -349,4 +496,5 @@ public class TabPage {
                 throw new IllegalStateException("Unexpected value: " + vaccineSelection());
         }
     }
+
 }
