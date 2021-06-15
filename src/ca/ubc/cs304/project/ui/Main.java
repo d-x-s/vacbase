@@ -15,10 +15,7 @@ import ca.ubc.cs304.model.patient.PreExistingCondition;
 import javafx.application.Application;
 
 import javafx.scene.Scene;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.TableView;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.sql.Date;
@@ -31,7 +28,6 @@ public class Main extends Application {
 
     Stage window;
     Scene scene;
-    MenuBar menuBar = new MenuBar();
 
     PatientPage patientPage;
     AdminPage adminPage;
@@ -45,7 +41,7 @@ public class Main extends Application {
     DatabaseConnectionHandler dbh;
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
         window = primaryStage;
         window.setOnCloseRequest(e -> dbh.close());
 
@@ -78,7 +74,6 @@ public class Main extends Application {
         conditionPage = new ConditionPage(dbh);
         vaccineCarePage = new PatientVaccineCarePage();
         addFunctionality();
-        VBox vBox = new VBox();
         scene = loginPage.getPage();
 
         window.setScene(scene);
@@ -98,8 +93,6 @@ public class Main extends Application {
     private void addFunctionalityTabPage() {
         addFunctionalityPatientTab();
         addFunctionalityFacilityTab();
-        addFunctionalityFilterTab();
-        addFunctionalityDistributorTab();
         addFunctionalityVaccineTab();
         addFunctionalityPatientVaccineCarePage();
     }
@@ -161,37 +154,6 @@ public class Main extends Application {
         });
     }
 
-    private void addFunctionalityFilterTab() {
-        tabPage.getButton017().setOnAction(event -> {
-            /* TODO: db stuff
-
-             */
-        });
-        tabPage.getButton1829().setOnAction(event -> {
-            /* TODO: db stuff
-
-             */
-        });
-        tabPage.getButton3044().setOnAction(event -> {
-            /* TODO: db stuff
-
-             */
-        });
-        tabPage.getButton4559().setOnAction(event -> {
-            /* TODO: db stuff
-
-             */
-        });
-        tabPage.getButton60().setOnAction(event -> {
-            /* TODO: db stuff
-
-             */
-        });
-    }
-
-    private void addFunctionalityDistributorTab() {
-
-    }
 
     private void addFunctionalityVaccineTab() {
         tabPage.getViewButton().setOnAction(event -> {
@@ -229,8 +191,10 @@ public class Main extends Application {
             window.setScene(conditionPage.getPage());
             conditionPage.setUpTable();
         });
-        patientPage.getVacLocations().setOnAction(event -> {
-            // TODO: view locations
+        patientPage.getLogOut().setOnAction(event -> {
+            window.setScene(loginPage.getPage());
+            currentUser = null;
+            conditionPage.setCareCardNumber(0);
         });
     }
 

@@ -6,7 +6,6 @@ import java.io.InputStreamReader;
 import java.sql.Date;
 
 import ca.ubc.cs304.delegates.TerminalTransactionsDelegate;
-import ca.ubc.cs304.model.BranchModel;
 import ca.ubc.cs304.model.distributor.Facility;
 import ca.ubc.cs304.model.patient.PatientAccount;
 import ca.ubc.cs304.model.patient.PreExistingCondition;
@@ -71,42 +70,36 @@ public class TerminalTransactions {
 
         while (choice != 28) {
             System.out.println();
-            System.out.println("1. Insert branch");
-            System.out.println("2. Delete branch");
-            System.out.println("3. Update branch name");
-            System.out.println("4. Show branch");
+            System.out.println("1. Insert Patient Account");
+            System.out.println("2. Delete Patient Account");
+            System.out.println("3. Show Patient Accounts");
+            System.out.println("4. Update the username of a Patient Account");
 
-            System.out.println("5. Insert Patient Account");
-            System.out.println("6. Delete Patient Account");
-            System.out.println("7. Show Patient Accounts");
-            System.out.println("8. Update the username of a Patient Account");
+            System.out.println("5. Insert Vaccine");
+            System.out.println("6. Delete Vaccine");
+            System.out.println("7. Show Vaccines");
+            System.out.println("8. Update the dosage of a Vaccine");
 
-            System.out.println("9. Insert Vaccine");
-            System.out.println("10. Delete Vaccine");
-            System.out.println("11. Show Vaccines");
-            System.out.println("12. Update the dosage of a Vaccine");
+            System.out.println("10. Insert a Condition");
+            System.out.println("11. Delete a Condition");
+            System.out.println("12. Show Conditions");
+            System.out.println("13. Update the description of a Condition");
 
-            System.out.println("13. Insert a Condition");
-            System.out.println("14. Delete a Condition");
-            System.out.println("15. Show Conditions");
-            System.out.println("16. Update the description of a Condition");
+            System.out.println("14. Insert a Facility");
+            System.out.println("15. Delete a Facility");
+            System.out.println("16. Show Facilities");
+            System.out.println("17. Update the address of a Facility");
 
-            System.out.println("17. Insert a Facility");
-            System.out.println("18. Delete a Facility");
-            System.out.println("19. Show Facilities");
-            System.out.println("20. Update the address of a Facility");
+            System.out.println("18. Selection Query: To discard (?)");
+            System.out.println("19. Projection Query: Display available Vaccines");
+            System.out.println("20. Search for Patient Account Query");
+            System.out.println("21. Join VaccineRecord with the ER/D Aggregate, output Vaccine | Date | Location | Nurse");
+            System.out.println("22. Aggregation Query: Show the total number of Vaccines administered so far");
+            System.out.println("23. Division query: All patients who have gotten all vaccines");
+            System.out.println("24. Nested Aggregation Query: Patients who have been vaccinated more times than the average number of vaccinations for a patient");
 
-            System.out.println("21. Selection Query: To discard (?)");
-            System.out.println("22. Projection Query: Display available Vaccines");
-            System.out.println("23. Search for Patient Account Query");
-            System.out.println("24. Join VaccineRecord with the ER/D Aggregate, output Vaccine | Date | Location | Nurse");
-            System.out.println("25. Aggregation Query: Show the total number of Vaccines administered so far");
-            System.out.println("26. Division query: All patients who have gotten all vaccines");
-            System.out.println("27. Nested Aggregation Query: Patients who have been vaccinated more times than the average number of vaccinations for a patient");
-
-
-            System.out.println("28. Quit");
-            System.out.print("Please choose one of the above 28 options: ");
+            System.out.println("25. Quit");
+            System.out.print("Please choose one of the above 25 options: ");
 
             choice = readInteger(false);
 
@@ -114,100 +107,86 @@ public class TerminalTransactions {
 
             if (choice != INVALID_INT) {
                 switch (choice) {
-                    // Branch
-                    case 1:
-                        handleInsertOption();
-                        break;
-                    case 2:
-                        handleDeleteOption();
-                        break;
-                    case 3:
-                        handleUpdateOption();
-                        break;
-                    case 4:
-                        delegate.showBranch();
-                        break;
-
                     // PatientAccount
-                    case 5:
+                    case 1:
                         handlePatientAccountInsertOption();
                         break;
-                    case 6:
+                    case 2:
                         handlePatientAccountDeleteOption();
                         break;
-                    case 7:
+                    case 3:
                         delegate.showPatientAccount();
                         break;
-                    case 8:
+                    case 4:
                         handlePatientAccountUpdateOption();
                         break;
 
                     // Vaccine
-                    case 9:
+                    case 5:
                         handleVaccineInsertOption();
                         break;
-                    case 10:
+                    case 6:
                         handleVaccineDeleteOption();
                         break;
-                    case 11:
+                    case 7:
                         delegate.showVaccine();
                         break;
-                    case 12:
+                    case 8:
                         handleVaccineUpdateOption();
                         break;
 
                     // Condition
-                    case 13:
+                    case 9:
                         handleConditionInsertOption();
                         break;
-                    case 14:
+                    case 10:
                         handleConditionDeleteOption();
                         break;
-                    case 15:
+                    case 11:
                         delegate.showCondition();
                         break;
-                    case 16:
+                    case 12:
                         handleConditionUpdateOption();
                         break;
 
                     // Facility
-                    case 17:
+                    case 13:
                         handleFacilityInsertOption();
                         break;
-                    case 18:
+                    case 14:
                         handleFacilityDeleteOption();
                         break;
-                    case 19:
+                    case 15:
                         delegate.showFacility();
                         break;
-                    case 20:
+                    case 16:
                         handleFacilityUpdateOption();
                         break;
 
                     // Query
-                    case 21:
+                    case 17:
                         handleSelectionQuery();
                         break;
-                    case 22:
+                    case 18:
                         handleProjectionQuery();
                         break;
-                    case 23:
+                    case 19:
                         handleSearchForPatientAccountQuery();
                         break;
-                    case 24:
+                    case 20:
                         delegate.joinAggregateWithVaccineRecordQuery();
                         break;
-                    case 25:
+                    case 21:
                         delegate.aggregationQueryTotalVaccines();
                         break;
-                    case 26:
+                    case 22:
                         delegate.divisionQuery();
                         break;
-                    case 27:
+                    case 23:
                         delegate.nestedAggregationQuery();
 
                     // Quit
-                    case 28:
+                    case 24:
                         handleQuitOption();
                         break;
                     default:
@@ -240,75 +219,6 @@ public class TerminalTransactions {
         delegate.projectionQuery();
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // BRANCH //////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    private void handleDeleteOption() {
-        int branchId = INVALID_INT;
-        while (branchId == INVALID_INT) {
-            System.out.print("Please enter the branch ID you wish to delete: ");
-            branchId = readInteger(false);
-            if (branchId != INVALID_INT) {
-                delegate.deleteBranch(branchId);
-            }
-        }
-    }
-
-    private void handleInsertOption() {
-        int id = INVALID_INT;
-        while (id == INVALID_INT) {
-            System.out.print("Please enter the branch ID you wish to insert: ");
-            id = readInteger(false);
-        }
-
-        String name = null;
-        while (name == null || name.length() <= 0) {
-            System.out.print("Please enter the branch name you wish to insert: ");
-            name = readLine().trim();
-        }
-
-        // branch address is allowed to be null so we don't need to repeatedly ask for the address
-        System.out.print("Please enter the branch address you wish to insert: ");
-        String address = readLine().trim();
-        if (address.length() == 0) {
-            address = null;
-        }
-
-        String city = null;
-        while (city == null || city.length() <= 0) {
-            System.out.print("Please enter the branch city you wish to insert: ");
-            city = readLine().trim();
-        }
-
-        int phoneNumber = INVALID_INT;
-        while (phoneNumber == INVALID_INT) {
-            System.out.print("Please enter the branch phone number you wish to insert: ");
-            phoneNumber = readInteger(true);
-        }
-
-        BranchModel model = new BranchModel(address,
-                city,
-                id,
-                name,
-                phoneNumber);
-        delegate.insertBranch(model);
-    }
-
-    private void handleUpdateOption() {
-        int id = INVALID_INT;
-        while (id == INVALID_INT) {
-            System.out.print("Please enter the branch ID you wish to update: ");
-            id = readInteger(false);
-        }
-
-        String name = null;
-        while (name == null || name.length() <= 0) {
-            System.out.print("Please enter the branch name you wish to update: ");
-            name = readLine().trim();
-        }
-
-        delegate.updateBranch(id, name);
-    }
 
     // PATIENT ACC //////////////////////////////////////////////////////////////////////////////////////////////////////////
     private void handlePatientAccountDeleteOption() {

@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 
-import ca.ubc.cs304.model.BranchModel;
 import ca.ubc.cs304.model.distributor.Facility;
 import ca.ubc.cs304.model.distributor.HappensIn;
 import ca.ubc.cs304.model.patient.*;
@@ -14,9 +13,6 @@ import ca.ubc.cs304.model.vaccine.Include;
 import ca.ubc.cs304.model.vaccine.Nurse;
 import ca.ubc.cs304.model.vaccine.Vaccine;
 import ca.ubc.cs304.sql.SQLUtil;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.scene.control.ComboBox;
 
 /**
  * This class handles all database related transactions
@@ -79,25 +75,6 @@ public class DatabaseConnectionHandler {
             System.out.println(EXCEPTION_TAG + " " + e.getMessage());
         }
     }
-
-    // NOTE: This is an old copy of databaseSetup that hardcoded branch creation
-//	public void databaseSetup() {
-//		dropBranchTableIfExists();
-//
-//		try {
-//			Statement stmt = connection.createStatement();
-//			stmt.executeUpdate("CREATE TABLE branch (branch_id integer PRIMARY KEY, branch_name varchar2(20) not null, branch_addr varchar2(50), branch_city varchar2(20) not null, branch_phone integer)");
-//			stmt.close();
-//		} catch (SQLException e) {
-//			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
-//		}
-//
-//		BranchModel branch1 = new BranchModel("123 Charming Ave", "Vancouver", 1, "First Branch", 1234567);
-//		insertBranch(branch1);
-//
-//		BranchModel branch2 = new BranchModel("123 Coco Ave", "Vancouver", 2, "Second Branch", 1234568);
-//		insertBranch(branch2);
-//	}
 
     // NOTE: This database setup runs a SQL script to create the tables
     public void databaseSetup() {
@@ -317,9 +294,6 @@ public class DatabaseConnectionHandler {
                 int FacilityID = rs.getInt("NurseID");
                 String FacilityName = rs.getString("FacilityName");
 
-                System.out.println(CareCardNumber + ", " + ID + ", " + EventID +
-                        ", " + NurseID + ", " + VacDate + ", " + VacID + ", " + VacName +
-                        ", " + FacilityID + ", " + FacilityName + ", " + NurseName);
                 list.add(new VaccineRecordAggregation(CareCardNumber, ID, EventID, NurseID, VacID, FacilityID, VacDate, VacName, FacilityName, NurseName));
             }
         } catch (SQLException e) {
@@ -385,108 +359,6 @@ public class DatabaseConnectionHandler {
             }
         } catch (SQLException e) {
             System.out.println(EXCEPTION_TAG + " " + e.getMessage());
-        }
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-    // BRANCH //////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public void deleteBranch(int branchId) {
-        try {
-            PreparedStatement ps = connection.prepareStatement("DELETE FROM branch WHERE branch_id = ?");
-            ps.setInt(1, branchId);
-
-            int rowCount = ps.executeUpdate();
-            if (rowCount == 0) {
-                System.out.println(WARNING_TAG + " Branch " + branchId + " does not exist!");
-            }
-
-            connection.commit();
-
-            ps.close();
-        } catch (SQLException e) {
-            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
-            rollbackConnection();
-        }
-    }
-
-    public void insertBranch(BranchModel model) {
-        try {
-            PreparedStatement ps = connection.prepareStatement("INSERT INTO branch VALUES (?,?,?,?,?)");
-            ps.setInt(1, model.getId());
-            ps.setString(2, model.getName());
-            ps.setString(3, model.getAddress());
-            ps.setString(4, model.getCity());
-            if (model.getPhoneNumber() == 0) {
-                ps.setNull(5, java.sql.Types.INTEGER);
-            } else {
-                ps.setInt(5, model.getPhoneNumber());
-            }
-
-            ps.executeUpdate();
-            connection.commit();
-
-            ps.close();
-        } catch (SQLException e) {
-            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
-            rollbackConnection();
-        }
-    }
-
-    public BranchModel[] getBranchInfo() {
-        ArrayList<BranchModel> result = new ArrayList<BranchModel>();
-
-        try {
-            Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM branch");
-
-            // get info on ResultSet
-            ResultSetMetaData rsmd = rs.getMetaData();
-
-            System.out.println(" ");
-
-            // display column names;
-            for (int i = 0; i < rsmd.getColumnCount(); i++) {
-                // get column name and print it
-                System.out.printf("%-15s", rsmd.getColumnName(i + 1));
-            }
-
-            while (rs.next()) {
-                BranchModel model = new BranchModel(rs.getString("branch_addr"),
-                        rs.getString("branch_city"),
-                        rs.getInt("branch_id"),
-                        rs.getString("branch_name"),
-                        rs.getInt("branch_phone"));
-                result.add(model);
-            }
-
-            rs.close();
-            stmt.close();
-        } catch (SQLException e) {
-            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
-        }
-
-        return result.toArray(new BranchModel[result.size()]);
-    }
-
-    public void updateBranch(int id, String name) {
-        try {
-            PreparedStatement ps = connection.prepareStatement("UPDATE branch SET branch_name = ? WHERE branch_id = ?");
-            ps.setString(1, name);
-            ps.setInt(2, id);
-
-            int rowCount = ps.executeUpdate();
-            if (rowCount == 0) {
-                System.out.println(WARNING_TAG + " Branch " + id + " does not exist!");
-            }
-
-            connection.commit();
-
-            ps.close();
-        } catch (SQLException e) {
-            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
-            rollbackConnection();
         }
     }
 

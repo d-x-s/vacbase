@@ -15,7 +15,7 @@ public class PatientPage {
     Button viewRecord;
     Button deleteAccount;
     Button viewConditions;
-    Button vacLocations;
+    Button logOut;
     PatientAccount currentUser;
     Label fullName;
 
@@ -39,10 +39,10 @@ public class PatientPage {
         viewConditions = makeButton(new Button("View Preexisting Conditions"));
         setButtonSpecs(viewConditions);
 
-        vacLocations = makeButton(new Button("Where can I get vaccinated"));
-        setButtonSpecs(vacLocations);
+        logOut = makeButton(new Button("Log out"));
+        setButtonSpecs(logOut);
 
-        menuButtons.getChildren().addAll(viewRecord, deleteAccount, viewConditions, vacLocations);
+        menuButtons.getChildren().addAll(viewRecord, deleteAccount, viewConditions, logOut);
 
         pane.getChildren().addAll(fullName, menuButtons);
         setBackgroundColor(pane);
@@ -77,12 +77,12 @@ public class PatientPage {
         this.viewConditions = viewConditions;
     }
 
-    public Button getVacLocations() {
-        return vacLocations;
+    public Button getLogOut() {
+        return logOut;
     }
 
-    public void setVacLocations(Button vacLocations) {
-        this.vacLocations = vacLocations;
+    public void setLogOut(Button logOut) {
+        this.logOut = logOut;
     }
 
     private void setButtonSpecs(Button button) {

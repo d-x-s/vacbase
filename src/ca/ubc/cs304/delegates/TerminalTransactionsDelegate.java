@@ -1,6 +1,5 @@
 package ca.ubc.cs304.delegates;
 
-import ca.ubc.cs304.model.BranchModel;
 import ca.ubc.cs304.model.distributor.Facility;
 import ca.ubc.cs304.model.patient.PatientAccount;
 import ca.ubc.cs304.model.patient.PreExistingCondition;
@@ -26,10 +25,6 @@ public interface TerminalTransactionsDelegate {
 	 	- Delete Operation
 	 	- Update Operation
 	 */
-	public void deleteBranch(int branchId);
-	public void insertBranch(BranchModel model);
-	public void showBranch();
-	public void updateBranch(int branchId, String name);
 
 	public void insertPatientAccount(PatientAccount model);
 	public void deletePatientAccount(int careCardNumber);

@@ -4,22 +4,16 @@ import ca.ubc.cs304.database.DatabaseConnectionHandler;
 import ca.ubc.cs304.model.distributor.Facility;
 import ca.ubc.cs304.model.patient.PatientAccount;
 import ca.ubc.cs304.model.vaccine.Vaccine;
-import javafx.beans.InvalidationListener;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.*;
 
 import static ca.ubc.cs304.project.ui.HelpfulFunctions.*;
@@ -28,24 +22,11 @@ public class TabPage {
     private Scene page;
     private TabPane tabs;
     private Tab vaccine;
-    private Tab distributor;
     private Tab patient;
 
     private Tab facilities;
-    private Tab filter;
     private TextField searchBar;
     private DatabaseConnectionHandler dbh;
-
-    /*
-    Filter tab
-     */
-    private Button button017;
-    private Button button1829;
-    private Button button3044;
-    private Button button4559;
-    private Button button60;
-    private TableView<PatientAccount> filterView;
-    private ObservableList<PatientAccount> filterList;
 
     /*
     Facility Tab
@@ -69,25 +50,21 @@ public class TabPage {
     private TableColumn<Vaccine, String> vacIDColumn;
     private TableColumn<Vaccine, String> vacNameColumn;
 
-
-
     public TabPage(DatabaseConnectionHandler databaseConnectionHandler) {
 
         //region Setup Tabs
         dbh = databaseConnectionHandler;
         initiateFields();
-        setUpDistributorTab();
         setUpVaccineTab();
         setUpFacilitiesTab();
         setUpPatientTab();
-        setUpFilterTab();
         setUpVaccineTab();
 
         //endregion
         StackPane backgroundPane = new StackPane();
         setBackgroundColor(backgroundPane);
         backgroundPane.getChildren().add(tabs);
-        tabs.getTabs().addAll(vaccine, distributor, patient, facilities, filter);
+        tabs.getTabs().addAll(vaccine, patient, facilities);
         tabs.setMaxSize(pageWidth - 70, pageHeight - 70);
         tabs.setMinSize(pageWidth - 70, pageHeight - 70);
         page = new Scene(backgroundPane, pageWidth, pageHeight);
@@ -119,9 +96,6 @@ public class TabPage {
         vaccine.setContent(hBox);
     }
 
-    private void setUpDistributorTab() {
-
-    }
 
     private void setUpPatientTab() {
         VBox vBox = new VBox(20);
@@ -193,72 +167,12 @@ public class TabPage {
         facilities.setContent(mainPane);
     }
 
-    private void setUpFilterTab() {
-        HBox hBox = new HBox();
-        setWhiteBackgroundColor(hBox);
-        hBox.setPadding(new Insets(10));
-        filterView = new TableView<>();
-
-        //region Setting up columns
-        TableColumn<PatientAccount, String> usernameColumn = new TableColumn<>("Username");
-        TableColumn<PatientAccount, String> careCardNumber = new TableColumn<>("Care Care Number");
-        usernameColumn.setMinWidth((pageWidth >> 1) * .75);
-        careCardNumber.setMinWidth(pageWidth - (pageWidth >> 1) * .75);
-        usernameColumn.setMaxWidth((pageWidth >> 1) * .75);
-        careCardNumber.setMaxWidth(pageWidth - (pageWidth >> 1) * .75);
-        usernameColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
-        careCardNumber.setCellValueFactory(new PropertyValueFactory<>("careCardNumber"));
-        //endregion
-
-        VBox vBox = new VBox(10);
-        BorderPane hBox1 = new BorderPane();
-        BorderPane hBox2 = new BorderPane();
-        BorderPane hBox3 = new BorderPane();
-        BorderPane hBox4 = new BorderPane();
-
-        //region Customizing Buttons
-        makeButtonOnWhite(button017);
-        makeButtonOnWhite(button1829);
-        makeButtonOnWhite(button3044);
-        makeButtonOnWhite(button4559);
-        makeButtonOnWhite(button60);
-        button017.setFont(commonFont(24));
-        button1829.setFont(commonFont(24));
-        button3044.setFont(commonFont(24));
-        button4559.setFont(commonFont(24));
-        button60.setFont(commonFont(24));
-        //endregion
-
-        vBox.getChildren().addAll(hBox1, hBox2, hBox3, hBox4);
-        Label filterLabel = new Label("Filter by Age Bracket: ");
-        filterLabel.setFont(commonFont(24));
-        //region Adding nodes to rhs
-        hBox1.setCenter(filterLabel);
-        hBox2.setLeft(button017);
-        hBox2.setRight(button1829);
-        hBox3.setLeft(button3044);
-        hBox3.setRight(button4559);
-        hBox4.setCenter(button60);
-        //endregion
-        vBox.setTranslateX(50);
-
-        hBox.getChildren().addAll(filterView, vBox);
-        filter.setContent(hBox);
-    }
-
     private void initiateFields() {
         searchBar = new TextField();
-        filter = new Tab("Filter");
         tabs = new TabPane();
         vaccine = new Tab("Vaccines");
-        distributor = new Tab("Distributors");
         patient = new Tab("Patients");
         facilities = new Tab("Facilities");
-        button017 = new Button("0 - 17");
-        button1829 = new Button("18 - 29");
-        button3044 = new Button("30 - 44");
-        button4559 = new Button("45 - 59");
-        button60 = new Button("60+");
         insertFacilityButton = new Button("Insert");
         updateFacilityButton = new Button("Update");
         facilityIDField = new TextField();
@@ -313,14 +227,6 @@ public class TabPage {
         this.vaccine = vaccine;
     }
 
-    public Tab getDistributor() {
-        return distributor;
-    }
-
-    public void setDistributor(Tab distributor) {
-        this.distributor = distributor;
-    }
-
     public Tab getPatient() {
         return patient;
     }
@@ -333,76 +239,12 @@ public class TabPage {
         this.facilities = facilities;
     }
 
-    public Tab getFilter() {
-        return filter;
-    }
-
-    public void setFilter(Tab filter) {
-        this.filter = filter;
-    }
-
     public TextField getSearchBar() {
         return searchBar;
     }
 
     public void setSearchBar(TextField searchBar) {
         this.searchBar = searchBar;
-    }
-
-    public Button getButton017() {
-        return button017;
-    }
-
-    public void setButton017(Button button017) {
-        this.button017 = button017;
-    }
-
-    public Button getButton1829() {
-        return button1829;
-    }
-
-    public void setButton1829(Button button1829) {
-        this.button1829 = button1829;
-    }
-
-    public Button getButton3044() {
-        return button3044;
-    }
-
-    public void setButton3044(Button button3044) {
-        this.button3044 = button3044;
-    }
-
-    public Button getButton4559() {
-        return button4559;
-    }
-
-    public void setButton4559(Button button4559) {
-        this.button4559 = button4559;
-    }
-
-    public Button getButton60() {
-        return button60;
-    }
-
-    public void setButton60(Button button60) {
-        this.button60 = button60;
-    }
-
-    public TableView<PatientAccount> getFilterView() {
-        return filterView;
-    }
-
-    public void setFilterView(TableView<PatientAccount> filterView) {
-        this.filterView = filterView;
-    }
-
-    public ObservableList<PatientAccount> getFilterList() {
-        return filterList;
-    }
-
-    public void setFilterList(ObservableList<PatientAccount> filterList) {
-        this.filterList = filterList;
     }
 
     public Button getInsertFacilityButton() {
