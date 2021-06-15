@@ -2,7 +2,8 @@ CREATE TABLE ActivityLog
 (
     Username CHAR(30),
     Activity CHAR(30),
-    EventDate DATE
+    EventDate DATE,
+    TimeOf TIMESTAMP
 );
 
 CREATE TABLE PatientAccount
