@@ -34,17 +34,17 @@ than a serious application for real use.
 # Queries:
 Insertion:
 ``` sql
-TODO
+INSERT INTO PatientAccount VALUES (?,?,?,?)
 ```
 
 Deletion:
 ``` sql
-TODO
+DELETE FROM PatientAccount WHERE CareCardNumber = ?
 ```
 
 Update:
 ``` sql
-TODO
+UPDATE Facility SET address = ? WHERE FacilityID = ?
 ```
 
 Selection:
@@ -90,7 +90,7 @@ INNER JOIN VACCINE ON
 
 Aggregation:
 ``` sql
-“SELECT COUNT(*) FROM VaccineRecord;”
+SELECT COUNT(*) FROM VaccineRecord;
 ```
 
 Nested Aggregation with Group-By:
