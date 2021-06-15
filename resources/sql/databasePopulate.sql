@@ -157,6 +157,7 @@ INSERT ALL
     INTO PreExistingCondition (CareCardNumber, Condition) VALUES (2000000000, 'Lung Cancer')
     INTO PreExistingCondition (CareCardNumber, Condition) VALUES (2000000003, 'High Blood Pressure')
     INTO PreExistingCondition (CareCardNumber, Condition) VALUES (1000000001, 'High Colestoral')
+    INTO PreExistingCondition (CareCardNumber, Condition) VALUES (2000000002, 'Brain Cancer')
 SELECT 1 FROM DUAL;
 
 
