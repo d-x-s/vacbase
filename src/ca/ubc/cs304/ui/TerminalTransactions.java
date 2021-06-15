@@ -68,7 +68,7 @@ public class TerminalTransactions {
         bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         int choice = INVALID_INT;
 
-        while (choice != 28) {
+        while (choice != 26) {
             System.out.println();
             System.out.println("1. Insert Patient Account");
             System.out.println("2. Delete Patient Account");
@@ -80,25 +80,25 @@ public class TerminalTransactions {
             System.out.println("7. Show Vaccines");
             System.out.println("8. Update the dosage of a Vaccine");
 
-            System.out.println("10. Insert a Condition");
-            System.out.println("11. Delete a Condition");
-            System.out.println("12. Show Conditions");
-            System.out.println("13. Update the description of a Condition");
+            System.out.println("9. Insert a Condition");
+            System.out.println("10. Delete a Condition");
+            System.out.println("11. Show Conditions");
+            System.out.println("12. Update the description of a Condition");
 
-            System.out.println("14. Insert a Facility");
-            System.out.println("15. Delete a Facility");
-            System.out.println("16. Show Facilities");
-            System.out.println("17. Update the address of a Facility");
+            System.out.println("13. Insert a Facility");
+            System.out.println("14. Delete a Facility");
+            System.out.println("15. Show Facilities");
+            System.out.println("16. Update the address of a Facility");
 
-            System.out.println("18. Selection Query: To discard (?)");
-            System.out.println("19. Projection Query: Display available Vaccines");
-            System.out.println("20. Search for Patient Account Query");
-            System.out.println("21. Join VaccineRecord with the ER/D Aggregate, output Vaccine | Date | Location | Nurse");
-            System.out.println("22. Aggregation Query: Show the total number of Vaccines administered so far");
-            System.out.println("23. Division query: All patients who have gotten all vaccines");
-            System.out.println("24. Nested Aggregation Query: Patients who have been vaccinated more times than the average number of vaccinations for a patient");
+            System.out.println("17. Selection Query: To discard (?)");
+            System.out.println("18. Projection Query: Display available Vaccines");
+            System.out.println("19. Search for Patient Account Query");
+            System.out.println("20. Join VaccineRecord with the ER/D Aggregate, output Vaccine | Date | Location | Nurse");
+            System.out.println("21. Aggregation Query: Show the total number of Vaccines administered so far");
+            System.out.println("22. Division query: All patients who have gotten all vaccines");
+            System.out.println("23. Nested Aggregation Query: Patients who have been vaccinated more times than the average number of vaccinations for a patient");
 
-            System.out.println("25. Quit");
+            System.out.println("24. Quit");
             System.out.print("Please choose one of the above 25 options: ");
 
             choice = readInteger(false);
@@ -184,6 +184,7 @@ public class TerminalTransactions {
                         break;
                     case 23:
                         delegate.nestedAggregationQuery();
+                        break;
 
                     // Quit
                     case 24:

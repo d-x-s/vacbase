@@ -21,7 +21,7 @@ CREATE TABLE Vaccine
     Dosage  REAL     NOT NULL
 );
 
-/*
+
 CREATE TABLE VacTypeMOI
 (
     Type              CHAR(50) PRIMARY KEY,
@@ -36,7 +36,7 @@ CREATE TABLE VacDosage
     Availability CHAR(1) NOT NULL,
     PRIMARY KEY (Dosage, Type)
 );
-*/
+
 
 CREATE TABLE AdministeredVaccineGivenToPatient
 (
@@ -63,7 +63,7 @@ CREATE TABLE Include
         ON DELETE CASCADE
 );
 
-/*
+
 CREATE TABLE SideEffect
 (
     SideEffectName CHAR(100) PRIMARY KEY,
@@ -115,7 +115,7 @@ CREATE TABLE ChickenPox
     FOREIGN KEY (VacID) REFERENCES Vaccine (VacID)
         ON DELETE CASCADE
 );
-*/
+
 
 CREATE TABLE LoginInfo
 (
@@ -125,7 +125,7 @@ CREATE TABLE LoginInfo
         ON DELETE CASCADE
 );
 
-/*
+
 CREATE TABLE AgeBracketLookup
 (
     DOB        DATE PRIMARY KEY,
@@ -139,7 +139,7 @@ CREATE TABLE Minor
     FOREIGN KEY (CareCardNumber) REFERENCES PatientAccount
         ON DELETE CASCADE
 );
-*/
+
 
 CREATE TABLE PreExistingCondition
 (
@@ -167,7 +167,7 @@ CREATE TABLE Facility
     Address      CHAR(100) UNIQUE
 );
 
-/*
+
 CREATE TABLE Distributor
 (
     DistributorName        CHAR(50) PRIMARY KEY,
@@ -196,7 +196,7 @@ CREATE TABLE Delivers
     FOREIGN KEY (FacilityID) REFERENCES Facility (FacilityID)
         ON DELETE CASCADE
 );
-*/
+
 
 CREATE TABLE HappensIn
 (

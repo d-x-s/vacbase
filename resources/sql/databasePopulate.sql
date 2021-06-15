@@ -15,7 +15,7 @@ INSERT ALL
     INTO PatientAccount VALUES (0000000002, 'Test Subject 02', date '2021-06-14', 'Test Subject 02')
 SELECT 1 FROM DUAL;
 
-/*
+
 INSERT ALL
     INTO SideEffect (SideEffectName, Treatment, Duration) VALUES ('Swelling at injection site', 'Apply wet cloth/ice', 2)
     INTO SideEffect (SideEffectName, Treatment, Duration) VALUES ('Fever', 'Drink lots of water', 3)
@@ -23,7 +23,7 @@ INSERT ALL
     INTO SideEffect (SideEffectName, Treatment, Duration) VALUES ('Blood clots', 'Visit a doctor', 7)
     INTO SideEffect (SideEffectName, Treatment, Duration) VALUES ('Muscle ache', 'Light exercise', 5)
 SELECT 1 FROM DUAL;
-*/
+
 
 INSERT ALL
     INTO Vaccine (VacID, VacName, Type, Dosage) VALUES (1001, 'Pfizer', 'mRNA', 0.3)
@@ -45,7 +45,7 @@ INSERT ALL
     INTO Vaccine (VacID, VacName, Type, Dosage) VALUES (3025, 'Varicella', 'Attenuated', 0.7)
 SELECT 1 FROM DUAL;
 
-/*
+
 INSERT ALL
     INTO VacDosage (Dosage, Type, Availability) VALUES (0.3, 'mRNA', 'Y')
     INTO VacDosage (Dosage, Type, Availability) VALUES (0.5, 'mRNA', 'Y')
@@ -61,7 +61,7 @@ INSERT ALL
     INTO VacTypeMOI (Type, MethodOfInjection) VALUES ('Attenuated', 'Subcutaneous')
     INTO VacTypeMOI (Type, MethodOfInjection) VALUES ('Toxoid', 'Intramuscular')
 SELECT 1 FROM DUAL;
-*/
+
 
 INSERT ALL
     INTO Nurse (NurseID, NurseName) VALUES (12345, 'Alice')
@@ -79,7 +79,7 @@ INSERT ALL
     INTO Facility(FacilityID, FacilityName, Address) VALUES (744, 'FacilityE','Dentistry Bldg, 5940 University Blvd, Vancouver, BC V6T 1Z3')
 SELECT 1 FROM DUAL;
 
-/*
+
 INSERT ALL
     INTO Distributor(DistributorName, DistributorPhoneNumber, DistributorEmail) VALUES ('Alpha', '800-822-2463', 'www.sanofipasteur.us/contact')
     INTO Distributor(DistributorName, DistributorPhoneNumber, DistributorEmail) VALUES ('Beta','855-358-8966','cs.flu@seqirus.com')
@@ -87,7 +87,7 @@ INSERT ALL
     INTO Distributor(DistributorName, DistributorPhoneNumber, DistributorEmail) VALUES ('Delta','800-637-2590',NULL)
     INTO Distributor(DistributorName, DistributorPhoneNumber, DistributorEmail) VALUES ('Echo','877-246-8472','productsafety@ebsi.com')
 SELECT 1 FROM DUAL;
-*/
+
 
 INSERT ALL
     INTO AdministeredVaccineGivenToPatient (EventID, NurseID, CareCardNumber, VacDate) VALUES (123456, 12345, 1000000000, date '2021-05-30')
@@ -159,7 +159,7 @@ INSERT ALL
     INTO PreExistingCondition (CareCardNumber, Condition) VALUES (1000000001, 'High Colestoral')
 SELECT 1 FROM DUAL;
 
-/*
+
 INSERT ALL
     INTO AgeBracketLookup VALUES (date '1978-09-23', '30-44')
     INTO AgeBracketLookup VALUES (date '2001-04-06', '18-29')
@@ -168,9 +168,9 @@ INSERT ALL
     INTO AgeBracketLookup VALUES (date '1940-10-20', '60+')
     INTO AgeBracketLookup VALUES (date '1918-07-04', '60+')
 SELECT 1 FROM DUAL;
-*/
 
-/*
+
+
 INSERT ALL
     INTO Minor VALUES (1000000001, 2000000000)
     INTO Minor VALUES (1000000001, 2000000001)
@@ -178,7 +178,7 @@ INSERT ALL
     INTO Minor VALUES (1000000006, 2000000003)
     INTO Minor VALUES (1000000006, 2000000004)
 SELECT 1 FROM DUAL;
-*/
+
 
 INSERT ALL
     INTO LoginInfo(Username, UserPassword) VALUES ('GenericName', 'password123')
@@ -196,7 +196,7 @@ INSERT ALL
     INTO LoginInfo(Username, UserPassword) VALUES ('Test Subject 02', 'password')
 SELECT 1 FROM DUAL;
 
-/*
+
 INSERT ALL
     INTO Couriers(Courier, DistributorName) VALUES ('UPS', 'Alpha')
     INTO Couriers(Courier, DistributorName) VALUES ('Fedex', 'Beta')
@@ -204,7 +204,7 @@ INSERT ALL
     INTO Couriers(Courier, DistributorName) VALUES ('Independent', 'Delta')
     INTO Couriers(Courier, DistributorName) VALUES ('Purolator', 'Echo')
 SELECT 1 FROM DUAL;
-*/
+
 
 INSERT ALL
     INTO HappensIn (EventID, CareCardNumber, FacilityID) VALUES (123456, 1000000000, 101)
@@ -237,7 +237,7 @@ INSERT ALL
     INTO HappensIn (EventID, CareCardNumber, FacilityID) VALUES (500023, 0000000002, 101)
 SELECT 1 FROM DUAL;
 
-/*
+
 INSERT ALL
     INTO Delivers(DistributorName, FacilityID, OrderID, Quantity, TimeOfDelivery) VALUES ('Alpha',101, 100, 1000, date '2021-05-31')
     INTO Delivers(DistributorName, FacilityID, OrderID, Quantity, TimeOfDelivery) VALUES ('Beta',105, 300, 1000, date '2021-04-23')
@@ -245,7 +245,7 @@ INSERT ALL
     INTO Delivers(DistributorName, FacilityID, OrderID, Quantity, TimeOfDelivery) VALUES ('Delta',480,400, 1000, date '2021-05-31')
     INTO Delivers(DistributorName, FacilityID, OrderID, Quantity, TimeOfDelivery) VALUES ('Echo',744, 500,1000, date '2021-05-30')
 SELECT 1 FROM DUAL;
-*/
+
 
 INSERT ALL
     INTO Include (EventID, CareCardNumber, VacID) VALUES (123456, 1000000000, 1001)
@@ -278,7 +278,7 @@ INSERT ALL
     INTO Include (EventID, CareCardNumber, VacID) VALUES (500023, 0000000002, 3025)
 SELECT 1 FROM DUAL;
 
-/*
+
 INSERT ALL
     INTO RequiredBooster (BoosterName, VacID, Dosage) VALUES ('Pfizer', 1001, 0.3)
     INTO RequiredBooster (BoosterName, VacID, Dosage) VALUES ('AstraZenca', 1002, 0.5)
@@ -318,4 +318,3 @@ INSERT ALL
     INTO Covid19 (WaitTimeUntilBooster, VacID) VALUES (3, 1001)
     INTO Covid19 (WaitTimeUntilBooster, VacID) VALUES (5, 1005)
 SELECT 1 FROM DUAL;
-*/

@@ -49,22 +49,22 @@ public class Main extends Application {
         dbh = new DatabaseConnectionHandler();
         boolean isConnected = false;
         int count = 0;
-        isConnected = dbh.login("ora_jyu19", "a67758979");
-        while (!isConnected) {
-            if (count == 0) {
-                isConnected = dbh.login("ora_akang28", "a74159187");
-                System.out.println("Successfully Logged in as Alice");
-            } else if (count == 1) {
-                isConnected = dbh.login("ora_dsong04", "a29241874");
-                System.out.println("Successfully Logged in as Davis");
-            } else if (count == 2){
-                isConnected = dbh.login("ora_jyu19", "a67758979");
-                System.out.println("Successfully Logged in as Jonathan");
-            } else {
-                count = 0; /* loop*/
-            }
-            count++;
-        }
+        isConnected = dbh.login("ora_dsong04", "a29241874");
+//        while (!isConnected) {
+//            if (count == 0) {
+//                isConnected = dbh.login("ora_akang28", "a74159187");
+//                System.out.println("Successfully Logged in as Alice");
+//            } else if (count == 1) {
+//                isConnected = dbh.login("ora_dsong04", "a29241874");
+//                System.out.println("Successfully Logged in as Davis");
+//            } else if (count == 2){
+//                isConnected = dbh.login("ora_jyu19", "a67758979");
+//                System.out.println("Successfully Logged in as Jonathan");
+//            } else {
+//                count = 0; /* loop*/
+//            }
+//            count++;
+//        }
 
 
         patientPage = new PatientPage();
