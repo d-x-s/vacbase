@@ -93,12 +93,26 @@ public class DatabaseConnectionHandler {
             // populate tables:
             SQLUtil.executeFile(connection, new File("resources/sql/databasePopulate.sql"));
 
+            // add triggers:
+            createTriggers();
+
             // placeholder: DOES NOTHING
             SQLUtil.executeFile(connection, new File("resources/sql/databaseClear.sql"));
 
             //createTriggers(connection);
         } catch (SQLException | IOException e) {
             e.printStackTrace();
+            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+        }
+    }
+
+    private void createTriggers() {
+        try {
+            Statement stmt = connection.createStatement();
+            stmt.executeQuery("CREATE OR REPLACE TRIGGER account_creation_trigger BEFORE INSERT ON PatientAccount FOR EACH ROW DECLARE v_username varchar2(100); BEGIN SELECT user INTO v_username FROM dual; INSERT INTO ActivityLog (Username, Activity, EventDate) VALUES (v_username, 'CREATION', SYSDATE); END;");
+            stmt.executeQuery("CREATE OR REPLACE TRIGGER account_deletion_trigger AFTER DELETE ON PatientAccount FOR EACH ROW DECLARE v_username varchar2(100); BEGIN SELECT user INTO v_username FROM dual; INSERT INTO ActivityLog (Username, Activity, EventDate) VALUES (v_username, 'DELETION', SYSDATE); END;");
+            stmt.close();
+        } catch (SQLException e) {
             System.out.println(EXCEPTION_TAG + " " + e.getMessage());
         }
     }

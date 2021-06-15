@@ -1,3 +1,10 @@
+CREATE TABLE ActivityLog
+(
+    Username CHAR(30),
+    Activity CHAR(30),
+    EventDate DATE
+);
+
 CREATE TABLE PatientAccount
 (
     CareCardNumber INTEGER PRIMARY KEY,

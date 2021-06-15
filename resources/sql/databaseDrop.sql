@@ -1,3 +1,4 @@
+DROP TABLE ActivityLog;
 DROP TABLE VaccineHasSideEffect;
 DROP TABLE RequiredBooster;
 DROP TABLE Covid19;
