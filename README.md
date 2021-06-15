@@ -21,15 +21,7 @@ VacBase presents a simple way to store data on every aspect of a Vaccine’s lif
 Backend functionality was accomplished with JDBC and Oracle Database. 
 The frontend was created with the JavaFX GUI toolkit.  
 
-VacBase allows for both admin access and patient access, which is fantastic for streamlining the Vaccination process. 
-An admin (like a nurse) is free to update information about Patients and store data about each Vaccination 
-that takes place. 
-Valuable data like Care Card numbers are hidden away from Patients who access the database, 
-who are only able to view their own accounts and update only their personal information. 
-Furthermore, patients can add details about any pre-existing conditions they may have, 
-which is important for a nurse to know beforehand. 
-VacBase was inspired by the recent COVID-19 crisis and was implemented more as a thought experiment 
-than a serious application for real use.
+VacBase allows for both admin access and patient access, which is fantastic for streamlining the vaccination process. On the login page, the user can authenticate as either a patient or an admin. An admin (like a nurse) is free to insert, delete or update information about patients and vaccination facilities, and browse through available vaccines. Valuable data like patients’ care card numbers are hidden away from patients who access the database. Once they are logged in, a patient can only view and update their own personal information associated with their account. Furthermore, patients can add details about any pre-existing conditions they may have, which is important for a nurse to know before administering the vaccines. VacBase was inspired by the recent COVID-19 crisis and was implemented to aid health care workers in distributing vaccines effectively. 
 
 # Queries:
 Insertion:
