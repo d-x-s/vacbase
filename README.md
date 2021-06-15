@@ -102,6 +102,59 @@ Division:
  WHERE p.CareCardNumber=i.CareCardNumber AND v.VacID=i.VacID));
 ```
 
+Triggers:
+``` sql
+CREATE OR REPLACE TRIGGER account_creation_trigger
+BEFORE INSERT
+   ON PatientAccount
+   FOR EACH ROW
+
+DECLARE
+   v_username varchar2(100);
+
+BEGIN
+
+   -- Find username of person performing INSERT into table
+   SELECT user INTO v_username
+   FROM dual;
+
+   INSERT INTO ActivityLog (Username, Activity, TimeOf)
+   VALUES (v_username, 'CREATION', SYSTIMESTAMP);
+
+END;
+
+
+
+
+CREATE OR REPLACE TRIGGER account_deletion_trigger
+AFTER DELETE
+   ON PatientAccount
+   FOR EACH ROW
+
+DECLARE
+   v_username varchar2(100);
+
+BEGIN
+
+   -- Find username of person performing DELETE on table
+   SELECT user INTO v_username
+   FROM dual;
+
+   INSERT INTO ActivityLog (Username, Activity, TimeOf)
+   VALUES (v_username, 'DELETION', SYSTIMESTAMP);
+
+END;
+
+
+
+-- The ActivityLog relation is where the triggers store their data
+CREATE TABLE ActivityLog (
+   Username CHAR(30),
+   Activity CHAR(30),
+   Timeof SYSTIMESTAMP
+);
+``` 
+
 # ER/D Modelling:
 ![Entity Relationship Diagram](data/ERDiagram.png?raw=true "Entity Relationship Diagram")
 This image is is best viewed in another tab.
