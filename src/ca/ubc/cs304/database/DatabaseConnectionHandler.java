@@ -83,7 +83,7 @@ public class DatabaseConnectionHandler {
             dropBranchTableIfExists();
 
             // drop tables: YOU WILL GET AN ERROR IF THE TABLES DO NOT EXIST!
-            SQLUtil.executeFile(connection, new File("resources/sql/databaseDrop.sql"));
+            // SQLUtil.executeFile(connection, new File("resources/sql/databaseDrop.sql"));
 
             // add tables: YOU WILL GET AN ERROR IF THE TABLES ALREADY EXIST!
             SQLUtil.executeFile(connection, new File("resources/sql/databaseSetup.sql"));

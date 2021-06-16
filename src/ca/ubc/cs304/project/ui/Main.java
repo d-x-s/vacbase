@@ -65,6 +65,7 @@ public class Main extends Application {
 //            }
 //            count++;
 //        }
+        dbh.databaseSetup();
 
 
         patientPage = new PatientPage();
