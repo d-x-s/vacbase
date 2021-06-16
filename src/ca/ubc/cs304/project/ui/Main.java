@@ -19,6 +19,9 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.sql.Array;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -41,6 +44,8 @@ public class Main extends Application {
     PatientAccount currentUser;
     DatabaseConnectionHandler dbh;
 
+    private BufferedReader bufferedReader = null;
+
     @Override
     public void start(Stage primaryStage) {
         window = primaryStage;
@@ -49,7 +54,30 @@ public class Main extends Application {
         dbh = new DatabaseConnectionHandler();
         boolean isConnected = false;
         int count = 0;
-        isConnected = dbh.login("ora_dsong04", "a29241874");
+
+        bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Enter Oracle login in the console");
+        String Username = null;
+        String Password = null;
+        try {
+            while (Username == null)
+            {
+                System.out.println("Enter username");
+                Username = bufferedReader.readLine();
+            }
+
+            while (Password == null)
+            {
+                System.out.println("Enter password");
+                Password = bufferedReader.readLine();
+            }
+
+            dbh.login(Username, Password);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+//        isConnected = dbh.login("ora_dsong04", "a29241874");
 //        while (!isConnected) {
 //            if (count == 0) {
 //                isConnected = dbh.login("ora_akang28", "a74159187");

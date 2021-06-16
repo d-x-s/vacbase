@@ -24,7 +24,7 @@ public class VacBase implements LoginWindowDelegate, TerminalTransactionsDelegat
 		dbHandler = new DatabaseConnectionHandler();
 	}
 
-	private void start() {
+	public void start() {
 		loginWindow = new LoginWindow();
 		loginWindow.showFrame(this);
 	}
