@@ -11,8 +11,8 @@ BEGIN
 SELECT user INTO v_username
 FROM dual;
 
-INSERT INTO ActivityLog (Username, Activity, EventDate)
-VALUES (v_username, 'CREATION', SYSDATE);
+INSERT INTO ActivityLog (Username, Activity, TimeOf)
+VALUES (v_username, 'CREATION', SYSTIMESTAMP);
 
 END;
 
@@ -31,8 +31,8 @@ BEGIN
 SELECT user INTO v_username
 FROM dual;
 
-INSERT INTO ActivityLog (Username, Activity, EventDate)
-VALUES (v_username, 'DELETION', SYSDATE);
+INSERT INTO ActivityLog (Username, Activity, TimeOf)
+VALUES (v_username, 'DELETION', SYSTIMESTAMP);
 
 END;
 

@@ -80,8 +80,6 @@ public class DatabaseConnectionHandler {
     // NOTE: This database setup runs a SQL script to create the tables
     public void databaseSetup() {
         try {
-            // resources/sql/databaseSetup.sql
-            // resources/sql/create_db.sql
             dropBranchTableIfExists();
 
             // drop tables: YOU WILL GET AN ERROR IF THE TABLES DO NOT EXIST!
